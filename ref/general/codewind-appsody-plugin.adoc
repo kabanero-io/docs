@@ -1,0 +1,39 @@
+= Codewind appsody Extension
+
+This section documents the Codewind plugin that adds support for https://appsody.dev[Appsody] projects.
+
+== Prerequisites
+* https://www.eclipse.org/codewind/installlocally.html[Codewind] (Not the Eclipse Che version)
+* https://appsody.dev/docs/getting-started/installation[appsody version: 0.2.2]
+
+== Installing the Appsody Extension on Codewind
+
+Clone the appsodyExtension repository to your Codewind workspace's `.extensions` folder, i.e.
+
+`cd <path-to-codewind-workspace>/.extensions/appsodyExtension` +
+`git clone git@github.com:kabanero-io/appsodyExtension.git`
+
+
+Restart Codewind to pick up the new extension.
+
+== Adding the Appsody Templates
+
+With Codewind running, execute the following `curl` command to add the Appsody templates to Codewind:
+
+```bash
+$ curl "http://localhost:9090/api/v1/templates/repositories" \
+-X POST \
+-d '{ "url": "https://raw.githubusercontent.com/kabanero-io/codewind-appsody-templates/master/devfiles/index.json", "description": "Appsody templates" }' \
+-H "Content-Type: application/json"
+```
+
+== Creating an Appsody Project
+
+After installing the Appsody extension and templates, you can create an Appsody project the same way you create other projects simply by selecting one of the Appsody templates.
+
+== Limitations for Tech Preview
+
+* There are currently only two Appsody templates, one for the Node.js Express stack and one for Java MicroProfile stack
+* Debugging of Appsody projects in Codewind is not supported at this time
+* Enabling and disabling auto build is not supported for Appsody projects
+* Appsody is not supported on Codewind on Eclipse Che
