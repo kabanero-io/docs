@@ -34,7 +34,7 @@ Other built in endpoints are described on the bottom of the https://github.com/a
 == Hello World
 
 === Create the index.html
-Right-click on the appsody project and chose the option to `Open Folder as Workspace`. In the project workspace, navigate to `src/webapp/` and create a new file there called `index.html`.
+Right-click on the appsody project and chose the option to `Open Folder as Workspace`. In the project workspace, navigate to `src/main/webapp/` and create a new file there called `index.html`.
 Open the file and add `Hello World`. Save the file and click the icon to open the app in your web browser again. You should see a webpage with `Hello World`. Now you can go back to the file and change it, save it, and then refresh the webpage.
 The webpage will now be displaying your change. 
 
