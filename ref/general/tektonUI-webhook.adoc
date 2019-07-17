@@ -3,12 +3,6 @@
 :linkattrs:
 = Connecting Tekton to GitHub
 
-== Prerequisites
-* Working Tekton Pipeline with Dashboard - https://github.com/tektoncd/pipeline
-* Tekton Experimental Webhook Extension - https://github.com/tektoncd/experimental/tree/master/webhooks-extension
-* GitHub account - to connect the webhook to - https://github.com/
-* Docker account - to push the built docker file to - https://www.docker.com/
-
 == Set up GitHub
 If you haven't already, create a new GitHub repo for the desired project and have the code pushed to the GitHub repo. Copy the url of the GitHub repo as you will need that later. You will also need to create an Auth Token with webhook permissions: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line 
 
