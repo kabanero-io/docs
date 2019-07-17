@@ -1,0 +1,293 @@
+== kabanero-tekton-example
+
+Example implementation of a Tekton pipeline that deploys an Appsody project on a Kabanero managed environment running on OpenShift or OKD.
+
+=== Introduction
+
+This repo contains an example of a https://github.com/tektoncd/pipeline[Tekton pipeline] that builds and deploys an application created with https://appsody.dev[Appsody] to a https://github.com/kabanero-io[Kabanero] managed cluster. 
+
+=== Prerequisites
+
+In order to run this example, the following prerequisites are required:
+
+. You have `+cluster-admin+` access to an OpenShift or OKD cluster and have installed the https://github.com/kabanero-io/kabanero-operator[Kabanero operator].
++
+....
+oc new-project kabanero
+oc project kabanero
+oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/deploy/dependencies.yaml
+oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/deploy/releases/0.0.1/kabanero-operator.yaml
+oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/config/samples/full.yaml
+....
++
+. You have installed Istio on your cluster. Istio is not yet installed by the Kabanero operator.
++
+....
+oc adm policy add-scc-to-user anyuid -z istio-ingress-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z default -n istio-system
+oc adm policy add-scc-to-user anyuid -z prometheus -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-egressgateway-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-citadel-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-ingressgateway-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-cleanup-old-ca-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-mixer-post-install-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-mixer-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-pilot-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-sidecar-injector-service-account -n istio-system
+oc adm policy add-cluster-role-to-user cluster-admin -z istio-galley-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z cluster-local-gateway-service-account -n istio-system
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.4.0/istio-crds.yaml &&
+curl -L https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
+  | kubectl apply --filename -
+....
++
+. You have created an application using the Appsody CLI, and your code is in a public GitHub repository.  
+. If the GitHub repository is private, refer to the https://github.com/tektoncd/pipeline/blob/master/docs/auth.md[Tekton Authentication Documentation] on how to add github credentials to your pipeline task or run.
+. Your code repository includes a Knative Serving manifest file called `+appsody-service.yaml+`. We'll discuss this aspect in more detail later on.
+. Your Kubernetes cluster can access a Docker registry, such as https://hub.docker.com/[Docker Hub] (it can pull and push images). Alternatively, you can use the https://docs.openshift.com/container-platform/3.11/install_config/registry/[Internal Openshift Registry]. 
+
+
+=== Setting up the pipeline
+
+. Clone the appsody https://github.com/appsody/tekton-example[tekton-example] repository. This repository contains the pipeline manifests.
++
+....
+git clone https://github.com/appsody/tekton-example.git
+....
++
+. Ensure that you are creating all resources in the previously created `+kabanero+` namespace.
+
+. Since the Tekton pipeline needs to deploy to the cluster itself, you want to ensure that it runs under an identity that has cluster administrator privileges.
++
+For this reason, create a service account, the appropriate cluster role binding, and hostmount-anyuid access by issuing:
++
+....
+kubectl apply -f appsody-service-account.yaml
+oc adm policy add-cluster-role-to-user cluster-admin -z appsody-sa -n kabanero
+oc adm policy add-scc-to-user hostmount-anyuid -z appsody-sa -n kabanero
+....
++
+The previous commands set up a service account called `+appsody-sa+` and grant the `+cluster-admin+` role to it. The pipeline you are going to create uses this service account.
+
+. Next, create and associate a secret holding the credentials for the Docker registry where you want to push the resultant image of your sample pipeline build.
+
+. If using the https://docs.openshift.com/container-platform/3.11/install_config/registry/[Internal Openshift Registry], add the https://docs.openshift.com/container-platform/3.11/dev_guide/service_accounts.html#default-service-accounts-and-roles[image-builder] role to the `+appsody-sa+` service account so it has push access. The internal registry secret is automatically associated with the `+appsody-sa+` service account by Openshift, and now as access to push images into project.
++
+....
+oc policy add-role-to-user system:image-builder system:serviceaccount:kabanero:appsody-sa
+.... 
++
+
+. If using an external registry, create a secret.
+In the example below, this secret will be used when the pipeline build is attempting to authenticate with `+https://index.docker.io/v1/+`. `+my-docker-secret+` is the name of secret that we will reference later. 
+You may use any name you wish. 
+
++
+....
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-docker-secret
+  annotations:
+    tekton.dev/docker-0: https://index.docker.io/v1/ 
+type: kubernetes.io/basic-auth
+stringData:
+  username: <your docker userid>
+  password: <your docker password>
+.... 
++
+ 
+Edit the yaml file `+my-docker-secret.yaml+`, making sure to replace the username and password values with your own values.  Then run:
++
+....
+kubectl apply -f my-docker-secret.yaml
+....
++
+
+. Make the Docker registry credentials available to the pipeline by adding your docker secret to the `+appsody-sa+` service account. This can be accomplished by editing the service account, using the following command:
++
+....
+kubectl edit serviceaccount appsody-sa
+....
++
+An editor opens up. Add your secret to the list of secrets, as shown in the example below:
++
+....
+...
+secrets:
+- name: appsody-sa-token-ldzbq
+- name: my-docker-secret
+....
++
+Save the changes.
+. Now, create the pipeline task and the pipeline definition. We have a simple pipeline, with a single task that performs the various steps of building and deploying the project:
++
+Modify `+appsody-build-task.yaml+` and add this environment variable to the build-push-step step:
++
+....
+...
+      env:
+      - name: DOCKER_CONFIG
+        value: /builder/home/.docker
+....
++
+If you are using the Internal Openshift Registry, add the arg `+--skip-tls-verify+` to the executor command
++
+....
+...
+      command:
+        - /kaniko/executor
+      args:
+        - --skip-tls-verify
+....
++
+Apply the manifests
++
+....
+kubectl apply -f appsody-build-task.yaml
+kubectl apply -f appsody-build-pipeline.yaml
+....
++
+
+. The pipeline requires the definition of two resources in order to operate:
+* The definition of the Docker image that is built and deployed by the pipeline itself
+* The location of the GitHub project that contains your Appsody code
++
+For this reason, you need to edit the `+appsody-pipeline-resources.yaml+`. Change the value of the Docker image url to match your settings:
++
+....
+...
+spec:
+  params:
+  - name: url
+    value: index.docker.io/your-userid/my-appsody-image
+....
++
+And change the definition of your GitHub project:
++
+....
+...
+spec:
+  params:
+  - name: revision
+    value: master
+  - name: url
+    value: https://github.com/your-userid/appsody-test-build
+....
+. Once you have edited the resources, apply them to your cluster:
++
+....
+kubectl apply -f appsody-pipeline-resources.yaml
+....
++
+. The Tekton buld pipeline requires a Persistent Volume. If you do not have a default dynamic storage provider, create a hostPath volume:
++
+....
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: appsody-manual-pipeline-run-pvc
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /var/lib/appsody-manual-pipeline-run-pvc
+....
+
+The Tekton pipeline is now fully set up.
+
+=== A few words on the required deployment manifest
+
+As we mentioned earlier, the pipeline is designed to deploy your application to the Kubernetes cluster as a Knative Serving service. The pipeline expects a deployment manifest located within your project - specifically, it expects to run `+kubectl apply+` against a file named `+appsody-service.yaml+`.
+
+Here we provide an example of such a deployment manifest:
+
+....
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: appsody-project
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: mydockeraccount/appsody-project
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 3000
+
+....
+
+The file can be located anywhere within your project, since the pipeline will discover it.
+
+Notice that the image url must match the definition of the Docker image resource that you created for the pipeline. The `+containerPort+` must be set to the port number on which the server inside the Appsody stack is configured to listen.
+
+One way to obtain a manifest file that has all the matching settings is to run the `+appsody deploy+` command, as described in https://appsody.dev/docs[the Appsody documentation].
+
+It must be noted, however, that the pipeline can work with any deployment manifest - not limited to Knative Serving services. Its current implementation applies whatever deployment manifest is contained in `+appsody-service.yaml+`.
+
+The file name can be modified by simply changing the relevant line in `+appsody-build-pipeline.yaml+`, as pointed out here:
+
+....
+      params:
+      - name: appsody-deploy-file-name
+        value: appsody-service.yaml
+....
+
+Also, if you wanted to retrieve a deployment manifest from a different repository, rather than assuming its presence in the application code repository, you could modify this section of `+appsody-build-task.yaml+`:
+
+....
+    - name: install-knative
+      image: lachlanevenson/k8s-kubectl
+      command: ['/bin/sh']
+      args: ['-c', 'find /workspace/extracted -name ${YAMLFILE} -type f|xargs kubectl apply -f']
+      env:
+        - name: YAMLFILE
+          value: ${inputs.params.appsody-deploy-file-name}
+....
+
+The implementation we have provided assumes the deployment manifest is in the `+workspace\extracted+` directory, which contains a clone of the source repository - but it could be adjusted to obtain that file from a different source.
+
+=== Running the pipeline manually
+
+This repo provides a manual trigger (via a PipelineRun resource) that you can use to kick off the pipeline on your cluster.
+
+Run the following command:
+
+
+....
+kubectl apply -f appsody-pipeline-run.yaml
+....
+
+
+A new pod will be launched in the "kabanero" namespace with the name similar to:
+
+....
+appsody-manual-pipeline-run-appsody-build-t9g87-pod-6c00e4
+....
+
+To view the logs from the running pipeline, use this command, tailored for the specific id of your pod:
+
+....
+kubectl logs appsody-manual-pipeline-run-appsody-build-t9g87-pod-6c00e4 -n kabanero --all-containers
+....
+
+In that output, you will see the output from the pipeline build. 
+
+To re-run another build, first delete the existing pipeline-run before re-running the apply command:
+
+
+....
+kubectl delete -f appsody-pipeline-run.yaml
+....
+
+
+=== Triggering the pipeline via a git webhook
+
+An advanced scenario with automatic triggering of the pipeline via a git webhook may be accomplished by use of the https://github.com/tektoncd/dashboard/[Tekton Dashboard] and https://github.com/tektoncd/experimental/tree/master/webhooks-extension[experimental webhooks-extension].
+
