@@ -1,6 +1,7 @@
 :page-layout: general-reference
 :page-type: general
-:linkattrs:
+:page-title: Appsody Hello World on Codewind
+
 = appsody Hello World on Codewind
 
 == Prerequisites
