@@ -2,7 +2,6 @@
 :page-type: general
 :page-title: Kabanero Foundation Setup
 :linkattrs:
-== Kabanero Foundation Setup
 
 The Kabanero Foundation is installed in a Kubernetes cluster.  For specific Kubernetes providers and resource pre-requisites, refer to documentation at https://github.com/kabanero-io/roadmap#kabanero-foundation.  
 
