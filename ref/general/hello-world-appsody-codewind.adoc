@@ -1,8 +1,8 @@
 :page-layout: general-reference
 :page-type: general
 :page-title: Appsody Hello World on Codewind
-
-= appsody Hello World on Codewind
+:linkattrs:
+= Appsody Hello World on Codewind
 
 == Prerequisites
 . https://www.eclipse.org/codewind/installlocally.html[Codewind] on Visual Studio Code or Eclipse
