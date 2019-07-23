@@ -1,16 +1,17 @@
-== kabanero-tekton-example
+:page-layout: general-reference
+:page-type: general
+:page-title: Kabanero Foundation Setup
+:linkattrs:
 
-Example implementation of a Tekton pipeline that deploys an Appsody project on a Kabanero managed environment running on OpenShift or OKD.
+The Kabanero Foundation is installed in a Kubernetes cluster.  For specific Kubernetes providers and resource pre-requisites, refer to documentation at https://github.com/kabanero-io/roadmap#kabanero-foundation.  
 
-=== Introduction
+Having an appropriate Kubernetes cluster built and defined, we are ready to build our Kabanero Foundation instance.
 
-This repo contains an example of a https://github.com/tektoncd/pipeline[Tekton pipeline] that builds and deploys an application created with https://appsody.dev[Appsody] to a https://github.com/kabanero-io[Kabanero] managed cluster. 
+The Kabanero Foundation is installed and managed using a Kubernetes Operator.  Kabanero is built on Knative, Istio and leverages Tekton for pipeline management. 
 
-=== Prerequisites
+=== Kabanero Operator
 
-In order to run this example, the following prerequisites are required:
-
-. You have `+cluster-admin+` access to an OpenShift or OKD cluster and have installed the https://github.com/kabanero-io/kabanero-operator[Kabanero operator].
+. Ensure you have `+cluster-admin+` access to an OpenShift or OKD cluster and have installed the https://github.com/kabanero-io/kabanero-operator[Kabanero operator].  (This documentation assumes that we will deploy the Kabanero Foundation in the `+kabanero+` Kubernetes namespace.) 
 +
 ....
 oc new-project kabanero
@@ -19,8 +20,9 @@ oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/mast
 oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/deploy/releases/0.0.1/kabanero-operator.yaml
 oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/config/samples/full.yaml
 ....
-+
-. You have installed Istio on your cluster. Istio is not yet installed by the Kabanero operator.
+
+=== Istio
+. The Kabanero Foundation requires Istio.  Istio is not yet installed by the Kabanero operator.  Install it:
 +
 ....
 oc adm policy add-scc-to-user anyuid -z istio-ingress-service-account -n istio-system
@@ -41,14 +43,21 @@ curl -L https://github.com/knative/serving/releases/download/v0.4.0/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
   | kubectl apply --filename -
 ....
-+
-. You have created an application using the Appsody CLI, and your code is in a public GitHub repository.  
+
+=== Tekton Pipeline
+
+The Kabanero Foundation uses Tekton Pipelines to build and deploy micro-services built with Appsody, and the Appsody application is stored in a public GitHub Repository.
+
 . If the GitHub repository is private, refer to the https://github.com/tektoncd/pipeline/blob/master/docs/auth.md[Tekton Authentication Documentation] on how to add github credentials to your pipeline task or run.
-. Your code repository includes a Knative Serving manifest file called `+appsody-service.yaml+`. We'll discuss this aspect in more detail later on.
-. Your Kubernetes cluster can access a Docker registry, such as https://hub.docker.com/[Docker Hub] (it can pull and push images). Alternatively, you can use the https://docs.openshift.com/container-platform/3.11/install_config/registry/[Internal Openshift Registry]. 
+
+. For the example pipeline, your Kubernetes cluster needs access to a Docker registry, such as https://hub.docker.com/[Docker Hub] (_I.e._, permission to pull and push images). Alternatively, you can use the https://docs.openshift.com/container-platform/3.11/install_config/registry/[Internal Openshift Registry]. 
 
 
-=== Setting up the pipeline
+=== Setting up the example Appsody pipeline
+
+This repo contains an example of a https://github.com/tektoncd/pipeline[Tekton pipeline] that builds and deploys an application created with https://appsody.dev[Appsody] to a https://github.com/kabanero-io[Kabanero] managed cluster. 
+
+The Appsody application repository includes a Knative Serving manifest file called `+appsody-service.yaml+`. We'll discuss this aspect in more detail later on.
 
 . Clone the appsody https://github.com/appsody/tekton-example[tekton-example] repository. This repository contains the pipeline manifests.
 +
@@ -285,8 +294,4 @@ To re-run another build, first delete the existing pipeline-run before re-runnin
 oc delete -f appsody-pipeline-run.yaml
 ....
 
-
-=== Triggering the pipeline via a git webhook
-
-An advanced scenario with automatic triggering of the pipeline via a git webhook may be accomplished by use of the https://github.com/tektoncd/dashboard/[Tekton Dashboard] and https://github.com/tektoncd/experimental/tree/master/webhooks-extension[experimental webhooks-extension].
 
