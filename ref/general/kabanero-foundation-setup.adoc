@@ -14,11 +14,8 @@ The Kabanero Foundation is installed and managed using a Kubernetes Operator.  K
 . Ensure you have `+cluster-admin+` access to an OpenShift or OKD cluster and have installed the https://github.com/kabanero-io/kabanero-operator[Kabanero operator].  (This documentation assumes that we will deploy the Kabanero Foundation in the `+kabanero+` Kubernetes namespace.) 
 +
 ....
-oc new-project kabanero
-oc project kabanero
-oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/deploy/dependencies.yaml
 oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/deploy/releases/0.0.1/kabanero-operator.yaml
-oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/config/samples/full.yaml
+oc apply -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/config/samples/full.yaml -n kabanero
 ....
 
 === Istio
