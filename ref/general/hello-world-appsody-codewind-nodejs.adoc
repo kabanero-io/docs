@@ -1,0 +1,43 @@
+:page-layout: general-reference
+:page-type: general
+:page-title: Appsody Hello World on Codewind
+:linkattrs:
+= Appsody Hello World on Codewind
+
+== Prerequisites
+. https://www.eclipse.org/codewind/installlocally.html[Codewind] on Visual Studio Code or Eclipse
+. https://appsody.dev/docs/getting-started/installation[Appsody]
+. https://github.com/kabanero-io/appsodyExtension[Appsody Extension for Codewind]
+
+== Getting started with VS Code
+
+=== Creating a Java MicroProfile appsody Project
+In VS Code open the command palette and navigate to the option `Codewind: Create New Project`. 
+Select the Appsody Java MicroProfile template, give it a name and press enter. Navigate to the `Explorer` view. 
+In the `Explorer` view keep expanding the Codewind section until the project you created is visible. 
+At this point you can click the box with arrow icon next to the project to open it up in a browser, or the information icon to view the project overview.
+
+The base url will show "Hello from Appsody!". You can also try appending `/health` to the URL which will display the health of the container.
+Other built in endpoints are described on the bottom of the https://github.com/appsody/stacks/blob/master/incubator/java-microprofile/README.md[application stack's README] 
+
+*NOTE:* The project might still be `starting` and you'll need to wait for it to be running.
+
+== Getting started with Eclispe
+
+=== Creating a Java MicroProfile Appsody Project
+Open up the Codwind Explorer in your Eclipse workspace by clicking `Window -> Show View -> Other... -> Codewind -> Codewind Explorer`.
+Right click on the `Local Projects` under `Codewind` and select `New Project`. Select the Appsody Java MicroProfile template, give it a name and create it.
+Now underneath your `Codewind -> Local Projects`, there should be your project. 
+You can right click on the project and "Open Application" to view your app in your browser.
+
+The base url will show "Hello from Appsody!". You can also try appending `/health` to the URL which will display the health of the container.
+Other built in endpoints are described on the bottom of the https://github.com/appsody/stacks/blob/master/incubator/java-microprofile/README.md[application stack's README] 
+
+*NOTE:* The project might still be `starting` and you'll need to wait for it to be running. Also you might need to refresh the project explorer to see the contents of your project directory.
+
+== Hello World
+
+=== Edit app.js
+Right-click on the appsody project and chose the option to `Open Folder as Workspace`. In the project workspace, navigate to the `app.js` file.
+In the file, you'll see where it returns "Hello from Appsody!". You can edit that to whatever you like, for example "Hello World from Appsody!", then save the file.
+Now just visit your webpage again and you'll see your new message!
