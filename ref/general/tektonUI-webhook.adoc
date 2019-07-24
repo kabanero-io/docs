@@ -1,6 +1,7 @@
 :page-layout: general-reference
 :page-type: general
-:linkattrs:
+:page-title: Connecting Tekton to GitHub
+
 = Connecting Tekton to GitHub
 
 == Set up GitHub
