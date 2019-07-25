@@ -53,10 +53,10 @@ oc adm policy add-scc-to-user anyuid -z istio-pilot-service-account -n istio-sys
 oc adm policy add-scc-to-user anyuid -z istio-sidecar-injector-service-account -n istio-system
 oc adm policy add-cluster-role-to-user cluster-admin -z istio-galley-service-account -n istio-system
 oc adm policy add-scc-to-user anyuid -z cluster-local-gateway-service-account -n istio-system
-kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml &&
+oc apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml &&
 curl -L https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml \
   | sed 's/LoadBalancer/NodePort/' \
-  | kubectl apply --filename -
+  | oc apply --filename -
 
 
 ### Kabanero ###
