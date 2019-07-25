@@ -78,6 +78,10 @@ done
 
 ### Tekton Dashboard ###
 
+# Manual install, pending inclusion to operator
+# https://github.com/openshift/tektoncd-pipeline-operator/pull/23
+# https://github.com/openshift/tektoncd-pipeline-operator/pull/24
+
 until oc get crd pipelines.tekton.dev && oc get crd tasks.tekton.dev
 do
   sleep 1
