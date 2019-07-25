@@ -18,7 +18,7 @@ In the `Explorer` view keep expanding the Codewind section until the project you
 At this point you can click the box with arrow icon next to the project to open it up in a browser, or the information icon to view the project overview.
 
 The base url will show "Hello from Appsody!". You can also try appending `/health` to the URL which will display the health of the container.
-Other built in endpoints are described on the bottom of the https://github.com/appsody/stacks/blob/master/incubator/java-microprofile/README.md[application stack's README] 
+Other built in endpoints are described on the bottom of the https://github.com/appsody/stacks/blob/master/incubator/nodejs-express/README.md[application stack's README] 
 
 *NOTE:* The project might still be `starting` and you'll need to wait for it to be running.
 
@@ -31,7 +31,7 @@ Now underneath your `Codewind -> Local Projects`, there should be your project.
 You can right click on the project and "Open Application" to view your app in your browser.
 
 The base url will show "Hello from Appsody!". You can also try appending `/health` to the URL which will display the health of the container.
-Other built in endpoints are described on the bottom of the https://github.com/appsody/stacks/blob/master/incubator/java-microprofile/README.md[application stack's README] 
+Other built in endpoints are described on the bottom of the https://github.com/appsody/stacks/blob/master/incubator/nodejs-express/README.md[application stack's README] 
 
 *NOTE:* The project might still be `starting` and you'll need to wait for it to be running. Also you might need to refresh the project explorer to see the contents of your project directory.
 
