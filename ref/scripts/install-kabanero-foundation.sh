@@ -38,29 +38,25 @@ fi
 
 oc rollout status -w deployment/packageserver --namespace="${namespace}"
 
-### Maistra ###
+### Istio ###
 
-# Jaeger - Optional#
-# oc new-project observability || true
-# oc apply -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.13.1/deploy/crds/jaegertracing_v1_jaeger_crd.yaml
-# oc apply -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.13.1/deploy/service_account.yaml
-# oc apply -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.13.1/deploy/role.yaml
-# oc apply -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.13.1/deploy/role_binding.yaml
-# oc apply -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.13.1/deploy/operator.yaml
-
-# Kiali - Optional#
-# bash <(curl -L https://git.io/getLatestKialiOperator) --operator-image-version v1.0.0 --operator-watch-namespace '**' --accessible-namespaces '**' --operator-install-kiali true || true
-
-# Istio #
-release=maistra-0.12.0
-oc new-project istio-operator || true
-oc new-project istio-system || true
-oc apply -n istio-operator -f https://raw.githubusercontent.com/Maistra/istio-operator/${release}/deploy/maistra-operator.yaml
-oc apply -n istio-system -f https://raw.githubusercontent.com/Maistra/istio-operator/${release}/deploy/examples/maistra_v1_servicemeshcontrolplane_cr_minimal.yaml
-
-# Full for Jaeger and Kiali
-# oc apply -n istio-system -f https://raw.githubusercontent.com/Maistra/istio-operator/${release}/deploy/examples/maistra_v1_servicemeshcontrolplane_cr_full.yaml
-
+oc adm policy add-scc-to-user anyuid -z istio-ingress-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z default -n istio-system
+oc adm policy add-scc-to-user anyuid -z prometheus -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-egressgateway-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-citadel-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-ingressgateway-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-cleanup-old-ca-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-mixer-post-install-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-mixer-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-pilot-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z istio-sidecar-injector-service-account -n istio-system
+oc adm policy add-cluster-role-to-user cluster-admin -z istio-galley-service-account -n istio-system
+oc adm policy add-scc-to-user anyuid -z cluster-local-gateway-service-account -n istio-system
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.5.0/istio-crds.yaml &&
+curl -L https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml \
+  | sed 's/LoadBalancer/NodePort/' \
+  | kubectl apply --filename -
 
 
 ### Kabanero ###
@@ -82,6 +78,11 @@ done
 
 ### Tekton Dashboard ###
 
+until oc get crd pipelines.tekton.dev && oc get crd tasks.tekton.dev
+do
+  sleep 1
+done
+
 # Webhook Extension #
 curl -L https://raw.githubusercontent.com/tektoncd/experimental/master/webhooks-extension/config/release/gcr-tekton-webhooks-extension.yaml \
   | sed 's/namespace: tekton-pipelines/namespace: kabanero/' \
@@ -91,17 +92,25 @@ curl -L https://raw.githubusercontent.com/tektoncd/experimental/master/webhooks-
 curl -L https://github.com/tektoncd/dashboard/releases/download/v0/gcr-tekton-dashboard.yaml \
   | sed 's/namespace: tekton-pipelines/namespace: kabanero/' \
   | oc apply --filename -
+  
+  
+# Patch Dashboard #
+# https://github.com/tektoncd/dashboard/issues/364
+until oc get clusterrole tekton-dashboard-minimal
+do
+  sleep 1
+done
+oc patch clusterrole tekton-dashboard-minimal --type json -p='[{"op":"add","path":"/rules/-","value":{"apiGroups":["security.openshift.io"],"resources":["securitycontextconstraints"],"verbs":["use"]}}]'
+oc scale -n kabanero deploy tekton-dashboard --replicas=0
+sleep 5
+oc scale -n kabanero deploy tekton-dashboard --replicas=1
+
 
 # Kserving Configuration #
 oc patch configmap config-domain --namespace knative-serving --type='json' --patch '[{"op": "add", "path": "/data/'"${openshift_master_default_subdomain}"'", "value": ""}]'
 
 
 ### Routes ###
-
-# Enable wildcard routes #
-oc scale -n default dc/router --replicas=0
-oc set env -n default dc/router ROUTER_ALLOW_WILDCARD_ROUTES=true
-oc scale -n default dc/router --replicas=1
 
 # Expose tekton dashboard with a Route #
 until oc get -n kabanero svc tekton-dashboard
@@ -114,19 +123,6 @@ oc expose service tekton-dashboard \
   --name "tekton-dashboard" \
   --port="http" \
   --hostname=tekton-dashboard.${openshift_master_default_subdomain}
-
-# Expose istio-gateway with a Route #
-until oc get -n istio-system svc istio-ingressgateway
-do
-  sleep 1
-done
-
-oc expose service istio-ingressgateway \
-  -n istio-system \
-  --name="istio-ingressgateway-kabanero" \
-  --wildcard-policy="Subdomain" \
-  --port="http2" \
-  --hostname=wildcard.kabanero.${openshift_master_default_subdomain}
 
 
 

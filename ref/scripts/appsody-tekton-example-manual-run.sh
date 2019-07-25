@@ -5,13 +5,21 @@ set -Eeuox pipefail
 ### Configuration ###
 
 # Resultant Appsody container image #
-DOCKER_IMAGE="${DOCKER_IMAGE:-docker-registry.default.svc:5000/kabanero/java-microprofile}"
+DOCKER_IMAGE="${DOCKER_IMAGE:-docker-registry.default.svc:5000/appsody-project/java-microprofile}"
 
 # Appsody project GitHub repository #
 APP_REPO="${APP_REPO:-https://github.com/dacleyra/appsody-hello-world/}"
 
 
 ### Tekton Example ###
+
+# Destination Namespace #
+oc new-project appsody-project || true
+
+# Add Namespace to Service Mesh #
+#oc patch -n istio-system servicemeshmemberroll default --type json -p='[{"op":"add","path":"/spec/members","value":["appsody-project"]}]'
+oc label namespace appsody-project istio-injection=enabled --overwrite
+
 
 # Service Account #
 oc apply -n kabanero -f https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-service-account.yaml
@@ -40,19 +48,19 @@ curl -L https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-
   | sed 's/        - --context=${inputs.params.pathToContext}/        - --context=${inputs.params.pathToContext}\n        - --skip-tls-verify/' \
   | sed 's|    - name: build-push-step|    - name: build-push-step\n      env:\n      - name: DOCKER_CONFIG\n        value: /builder/home/.docker|' \
   | sed 's/    - name: assemble-extract-step/    - name: assemble-extract-step\n      securityContext:\n        privileged: true/' \
-  | oc apply --filename -
+  | oc apply -n kabanero --filename -
 
 
 # Build Pipeline #
-oc apply -f https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-build-pipeline.yaml
+oc apply -n kabanero -f https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-build-pipeline.yaml
 
 
 # Pipeline Resources
 curl -L https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-pipeline-resources.yaml \
   | sed "s|index.docker.io/chilantim/my-appsody-image|${DOCKER_IMAGE}|" \
   | sed "s|https://github.com/chilanti/appsody-test-build|${APP_REPO}|" \
-  | oc apply --filename -
+  | oc apply -n kabanero --filename -
 
 
 # Pipeline Run
-oc apply -f https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-pipeline-run.yaml
+oc apply -n kabanero -f https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-pipeline-run.yaml
