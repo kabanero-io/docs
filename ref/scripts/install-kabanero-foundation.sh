@@ -7,6 +7,10 @@ set -Eeox pipefail
 # Kserving domain matches openshift_master_default_subdomain #
 openshift_master_default_subdomain="${openshift_master_default_subdomain:-my.openshift.master.default.subdomain}"
 
+# Branch/Release of Kabanero #
+KABANERO_BRANCH="${KABANERO_BRANCH:-0.0.2}"
+
+
 ### Operator Lifecycle Manager ###
 
 release=0.10.1
@@ -61,10 +65,16 @@ curl -L https://github.com/knative/serving/releases/download/v0.5.0/istio.yaml \
 
 ### Kabanero ###
 
-oc new-project kabanero || true
-oc apply -n kabanero -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/deploy/dependencies.yaml
-oc apply -n kabanero -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/deploy/releases/0.0.1/kabanero-operator.yaml
-oc apply -n kabanero -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/config/samples/full.yaml
+namespace=kabanero
+oc new-project ${namespace} || true
+oc apply -n ${namespace} -f https://github.com/kabanero-io/kabanero-operator/releases/download/${KABANERO_BRANCH}/kabanero-operators.yaml
+
+# Grant kabanero SA cluster-admin in order to create Appsody SA cluster-admin from the Collection
+oc adm policy add-cluster-role-to-user cluster-admin -z kabanero-operator -n ${namespace}
+
+# Create instance
+oc apply -n ${namespace} -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/${KABANERO_BRANCH}/config/samples/full.yaml
+oc apply -n ${namespace} -f https://raw.githubusercontent.com/kabanero-io/kabanero-operator/${KABANERO_BRANCH}/config/samples/collection.yaml
 
 
 # Need to check KNative Serving CRD is available before proceeding #
@@ -73,7 +83,6 @@ until oc get crd services.serving.knative.dev
 do
   sleep 1
 done
-
 
 
 ### Tekton Dashboard ###
