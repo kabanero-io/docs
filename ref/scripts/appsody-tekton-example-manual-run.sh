@@ -43,18 +43,7 @@ done
 
 sleep 5
 
-# Build Task #
-curl -L https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-build-task.yaml \
-  | sed 's/        - --context=${inputs.params.pathToContext}/        - --context=${inputs.params.pathToContext}\n        - --skip-tls-verify/' \
-  | sed 's|    - name: build-push-step|    - name: build-push-step\n      env:\n      - name: DOCKER_CONFIG\n        value: /builder/home/.docker|' \
-  | sed 's/    - name: assemble-extract-step/    - name: assemble-extract-step\n      securityContext:\n        privileged: true/' \
-  | oc apply -n kabanero --filename -
-
-
-# Build Pipeline #
-oc apply -n kabanero -f https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-build-pipeline.yaml
-
-
+# Install example resource for operator installed pipeline.
 # Pipeline Resources
 curl -L https://raw.githubusercontent.com/appsody/tekton-example/master/appsody-pipeline-resources.yaml \
   | sed "s|index.docker.io/chilantim/my-appsody-image|${DOCKER_IMAGE}|" \
