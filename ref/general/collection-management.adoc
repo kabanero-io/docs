@@ -1,0 +1,21 @@
+:page-layout: general-reference
+:page-type: general
+:page-title: Kabanero Collections
+:linkattrs:
+
+The Kabanero project provides the Enterprise Architecture and Infrastructure teams with the ability to curate an opinionated configuration for the development and life-cycle management of cloud-native Micro-Services.  Kabanero organizes artifacts into a collection that specifies an Appsody stack, Tekton Pipeline, and Build Task definitions.  
+
+The Kabanero Collection itself is a logical collection, stored and managed in a Github repository.  During the development phase, the collection seamlessly constrains the development of Micro-Services to the Enterprise-blessed configuration.  Collections allow the enterprise to specify, among other detail, specific fix packs and release levels of the application runtimes.
+
+The infrastructure team activates a collection in a given namespace using the Kabanero operator.  The collection activation creates a collection instance and prepares the Kabanero Foundation for managing the build, test, and deployment of the Micro-Service.
+
+Given the Kabanero Project is still getting rolling, you can expect the Collection schema to evolve rapidly.    At the moment, Kabanero defines a single Kabanero Collection to demonstrate the concept and is located https://github.com/kabanero-io/kabanero-collection/tree/master/experimental[here].   You may note that the Kabanero collection is schema compatible with Appsody such that the developer can use a Kabanero Collection as an Appsody Stack.  
+
+The Kabanero Project expects to publish best practice collections that allow your developers to build bullet-proof Micro-Services your enterprise can trust. 
+
+== Current Restrictions:
+
+1. The Kabanero Collection has a single Java-MicroProfile Appsody Stack. 
+1. The Kabanero Operator automatically activates the default collection and only in the `kabanero` namespace.
+1. Kabanero only supports the default collection.
+1. The Kabanero Operator requires `cluster-admin` privileges.
