@@ -12,7 +12,7 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 ** See https://docs.okd.io/3.11/install/configuring_inventory_file.html[Configuring Your Inventory File, window="_blank"]
 * Wildcard DNS is available for your subdomain
 ** alternatively, nip.io can be used
-* The OpenShift Internal Registry is configured
+* The Integrated Container Image Registry is configured
 ** See more about the https://docs.okd.io/3.11/install_config/registry/index.html[Internal Registry, window="_blank"]
 
 
@@ -23,7 +23,7 @@ Retrieve the https://github.com/kabanero-io/docs/tree/master/ref/scripts[install
 
 === Installation
 
-As an OpenShift `cluster-admin`, run the following
+As an OKD `cluster-admin`, run the following
 ....
 openshift_master_default_subdomain=my.openshift.master.default.subdomain ./install-kabanero-foundation.sh
 ....
@@ -42,7 +42,7 @@ Create the pipeline and execute the example manual pipeline run
 APP_REPO=https://github.com/dacleyra/appsody-hello-world/ ./appsody-tekton-example-manual-run.sh
 ....
 
-By default, the application container image will be built and pushed to the OpenShift Internal Registry, and then deployed as a Knative Service.
+By default, the application container image will be built and pushed to the Integrated Container Image Registry, and then deployed as a Knative Service.
 
 View manual pipeline logs
 ....
