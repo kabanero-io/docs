@@ -3,7 +3,7 @@
 :page-title: Scripted Kabanero Foundation Setup
 :linkattrs:
 
-Today, Kabanero has been tested on the Origin Community Distribution of Kubernetes(OKD) version 3.11. There is intent to also expand testing on upstream Kubernetes in the future.
+Today, Kabanero has been tested on the Origin Community Distribution of Kubernetes(OKD) version 3.11. There is intent to also expand testing on additional distributions including upstream Kubernetes in the future.
 
 === Prerequisites
 * Kubernetes is installed
@@ -12,7 +12,7 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 ** See https://docs.okd.io/3.11/install/configuring_inventory_file.html[Configuring Your Inventory File, window="_blank"]
 * Wildcard DNS is available for your subdomain
 ** alternatively, nip.io can be used
-* The OpenShift Internal Registry is configured
+* The Internal Registry is configured
 ** See more about the https://docs.okd.io/3.11/install_config/registry/index.html[Internal Registry, window="_blank"]
 
 
@@ -23,7 +23,7 @@ Retrieve the https://github.com/kabanero-io/docs/tree/master/ref/scripts[install
 
 === Installation
 
-As an OpenShift `cluster-admin`, run the following
+As a `cluster-admin`, run the following
 ....
 openshift_master_default_subdomain=my.openshift.master.default.subdomain ./install-kabanero-foundation.sh
 ....
@@ -42,13 +42,16 @@ Create the pipeline and execute the example manual pipeline run
 APP_REPO=https://github.com/dacleyra/appsody-hello-world/ ./appsody-tekton-example-manual-run.sh
 ....
 
-By default, the application container image will be built and pushed to the OpenShift Internal Registry, and then deployed as a Knative Service.
+By default, the application container image will be built and pushed to the Internal Registry, and then deployed as a Knative Service.
+
+Access application at `http://appsody-hello-world.appsody-project.my.openshift.master.default.subdomain`
+
+If you need to access pipeline logs or make detailed pipeline changes, see below.
 
 View manual pipeline logs
 ....
 oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers
 ....
 
-Access Tekton dashboard at `http://tekton-dashboard.my.openshift.master.default.subdomain`
-
-Access application at `http://appsody-hello-world.appsody-project.my.openshift.master.default.subdomain`
+Access Tekton dashboard 
+`http://tekton-dashboard.my.openshift.master.default.subdomain`
