@@ -9,16 +9,16 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * Kubernetes is installed
 * The Kabanero Foundation is installed in a Kubernetes cluster
 * openshift_master_default_subdomain is configured
-** See https://docs.okd.io/3.11/install/configuring_inventory_file.html[Configuring Your Inventory File]
+** See https://docs.okd.io/3.11/install/configuring_inventory_file.html[Configuring Your Inventory File, window="_blank"]
 * Wildcard DNS is available for your subdomain
 ** alternatively, nip.io can be used
 * The OpenShift Internal Registry is configured
-** See more about the https://docs.okd.io/3.11/install_config/registry/index.html[Internal Registry]
+** See more about the https://docs.okd.io/3.11/install_config/registry/index.html[Internal Registry, window="_blank"]
 
 
 === Installation Scripts
 
-Retrieve the https://github.com/kabanero-io/docs/tree/master/ref/scripts[installation scripts from our documentation repository]
+Retrieve the https://github.com/kabanero-io/docs/tree/master/ref/scripts[installation scripts from our documentation repository, window="_blank"]
 
 
 === Installation
