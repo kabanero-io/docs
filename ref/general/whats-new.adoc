@@ -1,0 +1,6 @@
+:page-layout: general-reference
+:page-type: general
+:page-title: What's new in Kabanero
+:linkattrs:
+
+TBA
