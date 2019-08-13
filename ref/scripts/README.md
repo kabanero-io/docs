@@ -13,14 +13,18 @@
 
 Retrieve the [installation scripts from our documentation repository](https://github.com/kabanero-io/docs/tree/master/ref/scripts)
 
+__Note__:Please replace `<my.openshift.master.default.subdomain>` with your master default subdomain. You can find this from your inventory file and the global variable name is `openshift_master_default_subdomain`.
+
 ## Installation
 
 As a `cluster-admin`, run
 ```
-openshift_master_default_subdomain=my.openshift.master.default.subdomain ./install-kabanero-foundation.sh
+openshift_master_default_subdomain=<my.openshift.master.default.subdomain> ./install-kabanero-foundation.sh
 ```
 
 ## Sample Appsody project with manual Tekton pipeline run
+
+__Note__: This step is optional if you do not have dynamic storage is enabled.
 
 Create a Persistent Volume for the pipeline to use. A sample hostPath `pv.yaml` is provided.
 ```
@@ -39,6 +43,6 @@ View manual pipeline logs
 oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers
 ```
 
-Access Tekton dashboard at `http://tekton-dashboard.my.openshift.master.default.subdomain`
+Access Tekton dashboard at `http://tekton-dashboard.<my.openshift.master.default.subdomain>`
 
-Access application at `http://appsody-hello-world.appsody-project.my.openshift.master.default.subdomain`
+Access application at `http://appsody-hello-world.appsody-project.<my.openshift.master.default.subdomain>`
