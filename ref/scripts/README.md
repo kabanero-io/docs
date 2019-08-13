@@ -24,7 +24,7 @@ openshift_master_default_subdomain=<my.openshift.master.default.subdomain> ./ins
 
 ## Sample Appsody project with manual Tekton pipeline run
 
-__Note__: This step is optional if you do not have dynamic storage is enabled.
+__Note__: This step is required only if dynamic storage is not enabled.
 
 Create a Persistent Volume for the pipeline to use. A sample hostPath `pv.yaml` is provided.
 ```
