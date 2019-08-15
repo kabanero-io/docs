@@ -1,7 +1,8 @@
 ---
 layout: general-reference
 type: general
-title: What's New In Kabanero v0.7
+version: v0.0.3
+title: What's New In Kabanero v0.0.3
 ---
 
 TBA
