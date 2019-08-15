@@ -1,14 +1,41 @@
-# Documentation
-Docs for the kabanero-io site. These docs are dynamically pulled in during the [Kabanero-website](https://github.com/kabanero-io/kabanero-website) build process.
+# Kabanero.io Documentation
+This repository holds the documentation for the kabanero-io site. These docs are dynamically pulled in during the [Kabanero-website](https://github.com/kabanero-io/kabanero-website) build process.
 
-# Contribute to the Documentation
+# How to contribute to the documentation
 
 ## Create Doc
-Create an a AsciiDoc file that contains the documentation in a presentable format. For help on syntax you can view this [AsciiDoc syntax reference sheet](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/)
 
-For AsciiDoc editors there are a few options you can use, such as, your browser, an IDE, and more. See [Editing AsciiDoc with Live Preview](https://asciidoctor.org/docs/editing-asciidoc-with-live-preview/#using-a-web-browser-preview-only)
+You have 2 options when creating docs: Markdown and AsciiDoc.
+   * We use Jekyll, which uses the [kramdown](https://jekyllrb.com/docs/configuration/markdown/#kramdown) Markdown renderer, which still supports standard Markdown with some minor modifications.
+   * We use the [Jekyll-asciidoc](https://github.com/asciidoctor/jekyll-asciidoc) plugin, which uses [Asciidoctor](https://asciidoctor.org/) to render [AsciiDocs](http://asciidoc.org/)
+
+You need the proper front matter on each doc to get it categorized correctly. The title is the only one you should change for your doc.
+  * For Markdown, use a YAML front matter
+    ```
+    ---
+    layout: general-reference
+    type: general
+    title: Kabanero Collections
+    ---
+    ```
+  * For AsciiDoc, use `page-` AsciiDoc attributes in place.
+    ```
+    :page-layout: general-reference
+    :page-type: general
+    :page-title: Kabanero Collections
+    :linkattrs:
+    ```
+
+Create an a Markdown/AsciiDoc file that contains the documentation in a presentable format. For help on syntax you can view these references.
+  * Syntax references
+    * [kramdown syntax](https://kramdown.gettalong.org/syntax.html)
+    * [AsciiDoc syntax](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/)
+  * Editor options
+    * See [kramdown live editor](http://trykramdown.herokuapp.com/)
+    * See [AsciiDoc editor options](https://asciidoctor.org/docs/editing-asciidoc-with-live-preview/#using-a-web-browser-preview-only)
 
 ### Add Images
+
 To add an image to your AsciiDoc put the image in the img directory. You can reference this image in your AsciiDoc by using the path to the img directory. For example, if you added `my_image.png` to the img directory you can use that image with the following AsciiDoc syntax: `image::/docs/img/my_image.png[My image alt text]`. The image will not show for the GitHub preview, but it will be linked on the website when its deployed.
 
 ## Doc Location
