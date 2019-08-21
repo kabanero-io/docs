@@ -1,5 +1,4 @@
 :page-layout: general-reference
-:page-type: doc
 :page-doc-category: Collection Management
 :page-title: Kabanero Collections
 :linkattrs:
