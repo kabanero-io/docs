@@ -1,5 +1,6 @@
 :page-layout: general-reference
-:page-type: general
+:page-type: doc
+:page-doc-category: Getting Started
 :page-title: Scripted Kabanero Foundation Setup
 :linkattrs:
 
