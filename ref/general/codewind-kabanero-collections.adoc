@@ -1,10 +1,10 @@
 == Using Kabanero Collections in Codewind
 
 === Prerequisties
-* https://eclipse.com/codewind[Codewind for VS Code or Eclipse]
+* https://eclipse.com/codewind[Codewind for VS Code or Eclipse v0.3.0 or later]
 * https://www.docker.com/get-started[Docker]
 * https://appsody.dev/docs/getting-started/installation[Appsody]
-* github.com/eclipse/codewind-appsody-extension[Appsody Extension for Codewind]
+* https://github.com/eclipse/codewind-appsody-extension[Appsody Extension for Codewind v0.3.0 or later]
 ** Follow the instructions `Installing the Appsody Extension on Codewind` and `Optional: Using the Same Appsody Configuration Between Local CLI and Codewind` in the README.md
 
 
