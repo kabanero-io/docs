@@ -1,5 +1,5 @@
 :page-layout: general-reference
-:page-type: general
+:page-doc-category: Getting Started
 :page-title: Connecting Tekton to GitHub
 
 = Connecting Tekton to GitHub
