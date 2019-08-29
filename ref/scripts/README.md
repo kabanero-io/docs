@@ -11,7 +11,7 @@
 
 ## Installation Scripts
 
-Retrieve the [installation scripts from our documentation repository](https://github.com/kabanero-io/docs/tree/master/ref/scripts)
+Retrieve the [installation scripts from our kabanero-foundation repository](https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts)
 
 ## Installation
 
