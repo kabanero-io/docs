@@ -18,7 +18,7 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 === Installation Scripts
 
-Retrieve the https://github.com/kabanero-io/docs/tree/master/ref/scripts[installation scripts from our documentation repository, window="_blank"]
+Retrieve the https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[installation scripts from our kabanero-foundation repository, window="_blank"]
 
 
 === Installation
