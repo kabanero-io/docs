@@ -43,3 +43,8 @@ Open the file and add `Hello World`. Save the file and click the icon to open th
 The webpage will now be displaying your change. 
 
 While this is only a basic Hello World html file, this same process goes for any changes in the project you want to make.
+
+== Debugging
+You can debug these applications as you would any other Codewind project. 
+
+Find more info on debugging Codewind applications in VS Code https://www.eclipse.org/codewind/mdt-vsc-commands-restart-and-debug.html[here] and debugging in Eclipse https://www.eclipse.org/codewind/mdteclipsedebugproject.html[here]
