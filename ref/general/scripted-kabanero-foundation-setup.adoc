@@ -7,7 +7,6 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 === Prerequisites
 * Kubernetes is installed
-* The Kabanero Foundation is installed in a Kubernetes cluster
 * openshift_master_default_subdomain is configured
 ** See https://docs.okd.io/3.11/install/configuring_inventory_file.html[Configuring Your Inventory File, window="_blank"]
 * Wildcard DNS is available for your subdomain
