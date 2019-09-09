@@ -10,7 +10,7 @@ Kabanero CLI is a command-line interface for managing collections and onboarding
 
 == Kabanero commands
 
-Use the following commands to monitor and administer a kabanero environment.
+Use the following commands to monitor and administer a Kabanero environment.
 
 
 === Log in to Kabanero
