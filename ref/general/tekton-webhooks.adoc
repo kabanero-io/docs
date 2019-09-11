@@ -1,0 +1,75 @@
+:page-layout: general-reference
+:page-doc-category: Getting Started
+:page-title: Connecting Kabanero to GitHub with Tekton Webhooks
+:page-published: false
+= Connecting Kabanero to GitHub with Tekton Webhooks
+
+A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipeline]. After you configure the webhook, changes you make in your GitHub repository will trigger the Kabanero pipeline and its associated tasks.
+
+== Prerequisites
+
+* A GitHub repository
+* link:https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[Kabanero foundation]
+* link:https://github.com/tektoncd/dashboard#tekton-dashboard[Tekton Dashboard] with the link:https://github.com/tektoncd/experimental/tree/master/webhooks-extension#webhooks-extension[Webhooks Extension] installed
+
+=== Generate a GitHub access token.
+You need to generate a GitHub personal access token to authorize your webhook. To generate the token:
+
+* Go to link:https://github.com/settings/tokens[github.com/settings/tokens] and click `Generate new token`.
+* Check the `admin:repo_hook` option and click `Generate token`.
+* Make sure to save the token to a file since you can't see it after you leave this page.
+
+=== Create secrets.
+Store the access token in a Kubernetes secret from the Tekton Dashboard's `Secrets` menu. From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`. Use your GitHub user name and the personal access token you generated in the previous step to create this secret.
+
+image::/docs/img/GHsecret.png[Create secret panel screenshot]
+
+If you want to push the image to docker hub, you need to create a separate secret to connect to docker hub. Follow the same procedure but use your docker hub user name and password to create this secret.
+
+== Create a webhook.
+* From your Tekton Dashboard, select `webhooks` from the sidebar menu and click
+`Add Webhook`.
+* Enter your information in the `Create Webhook` window.
++
+image::/docs/img/create_webhook.png[Create webhook panel screenshot]
+
+** Name
++
+Give your webhook a distinctive name. The `Name` field is used as part of the webhook callback URI. Therefore, the name must consist of valid URI characters.
+** Repository URL
++
+The URL of the GitHub repository that you want to connect to Kabanero.
+** Access token
++
+Use this field to create a secret to store your GitHub personal access token. Even though you already created a token-based Git secret from your Tekton Dashboard, you must also store your GitHub personal access token in this field. Click the green plus icon beside the field to open the following window:
++
+image::/docs/img/access_token.png[Access token panel screenshot]
++
+Give your access token secret a descriptive name. In the `Access token` field, enter the GitHub personal access token that you previously created.
+** Namespace
++
+Select the Kubernetes namespace where the triggered Pipeline runs. In this case, choose `kabanero`.
+** Pipeline
++
+Select the Pipeline in your target Namespace from which a PipelineRun (and accompanying PipelineResources) is created. For information about how to create and configure pipelines, see link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipelines].
+** Service Account
++
+This field specifies the service account that is used by the PipelineRun. In this case, choose `kabanero operator`.
+** Docker registry
++
+Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously.
+* After you complete the necessary information, click `Create`.
+
+== Confirm your webhook.
+
+* Look for the webhook in your GitHub Repository.
++
+From your GitHub repository, go to the `settings` tab and select `Hooks` from the sidebar menu. Look for the webhook you created. Sometimes the webhook initially shows a 504 error but after the webhook is used it changes to a green check mark.
+* Update code and merge a PR.
++
+Make any update to your code, create a PR, and merge it. This change kicks off a Pipeline Run.
+* Check the Pipeline Run from your Tekton Dashboard.
++
+From your Tekton Dashboard, select `PipelineRuns` from the sidebar menu. Look for the PipelineRun you just kicked off.
+
+Nice work! You connected your GitHub repo to Kabanero with a webhook. Changes in your code can now automatically trigger tasks that are specified by the pipeline.
