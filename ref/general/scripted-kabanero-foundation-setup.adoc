@@ -45,4 +45,5 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 . If you need to access pipeline logs or make detailed pipeline changes, see below.
 * View manual pipeline logs
 ** `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
-* Access the Tekton dashboard: `http://tekton-dashboard.my.openshift.master.default.subdomain`
+* Access the Tekton dashboard: `http://tekton-dashboard.MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN`
+** Don't forget to replace `MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN` with your subdomain
