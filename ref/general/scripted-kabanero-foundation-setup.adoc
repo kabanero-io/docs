@@ -1,11 +1,12 @@
 :page-layout: general-reference
 :page-doc-category: Getting Started
-:page-title: Scripted Kabanero Foundation Setup
+:page-title: Scripted Kabanero Foundation Install
 :linkattrs:
 
 Today, Kabanero has been tested on the Origin Community Distribution of Kubernetes(OKD) version 3.11. There is intent to also expand testing on additional distributions including upstream Kubernetes in the future.
 
-=== Prerequisites
+== Prerequisites
+
 * Kubernetes is installed
 * openshift_master_default_subdomain is configured
 ** See https://docs.okd.io/3.11/install/configuring_inventory_file.html[Configuring Your Inventory File, window="_blank"]
@@ -14,43 +15,34 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * The Internal Registry is configured
 ** See more about the https://docs.okd.io/3.11/install_config/registry/index.html[Internal Registry, window="_blank"]
 
+== Installation
 
-=== Installation Scripts
+. On your machine, create and `cd` to a temporary working directory of your choice.
 
-Retrieve the https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[installation scripts from our kabanero-foundation repository, window="_blank"]
+. Retrieve the https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[installation scripts from our kabanero-foundation repository, window="_blank"]
+* Clone the repository to get the scripts `git clone https://github.com/kabanero-io/kabanero-foundation.git`
 
+. Go to the **scripts** directory: `cd kabanero-foundation/scripts`
 
-=== Installation
+. Ensure you are logged into your cluster with the https://docs.openshift.com/enterprise/3.2/cli_reference/get_started_cli.html#basic-setup-and-login[`oc login` command]
 
-As a `cluster-admin`, run the following
-....
-openshift_master_default_subdomain=my.openshift.master.default.subdomain ./install-kabanero-foundation.sh
-....
+. As a `cluster-admin`, run the following:
+* Don't forget to replace `MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN` with your subdomain
+* `openshift_master_default_subdomain=MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN ./install-kabanero-foundation.sh`
 
+== Optional sample - Appsody project with manual Tekton pipeline run
 
+. Create a Persistent Volume for the pipeline to use. A sample hostPath `pv.yaml` is provided.
+* `oc apply -f pv.yaml`
 
-=== Sample Appsody project with manual Tekton pipeline run
+. Create the pipeline and execute the example manual pipeline run
+* `APP_REPO=https://github.com/dacleyra/appsody-hello-world/ ./appsody-tekton-example-manual-run.sh`
 
-Create a Persistent Volume for the pipeline to use. A sample hostPath `pv.yaml` is provided.
-....
-oc apply -f pv.yaml
-....
+. By default, the application container image will be built and pushed to the Internal Registry, and then deployed as a Knative Service.
+* Access the application at: `http://appsody-hello-world.appsody-project.MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN`
+** Don't forget to replace `MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN` with your subdomain
 
-Create the pipeline and execute the example manual pipeline run
-....
-APP_REPO=https://github.com/dacleyra/appsody-hello-world/ ./appsody-tekton-example-manual-run.sh
-....
-
-By default, the application container image will be built and pushed to the Internal Registry, and then deployed as a Knative Service.
-
-Access application at `http://appsody-hello-world.appsody-project.my.openshift.master.default.subdomain`
-
-If you need to access pipeline logs or make detailed pipeline changes, see below.
-
-View manual pipeline logs
-....
-oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers
-....
-
-Access Tekton dashboard 
-`http://tekton-dashboard.my.openshift.master.default.subdomain`
+. If you need to access pipeline logs or make detailed pipeline changes, see below.
+* View manual pipeline logs
+** `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
+* Access the Tekton dashboard: `http://tekton-dashboard.my.openshift.master.default.subdomain`
