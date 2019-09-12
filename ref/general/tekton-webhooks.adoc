@@ -16,7 +16,7 @@ A webhook is an outbound HTTP request that helps you create a relationship betwe
 Tekton pipelines need a persistent volume. If there is no network storage available, create a `hostPath pv`. For more information, see link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#create-a-persistent-volume[Creating a persistent volume].
 
 === Generate a GitHub access token.
-You need to generate a GitHub personal access token to authorize your webhook. To generate the token:
+You need to generate a GitHub personal access token to use for creating the webhook and for accessing the repository source code during PipelineRuns. To generate the token:
 
 * Go to link:https://github.com/settings/tokens[github.com/settings/tokens] and click `Generate new token`.
 * Check the `admin:repo_hook` option and click `Generate token`.
@@ -51,10 +51,10 @@ image::/docs/img/access_token.png[Access token panel screenshot]
 Give your access token secret a descriptive name. In the `Access token` field, enter the GitHub personal access token that you previously created.
 ** Namespace
 +
-Select the Kubernetes namespace where the triggered Pipeline runs. In this case, choose `kabanero`.
+Select the Kubernetes namespace in which you want to run your pipeline. In this case, choose `kabanero`.
 ** Pipeline
 +
-Select the Pipeline in your target Namespace from which a PipelineRun (and accompanying PipelineResources) is created. For information about how to create and configure pipelines, see link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipelines].
+Select the Pipeline in your target Namespace. PipelineRuns (and their accompanying PipelineResources) are created in this namespace. For information about how to create and configure pipelines, see link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipelines].
 ** Service Account
 +
 This field specifies the service account that is used by the PipelineRun. In this case, choose `kabanero operator`.
@@ -70,8 +70,8 @@ Select the Docker registry where any built images are pushed. Use the same Docke
 From your GitHub repository, go to the `settings` tab and select `Hooks` from the sidebar menu. Look for the webhook you created. Sometimes the webhook initially shows a 504 error but after the webhook is used it changes to a green check mark.
 * Update code and merge a PR.
 +
-Make any update to your code, create a PR, and merge it. This change kicks off a Pipeline Run.
-* Check the Pipeline Run from your Tekton Dashboard.
+Make any update to your code, create a PR, and merge it. This change kicks off a PipelineRun.
+* Check the PipelineRun from your Tekton Dashboard.
 +
 From your Tekton Dashboard, select `PipelineRuns` from the sidebar menu. Look for the PipelineRun you just kicked off.
 
