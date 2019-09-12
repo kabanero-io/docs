@@ -17,12 +17,12 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 == Installation
 
-. On your machine, create and `cd` to a temporary working directory of your choice.
+. In a terminal session, create and `cd` to a temporary working directory of your choice.
 
 . Retrieve the https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[installation scripts from our kabanero-foundation repository, window="_blank"]
 * Clone the repository to get the scripts `git clone https://github.com/kabanero-io/kabanero-foundation.git`
 
-. Go to the **scripts** directory: `cd kabanero-foundation/scripts`
+. Navigate to the **scripts** directory: `cd kabanero-foundation/scripts`
 
 . Ensure you are logged into your cluster with the https://docs.openshift.com/enterprise/3.2/cli_reference/get_started_cli.html#basic-setup-and-login[`oc login` command]
 
@@ -40,10 +40,9 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 . By default, the application container image will be built and pushed to the Internal Registry, and then deployed as a Knative Service.
 * Access the application at: `http://appsody-hello-world.appsody-project.MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN`
-** Don't forget to replace `MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN` with your subdomain
 
-. If you need to access pipeline logs or make detailed pipeline changes, see below.
-* View manual pipeline logs
-** `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
-* Access the Tekton dashboard: `http://tekton-dashboard.MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN`
-** Don't forget to replace `MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN` with your subdomain
+. Optional - Access the pipeline logs
+* `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
+
+. Optional - Make detailed pipeline changes by accessing the Tekton dashboard
+* `http://tekton-dashboard.MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN`
