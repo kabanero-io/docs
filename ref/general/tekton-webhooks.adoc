@@ -26,8 +26,6 @@ You need to generate a GitHub personal access token to use for creating the webh
 === Create secrets.
 If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret. From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`. Use your GitHub user name and the personal access token you generated in the previous step to create this secret. Select the service account that is used by the pipeline you want to trigger. In this case, use `kabanero-operator`.
 
-image::/docs/img/GHsecret.png[Create secret panel screenshot]
-
 If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub user name and password to create this secret.
 
 == Create a webhook.
@@ -35,31 +33,27 @@ If you want to push the image to Docker Hub, you need to create a separate secre
 `Add Webhook`.
 * Enter your information in the `Create Webhook` window.
 +
-image::/docs/img/create_webhook.png[Create webhook panel screenshot]
-
-** Name
+** **Name**
 +
 Give your webhook a distinctive name.
-** Repository URL
+** **Repository URL**
 +
 The URL of the GitHub repository that you want to connect to Kabanero.
-** Access token
+** **Access token**
 +
-Use this field to create a secret to store your GitHub personal access token. Even if you already created a token-based Git secret from your Tekton Dashboard, you must also store your GitHub personal access token in this field. Click the green plus icon beside the field to open the following window:
-+
-image::/docs/img/access_token.png[Access token panel screenshot]
+Use this field to create a secret to store your GitHub personal access token. Even if you already created a token-based Git secret from your Tekton Dashboard, you must also store your GitHub personal access token in this field. Click the green plus icon beside the field to open the `Create Access Token Secret` window.
 +
 Give your access token secret a descriptive name. In the `Access token` field, enter the GitHub personal access token that you previously generated in the <<Generate a GitHub access token.>> step.
-** Namespace
+** **Namespace**
 +
 Select the Kubernetes namespace in which you want to run your pipeline. In this case, choose `kabanero`.
-** Pipeline
+** **Pipeline**
 +
 Select the Pipeline in your target Namespace. PipelineRuns (and their accompanying PipelineResources) are created in this namespace. For information about how to create and configure pipelines, see link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipelines].
-** Service Account
+** **Service Account**
 +
 This field specifies the service account that is used by the PipelineRun. In this case, choose `kabanero operator`.
-** Docker registry
+** **Docker registry**
 +
 Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace'.
 * After you complete the necessary information, click `Create`.
