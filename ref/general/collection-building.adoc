@@ -15,7 +15,7 @@ cd collections
 +
 Once this has been done, you will have your own copy of the collections repository in your own git org/repo. Follow any normal development processes you have for using git (i.e., creating branches, etc.).
 
-. Create / Modify the collections (stacks) if required.
+. Create or modify the collections if required.
 * You can find out more about https://github.com/appsody/website/blob/master/content/docs/stacks/create.md[creating or modifying collections, window="_blank"].
 
 . Set up local build environment.
