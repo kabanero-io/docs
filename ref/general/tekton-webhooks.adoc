@@ -38,7 +38,7 @@ image::/docs/img/create_webhook.png[Create webhook panel screenshot]
 
 ** Name
 +
-Give your webhook a distinctive name. 
+Give your webhook a distinctive name.
 +
 The URL of the GitHub repository that you want to connect to Kabanero.
 ** Access token
@@ -66,7 +66,7 @@ Select the Docker registry where any built images are pushed. Use the same Docke
 
 * Look for the webhook in your GitHub Repository.
 +
-From your GitHub repository, go to the `settings` tab and select `Hooks` from the sidebar menu. Look for the webhook you created. Sometimes the webhook initially shows a 504 error but after the webhook is used it changes to a green check mark.
+From your GitHub repository, go to the `settings` tab and select `Webhooks` from the sidebar menu. Look for the webhook you created. Sometimes the webhook initially shows a 504 error but after the webhook is used it changes to a green check mark.
 * Update code and merge a PR.
 +
 Make any update to your code, create a PR, and merge it. This change kicks off a PipelineRun.
