@@ -38,8 +38,7 @@ image::/docs/img/create_webhook.png[Create webhook panel screenshot]
 
 ** Name
 +
-Give your webhook a distinctive name. The `Name` field is used as part of the webhook callback URI. Therefore, the name must consist of valid URI characters.
-** Repository URL
+Give your webhook a distinctive name. 
 +
 The URL of the GitHub repository that you want to connect to Kabanero.
 ** Access token
