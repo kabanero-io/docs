@@ -1,5 +1,5 @@
 :page-layout: general-reference
-:page-doc-category: Collection Management
+:page-doc-category: Reference
 :page-title: Building a Kabanero collection locally
 :linkattrs:
 = Building the collections locally

@@ -1,5 +1,5 @@
 :page-layout: general-reference
-:page-doc-category: Getting Started
+:page-doc-category: Configuration
 :page-title: Connecting Tekton to GitHub
 
 = Connecting Tekton to GitHub
@@ -14,4 +14,4 @@ Now we can create a webhook. From the Tekton Dashboard, under "Extensions" in th
 
 You can check to see if it was created correctly by going into your GitHub repo and, in the settings->webhooks tab, you should see a webhook with a green checkmark. 
 
-You can now change some code in your local repo, commit and push to GitHub to see Tekton kick off a pipeline run. 
+You can now change some code in your local repo, commit and push to GitHub to see Tekton kick off a pipeline run.
