@@ -19,7 +19,7 @@ Now that your local Appsody CLI points to the Appsody Extension, you can modify 
 +
 `appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/v0.1.0/kabanero-index.yaml`
 
-. Set the Kabanero Collections Repo to default so you can remove the old default templates:
+. Set the Kabanero Collections repo to default so you can remove the old default templates:
 +
 `appsody repo set-default kabanero`
 
@@ -30,7 +30,7 @@ appsody repo remove appsodyhub
 appsody repo remove experimental
 ----
 
-== Create a Project from a Kabanero Collection
+== Create a project from a Kabanero Collection
 Once the Kabanero templates have been added, you can create a project like you normally would in Codewind.
 
 * VS Code 
