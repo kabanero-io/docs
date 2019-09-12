@@ -10,7 +10,7 @@ A webhook is an outbound HTTP request that helps you create a relationship betwe
 
 * A GitHub repository
 * link:https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[Kabanero foundation]
-* link:https://github.com/tektoncd/dashboard#tekton-dashboard[Tekton Dashboard] with the link:https://github.com/tektoncd/experimental/tree/master/webhooks-extension#webhooks-extension[Webhooks Extension] installed
+* link:https://github.com/tektoncd/dashboard#installing-the-latest-release[Tekton Dashboard] with the link:https://github.com/tektoncd/experimental/blob/master/webhooks-extension/docs/InstallReleaseBuild.md[Webhooks Extension] installed
 
 === Create a persistent volume
 Tekton pipelines need a persistent volume. If there is no network storage available, create a `hostPath pv`. For more information, see link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#create-a-persistent-volume[Creating a persistent volume].
