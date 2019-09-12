@@ -4,13 +4,16 @@
 :page-published: false
 = Connecting Kabanero to GitHub with Tekton Webhooks
 
-A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipeline]. After you configure the webhook, changes you make in your GitHub repository will trigger the Kabanero pipeline and its associated tasks.
+A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Tekton pipeline]. After you configure the webhook, changes you make in your GitHub repository will trigger the Tekton pipeline and its associated tasks.
 
 == Prerequisites
 
 * A GitHub repository
 * link:https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[Kabanero foundation]
 * link:https://github.com/tektoncd/dashboard#tekton-dashboard[Tekton Dashboard] with the link:https://github.com/tektoncd/experimental/tree/master/webhooks-extension#webhooks-extension[Webhooks Extension] installed
+
+=== Create a persistent volume
+Tekton pipelines need a persistent volume. If there is no network storage available, create a `hostPath pv`. For more information, see link:https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#create-a-persistent-volume[Creating a persistent volume].
 
 === Generate a GitHub access token.
 You need to generate a GitHub personal access token to authorize your webhook. To generate the token:
@@ -20,11 +23,11 @@ You need to generate a GitHub personal access token to authorize your webhook. T
 * Make sure to save the token to a file since you can't see it after you leave this page.
 
 === Create secrets.
-Store the access token in a Kubernetes secret from the Tekton Dashboard's `Secrets` menu. From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`. Use your GitHub user name and the personal access token you generated in the previous step to create this secret.
+Store the access token in a Kubernetes secret from the Tekton Dashboard's `Secrets` menu. From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`. Use your GitHub user name and the personal access token you generated in the previous step to create this secret. Select the service account that is used by the pipeline you want to trigger. In this case, use `kabanero-operator`.
 
 image::/docs/img/GHsecret.png[Create secret panel screenshot]
 
-If you want to push the image to docker hub, you need to create a separate secret to connect to docker hub. Follow the same procedure but use your docker hub user name and password to create this secret.
+If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub user name and password to create this secret.
 
 == Create a webhook.
 * From your Tekton Dashboard, select `webhooks` from the sidebar menu and click
