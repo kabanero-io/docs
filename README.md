@@ -3,6 +3,9 @@ This repository holds the documentation for the kabanero-io site. These docs are
 
 # How to contribute to the documentation
 
+## Before You Start
+  * Click the `fork` button to create your fork of the `docs` repo. Make changes on your fork then open a pull request against `kabanero-io/docs:master` when you're ready for the changes to be reviewed and merged.
+  
 ## Doc format
 
 You have 2 options when creating docs: Markdown and AsciiDoc.
