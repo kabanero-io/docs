@@ -28,10 +28,10 @@ Examples:
 
 -----
 # login with GitHub userid and password:
-kabanero myGithubID myGithubPassword https://my.kabaneroInstance.io
+kabanero login my.kabaneroInstance.io -u myGithubID -p myGithubPassword
 
-# login with GitHub userid and PAT:
-kabanero myGithubID myGithubPAT https://my.kabaneroInstance.io
+# login with previously used url Github userid and PAT:
+	kabanero login -u myGithubID -p myGithubPAT
 -----
 
 === Onboard a developer
