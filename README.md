@@ -18,16 +18,15 @@ You need the proper front matter on each doc to get it categorized correctly. Th
     ```
     ---
     layout: general-reference
-    type: doc
-    title: Installing Kabanero Foundation
-    doc-category: Installation
+    doc-category: Configuration
+    title: Connecting Kabanero to GitHub with Tekton Webhooks
     ---
     ```
   * For AsciiDoc, use `page-` AsciiDoc attributes in place.
     ```
     :page-layout: general-reference
-    :page-doc-category: Installation
-    :page-title: Installing Kabanero Foundation
+    :page-doc-category: Configuration
+    :page-title: Connecting Kabanero to GitHub with Tekton Webhooks
     :linkattrs:
     ```
 
@@ -39,6 +38,16 @@ We currently have 3 categories you can use for the doc-category front matter
 * Configuration
 
 If you need a new category feel free to open an issue or discussion in a pull request about the new category.
+
+## Doc category Order in table of contents
+
+The [doc-categories.adoc](https://github.com/kabanero-io/docs/blob/master/doc-categories.adoc) file configures the order that the doc categories will show up on our table of contents for the website. Currently the order is
+   1. Installation
+   1. Configuration
+   1. Reference
+
+This file should only be updated if a *new* category is added. 
+   * If a new category is added you must place your category in the `page-categories` in order you want it to show up on the site.
 
 ## Doc Syntax
 
