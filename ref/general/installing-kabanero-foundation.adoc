@@ -1,6 +1,6 @@
 :page-layout: general-reference
-:page-doc-category: Getting Started
-:page-title: Scripted Kabanero Foundation Install
+:page-doc-category: Installation
+:page-title: Installing Kabanero Foundation
 :linkattrs:
 
 Today, Kabanero has been tested on the Origin Community Distribution of Kubernetes(OKD) version 3.11. There is intent to also expand testing on additional distributions including upstream Kubernetes in the future.
