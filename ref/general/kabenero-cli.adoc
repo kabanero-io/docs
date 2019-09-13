@@ -1,16 +1,18 @@
 :page-layout: general-reference
 :page-type: doc
 :page-title: Kabanero CLI
-:page-doc-category: Reference
-:page-published: false
+:page-doc-category: Getting Started
 :linkattrs:
 = Kabanero CLI
 
 Kabanero CLI is a command-line interface for managing collections and onboarding developers in a Kabanero environment. This interface is used by the enterprise, solution, or application architect who defines and manages the Kabanero collections that are used by developers to create governed applications.
 
+== Kabanero commands
+
 Use the following commands to monitor and administer a Kabanero environment.
 
-== Log in to Kabanero
+
+=== Log in to Kabanero
 
 Run the `kabanero login` command to authenticate to Kabanero.
 
@@ -25,14 +27,14 @@ Use your GitHub user ID and either a password or Personal Access Token (PAT) to 
 Examples:
 
 -----
-# login with Github userid and password:
+# login with GitHub userid and password:
 kabanero myGithubID myGithubPassword https://my.kabaneroInstance.io
 
-# login with Github userid and PAT:
+# login with GitHub userid and PAT:
 kabanero myGithubID myGithubPAT https://my.kabaneroInstance.io
 -----
 
-== Onboard a developer
+=== Onboard a developer
 
 Run the `kabanero onboard` command to onboard a developer to the Kabanero environment.
 
@@ -42,7 +44,7 @@ kabanero onboard github-id repo-name
 
 This command is under development. Once integrated, it sends an email to the specified user that provides the necessary information to get started with Kabanero.
 
-== List Kabanero collections
+=== List Kabanero collections
 
 Run the `kabanero list` command to list all the collections in a kabanero instance, along with their status.
 
@@ -50,15 +52,15 @@ Run the `kabanero list` command to list all the collections in a kabanero instan
 kabanero list
 -----
 
-== Refresh collections
+=== Refresh collections
 
-Run the `kabanero refresh` command to refresh the list of collections from master, making these collections current with the activated collections across all namespaces in the Kabanero instance.
+Run the `kabanero refresh` command to refresh the list of collections from master, making these collections current with the activated collections across all namespaces in the Kabanero instance. This command can also be used to restore deactivated collections. See <<Deactivate Kabanero>>.
 
 ----
 kabanero refresh
 ----
 
-== Show the Kabanero version
+=== Show the Kabanero version
 
 Run the `kabanero version` command to display the version of kabanero that is running.
 
@@ -66,7 +68,7 @@ Run the `kabanero version` command to display the version of kabanero that is ru
 kabanero version
 ----
 
-== Deactivate Kabanero
+=== Deactivate Kabanero
 
 Run the `kabanero deactivate` command to prevent a collection from being shown to the development team, without deleting it.
 
@@ -76,9 +78,9 @@ kabanero deactivate collection-name
 
 Running the deactivate command removes the specified collection from the list of available application types, without deleting it from the Kabanero instance.
 
-This command is useful in a case where you have cloned a collection and customized it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection.
+This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero refresh` command. See <<Refresh collections>>.
 
-== Log out of Kabanero
+=== Log out of Kabanero
 
 Run the `kabanero logout` command to disconnect from the Kabanero instance.
 
@@ -86,11 +88,33 @@ Run the `kabanero logout` command to disconnect from the Kabanero instance.
 kabanero logout
 ----
 
-== General options
+== Options
 
+=== Global options
 These options can be enabled on any Kabanero command.
 
------
-  -h, --help      help for kabanero
-  -v, --verbose   Turns on debug output and logging to a file in $HOME/.kabanero/logs
------
+
+|===
+|||
+|-h
+|--help
+|help for kabanero
+|`-v`
+|`--verbose`
+|Turns on debug output and logging to a file in $HOME/.kabanero/logs
+|===
+
+=== Login Options
+Use these options with the `kabanero login` command.
+
+|===
+|||
+|-h
+|--help
+|help for login
+|`-p`
+|`--password string`
+|GitHub password or personal access token
+|`-u`
+|`--username string`
+|GitHub user name
