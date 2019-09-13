@@ -27,8 +27,8 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 . Ensure you are logged into your cluster with the https://docs.openshift.com/enterprise/3.2/cli_reference/get_started_cli.html#basic-setup-and-login[`oc login` command]
 
 . As a `cluster-admin`, run the following:
-* Don't forget to replace `MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN` with your subdomain
-* `openshift_master_default_subdomain=MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN ./install-kabanero-foundation.sh`
+* Don't forget to replace `<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>` with your subdomain, and do not include the angle brackets:
+* `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN> ./install-kabanero-foundation.sh`
 
 == Optional sample - Appsody project with manual Tekton pipeline run
 
@@ -39,10 +39,11 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * `APP_REPO=https://github.com/dacleyra/appsody-hello-world/ ./appsody-tekton-example-manual-run.sh`
 
 . By default, the application container image will be built and pushed to the Internal Registry, and then deployed as a Knative Service.
-* Access the application at: `http://appsody-hello-world.appsody-project.MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN`
+* Access the application at: `http://appsody-hello-world.appsody-project.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
 
 . Optional - Access the pipeline logs
 * `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
 
 . Optional - Make detailed pipeline changes by accessing the Tekton dashboard
-* `http://tekton-dashboard.MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN`
+* `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
+
