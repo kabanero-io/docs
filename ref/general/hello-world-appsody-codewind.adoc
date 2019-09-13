@@ -1,5 +1,5 @@
 :page-layout: general-reference
-:page-doc-category: Getting Started
+:page-doc-category: Reference
 :page-title: Appsody Hello World on Codewind
 :linkattrs:
 = Appsody Hello World on Codewind

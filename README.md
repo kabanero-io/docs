@@ -19,18 +19,26 @@ You need the proper front matter on each doc to get it categorized correctly. Th
     ---
     layout: general-reference
     type: doc
-    title: Kabanero Introduction
-    doc-category: Getting Started
+    title: Installing Kabanero Foundation
+    doc-category: Installation
     ---
     ```
   * For AsciiDoc, use `page-` AsciiDoc attributes in place.
     ```
     :page-layout: general-reference
-    :page-type: doc
-    :page-title: Kabanero Intro
-    :page-doc-category: Getting Started
+    :page-doc-category: Installation
+    :page-title: Installing Kabanero Foundation
     :linkattrs:
     ```
+
+## Doc Categories
+
+We currently have 3 categories you can use for the doc-category front matter
+* Installation
+* Reference
+* Configuration
+
+If you need a new category feel free to open an issue or discussion in a pull request about the new category.
 
 ## Doc Syntax
 
@@ -55,10 +63,6 @@ To add an image to your AsciiDoc put the image in the img directory. You can ref
 ## Doc Location
 
 In this repository you shoud place the doc under the folder that best describes the documentation category. These folders located in the [ref directory](https://github.com/kabanero-io/docs/tree/master/ref)
-
-If no folder / category exists for your documentation feel free to create a properly named folder in the [ref directory](https://github.com/kabanero-io/docs/tree/master/ref) and place your asciidoc file in there.
-
-If the documentation doesn't really fit in its own category you can place the doc in the [general directory](https://github.com/kabanero-io/docs/tree/master/ref/general)
 
 
 

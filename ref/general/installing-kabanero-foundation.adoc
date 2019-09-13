@@ -46,3 +46,4 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 . Optional - Make detailed pipeline changes by accessing the Tekton dashboard
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
+
