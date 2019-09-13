@@ -55,7 +55,7 @@ Select the Pipeline in your target Namespace. PipelineRuns (and their accompanyi
 This field specifies the service account that is used by the PipelineRun. In this case, choose `kabanero operator`.
 ** **Docker registry**
 +
-Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace`.
+Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace'.
 * After you complete the necessary information, click `Create`.
 
 == Confirm your webhook.
