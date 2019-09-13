@@ -89,8 +89,9 @@ Run the `kabanero logout` command to disconnect from the Kabanero instance.
 kabanero logout
 ----
 
-== General options
+== Options
 
+=== Global options
 These options can be enabled on any Kabanero command.
 
 
@@ -99,10 +100,19 @@ These options can be enabled on any Kabanero command.
 |-h
 |--help
 |help for kabanero
-
 |`-v`
 |`--verbose`
 |Turns on debug output and logging to a file in $HOME/.kabanero/logs
+|===
+
+=== Login Options
+Use these options with the `kabanero login` command.
+
+|===
+|||
+|-h
+|--help
+|help for login
 |`-p`
 |`--password string`
 |Github password or personal access token
