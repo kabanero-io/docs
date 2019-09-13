@@ -1,33 +1,34 @@
 ---
 
-copyright:
-  years: 2019
-lastupdated: "2019-09-12"
+layout: general-reference
+type: general
+title: What's new in Kabanero 0.1.2
+doc-category: Reference
+
 
 ---
 
+# What's new in Kabanero 0.1.2
 
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:codeblock: .codeblock}
-{:pre: .pre}
-{:screen: .screen}
-{:tip: .tip}
+## Installing Codewind in VS code or Eclipse
+* Explains how you can install Codewind for two different IDEs
 
-# What's new in Kabanero
+## Installing Kabanero Foundation
+* Explains how you can install Kabanero Foundation
 
+## Connecting Kabanero to Github with Tekton Webhooks
+* You can configure you webhook so you can make changes in Github that will trigger the Tekton pipeline.
 
-Learn about new features, improvements, any limitations, and other changes in the latest product release.
-{: shortdesc}
+## Using Kabanero Collections in Codewind
+* In Codewind, you can replace default templates with the Kabanero Collections templates and create a project from a Kabanero Collection.
 
+## Building a Kabanero collection locally
+* Explains how to build a Kabanero Collection locally
 
-## Kabanero v0.0.3
-{: #console-version}
+## Kabanero Collections Overview
+* Provides an overview Kabanero Collections
 
-* **Software support**
-
-
-
-**Features and enhancements**
+## Appsody Hello World on Codewind
+* You can create a Java MicroProfile Appsody project with Codewind.
 
