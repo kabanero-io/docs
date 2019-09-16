@@ -1,10 +1,10 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-doc-category: Reference
 :page-title: Using Kabanero Collections in Codewind
 :linkattrs:
 = Using Kabanero Collections in Codewind
 
-== Prerequisites
+== [#prerequisites]#Prerequisites#
 * https://eclipse.com/codewind[Codewind for VS Code or Eclipse v0.3.0 or later]
 * https://www.docker.com/get-started[Docker]
 * https://appsody.dev/docs/getting-started/installation[Appsody]
@@ -12,7 +12,7 @@
 ** Follow the instructions `Installing the Appsody Extension on Codewind` and `Optional: Using the Same Appsody Configuration Between Local CLI and Codewind` in the README.md file
 
 
-== Replace the default templates with the Kabanero Collections templates
+== [#templates]#Replace the default templates with the Kabanero Collections templates#
 Now that your local Appsody CLI points to the Appsody Extension, you can modify the repo's with the standard repo commands. 
 
 . First you will need to add the https://github.com/kabanero-io/collections[Kabanero Collections Repository]:
@@ -30,7 +30,7 @@ appsody repo remove appsodyhub
 appsody repo remove experimental
 ----
 
-== Create a project from a Kabanero Collection
+== [#createProject]#Create a project from a Kabanero Collection#
 Once the Kabanero templates have been added, you can create a project like you normally would in Codewind.
 
 * VS Code 

@@ -1,9 +1,9 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-title: Welcome to Docs
 
 = Welcome to the Kabanero Docs
 
-== Kabanero
+== [#kabanero]#Kabanero#
 
 Kabanero is an open source project that brings together foundational open source technologies into a modern microservices-based framework. Kabanero provides an end-to-end solution that enables you to architect, build, deploy, and manage the lifecycle of Kubernetes-based applications with more speed than ever.
 

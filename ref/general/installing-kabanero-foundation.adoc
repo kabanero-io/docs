@@ -1,11 +1,12 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-doc-category: Installation
 :page-title: Installing Kabanero Foundation
 :linkattrs:
+:sectanchors:
 
 Today, Kabanero has been tested on the Origin Community Distribution of Kubernetes(OKD) version 3.11. There is intent to also expand testing on additional distributions including upstream Kubernetes in the future.
 
-== Prerequisites
+== [#prerequisites]#Prerequisites#
 
 * Kubernetes is installed
 * openshift_master_default_subdomain is configured
@@ -15,7 +16,7 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * The Internal Registry is configured
 ** See more about the https://docs.okd.io/3.11/install_config/registry/index.html[Internal Registry, window="_blank"]
 
-== Installation
+== [#installation]#Installation#
 
 . In a terminal session, create and `cd` to a temporary working directory of your choice.
 
@@ -30,7 +31,7 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * Don't forget to replace `<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>` with your subdomain, and do not include the angle brackets:
 * `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN> ./install-kabanero-foundation.sh`
 
-== Optional sample - Appsody project with manual Tekton pipeline run
+== [#sample]#Optional sample - Appsody project with manual Tekton pipeline run#
 
 . Create a Persistent Volume for the pipeline to use. A sample hostPath `pv.yaml` is provided.
 * `oc apply -f pv.yaml`

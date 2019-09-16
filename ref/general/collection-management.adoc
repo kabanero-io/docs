@@ -1,4 +1,4 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-doc-category: Reference
 :page-title: Kabanero Collections Overview
 :linkattrs:

@@ -1,8 +1,8 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-doc-category: Reference
 :page-title: Building a Kabanero collection locally
 :linkattrs:
-= Building the collections locally
+= [#localBuild]#Building the collections locally#
 
 . Clone the collections repository and create a new copy of it in your git organization
 +
@@ -108,6 +108,6 @@ git push --tags
 +
 This will trigger another Travis build that will also generate a Git Release and push the images to the image repository.
 
-== Need help?
+== [#help]#Need help?#
 If you have a question that you can't find an answer to, we would also like to hear about that too.
 You can reach out to the community for assistance on the https://ibm-cloud-tech.slack.com/messages/CJZCYTD0Q[Kabanero Slack channel, window="_blank"].
