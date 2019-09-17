@@ -16,7 +16,7 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * The Internal Registry is configured
 ** See more about the https://docs.okd.io/3.11/install_config/registry/index.html[Internal Registry, window="_blank"]
 
-== [#installation]#Installation#
+== [[Installation]]Installation
 
 . In a terminal session, create and `cd` to a temporary working directory of your choice.
 
