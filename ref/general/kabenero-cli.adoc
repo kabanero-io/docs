@@ -3,16 +3,17 @@
 :page-title: Kabanero CLI
 :page-doc-category: Getting Started
 :linkattrs:
+:sectanchors:
 = Kabanero CLI
 
 Kabanero CLI is a command-line interface for managing collections and onboarding developers in a Kabanero environment. This interface is used by the enterprise, solution, or application architect who defines and manages the Kabanero collections that are used by developers to create governed applications.
 
-== [#kabaneroCommands]#Kabanero commands#
+== Kabanero commands
 
 Use the following commands to monitor and administer a Kabanero environment.
 
 
-=== [#login]#Log in to Kabanero#
+=== Log in to Kabanero
 
 Run the `kabanero login` command to authenticate to Kabanero.
 
@@ -34,7 +35,7 @@ kabanero login my.kabaneroInstance.io -u myGithubID -p myGithubPassword
 	kabanero login -u myGithubID -p myGithubPAT
 -----
 
-=== [#onboardDeveloper]#Onboard a developer#
+=== Onboard a developer
 
 Run the `kabanero onboard` command to onboard a developer to the Kabanero environment.
 
@@ -44,7 +45,7 @@ kabanero onboard github-id repo-name
 
 This command is under development. Once integrated, it sends an email to the specified user that provides the necessary information to get started with Kabanero.
 
-=== [#listCollections]#List Kabanero collections#
+=== List Kabanero collections
 
 Run the `kabanero list` command to list all the collections in a kabanero instance, along with their status.
 
@@ -52,7 +53,7 @@ Run the `kabanero list` command to list all the collections in a kabanero instan
 kabanero list
 -----
 
-=== [#refreshCollections]#Refresh collections#
+=== Refresh collections
 
 Run the `kabanero refresh` command to refresh the list of collections from master, making these collections current with the activated collections across all namespaces in the Kabanero instance. This command can also be used to restore deactivated collections. See <<Deactivate Kabanero>>.
 
@@ -60,7 +61,7 @@ Run the `kabanero refresh` command to refresh the list of collections from maste
 kabanero refresh
 ----
 
-=== [#showKabaneroVersion]#Show the Kabanero version#
+=== Show the Kabanero version
 
 Run the `kabanero version` command to display the version of kabanero that is running.
 
@@ -68,7 +69,7 @@ Run the `kabanero version` command to display the version of kabanero that is ru
 kabanero version
 ----
 
-=== [#deactivateKabanero]#Deactivate Kabanero#
+=== Deactivate Kabanero
 
 Run the `kabanero deactivate` command to prevent a collection from being shown to the development team, without deleting it.
 
@@ -80,7 +81,7 @@ Running the deactivate command removes the specified collection from the list of
 
 This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero refresh` command. See <<Refresh collections>>.
 
-=== [#logout]#Log out of Kabanero#
+=== Log out of Kabanero
 
 Run the `kabanero logout` command to disconnect from the Kabanero instance.
 
@@ -88,9 +89,9 @@ Run the `kabanero logout` command to disconnect from the Kabanero instance.
 kabanero logout
 ----
 
-== [#options]#Options#
+== Options
 
-=== [#globalOptions]#Global options#
+=== Global options
 These options can be enabled on any Kabanero command.
 
 
@@ -104,7 +105,7 @@ These options can be enabled on any Kabanero command.
 |Turns on debug output and logging to a file in $HOME/.kabanero/logs
 |===
 
-=== [#loginOptions]#Login Options#
+=== Login Options
 Use these options with the `kabanero login` command.
 
 |===

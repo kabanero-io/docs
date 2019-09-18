@@ -2,6 +2,7 @@
 :page-doc-category: Reference
 :page-title: Kabanero Collections Overview
 :linkattrs:
+:sectanchors:
 
 The Kabanero project provides solution architects with the ability to manage  integrated collections. Kabanero organizes artifacts into a collection that specifies an Appsody stack, pipelines based on Tekton with “Build Task Definitions”.
 

@@ -2,16 +2,17 @@
 :page-doc-category: Reference
 :page-title: Appsody Hello World on Codewind
 :linkattrs:
+:sectanchors:
 = Appsody Hello World on Codewind
 
-== [#prerequisites]#Prerequisites#
+== Prerequisites
 . https://www.eclipse.org/codewind/installlocally.html[Codewind] on Visual Studio Code or Eclipse
 . https://appsody.dev/docs/getting-started/installation[Appsody]
 . https://github.com/kabanero-io/appsodyExtension[Appsody Extension for Codewind]
 
-== [#vsCode]#Getting started with VS Code#
+== Getting started with VS Code
 
-=== [#vsCodeAppsody]#Creating a Java MicroProfile appsody Project#
+=== Creating a Java MicroProfile appsody Project
 In VS Code open the command palette and navigate to the option `Codewind: Create New Project`. 
 Select the Appsody Java MicroProfile template, give it a name and press enter. Navigate to the `Explorer` view. 
 In the `Explorer` view keep expanding the Codewind section until the project you created is visible. 
@@ -22,9 +23,9 @@ Other built in endpoints are described on the bottom of the https://github.com/a
 
 *NOTE:* The project might still be `starting` and you'll need to wait for it to be running.
 
-== [#eclipse]#Getting started with Eclispe#
+== Getting started with Eclispe
 
-=== [#eclipseAppsody]#Creating a Java MicroProfile appsody Project#
+=== Creating a Java MicroProfile appsody Project
 Open up the Codwind Explorer in your Eclipse workspace by clicking `Window -> Show View -> Other... -> Codewind -> Codewind Explorer`.
 Right click on the `Local Projects` under `Codewind` and select `New Project`. Select the Appsody Java MicroProfile template, give it a name and create it.
 Now underneath your `Codewind -> Local Projects`, there should be your project. 
@@ -35,16 +36,16 @@ Other built in endpoints are described on the bottom of the https://github.com/a
 
 *NOTE:* The project might still be `starting` and you'll need to wait for it to be running. Also you might need to refresh the project explorer to see the contents of your project directory.
 
-== [#helloWorld]#Hello World#
+== Hello World
 
-=== [#createIndex]#Create the index.html#
+=== Create the index.html
 Right-click on the appsody project and chose the option to `Open Folder as Workspace`. In the project workspace, navigate to `src/main/webapp/` and create a new file there called `index.html`.
 Open the file and add `Hello World`. Save the file and click the icon to open the app in your web browser again. You should see a webpage with `Hello World`. Now you can go back to the file and change it, save it, and then refresh the webpage.
 The webpage will now be displaying your change. 
 
 While this is only a basic Hello World html file, this same process goes for any changes in the project you want to make.
 
-== [#debugging]#Debugging#
+== Debugging
 You can debug these applications as you would any other Codewind project. 
 
 Find more info on debugging Codewind applications in VS Code https://www.eclipse.org/codewind/mdt-vsc-commands-restart-and-debug.html[here] and debugging in Eclipse https://www.eclipse.org/codewind/mdteclipsedebugproject.html[here]
