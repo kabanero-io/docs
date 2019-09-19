@@ -1,7 +1,8 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-doc-category: Reference
 :page-title: Building a Kabanero collection locally
 :linkattrs:
+:sectanchors:
 = Building the collections locally
 
 . Clone the collections repository and create a new copy of it in your git organization

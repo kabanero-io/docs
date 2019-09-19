@@ -1,5 +1,6 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-title: Welcome to Docs
+:sectanchors:
 
 = Welcome to the Kabanero Docs
 

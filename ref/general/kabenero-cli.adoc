@@ -1,8 +1,9 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-type: doc
 :page-title: Kabanero CLI
 :page-doc-category: Getting Started
 :linkattrs:
+:sectanchors:
 = Kabanero CLI
 
 Kabanero CLI is a command-line interface for managing collections and onboarding developers in a Kabanero environment. This interface is used by the enterprise, solution, or application architect who defines and manages the Kabanero collections that are used by developers to create governed applications.

@@ -1,7 +1,9 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-doc-category: Reference
 :page-title: Using Kabanero Collections in Codewind
 :linkattrs:
+:sectanchors:
+
 = Using Kabanero Collections in Codewind
 
 == Prerequisites

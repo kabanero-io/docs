@@ -1,7 +1,8 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-doc-category: Reference
 :page-title: Appsody Hello World on Codewind
 :linkattrs:
+:sectanchors:
 = Appsody Hello World on Codewind
 
 == Prerequisites
