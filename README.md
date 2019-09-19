@@ -28,6 +28,7 @@ You need the proper front matter on each doc to get it categorized correctly. Th
     :page-doc-category: Configuration
     :page-title: Connecting Kabanero to GitHub with Tekton Webhooks
     :linkattrs:
+    :sectanchors:
     ```
 
 ## Doc Categories
