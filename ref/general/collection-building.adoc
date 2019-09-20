@@ -15,16 +15,15 @@ cd collections
 +
 Once this has been done, you will have your own copy of the collections repository in your own git org/repo. Follow any normal development processes you have for using git (i.e., creating branches, etc.).
 
-. Create and organizational-level teams in Git that should administer the cloned collection, and add members to those teams.
+. Create organizational-level teams in Git that should administer the cloned collection(s), and add members to those teams.
 
-. Set up a Kabanero Custom Resource Definition to target the new collections
-* Specify the repository URL in the Kabanero document (object) to point to cloned, customized index.yaml for the master collection.
-You can either alter the Kabanero document that already exists, or delete it and create a new one.
-* In the `kabanero crd`, specify:
-  git `group or organization` in the `organization` field
+. Set up a Kabanero instance to target the new collections
+* Specify the repository URL in the Kabanero document (object) to point to cloned, customized `index.yaml` for the master collection.  The URL setting is in the `Spec.Collections.Repositories` section of the Kabanero instance.
+You can either alter the Kabanero instance that already exists, or delete it and create a new one.
+* In the Kabanero document, specify:
+  git `organizations` in the `organizations` field
   git `team name(s)` in the `teams` field
   the `api github url` in the `apiurl` field. ( env variable: github.api.url )
-  the kabanero `namespace(s)` in the `namespaces` field
 
 . Create or modify the collections if required.
 * You can find out more about https://github.com/appsody/website/blob/master/content/docs/stacks/create.md[creating or modifying collections, window="_blank"].
