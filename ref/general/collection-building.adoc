@@ -16,6 +16,16 @@ cd collections
 +
 Once this has been done, you will have your own copy of the collections repository in your own git org/repo. Follow any normal development processes you have for using git (i.e., creating branches, etc.).
 
+. Create organizational-level teams in Git that should administer the cloned collection(s), and add members to those teams.
+
+. Set up a Kabanero instance to target the new collections
+* Specify the repository URL in the Kabanero document (object) to point to cloned, customized `index.yaml` for the master collection.  The URL setting is in the `Spec.Collections.Repositories` section of the Kabanero instance.
+You can either alter the Kabanero instance that already exists, or delete it and create a new one.
+* In the Kabanero instance, specify:
+  git `organization` in the `organization` field
+  git `team name(s)` in the `teams` field
+  the `api github url` in the `apiurl` field
+
 . Create or modify the collections if required.
 * You can find out more about https://github.com/appsody/website/blob/master/content/docs/stacks/create.md[creating or modifying collections, window="_blank"].
 
@@ -82,9 +92,6 @@ This will enable you to do an `appsody init` for a collection that is in the new
 appsody init kabanero/java-microprofile
 ----
 
-. Test the pipelines and other components that have been included in the collection within the Kabanero/OpenShift environment.
-* More details coming.
-
 . Push changes back to your repository:
 * Once you have made all the changes to the collection and you are ready to push the changes back to your git repository then
 +
@@ -96,7 +103,7 @@ git commit -a -m "Updates to the collections"
 git push -u private-org
 ----
 +
-If Travis CI has been setup in your git organization, the push to git should trigger the Travis build to run, which will ensure that the changes build OK. 
+If Travis CI has been setup in your git organization, the push to git should trigger the Travis build to run, which will ensure that the changes build OK.
 
 . Release the final version of the collections.
 * Once all changes have been made to the Collections and they are ready to be released, if a full release of the collections is required, create a git tag:
@@ -108,6 +115,10 @@ git push --tags
 ----
 +
 This will trigger another Travis build that will also generate a Git Release and push the images to the image repository.
+
+. Test the pipelines and other components that have been included in the collection within the Kabanero/OpenShift environment.
+
+. Declare the release final.
 
 == Need help?
 If you have a question that you can't find an answer to, we would also like to hear about that too.
