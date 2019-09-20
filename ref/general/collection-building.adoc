@@ -20,10 +20,10 @@ Once this has been done, you will have your own copy of the collections reposito
 . Set up a Kabanero instance to target the new collections
 * Specify the repository URL in the Kabanero document (object) to point to cloned, customized `index.yaml` for the master collection.  The URL setting is in the `Spec.Collections.Repositories` section of the Kabanero instance.
 You can either alter the Kabanero instance that already exists, or delete it and create a new one.
-* In the Kabanero document, specify:
-  git `organizations` in the `organizations` field
+* In the Kabanero instance, specify:
+  git `organization` in the `organization` field
   git `team name(s)` in the `teams` field
-  the `api github url` in the `apiurl` field. ( env variable: github.api.url )
+  the `api github url` in the `apiurl` field
 
 . Create or modify the collections if required.
 * You can find out more about https://github.com/appsody/website/blob/master/content/docs/stacks/create.md[creating or modifying collections, window="_blank"].
