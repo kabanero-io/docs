@@ -43,7 +43,7 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * Access the application at: `http://appsody-hello-world.appsody-project.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
 
 . Optional - Access the pipeline logs
-* `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
+* `oc logs $(oc get pods -l tekton.dev/pipelineRun=manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
 
 . Optional - Make detailed pipeline changes by accessing the Tekton dashboard
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
