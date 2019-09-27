@@ -1,0 +1,20 @@
+:page-layout: doc
+:page-doc-category: Reference
+:linkattrs:
+:sectanchors:
+= Troubleshooting
+
+Learn how to isolate and resolve problems with Kabanero.
+
+Make sure that your issues are not related to the operating system, such as disk, memory, and CPU capacities.
+
+* See https://github.com/kabanero-io/kabanero-foundation#cluster-hardware-capacity[Kabanero resource requirements, window="_blank"]
+
+== Errors when using a Tekton webhook to trigger pipelines
+
+When using a Tekton webhook to trigger pipelines installed with Kabanero, the last task is the `monitor-result-task`, which may fail in some cases. 
+This might also cause the webhook pod to be in the "Error" state. The following failures of `monitor-result-task` in the TaskRun view can be disregarded 
+at this time; they do not impact the application deployment:
+
+* `error creating GitHub client: error parsing PR number: pulls`
+* `IOError: [Errno 2] No such file or directory: '/workspace/pull-request/pr.json'`
