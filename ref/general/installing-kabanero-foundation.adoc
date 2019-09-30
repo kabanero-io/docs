@@ -36,15 +36,15 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 . Create a Persistent Volume for the pipeline to use. A sample hostPath `pv.yaml` is provided.
 * `oc apply -f pv.yaml`
 
-. Create the pipeline and execute the example manual pipeline run
+. Create the pipeline and execute the example manual pipeline run.
 * `APP_REPO=https://github.com/dacleyra/appsody-hello-world/ ./appsody-tekton-example-manual-run.sh`
 
 . By default, the application container image will be built and pushed to the Internal Registry, and then deployed as a Knative Service.
 * Access the application at: `http://appsody-hello-world.appsody-project.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
 
-. Optional - Access the pipeline logs
+. Optional - Access the pipeline logs.
 * `oc logs $(oc get pods -l tekton.dev/pipelineRun=manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
 
-. Optional - Make detailed pipeline changes by accessing the Tekton dashboard
+. Optional - Make detailed pipeline changes by accessing the Tekton dashboard.
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
-
+* To assign the required role: `oc policy add-role-to-user tekton-dashboard-minimal <userid>`
