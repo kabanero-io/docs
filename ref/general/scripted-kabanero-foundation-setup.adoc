@@ -54,3 +54,9 @@ oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --ou
 
 Access Tekton dashboard 
 `http://tekton-dashboard.my.openshift.master.default.subdomain`
+
+The user <userid> should have the `tekton-dashboard-minimal` role in order to access the pipeline information:
+
+```
+oc policy add-role-to-user tekton-dashboard-minimal <userid>
+```
