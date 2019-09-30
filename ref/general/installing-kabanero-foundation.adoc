@@ -47,4 +47,8 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 . Optional - Make detailed pipeline changes by accessing the Tekton dashboard.
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
-* To assign the required role: `oc policy add-role-to-user tekton-dashboard-minimal <userid>`
+* The user <userid> should have the `tekton-dashboard-minimal` role in order to access the pipeline information:
+
+```
+oc policy add-role-to-user tekton-dashboard-minimal <userid>
+```
