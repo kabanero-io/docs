@@ -14,14 +14,14 @@ git push -u private-org
 cd collections
 ----
 +
-Once this has been done, you will have your own copy of the collections repository in your own git org/repo. Follow any normal development processes you have for using git (i.e., creating branches, etc.).
+Once this has been done, you will have your own copy of the collections repository in your own Git org/repo. Follow any normal development processes you have for using git (i.e., creating branches, etc.).
 
 . Create organizational-level teams in Git that should administer the cloned collection(s), and add members to those teams.
 
-. Set up a Kabanero instance to target the new collections
-* Specify the repository URL in the Kabanero document (object) to point to cloned, customized `index.yaml` for the master collection.  The URL setting is in the `Spec.Collections.Repositories` section of the Kabanero instance.
-You can either alter the Kabanero instance that already exists, or delete it and create a new one.
-* In the Kabanero instance, specify:
+. Set up a Kabanero Custom Resource instance to target the new collections
+* Specify the repository URL in the Kabanero document (object) to point to a cloned, customized `index.yaml` for the master collection.  The URL setting is in the `Spec.Collections.Repositories` section of the Kabanero Custom Resource (CR) instance.
+You can either alter the Kabanero CR instance that already exists, or delete it and create a new one.
+* In the Kabanero CR instance, specify:
 ** git organization in the `organization` field
 ** git team name(s) in the `teams` field
 ** the api github url in the `apiurl` field
