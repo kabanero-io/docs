@@ -15,6 +15,6 @@ Here is an example flow of the Kabanero release using `0.2.0` as the next releas
 1. Cut a new release based off the `release-0.2` branch and increment the patch number so it becomes `0.2.1`
 1. Publish release `0.2.1`.
 
-The patch version of the `docs` repo is independent of the patch version of Kabanero while the major and minor versions are in sync. Therefore, the `docs` release `0.2.1` from the example corresponds to the first patch of the `docs` repo at Kabanero version `0.2.x`.   
+The patch version of the `docs` repo is independent of the patch version of Kabanero; the major and minor version numbers of the docs and Kabanero are in sync. For example, a `docs` release of `0.2.1` corresponds to Kabanero version `0.2.x` and vice versa.  
 
 **Note**: In this hot fix example the `master` branch will always be going towards the next release so new commits to `master` will always be `0.3.0` related.
