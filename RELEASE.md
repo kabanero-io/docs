@@ -9,10 +9,12 @@ Here is an example flow of the Kabanero release using `0.2.0` as the next releas
 
 ## Docs repo needs a hot fix for `0.2.0` example
 
-1. If after a release, A piece of Kabanero.io (cli, pipelines, operator, docs, etc...) needs to do a small update or a quick bug fix or something (and should be deployed before the next scheduled release, `0.3.0`, in this example) maintainers would:
+1. If after a release, a piece of documentation needs to have a small update or a quick bug fix (and should be deployed before the next scheduled release, `0.3.0`, in this example) maintainers would:
 1. create a `release-0.2` branch based off the `0.2.0` release. 
 1. Put the changes in the `release-0.2` branch and `master` branch, if applicable (see Note below).
 1. Cut a new release based off the `release-0.2` branch and increment the patch number so it becomes `0.2.1`
 1. Publish release `0.2.1`.
 
-**Note**: During this whole hot fix situation the `master` branch will always be going towards the next release so new stuff in master will always be `0.3.0` related.
+The patch version of the `docs` repo is independent of the patch version of Kabanero while the major and minor versions are in sync. Therefore, the `docs` release `0.2.1` from the example corresponds to the first patch of the `docs` repo at Kabanero version `0.2.x`.   
+
+**Note**: In this hot fix example the `master` branch will always be going towards the next release so new commits to `master` will always be `0.3.0` related.
