@@ -55,7 +55,7 @@ Examples:
 kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PASSWORD>
 ----
 
-* Login with previously used url Github user ID and PAT
+* Login with previously used url GitHub user ID and PAT
 +
 ----
 kabanero login -u <GITHUB_USER_ID> -p <GITHUB_PAT>
