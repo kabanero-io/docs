@@ -7,7 +7,19 @@
 :page-published: false
 = Kabanero CLI
 
-Kabanero CLI is a command-line interface for managing collections and onboarding developers in a Kabanero environment. This interface is used by the enterprise, solution, or application architect who defines and manages the Kabanero collections that are used by developers to create governed applications.
+The Kabanero CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the collections that are used by developers to create governed applications for their business.  
+
+== Installing the Kabanero CLI
+
+Download the archive corresponding to the platform you are running on:  https://github.com/kabanero-io/kabanero-command-line/releases
+
+Unzip or Untar the archive, and run the kabanero command is ready to run
+
+== How to find the kabanero endpoint to connect to
+
+In the Kubernetes cluster where Kabanero foundation is installed, run the following command to find the endpoint URL to connect to:
+    oc get routes
+
 
 == Kabanero commands
 
@@ -19,7 +31,7 @@ Use the following commands to monitor and administer a Kabanero environment.
 Run the `kabanero login` command to authenticate to Kabanero.
 
 -----
-kabanero login userid Github-PAT|Github-password kabanero-url
+kabanero login kabanero-url -u Github userid -p  Github-PAT|Github-password 
 -----
 
 Log in to a Kabanero instance by using GitHub credentials and store a temporary access token for subsequent command-line calls.
@@ -38,13 +50,13 @@ kabanero login my.kabaneroInstance.io -u myGithubID -p myGithubPassword
 
 === Onboard a developer
 
-Run the `kabanero onboard` command to onboard a developer to the Kabanero environment.
+Run the `kabanero onboard` command to onboard a developer to the Kabanero environment. 
 
 -----
 kabanero onboard github-id repo-name
 -----
 
-This command is under development. Once integrated, it sends an email to the specified user that provides the necessary information to get started with Kabanero.
+This command is under development. 
 
 === List Kabanero collections
 
