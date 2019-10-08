@@ -6,9 +6,7 @@
 
 == Uninstalling Kabanero Foundation
 
-A sample uninstall script is available at [https://github.com/kabanero-io/kabanero-foundation/blob/master/scripts/uninstall-kabanero-foundation.sh](https://github.com/kabanero-io/kabanero-foundation/blob/master/scripts/uninstall-kabanero-foundation.sh).
-This script will perform the reverse of the 'install-kabanero-foundation' script. Before running the `uninstall-kabanero-foundation` script, consider removing any resources that were not created by the 'install-kabanero-foundation' script, such as
-webhooks, Knative services or Appsody applications.
+A sample uninstall script is available at the https://github.com/kabanero-io/kabanero-foundation/blob/master/scripts/uninstall-kabanero-foundation.sh[Kabanero Foundation Repository, window="_blank"]. This script will perform the reverse of the `install-kabanero-foundation` script. Before running the `uninstall-kabanero-foundation` script, consider removing any resources that were not created by the 'install-kabanero-foundation' script, such as webhooks, Knative services or Appsody applications.
 
 The sample uninstallation script will completely remove all dependencies from the cluster, including Knative, Tekton and Istio.  You can modify your local copy of the script if desired.
 
@@ -16,6 +14,6 @@ The sample uninstallation script will completely remove all dependencies from th
 
 As a `cluster-admin`, execute the sample uninstallation script:
 
-```
+----
 ./uninstall-kabanero-foundation.sh
-```
+----
