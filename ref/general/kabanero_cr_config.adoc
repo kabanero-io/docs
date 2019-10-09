@@ -188,6 +188,7 @@ apiVersion: kabanero.io/v1alpha1
 kind: Kabanero
 metadata:
   name: kabanero
+  namespace: kabanero
 spec:
   version: "0.2.0"
   collections: 
@@ -206,6 +207,7 @@ apiVersion: kabanero.io/v1alpha1
 kind: Kabanero
 metadata:
   name: kabanero
+  namespace: kabanero
 spec:
   version: "0.2.0"
   collections: 
