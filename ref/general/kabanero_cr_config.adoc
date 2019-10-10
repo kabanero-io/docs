@@ -4,9 +4,9 @@
 :sectanchors:
 = Configuring a Kabanero CR instance
 
-A `Kabanero` custom resource (CR) instance describes how a Kabanero installation
-should behave.  This includes the location of the Kabanero Collections, and
-how the Kabanero CLI should interact with Github.
+A `Kabanero` custom resource (CR) instance describes a particluar Kabanero
+installation.  This description includes the locations of the Kabanero
+Collections, and how the Kabanero CLI should interact with Github.
 
 The `Spec` section of the `Kabanero` instance describes the desired
 configuration.  The `Status` section is populated by the Kabanero operator,
@@ -16,26 +16,26 @@ the components of Kabanero.
 
 == Syntax
 
-Most instances of a `Kabanero` CR will only need to specify a few attributes.
+A `Kabanero` CR can be comprised of only a few attributes.
 See the link:#_examples[examples].  To define a `Kabanero` instance, you can
 specify the following fields:
 
 * `Spec`
-** `version` - Specifies the release of Kabanero that you wish to install.
+** `version` - The release of Kabanero that you want to install.
    The levels of the individual components, such as the Appsody operator
    and CLI services, are selected automatically based on this level.  The
-   release follows semver notation (example 0.2.0).
+   release follows semver notation (for example, 0.2.0).
 ** `targetNamespaces` - A list of namespaces which the Appsody operator will
    watch for `AppsodyApplication` instances.  Typically an `AppsodyApplication`
    instance is created from the `app-deploy.yaml` file in an application,
    at the end of a deploy pipeline run.
 ** `github`
-*** `organization` - The name of the Github organization where the colllection
-    repositories have been cloned.  The Github teams which administer the
+*** `organization` - The name of the Github organization where the collection
+    repositories have been cloned.  The Github teams that administer the
     collections are also contained in this organization.
-*** `teams` - A comma separated list of Github teams which will be allowed to
+*** `teams` - A comma-separated list of Github teams that will be allowed to
     use the Kabanero CLI to administer the collection repositories.  All users
-    who wish to user the Kabanero CLI to administer the collections must be a
+    who want to user the Kabanero CLI to administer the collections must be a
     member of a team in this list.
 *** `apiUrl` - The Github API URL for the Github containing the collection
     repositories.  For example, the API URL for github.com is api.github.com.
@@ -47,7 +47,7 @@ specify the following fields:
      https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
 **** `activateDefaultCollections` - Controls whether the collections in the
      repository will be automatically activated by the Kabanero controller.
-     Valid values are `true` and `false`
+     Valid values are `true` and `false`.
 **** `skipCertVerification` - Controls whether the Kabanero controller will
      validate SSL/TLS certificates presented by the repository URL.
      Valid values are `true` and `false`.
@@ -57,7 +57,7 @@ specify the following fields:
     installed, as well as any additional namespaces specified in the
     `Spec.targetNamespaces` attribute.  Valid values are `true` and `false`.
 ** `cliServices`
-*** `sessionExpirationSeconds` - Specifies the length of time (duration) that
+*** `sessionExpirationSeconds` - The length of time (duration) that
     a session established by a Kabanero CLI login remains valid.  The duration
     can be specified in hours, minutes and/or seconds.  For example,
     specifying a value of `3h30m30s` would allow a login to remain valid for
@@ -69,7 +69,7 @@ specify the following fields:
 *** `enable` - Controls whether Kabanero will deploy an instance of Che.
     Valid values are `true` and `false`.
 *** `cheOperatorInstance`
-**** `cheWorkspaceClusterRole` - Specifies the workspace cluster role used
+**** `cheWorkspaceClusterRole` - The workspace cluster role used
      by Che.  By default, the `eclipse-codewind` cluster role is used.
 
 The following `Status` fields are maintained by the Kabanero operator to
@@ -77,9 +77,9 @@ provide information about the installed components, and the health of the
 Kabanero instance:
 
 * `Status`
-** `kabaneroInstance` - Contains overall status information about the
+** `kabaneroInstance` - The overall status information of the
    Kabanero instance.
-*** `ready` - Indicates the overall Status of Kabanero.  A value of `True`
+*** `ready` - The overall Status of Kabanero.  A value of `True`
     indicates Kabanero has been installed successfully.  A value of `False`
     indicates that there was a problem, and more information can be found
     by looking in the `errorMessage` attribute.
@@ -87,31 +87,31 @@ Kabanero instance:
 *** `version` - Shows the version of Kabanero that is currently installed.
     This version can be different from `Spec.version` if there is a problem
     configuring and installing the `Spec.version`.
-** `knativeEventing` - Contains information about the KNative Eventing
+** `knativeEventing` - Contains information about the Knative Eventing
    instance which was found on this cluster.
-*** `ready` - Indicates the overall status of the KNative Eventing operator,
-    as reported by the `KNativeEventing` CR instance.  A value of `False`
+*** `ready` - The overall status of the Knative Eventing operator,
+    as reported by the `KnativeEventing` CR instance.  A value of `False`
     indicates there was a problem, and more information can be found by
     looking in the `errorMessage` attribute.
 *** `errorMessage` - Provides more details for a `ready` status of `False`.
     The error message is copied from the `ready` condition on the
-    `KNativeEventing` CR instance.
-*** `version` - The version of KNative Eventing as reported by the
-    `KNativeEventing` CR instance.
-** `knativeServing` - Contains information about the KNative Serving
+    `KnativeEventing` CR instance.
+*** `version` - The version of Knative Eventing as reported by the
+    `KnativeEventing` CR instance.
+** `knativeServing` - Contains information about the Knative Serving
    instance which was found on this cluster.
-*** `ready` - Indicates the overall status of the KNative Serving operator,
-    as reported by the `KNativeServing` CR instance.  A value of `False`
+*** `ready` - The overall status of the Knative Serving operator,
+    as reported by the `KnativeServing` CR instance.  A value of `False`
     indicates there was a problem, and more information can be found by
     looking in the `errorMessage` attribute.
 *** `errorMessage` - Provides more details for a `ready` status of `False`.
     The error message is copied from the `ready` condition on the
-    `KNativeServing` CR instance.
-*** `version` - The version of KNative Serving as reported by the
-    `KNativeServing` CR instance.
+    `KnativeServing` CR instance.
+*** `version` - The version of Knative Serving as reported by the
+    `KnativeServing` CR instance.
 ** `tekton` - Contains information about the Tekton instance which was found
    on this cluster.
-*** `ready` - Indicates the overall status of Tekton, as reported by the
+*** `ready` - The overall status of Tekton, as reported by the
     Tekton `Config` CR instance.  A value of `False` indicates there was a
     problem, and more information can be found by looking in the `errorMessage`
     attribute.
@@ -121,7 +121,7 @@ Kabanero instance:
 *** `version` - The version of Tekton as reported by the Tekton `Config`
     CR instance.
 ** `cli` - Contains information about the Kabanero CLI backend service.
-*** `ready` - Indicates the overall status of the Kabanero CLI backend
+*** `ready` - The overall status of the Kabanero CLI backend
     service.  A value of `True` indicates the service was installed
     successfully.  A value of `False` indicates there was a problem, and
     more information can be found by looking in the `errorMessage`
@@ -131,51 +131,51 @@ Kabanero instance:
     for the Kabanero CLI service.  The hostname can be used in the Kabanero
     CLI to connect to this Kabanero instance.
 ** `landing` - Contains information about the Kabanero landing page
-*** `ready` - Indicates the overall status of the Kabanero landing page.
+*** `ready` - The overall status of the Kabanero landing page.
     A value of `True` indicates the landing page was deployed successfully.
     A value of `False` indicates there was a problem, and more information can
     be found by looking in the `errorMessage` attribute.
 *** `errorMessage` - Provides more details for a `ready` status of `False`.
-*** `version` - Contains the version of the landing page that was deployed.
+*** `version` - The version of the landing page that was deployed.
 ** `appsody` - Contains information about the Appsody operator that was
    deployed by the Kabanero operator.
-*** `ready` - Indicates the overall status of the Appsody operator.  A value
+*** `ready` - The overall status of the Appsody operator.  A value
     of `True` indicates the operator was deployed successfully.  A value of
     `False` indicates there was a problem, and more information can be found
     by looking in the `errorMessage` attribute.
 *** `errorMessage` - Provides more details for a `ready` status of `False.
-** `kappnav` Contains information about the KAppNav that was found on the
-   cluster.  KAppNav is an optional component of Kabanero.  If KAppNav is
+** `kappnav` Contains information about the kAppNav that was found on the
+   cluster.  kAppNav is an optional component of Kabanero.  If kAppNav is
    not found in its default location in the `kappnav` namespace, its status
    is not reported here.
-*** `ready` - Indicates the overall status of KAppNav.  A value of `True`
-    indicates KAppNav was installed and configured successfully.  A value
+*** `ready` - The overall status of kAppNav.  A value of `True`
+    indicates kAppNav was installed and configured successfully.  A value
     of `False` indicates that there was a problem, and more information can
     be found by looking in the `errorMessage` attribute.
 *** `errorMessage` - Provides more details for a `ready` status of `False`.
-*** `uiLocations` - Contains the location (URL) of the UI endpoint of KAppNav.
-    This information is copied from the `Route` for the KAppNav UI service.
-*** `apiLocations` - Contains the location (URL) of the API endpoint of
-    KAppNav.  This information is copied from the `Route` for the KAppNav API
+*** `uiLocations` - The location (URL) of the UI endpoint of kAppNav.
+    This information is copied from the `Route` for the kAppNav UI service.
+*** `apiLocations` - The location (URL) of the API endpoint of
+    kAppNav.  This information is copied from the `Route` for the kAppNav API
     service.
 ** `che` - Contains information about the Che instance that is deployed by
    the Kabanero operator.
-*** `ready` - Indicates the overall status of Che.  A value of `True`
+*** `ready` - The overall status of Che.  A value of `True`
     indicates Che was installed and configured successfully.  A value of
     `False` indicates that there was a problem, and more information can be
     found by looking in the `errorMessage` attribute.
 *** `errorMessage` - Provides more details for a `ready` status of `False`.
 *** `cheOperator`
-**** `version` - Contains the version of the Che operator used.
+**** `version` - The version of the Che operator used.
 *** `kabaneroChe`
-**** `version` - Contains the version of the Kabanero-Che container used
+**** `version` - The version of the Kabanero-Che container used
      to configure the Che instance.
 *** `kabaneroCheInstance`
-**** `cheImage` - Contains the Kabanero-Che image name used by this Che
+**** `cheImage` - The Kabanero-Che image name used by this Che
      instance.
-**** `cheImageTag` - Contains the tag of the Kabanero-Che image used by this
+**** `cheImageTag` - The tag of the Kabanero-Che image used by this
      Che instance.
-**** `cheWorkspaceClusterRole` - Contains the name of the cluster role used
+**** `cheWorkspaceClusterRole` - The name of the cluster role used
      by the workspaces that are created by this Che instance.
 
 == Examples
@@ -200,7 +200,7 @@ spec:
 
 The following yaml defines a `Kabanero` instance at version 0.2.0, using
 a custom collection set and its associated Github configuration.  Sessions
-established using the Kabanero CLI will remain valid for one hour.
+established using the Kabanero CLI remain valid for one hour.
 
 ```yaml
 apiVersion: kabanero.io/v1alpha1
