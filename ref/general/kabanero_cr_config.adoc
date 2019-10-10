@@ -35,7 +35,7 @@ specify the following fields:
     collections are also contained in this organization.
 *** `teams` - A comma-separated list of Github teams that will be allowed to
     use the Kabanero CLI to administer the collection repositories.  All users
-    who want to user the Kabanero CLI to administer the collections must be a
+    who want to use the Kabanero CLI to administer the collections must be a
     member of a team in this list.
 *** `apiUrl` - The Github API URL for the Github containing the collection
     repositories.  For example, the API URL for github.com is api.github.com.
