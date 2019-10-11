@@ -26,9 +26,10 @@ specify the following fields:
    and CLI services, are selected automatically based on this level.  The
    release follows semver notation (for example, 0.2.0).
 ** `targetNamespaces` - A list of namespaces which the Appsody operator will
-   watch for `AppsodyApplication` instances.  Typically an `AppsodyApplication`
-   instance is created from the `app-deploy.yaml` file in an application,
-   at the end of a deploy pipeline run.
+   watch for `AppsodyApplication` instances, in addition to the namespace
+   where the Kabanero CR instance is deployed.  Typically an
+   `AppsodyApplication` instance is created from the `app-deploy.yaml` file
+   in an application, at the end of a deploy pipeline run.
 ** `github`
 *** `organization` - The name of the Github organization where the collection
     repositories have been cloned.  The Github teams that administer the
@@ -56,6 +57,8 @@ specify the following fields:
     Appsody operator to watch the namespace where the Kabanero operator is
     installed, as well as any additional namespaces specified in the
     `Spec.targetNamespaces` attribute.  Valid values are `true` and `false`.
+    The default value is `true`.   Please see link:https://github.com/appsody/appsody-operator/blob/master/doc/user-guide.md[the Appsody operator user guide]
+    for more information.
 ** `cliServices`
 *** `sessionExpirationSeconds` - The length of time (duration) that
     a session established by a Kabanero CLI login remains valid.  The duration
@@ -64,10 +67,11 @@ specify the following fields:
     three hours, thirty minutes and thirty seconds.
 ** `landing`
 *** `enable` - Controls whether the Kabanero landing page is deployed by
-    the Kabanero operator.  Valid values are `true` and `false`.
+    the Kabanero operator.  Valid values are `true` and `false`.  The default
+    value is `true`.
 ** `che`
 *** `enable` - Controls whether Kabanero will deploy an instance of Che.
-    Valid values are `true` and `false`.
+    Valid values are `true` and `false`.  The default value is `false`.
 *** `cheOperatorInstance`
 **** `cheWorkspaceClusterRole` - The workspace cluster role used
      by Che.  By default, the `eclipse-codewind` cluster role is used.
@@ -177,6 +181,16 @@ Kabanero instance:
      Che instance.
 **** `cheWorkspaceClusterRole` - The name of the cluster role used
      by the workspaces that are created by this Che instance.
+
+== Inspecting your Kabanero CR Instance
+
+You can retrieve all the Kabanero CR instances in a namespace using this
+command:
+
+`oc get Kabanero -n kabanero -o yaml`
+
+The example uses the kabanero namespace.  To use a different namespace,
+replace `-n kabanero` with the name of another namespace.
 
 == Examples
 
