@@ -22,9 +22,16 @@ You need to generate a GitHub personal access token to use for creating the webh
 . Check the `admin:repo_hook` option and click `Generate token`. If you are working in a private repository, additional options may be required. Check with your administrator for details. *Make sure to save the token to a file since you can't see it after you leave this page.*
 
 == Create secrets.
-If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret. From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`. Use your GitHub user name and the personal access token you generated in the previous step to create this secret. Select the service account that is used by the pipeline you want to trigger. In this case, use `kabanero-operator`.
+If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret.
 
-If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub user name and password to create this secret.
+. From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`.
+. Give your secret a unique name.
+. For the `Namespace`, select `kabanero` from the drop-down list.
+. For `Access To:`, select `Git Server` from the drop-down list.
+. Enter your GitHub user name and the personal access token you generated in the previous section. 
+. Select the service account that is used by the pipeline you want to trigger. In this case, use `kabanero-operator`.
+
+If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub user name and password. For `Access To:`, select `Docker Registry` from the drop-down list.
 
 == Create a webhook.
 . From your Tekton Dashboard, select `webhooks` from the sidebar menu and click `Add Webhook`.
