@@ -7,12 +7,12 @@
 
 The default collections can be modified to suit the needs of your organization.  Use the following steps to customize the default collections and store them in a new Github repository:
 
-. Clone the default collections repository and create a new copy of it in your Github organization.  In this example, we are referring to `github.acme.com` as the remote Github repository, and we refer to it locally as `private-org`.
+. Clone the default collections repository and create a new copy of it in your Github organization.  In this example, we are referring to `github.example.com` as the remote Github repository, and we refer to it locally as `private-org`.
 +
 ----
 git clone https://github.com/kabanero-io/collections.git
 cd collections
-git remote add private-org https://github.acme.com/my_org/collections.git
+git remote add private-org https://github.example.com/my_org/collections.git
 git push -u private-org
 ----
 +
@@ -113,5 +113,5 @@ This will trigger another Travis build that will also generate a Git Release and
 . Declare the release final.  If you need to make additional changes, repeat the process using the same repository you created in the first step, and create a new tag to represent a new release.
 
 == Need help?
-If you have a question that you can't find an answer to, we would also like to hear about that too.
+If you have questions, we would like to hear from you.
 You can reach out to the community for assistance on the https://ibm-cloud-tech.slack.com/messages/CJZCYTD0Q[Kabanero Slack channel, window="_blank"].
