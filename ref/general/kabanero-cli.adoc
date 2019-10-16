@@ -25,6 +25,7 @@ Use the following commands to monitor and administer a Kabanero environment.
 === Login
 
 You will need the Kabanero CLI URL to login. There are 2 ways you can get this URL.
+
 * View the CLI URL in the Kabanero landing page instance details.
 * Login to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
 
