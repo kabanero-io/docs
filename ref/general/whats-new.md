@@ -1,8 +1,6 @@
 ---
-layout: general-reference
-type: general
 version: v0.2.0
-title: What's New In Kabanero 0.2.0
+title: What's New In Kabanero v0.2.0
 ---
 
 # What's new in Kabanero 0.2.0

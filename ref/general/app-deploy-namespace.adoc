@@ -1,0 +1,43 @@
+:page-layout: doc
+:page-doc-category: Configuration
+:page-title: Deploying applications to an alternate namespace
+:sectanchors:
+= Deploying applications to an alternate namespace
+
+Applications are deployed to the namespace where the Kabanero CR is deployed.  The default configuration uses the `kabanero` namespace.  Kabanero can be configured to deploy applications to a different namespace.
+
+. Obtain a copy of your current Kabanero CR instance. Use `oc get kabaneros -n kabanero` to obtain a list of all Kabanero CR instances in namespace `kabanero`. The default name for the CR instance is also `kabanero`. Then, obtain the specific CR instance using `oc get kabanero <name> -o yaml > kabanero.yaml`, replacing `<name>` with the instance name, to save a copy to the current directory.
+
+. Edit `kabanero.yaml` and specify the namespaces where you intend to deploy applications, using the `targetNamespaces` attribute.  Multiple namespaces are specified as a list.  For example, a Kabanero CR instance which supports application deployment to the `production` and `test` namespaces might look like this:
++
+----
+apiVersion: kabanero.io/v1alpha1
+kind: Kabanero
+metadata:
+  name: kabanero
+  namespace: kabanero
+spec:
+  targetNamespaces:
+  - production
+  - test
+----
++
+Note that collection repository and Github configuration were removed from the example above.  For a full list of supported attributes of the Kabanero CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
+
+. Apply your changes to the Kabanero CR instance. For example, in the Kabanero namespace use `oc apply -f kabanero.yaml -n kabanero`.
+
+. Modify your Appsody application's `app-deploy.yaml` to use one of the namespaces you configured in the `targetNamespaces` attribute of the Kabanero CR instance.  An example `app-deploy.yaml` that deploys the `appsody-hello-world` application to the `test` namespace might look like this:
++
+----
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  name: appsody-hello-world
+  namespace: test
+spec:
+  applicationImage: docker-registry.default.svc:5000/kabanero/appsody-hello-world
+  stack: java-microprofile
+  createKnativeService: true
+----
+
+. Deploy the application using a manual pipeline run, or using link:tekton-webhooks.html[a webhook].

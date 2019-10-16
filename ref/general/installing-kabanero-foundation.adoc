@@ -1,7 +1,8 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-doc-category: Installation
 :page-title: Installing Kabanero Foundation
 :linkattrs:
+:sectanchors:
 
 Today, Kabanero has been tested on the Origin Community Distribution of Kubernetes(OKD) version 3.11. There is intent to also expand testing on additional distributions including upstream Kubernetes in the future.
 
@@ -26,9 +27,36 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 . Ensure you are logged into your cluster with the https://docs.openshift.com/enterprise/3.2/cli_reference/get_started_cli.html#basic-setup-and-login[`oc login` command]
 
+. Review the `install-kabanero-foundation.sh` script for any optional components that can be enabled by setting the required environment variable, or by editing the value in the script directly.  Optional components are listed at the top of the script, below the section titled `Optional components`.
+
 . As a `cluster-admin`, run the following:
 * Don't forget to replace `<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>` with your subdomain, and do not include the angle brackets:
 * `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN> ./install-kabanero-foundation.sh`
+* If using a wildcard DNS such as nip.io, append it to the subdomain: `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>.nip.io ./install-kabanero-foundation.sh`
+
+. Create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is printed at the conclusion of the `install-kabanero-foundation.sh` script.  The CR instance can be modified to include the URL of a custom collection and the Github information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
+
+== After Install
+
+The **Kabanero Landing Page** is installed as part of the install process and is a good next step to go explore information about your Kabanero instance.
+
+=== View the Landing Page
+. In your OKD Console
+.. Click on the **Kabanero** tab on the left hand navigation.
+
+**Note**: If you do not see the **Kabanero** tab, proper certificates might not be installed in your cluster. You will have to accept the self-signed certificate before the **Kabanero** tab is displayed.
+To accept the self signed certificate you will have to **go to the landing page URL in your browser and accept the self-signed certificate**.
+
+There are two ways to get the landing page URL::
+
+Using the `oc` CLI:::
+. Open a terminal and run: `oc get routes -n kabanero`
+. Find the result with the name `kabanero-landing`. The URL is displayed under **HOST/PORT** for that row.
+
+Using the OKD Console:::
+. Switch the project to **kabanero**
+. Under **Applications** click **Routes**
+. The landing page name is **kabanero-landing** which should be in the list of routes. Click the URL under **Hostname** to open the landing application
 
 == Optional sample - Appsody project with manual Tekton pipeline run
 
@@ -42,7 +70,7 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * Access the application at: `http://appsody-hello-world.appsody-project.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
 
 . Optional - Access the pipeline logs
-* `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
+* `oc logs $(oc get pods -l tekton.dev/pipelineRun=manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
 
 . Optional - Make detailed pipeline changes by accessing the Tekton dashboard
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`

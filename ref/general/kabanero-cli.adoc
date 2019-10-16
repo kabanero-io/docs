@@ -1,0 +1,128 @@
+:page-layout: doc
+:page-type: doc
+:page-doc-category: Reference
+:linkattrs:
+:sectanchors:
+= Kabanero CLI
+
+The Kabanero CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the collections that are used by developers to create governed applications for their business.
+
+== Installing the Kabanero CLI
+
+. Download the archive corresponding to the platform you are running on.
+* https://github.com/kabanero-io/kabanero-command-line/releases/latest[Latest CLI release, window="_blank"]
+* https://github.com/kabanero-io/kabanero-command-line/releases[All CLI releases, window="_blank"]
+
+. Unzip or Untar the archive. The archive holds the `./kabanero` command which is ready to be used.
+* Test the install by issuing the command: `./kabanero help` and the help output should be shown.
+
+. Optional - Add the path to the `kabanero` command to your `PATH` env variable. This will allow you to use the `kabanero` command without specifying the path each time.
+
+== Kabanero commands
+
+Use the following commands to monitor and administer a Kabanero environment.
+
+=== Login
+
+You will need the Kabanero CLI URL to login. There are 2 ways you can get this URL.
+
+* View the CLI URL in the Kabanero landing page instance details.
+* Login to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
+
+Run the `kabanero login` command to authenticate to Kabanero. `<GITHUB_PAT>` is your GitHub Personal Access Token.  **Note**: You can also use your GitHub password for the `<GITHUB_PAT>` argument.
+
+----
+kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PAT>
+----
+
+**Kabanero login options**
+
+* Pass in a GitHub password or personal access token
+** `-p <string>`
+** `--password <string>`
+* Pass in GitHub user name
+** `-u <string>`
+** `--username <string>`
+
+Log in to a Kabanero instance by using GitHub credentials and store a temporary access token for subsequent command-line calls.
+The temporary access token is stored in a `your-home-directory/.kabanero/config.yaml` file.
+Use your GitHub user ID and either a password or Personal Access Token (PAT) to log in.
+
+Examples:
+
+* Login with A GitHub user ID and password
++
+----
+kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PASSWORD>
+----
+
+* Login with previously used url GitHub user ID and PAT
++
+----
+kabanero login -u <GITHUB_USER_ID> -p <GITHUB_PAT>
+----
+
+=== Onboard a developer
+
+Run the `kabanero onboard` command to onboard a developer to the Kabanero environment. 
+
+----
+kabanero onboard <GITHUB_USER_ID> <REPO_NAME>
+----
+
+This command is under development. 
+
+=== List Kabanero Collections
+
+Run the `kabanero list` command to list all the collections in a kabanero instance, along with their status.
+
+----
+kabanero list
+----
+
+=== Refresh Collections
+
+Run the `kabanero refresh` command to refresh the list of collections from master, making these collections current with the activated collections across all namespaces in the Kabanero instance. This command can also be used to restore deactivated collections. See <<Deactivate Kabanero>>.
+
+----
+kabanero refresh
+----
+
+=== Show the Kabanero version
+
+Run the `kabanero version` command to display the version of kabanero that is running.
+
+----
+kabanero version
+----
+
+=== Deactivate Kabanero
+
+Run the `kabanero deactivate` command to prevent a collection from being shown to the development team, without deleting it.
+
+----
+kabanero deactivate collection-name
+----
+
+Running the deactivate command removes the specified collection from the list of available application types, without deleting it from the Kabanero instance.
+
+This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero refresh` command. See <<Refresh collections>>.
+
+=== Log out of Kabanero
+
+Run the `kabanero logout` command to disconnect from the Kabanero instance.
+
+----
+kabanero logout
+----
+
+== Global Options
+
+These options can be enabled on any Kabanero command.
+
+* Help for a Kabanero command. For example, `kabanero refresh -h`
+** `-h`
+** `--help`
+* Turn on debug output and logging to a file in `$HOME/.kabanero/logs`
+** `-v`
+** `--verbose`

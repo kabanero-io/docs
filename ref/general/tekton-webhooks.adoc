@@ -1,6 +1,7 @@
-:page-layout: general-reference
+:page-layout: doc
 :page-doc-category: Configuration
 :page-title: Connecting Kabanero to GitHub with Tekton Webhooks
+:sectanchors:
 = Connecting Kabanero to GitHub with Tekton Webhooks
 
 A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Tekton pipeline, window="_blank"]. After you configure the webhook, changes you make in your GitHub repository will trigger the Tekton pipeline and its associated tasks.
@@ -47,10 +48,10 @@ Pipeline::
 Select the Pipeline in your target Namespace. PipelineRuns (and their accompanying PipelineResources) are created in this namespace. For information about how to create and configure pipelines, see https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipelines, window="_blank"].
 
 Service Account::
-This field specifies the service account that is used by the PipelineRun. In this case, choose `kabanero operator`.
+This field specifies the service account that is used by the PipelineRun. In this case, choose `appsody-sa`.
 
 Docker registry::
-Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace'.
+Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace`.
 
 . After you complete the necessary information, click `Create`.
 
