@@ -17,7 +17,7 @@ the components of Kabanero.
 == Syntax
 
 A `Kabanero` CR can be comprised of only a few attributes.
-See the link:#_examples[examples].  To define a `Kabanero` instance, you can
+See the link:#examples[examples].  To define a `Kabanero` instance, you can
 specify the following fields:
 
 * `Spec`
