@@ -25,5 +25,5 @@ The Kabanero support scripts include a sample script that uninstalls Kabanero an
 ## Kabanero guides
 Guides are now available on the Kabanero website to help you to learn more about Kabanero. For more information, see https://kabanero.io/guides/.
 
-## kAppnav
-The kAppnav operator assists with managing microservice composed applications and integrates with the Appsody 0.2.0 operator.
+## kAppNav
+The kAppNav operator assists with managing microservice composed applications and integrates with the Appsody 0.2.0 operator.
