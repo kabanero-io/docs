@@ -3,8 +3,6 @@ version: v0.2.0
 title: What's New In Kabanero v0.2.0
 ---
 
-# What's new in Kabanero 0.2.0
-
 ## Kabanero management CLI
 With the Kabanero Management CLI, you can synchronize curated-collection updates, view the status of collections, and temporarily deactivate a collection. This feature also assists the enterprise manage collections within a specific Kabanero instance deployed in a OKD Kubernetes cluster.
 
