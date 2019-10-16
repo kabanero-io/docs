@@ -72,7 +72,7 @@ To add an image to your AsciiDoc put the image in the img directory. You can ref
 
 ## Doc Location
 
-In this repository you shoud place the doc under the folder that best describes the documentation category. These folders located in the [ref directory](https://github.com/kabanero-io/docs/tree/master/ref)
+In this repository you shoud place the doc under the folder that best describes the documentation category. These folders are located in the [ref directory](https://github.com/kabanero-io/docs/tree/master/ref)
 
 
 
