@@ -62,6 +62,12 @@ kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PASSWORD>
 kabanero login -u <GITHUB_USER_ID> -p <GITHUB_PAT>
 ----
 
+Example result:
+
+----
+Logged in to Kabanero instance: <KAB_CLI_URL>
+----
+
 === Onboard a developer
 
 Run the `kabanero onboard` command to onboard a developer to the Kabanero environment.
@@ -72,12 +78,40 @@ kabanero onboard <GITHUB_USER_ID> <REPO_NAME>
 
 This command is under development.
 
+Example result:
+
+----
+{
+	"message": "Command development in progress, please go to the tekton dashboard in your browser and manually configure the webhook For gituser: jane"
+}
+----
+
 === List Kabanero Collections
 
 Run the `kabanero list` command to list all the collections in a kabanero instance, along with their status.
 
 ----
 kabanero list
+----
+
+Example result:
+
+----
+Collection Name       Version   Status
+---                   ---       ---
+java-microprofile     0.2.11    active
+java-spring-boot2     0.3.9     active
+nodejs                0.2.5     active
+nodejs-express        0.2.5     active
+nodejs-loopback       0.1.4     active
+
+Curated Collections   Version
+---                   ---
+java-microprofile     0.2.11
+java-spring-boot2     0.3.9
+nodejs-express        0.2.5
+nodejs-loopback       0.1.4
+nodejs                0.2.5
 ----
 
 === Refresh Collections
@@ -88,12 +122,27 @@ Run the `kabanero refresh` command to refresh the list of collections from maste
 kabanero refresh
 ----
 
+Example result:
+
+----
+active collection is already synchronized with master
+----
+
+Curated collections and active collections are now fully synchronized.
+
 === Show the Kabanero version
 
 Run the `kabanero version` command to display the version of kabanero that is running.
 
 ----
 kabanero version
+----
+
+Example result:
+
+----
+kabanero cli version: 0.1.0
+kabanero command line service version: 0.2.0
 ----
 
 === Deactivate Kabanero
@@ -107,6 +156,32 @@ kabanero deactivate collection-name
 Running the deactivate command removes the specified collection from the list of available application types, without deleting it from the Kabanero instance.
 
 This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero refresh` command. See <<Refresh collections>>.
+
+Example result:
+
+----
+Collection name: nodejs deactivated
+----
+
+Running the `kabanero list` command now shows the deactivated collection as inactive.
+
+----
+Collection Name       Version   Status
+---                   ---       ---
+nodejs                0.2.5     inactive
+java-microprofile     0.2.11    active
+java-spring-boot2     0.3.9     active
+nodejs-express        0.2.5     active
+nodejs-loopback       0.1.4     active
+
+Curated Collections   Version
+---                   ---
+java-microprofile     0.2.11
+java-spring-boot2     0.3.9
+nodejs-express        0.2.5
+nodejs-loopback       0.1.4
+nodejs                0.2.5
+----
 
 === Log out of Kabanero
 
