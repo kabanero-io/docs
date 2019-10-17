@@ -5,7 +5,7 @@
 :sectanchors:
 = Kabanero CLI
 
-The Kabanero CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the collections that are used by developers to create governed applications for their business.
+The Kabanero CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the Kabanero collections. Developers use these collections to create governed applications for their business.
 
 == Installing the Kabanero CLI
 
@@ -13,10 +13,10 @@ The Kabanero CLI is a command-line interface used by the enterprise, solution, o
 * https://github.com/kabanero-io/kabanero-command-line/releases/latest[Latest CLI release, window="_blank"]
 * https://github.com/kabanero-io/kabanero-command-line/releases[All CLI releases, window="_blank"]
 
-. Unzip or Untar the archive. The archive holds the `./kabanero` command which is ready to be used.
-* Test the install by issuing the command: `./kabanero help` and the help output should be shown.
+. Extract the archive. The archive holds the `./kabanero` command, which is ready to be used.
+* Test the installation by running the `./kabanero help` command and viewing the help output.
 
-. Optional - Add the path to the `kabanero` command to your `PATH` env variable. This will allow you to use the `kabanero` command without specifying the path each time.
+. Optional - Add the path to the `kabanero` command to your `PATH` environment variable so that you can use the `kabanero` command without specifying the path each time.
 
 == Kabanero commands
 
@@ -24,12 +24,12 @@ Use the following commands to monitor and administer a Kabanero environment.
 
 === Login
 
-You will need the Kabanero CLI URL to login. There are 2 ways you can get this URL.
+Use the Kabanero CLI URL to log in. There are two ways you can get this URL:
 
-* View the CLI URL in the Kabanero landing page instance details.
-* Login to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
+. View the CLI URL in the Kabanero landing page instance details.
+. Log in to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
 
-Run the `kabanero login` command to authenticate to Kabanero. `<GITHUB_PAT>` is your GitHub Personal Access Token.  **Note**: You can also use your GitHub password for the `<GITHUB_PAT>` argument.
+Run the `kabanero login` command to authenticate to Kabanero. `<GITHUB_PAT>` is your GitHub Personal Access Token. You can also use your GitHub password for the `<GITHUB_PAT>` argument.
 
 ----
 kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PAT>
@@ -50,13 +50,13 @@ Use your GitHub user ID and either a password or Personal Access Token (PAT) to 
 
 Examples:
 
-* Login with A GitHub user ID and password
+* Log in with A GitHub user ID and password
 +
 ----
 kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PASSWORD>
 ----
 
-* Login with previously used url GitHub user ID and PAT
+* Log in with previously used url GitHub user ID and PAT
 +
 ----
 kabanero login -u <GITHUB_USER_ID> -p <GITHUB_PAT>
@@ -64,13 +64,13 @@ kabanero login -u <GITHUB_USER_ID> -p <GITHUB_PAT>
 
 === Onboard a developer
 
-Run the `kabanero onboard` command to onboard a developer to the Kabanero environment. 
+Run the `kabanero onboard` command to onboard a developer to the Kabanero environment.
 
 ----
 kabanero onboard <GITHUB_USER_ID> <REPO_NAME>
 ----
 
-This command is under development. 
+This command is under development.
 
 === List Kabanero Collections
 
@@ -126,3 +126,8 @@ These options can be enabled on any Kabanero command.
 * Turn on debug output and logging to a file in `$HOME/.kabanero/logs`
 ** `-v`
 ** `--verbose`
+
+== Related links
+
+- link:https://github.com/kabanero-io/kabanero-command-line#kabanero-cli[Kabanero CLI repository]
+- link:https://github.com/kabanero-io/kabanero-security#support-for-authentication-and-rbac-for-kabanero-collection-maintenance[Support for authentication and RBAC for Kabanero Collection maintenance]
