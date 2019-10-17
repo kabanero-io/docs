@@ -19,12 +19,19 @@ Tekton pipelines need a persistent volume. If there is no network storage availa
 You need to generate a GitHub personal access token to use for creating the webhook and for accessing the repository source code during PipelineRuns. To generate the token:
 
 . Go to https://github.com/settings/tokens[github.com/settings/tokens, window="_blank"] and click `Generate new token`.
-. Check the `admin:repo_hook` option and click `Generate token`. If you are working in a private repository, additional options may be required. Check with your administrator for details. *Make sure to save the token to a file since you can't see it after you leave this page.*
+. Check the `admin:repo_hook` option and click `Generate token`. If you are working in a private repository, more options might be required. Check with your administrator for details. *Make sure to save the token to a file since you can't see it after you leave this page.*
 
 == Create secrets.
-If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret. From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`. Use your GitHub user name and the personal access token you generated in the previous step to create this secret. Select the service account that is used by the pipeline you want to trigger. In this case, use `kabanero-operator`.
+If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret. If you are working with a public GitHub repository, you do not need to create a secret for your Tekton dashboard webhook.
 
-If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub user name and password to create this secret.
+. From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`.
+. Give your secret a unique name.
+. For the `Namespace`, select `kabanero` from the drop-down list.
+. For `Access To:`, select `Git Server` from the drop-down list.
+. Enter your GitHub username and the personal access token you generated in the previous section.
+. Select the service account that is used by the pipeline you want to trigger. In this case, use `kabanero-operator`.
+
+If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub username and password. For `Access To:`, select `Docker Registry` from the drop-down list.
 
 == Create a webhook.
 . From your Tekton Dashboard, select `webhooks` from the sidebar menu and click `Add Webhook`.
@@ -39,13 +46,13 @@ The URL of the GitHub repository that you want to connect to Kabanero.
 Access token::
 Use this field to create a secret to store your GitHub personal access token. Even if you already created a token-based Git secret from your Tekton Dashboard, you must also store your GitHub personal access token in this field. Click the green plus icon beside the field to open the `Create Access Token Secret` window.
 +
-Give your access token secret a descriptive name. In the `Access token` field, enter the GitHub personal access token that you previously generated in the *Generate a GitHub access token*. step.
+Give your access token secret a descriptive name. In the `Access token` field, enter the GitHub personal access token that you previously generated in the *Generate a GitHub access token* step.
 
 Namespace::
 Select the Kubernetes namespace in which you want to run your pipeline. In this case, choose `kabanero`.
 
 Pipeline::
-Select the Pipeline in your target Namespace. PipelineRuns (and their accompanying PipelineResources) are created in this namespace. For information about how to create and configure pipelines, see https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipelines, window="_blank"].
+Select the Pipeline in your target Namespace. PipelineRuns (and their accompanying PipelineResources) are created in this namespace. For more information, see https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipelines, window="_blank"].
 
 Service Account::
 This field specifies the service account that is used by the PipelineRun. In this case, choose `appsody-sa`.
@@ -66,4 +73,4 @@ Select the Docker registry where any built images are pushed. Use the same Docke
 . Check the PipelineRun from your Tekton Dashboard.
 * From your Tekton Dashboard, select `PipelineRuns` from the sidebar menu. Look for the PipelineRun you just kicked off.
 
-You now have connected your GitHub repo to Kabanero with a webhook. Changes in your code can now automatically trigger tasks that are specified by the pipeline.
+Your GitHub repo is connected to Kabanero with a webhook. Changes in your code can now automatically trigger tasks that are specified by the pipeline.
