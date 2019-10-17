@@ -24,10 +24,10 @@ Use the following commands to monitor and administer a Kabanero environment.
 
 === Login
 
-Use the Kabanero CLI URL to log in. There are two ways you can get this URL.
+Use the Kabanero CLI URL to log in. There are two ways you can get this URL:
 
-* View the CLI URL in the Kabanero landing page instance details.
-* Log in to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
+. View the CLI URL in the Kabanero landing page instance details.
+. Log in to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
 
 Run the `kabanero login` command to authenticate to Kabanero. `<GITHUB_PAT>` is your GitHub Personal Access Token. You can also use your GitHub password for the `<GITHUB_PAT>` argument.
 
@@ -129,5 +129,5 @@ These options can be enabled on any Kabanero command.
 
 == Related links
 
-- link:https://github.com/kabanero-io/kabanero-command-line#kabanero-cli[Kabanero CLI]
+- link:https://github.com/kabanero-io/kabanero-command-line#kabanero-cli[Kabanero CLI repository]
 - link:https://github.com/kabanero-io/kabanero-security#support-for-authentication-and-rbac-for-kabanero-collection-maintenance[Support for authentication and RBAC for Kabanero Collection maintenance]
