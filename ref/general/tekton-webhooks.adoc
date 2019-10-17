@@ -22,7 +22,7 @@ You need to generate a GitHub personal access token to use for creating the webh
 . Check the `admin:repo_hook` option and click `Generate token`. If you are working in a private repository, more options might be required. Check with your administrator for details. *Make sure to save the token to a file since you can't see it after you leave this page.*
 
 == Create secrets.
-If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret. If you are working with a public GitHub repository, you do no need to create a secret for your Tekton dashboard webhook.
+If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret. If you are working with a public GitHub repository, you do not need to create a secret for your Tekton dashboard webhook.
 
 . From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`.
 . Give your secret a unique name.
