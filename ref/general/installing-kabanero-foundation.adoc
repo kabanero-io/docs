@@ -1,6 +1,6 @@
 :page-layout: doc
 :page-doc-category: Installation
-:page-title: Installing Kabanero Foundation
+:page-title: Installing and upgrading Kabanero Foundation
 :linkattrs:
 :sectanchors:
 
@@ -57,6 +57,23 @@ Using the OKD Console:::
 . Switch the project to **kabanero**
 . Under **Applications** click **Routes**
 . The landing page name is **kabanero-landing** which should be in the list of routes. Click the URL under **Hostname** to open the landing application
+
+== Upgrade
+
+. Navigate to the cloned `kabanero-foundation` repository that was used to install Kabanero.  Make sure the repository is current:  `git pull`
+
+. Check out the release that you want to upgrade to.  A list of releases can be found link:https://github.com/kabanero-io/kabanero-foundation/releases[on the kabanero-foundation Github repository].  For example, `git checkout 0.2.0`
+
+. To upgrade from release to release, use the `upgrade-kabanero-foundation.sh`
+script.  Set environment variable KABANERO_BRANCH to be the kabanero-operator release that you want to upgrade to.  If you checked out `kabanero-foundation` to a tagged release in the previous step, this variable will by default be the correct value.  The script will update the Kabanero operator to the desired release.  For example:
++
+```
+KABANERO_BRANCH=0.2.0 ./upgrade-kabanero-foundation.sh
+```
+
+. After the script completes successfully, update your Kabanero CR
+instances to use the new version.  If you are using the default collection set,
+consider updating it to the new version as well.  For an example, see link:https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/config/samples/default.yaml[default.yaml], which sets the version, and uses the default collection set.
 
 == Optional sample - Appsody project with manual Tekton pipeline run
 
