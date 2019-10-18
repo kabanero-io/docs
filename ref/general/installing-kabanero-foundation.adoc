@@ -33,6 +33,8 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * Don't forget to replace `<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>` with your subdomain, and do not include the angle brackets:
 * `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN> ./install-kabanero-foundation.sh`
 * If using a wildcard DNS such as nip.io, append it to the subdomain: `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>.nip.io ./install-kabanero-foundation.sh`
+* If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
+* `ENABLE_KAPPNAV=yes|no openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN> ./install-kabanero-foundation.sh`
 
 . Create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is printed at the conclusion of the `install-kabanero-foundation.sh` script.  The CR instance can be modified to include the URL of a custom collection and the Github information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
 
@@ -91,4 +93,3 @@ consider updating it to the new version as well.  For an example, see link:https
 
 . Optional - Make detailed pipeline changes by accessing the Tekton dashboard
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
-
