@@ -128,6 +128,8 @@ Example results:
 active collection is already synchronized with master
 ----
 
+Curated collections and active collections are now fully synchronized.
+
 or
 
 ----
@@ -135,8 +137,6 @@ Collection Name    Version    Status
 ----        ----    ----
 nodejs        0.2.5    inactive ==> active
 ----
-
-Curated collections and active collections are now fully synchronized.
 
 === Show the Kabanero version
 
