@@ -65,7 +65,7 @@ kabanero login -u <GITHUB_USER_ID> -p <GITHUB_PAT>
 Example result:
 
 ----
-Logged in to Kabanero instance: <KAB_CLI_URL>
+Logged in to Kabanero instance: <KABANERO_CLI_URL>
 ----
 
 === Onboard a developer
@@ -82,7 +82,7 @@ Example result:
 
 ----
 {
-	"message": "Command development in progress, please go to the tekton dashboard in your browser and manually configure the webhook For gituser: jane"
+	"message": "Command development in progress, please go to the tekton dashboard in your browser and manually configure the webhook For gituser: <GITHUB_USER_ID>"
 }
 ----
 
@@ -122,10 +122,18 @@ Run the `kabanero refresh` command to refresh the list of collections from maste
 kabanero refresh
 ----
 
-Example result:
+Example results:
 
 ----
 active collection is already synchronized with master
+----
+
+or
+
+----
+Collection Name    Version    Status
+----        ----    ----
+nodejs        0.2.5    inactive ==> active
 ----
 
 Curated collections and active collections are now fully synchronized.
@@ -189,6 +197,12 @@ Run the `kabanero logout` command to disconnect from the Kabanero instance.
 
 ----
 kabanero logout
+----
+
+Example result:
+
+----
+Logged out of kab instance: <KABANERO_CLI_URL>
 ----
 
 == Global Options
