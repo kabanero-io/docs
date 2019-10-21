@@ -40,7 +40,7 @@ Let’s create the pipeline by invoking the following command:oc apply -f test-b
 
 * Image creation and push to docker repository:
 
-Log in to your OpenShift dashboard and select “Kabanero” namespace. Navigate to Overview Builds <project-name> and you should be able to see the newly created image.The <project-name> is the same as your github project name.
+Log in to your OpenShift dashboard and select “Kabanero” namespace. Navigate to Overview --> Builds --> <project-name> and you should be able to see the newly created image.The <project-name> is the same as your github project name.
 
 == Deploy Steps by Jenkins:
 
