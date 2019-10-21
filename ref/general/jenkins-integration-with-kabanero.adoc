@@ -5,6 +5,7 @@
 = Jenkins Integration with Kabanero
 
 The goal of this guide is to show existing Jenkins users how to use Tekton to build images from their code repository and have Jenkins deploy using the image. The flow looks something like this:
+
 image::jenkins-tekton.png[]
 
 == Prerequisites
