@@ -62,7 +62,7 @@ If everything went smooth, you should be able to see the successful deployment u
 
 == Reference:
 
-** Sample Jenkinsfile: include:: sample_jenkinsfile[]
+** Sample Jenkinsfile: include::sample_jenkinsfile[]
 ** OKD Installation: https://docs.okd.io/latest/install/running_install.html (at the time of writing this guide, version 3.11 is the preferred one)
 ** Appsody Installation: http://appsody.dev
 ** Kabanero Foundation: https://github.com/Kabanero-io/Kabanero-foundation
