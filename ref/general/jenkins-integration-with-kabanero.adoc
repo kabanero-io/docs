@@ -1,0 +1,33 @@
+:page-layout: doc
+:page-doc-category: Reference
+:page-title: Jenkins Integration with Kabanero
+:sectanchors:
+= Jenkins Integration with Kabanero
+
+The goal of this guide is to show existing Jenkins users how to use Tekton to build images from their code repository and have Jenkins deploy using the image. The flow looks something like this:
+image::Jenkins-Tekton.png[]
+
+== Prerequisites
+In order to follow along with this hands-on guide, you’ll need the following pre-requisites:
+* OpenShift 3.11 
+* Kabanero Foundation (cloned)
+* Kabanero Pipelines (cloned)
+* Appsody (installed)
+** Links to each of the above projects aregiven under reference section. Each project website/github listsnecessary system requirements.
+
+== Intended Audience:
+This hands-on guideis directed towards anyone who has used Jenkins before and familiar with the  fundamental  concepts  of  microservices,  Docker,  Kubernetes, OpenShiftand  Tekton.  The intent is to show an existing Jenkins user/administrator how to build the image using Tekton and deploy using Jenkins.
+
+== Build Steps by Tekton:
+
+* Pipeline creation:
+
+The script to create a pipeline is included with Kabanero-pipelines project. This template script contains both build and deploy tasks,but wewill remove the deploy task from this file to have Tektonperform only build task. Go to Kabanero-pipelines folder which you recently cloned.
+From the bottom-half of thefile pipelines/incubator/build-deploy-pipeline.yaml, remove the highlighted section (i.e. the deploy-task). Save and close the file.Rename the file to test-build-pipeline.yaml.
+
+image::test-build-pipeline.png[]
+
+For our example, we’ll be using nodejs-build-task for “build-task” section and name the pipeline test-build-pipeline. Once finished, your file should look like following:
+
+image::build-task.png[]
+
