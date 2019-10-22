@@ -63,7 +63,21 @@ If everything went smooth, you should be able to see the successful deployment u
 
 == Reference:
 
-** Sample Jenkinsfile: include::{sourcedir}/ref/general/sample_jenkinsfile
+** Sample Jenkinsfile: 
+podTemplate(label: 'label', cloud: 'openshift', serviceAccount: 'appsody-sa', containers: [
+    containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl', ttyEnabled: true, command: 'cat')
+  ]){
+    node('label') {
+        stage('Deploy') {
+            container('kubectl') {
+                checkout scm
+                sh 'sed -i -e \'s#applicationImage: .*$#applicationImage: docker-registry.default.svc:5000/Kabanero/project1#g\' app-deploy.yaml'
+                sh 'cat app-deploy.yaml'
+                sh 'find . -name app-deploy.yaml -type f|xargs kubectl apply -f'
+            }
+        }
+    }
+}
 ** OKD Installation: https://docs.okd.io/latest/install/running_install.html (at the time of writing this guide, version 3.11 is the preferred one)
 ** Appsody Installation: http://appsody.dev
 ** Kabanero Foundation: https://github.com/Kabanero-io/Kabanero-foundation
