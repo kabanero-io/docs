@@ -6,7 +6,7 @@
 
 The goal of this guide is to show existing Jenkins users how to use Tekton to build images from their code repository and have Jenkins deploy using the image. The flow looks something like this:
 
-image::jenkins-tekton.png[]
+image::/docs/img/jenkins-tekton.png[]
 
 == Prerequisites
 In order to follow along with this hands-on guide, you’ll need the following pre-requisites:
@@ -27,11 +27,11 @@ The script to create a pipeline is included with Kabanero-pipelines project. Thi
 
 From the bottom-half of the file pipelines/incubator/build-deploy-pipeline.yaml, remove the highlighted section (i.e. the deploy-task). Save and close the file. Rename the file to test-build-pipeline.yaml.
 
-image::test-build-pipeline.png[]
+image::/docs/img/test-build-pipeline.png[]
 
 For our example, we’ll be using nodejs-build-task for “build-task” section and name the pipeline test-build-pipeline. Once finished, your file should look like following:
 
-image::build-task.png[]
+image::/docs/img/build-task.png[]
 
 Let’s create the pipeline by invoking the following command: _oc apply -f test-build-pipeline.yaml -n Kabanero_. Notice the -n Kabaneropart which indicates the namespace Kabanero where the pipeline will be created. Note: Change the names on lines 5, 15,25 (the ‘name’ fields) in the template file to lowercase letter only names.  The taskRef name must be one of the tasks installed in the OpenShift cluster.  Here, we’re using "nodejs-epress-build-task".
 
