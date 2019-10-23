@@ -22,10 +22,11 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 . Retrieve the https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[installation scripts from our kabanero-foundation repository, window="_blank"]
 * Clone the repository to get the scripts `git clone https://github.com/kabanero-io/kabanero-foundation.git`
+* ... or download the repository as a zip file https://github.com/kabanero-io/kabanero-foundation/archive/master.zip
 
 . Navigate to the **scripts** directory: `cd kabanero-foundation/scripts`
 
-. Ensure you are logged into your cluster with the https://docs.openshift.com/enterprise/3.2/cli_reference/get_started_cli.html#basic-setup-and-login[`oc login` command]
+. Ensure you are logged into your cluster with the https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli.html#basic-setup-and-login[`oc login` command]
 
 . Review the `install-kabanero-foundation.sh` script for any optional components that can be enabled by setting the required environment variable, or by editing the value in the script directly.  Optional components are listed at the top of the script, below the section titled `Optional components`.
 
@@ -34,9 +35,11 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN> ./install-kabanero-foundation.sh`
 * If using a wildcard DNS such as nip.io, append it to the subdomain: `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>.nip.io ./install-kabanero-foundation.sh`
 * If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
-* `ENABLE_KAPPNAV=yes|no openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN> ./install-kabanero-foundation.sh`
+* For example: `ENABLE_KAPPNAV=yes openshift_master_default_subdomain=9.9.9.9.nip.io ./install-kabanero-foundation.sh`
 
-. Create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is printed at the conclusion of the `install-kabanero-foundation.sh` script.  The CR instance can be modified to include the URL of a custom collection and the Github information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
+. Create a `Kabanero` custom resource (CR) instance.
+* A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is printed at the conclusion of the `install-kabanero-foundation.sh` script.  The CR instance can be modified to include the URL of a custom collection and the Github information necessary to administer that collection.
+* For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
 
 == After Install
 
@@ -59,6 +62,25 @@ Using the OKD Console:::
 . Switch the project to **kabanero**
 . Under **Applications** click **Routes**
 . The landing page name is **kabanero-landing** which should be in the list of routes. Click the URL under **Hostname** to open the landing application
+
+If its not responding:::
+. It may take some time for the landing page and other pods to be created and started. You can check the status of the Kabanero pods with `oc get pods -n kabanero` and wait until they are all in *Running* status.
++
+```
+# oc get pods -n kabanero
+NAME                                                        READY     STATUS    RESTARTS   AGE
+appsody-operator-79ccd57895-9lsmt                           1/1       Running   0          11m
+controller-manager-0                                        1/1       Running   4          29m
+kabanero-cli-855c64f6fc-j6s44                               1/1       Running   0          11m
+kabanero-landing-6dc5c798d4-ncg52                           1/1       Running   0          11m
+kabanero-operator-68877b5d6b-6wqr4                          1/1       Running   1          29m
+knative-eventing-operator-67cdf5dc9f-fhzbt                  1/1       Running   0          29m
+knative-serving-operator-b64558bbc-k5sjl                    1/1       Running   0          29m
+openshift-pipelines-operator-66c4d787cf-7kjjk               1/1       Running   0          29m
+tekton-dashboard-55fd66fbff-2bzhl                           2/2       Running   0          27m
+webhooks-extension-65d44777-tsz4j                           1/1       Running   0          27m
+webhooks-extension-sink-4wq7k-deployment-6c9cd554f5-gf7rk   2/2       Running   0          26m
+```
 
 == Upgrade
 
