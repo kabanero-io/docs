@@ -34,7 +34,7 @@ specify the following fields:
 *** `organization` - The name of the Github organization where the collection
     repositories have been cloned.  The Github teams that administer the
     collections are also contained in this organization.
-*** `teams` - A comma-separated list of Github teams that will be allowed to
+*** `teams` - A yaml list of Github teams that will be allowed to
     use the Kabanero CLI to administer the collection repositories.  All users
     who want to use the Kabanero CLI to administer the collections must be a
     member of a team in this list.
@@ -205,8 +205,8 @@ metadata:
   namespace: kabanero
 spec:
   version: "0.2.0"
-  collections: 
-    repositories: 
+  collections:
+    repositories:
     - name: central
       url: https://github.com/kabanero-io/collections/releases/download/v0.2.0-rc1/kabanero-index.yaml
       activateDefaultCollections: true
@@ -224,14 +224,16 @@ metadata:
   namespace: kabanero
 spec:
   version: "0.2.0"
-  collections: 
-    repositories: 
+  collections:
+    repositories:
     - name: central
       url: https://github.com/my-organization/collections/releases/download/v0.1/kabanero-index.yaml
       activateDefaultCollections: true
   github:
     organization: my-organization
-    teams: collection-admins,admins
+    teams:
+      - collection-admins
+      - admins
     apiurl: api.github.com
   cli:
     sessionExpirationSeconds: 1h

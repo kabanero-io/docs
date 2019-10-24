@@ -31,14 +31,16 @@ metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  collections: 
-    repositories: 
+  collections:
+    repositories:
     - name: custom
       url: https://github.example.com/my_org/collections/releases/download/v0.1/kabanero-index.yaml
       activateDefaultCollections: true
   github:
     organization: my_org
-    teams: collection-admins,admins
+    teams:
+      - collection-admins
+      - admins
     apiurl: api.github.com
 ```
 +
