@@ -138,6 +138,16 @@ Collection Name    Version    Status
 nodejs        0.2.5    inactive ==> active
 ----
 
+=== Show the active repository and collections for a Kabanero instance
+
+Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the acive repository and collections for a Kabanero instance.
+
+. From the Kabanero landing page extension in the OKD console.
+. Displaying the configured Kabanero CR with the OC CLI command
+
+  `oc get kabanero -n kabanero -o yaml`
+
+
 === Show the Kabanero version
 
 Run the `kabanero version` command to display the version of kabanero that is running.
