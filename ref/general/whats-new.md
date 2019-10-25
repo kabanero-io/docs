@@ -3,25 +3,6 @@ version: v0.2.0
 title: What's New In Kabanero v0.2.0
 ---
 
-## Kabanero management CLI
-With the Kabanero Management CLI, you can synchronize curated-collection updates, view the status of collections, and temporarily deactivate a collection. This feature also assists the enterprise manage collections within a specific Kabanero instance deployed in a OKD Kubernetes cluster.
+Today you can get your hands on the next monthly release of Kabanero, v0.2.0.  We’re working towards delivering on a monthly cadence so stay tuned to what November and December bring as well.  We’ve been busy making a ton of improvements including new features, enhancements, and good old fashion bug fixes.  
 
-## Kabanero operator
-The Kabanero Operator feature includes the --targetNameSpaces configuration that defines a list of namespaces that help to manage Appsody application deployments with Kabanero. To simplify collection development, variable substitution is introduced to allow the same pipeline template to be used for 1.
-
-## Kabanero collections
-Use the features in the Kabanero collections to develop microservices and applications for the enterprise.
-* java-microprofile
-* java-spring-boot2
-* node-js-express
-* node-js-loopback
-* node-js
-
-## Kabanero support scripts
-The Kabanero support scripts include a sample script that uninstalls Kabanero and must-gather scripts that collect important diagnostic data.
-
-## Kabanero guides
-Guides are now available on the Kabanero website to help you to learn more about Kabanero. For more information, see https://kabanero.io/guides/.
-
-## kAppNav
-The kAppNav operator assists with managing microservice composed applications and integrates with the Appsody 0.2.0 operator.
+One focus area for this release is enhancements for the Architect persona to better support customizations for the enterprise.  A new feature we’d like to mention is a Kubernetes Application Navigator that assists with managing microservice composed applications, which aligns with how the Kubernetes SIG-apps describe applications.  Check out all the details on everything new in our [What's New in 0.2.0 blog post](/blog/2019/10/20/WhatsNew020.html).

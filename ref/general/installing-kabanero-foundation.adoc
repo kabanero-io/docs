@@ -1,6 +1,6 @@
 :page-layout: doc
 :page-doc-category: Installation
-:page-title: Installing Kabanero Foundation
+:page-title: Installing and upgrading Kabanero Foundation
 :linkattrs:
 :sectanchors:
 
@@ -33,6 +33,8 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 * Don't forget to replace `<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>` with your subdomain, and do not include the angle brackets:
 * `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN> ./install-kabanero-foundation.sh`
 * If using a wildcard DNS such as nip.io, append it to the subdomain: `openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>.nip.io ./install-kabanero-foundation.sh`
+* If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
+* `ENABLE_KAPPNAV=yes|no openshift_master_default_subdomain=<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN> ./install-kabanero-foundation.sh`
 
 . Create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is printed at the conclusion of the `install-kabanero-foundation.sh` script.  The CR instance can be modified to include the URL of a custom collection and the Github information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
 
@@ -58,6 +60,23 @@ Using the OKD Console:::
 . Under **Applications** click **Routes**
 . The landing page name is **kabanero-landing** which should be in the list of routes. Click the URL under **Hostname** to open the landing application
 
+== Upgrade
+
+. Navigate to the cloned `kabanero-foundation` repository that was used to install Kabanero.  Make sure the repository is current:  `git pull`
+
+. Check out the release that you want to upgrade to.  A list of releases can be found link:https://github.com/kabanero-io/kabanero-foundation/releases[on the kabanero-foundation Github repository].  For example, `git checkout 0.2.0`
+
+. To upgrade from release to release, use the `upgrade-kabanero-foundation.sh`
+script.  Set environment variable KABANERO_BRANCH to be the kabanero-operator release that you want to upgrade to.  If you checked out `kabanero-foundation` to a tagged release in the previous step, this variable will by default be the correct value.  The script will update the Kabanero operator to the desired release.  For example:
++
+```
+KABANERO_BRANCH=0.2.0 ./upgrade-kabanero-foundation.sh
+```
+
+. After the script completes successfully, update your Kabanero CR
+instances to use the new version.  If you are using the default collection set,
+consider updating it to the new version as well.  For an example, see link:https://raw.githubusercontent.com/kabanero-io/kabanero-operator/master/config/samples/default.yaml[default.yaml], which sets the version, and uses the default collection set.
+
 == Optional sample - Appsody project with manual Tekton pipeline run
 
 . Create a Persistent Volume for the pipeline to use. A sample hostPath `pv.yaml` is provided.
@@ -74,4 +93,3 @@ Using the OKD Console:::
 
 . Optional - Make detailed pipeline changes by accessing the Tekton dashboard
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
-
