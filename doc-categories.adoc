@@ -1,2 +1,2 @@
 :page-title: doc categories meta
-:page-categories: ['Installation', 'Configuration', 'Reference']
+:page-categories: ['Overview', 'Installation', 'Configuration', 'Reference']
