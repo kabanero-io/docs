@@ -19,7 +19,7 @@ The Kabanero architecture supports the activity of application developers, appli
 The following figure illustrates the main building blocks of the architecture, which will be elaborated in the next sections. 
 
 .Main Kabanero building blocks  
-image::/docs/img/arch-overview-main.png[link="/img/guide/arch-overview-main.png" alt="Main Kabanero building blocks"]
+image::/docs/img/arch-overview-main.png[link="/docs/img/arch-overview-main.png" alt="Main Kabanero building blocks"]
 
 
 === Kabanero Collections
@@ -53,7 +53,7 @@ Applications in a production environment are subject to common operational polic
 A *stack* is part of a Kabanero Collection and it deserved its own section in this guide as the single architectural component shared between application development and application deployment activities. A stack is realized as a container image designed, built, and published by an application architect, which can then be pulled into local registries by application developers and into the deployment pipeline upon code deliveries.
 
 .Collection stacks
-image::/docs/img/arch-overview-stacks.png[link="/img/guide/arch-overview-stacks.png" alt="Collection stacks"]
+image::/docs/img/arch-overview-stacks.png[link="/docs/img/arch-overview-stacks.png" alt="Collection stacks"]
 
 Although a stack is ultimately delivered as a regular container image, Kabanero specifies conventions for the internal structure of that image, with a clear separation between the portions of the stack that are common across all applications and the portions that are unique to each application, being visible and editable by application developers. 
 
@@ -68,7 +68,7 @@ Kabanero provides initial collections for the most popular software development 
 The following sections contain concrete examples of how different roles would interact with Kabanero to achieve concrete goals.
 
 .Application Developer and Application Architect workflows
-image::/docs/img/arch-overview-workflows.png[link="/img/guide/arch-overview-workflows.png" alt="Application Developer and Application Architect workflows"]
+image::/docs/img/arch-overview-workflows.png[link="/docs/img/arch-overview-workflows.png" alt="Application Developer and Application Architect workflows"]
 
 
 === Create New Application (application developer)
