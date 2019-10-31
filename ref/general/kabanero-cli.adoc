@@ -29,11 +29,17 @@ Use the Kabanero CLI URL to log in. There are two ways you can get this URL:
 . View the CLI URL in the Kabanero landing page instance details.
 . Log in to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
 
-Run the `kabanero login` command to authenticate to Kabanero. `<GITHUB_PAT>` is your GitHub Personal Access Token. You can also use your GitHub password for the `<GITHUB_PAT>` argument.
+Run the `kabanero login` command to authenticate to Kabanero.
 
 ----
 kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PAT>
 ----
+
+* `<KABANERO_CLI_URL>` is your Kabanero CLI URL from above.
+* `<GITHUB_USER_ID>` is your GitHub user name.
+* `<GITHUB_PAT>` is your GitHub Personal Access Token.
+** Your PAT must have the **read:org** - Read org and team membership, read org projects OAuth Scope allowed. You can select this when creating your PAT in GitHub
+* You can also use your GitHub password for the `<GITHUB_PAT>` argument.
 
 **Kabanero login options**
 
