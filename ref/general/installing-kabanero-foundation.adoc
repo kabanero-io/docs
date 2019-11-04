@@ -40,7 +40,8 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Sev
 
 . Install the OLM CatalogSource containing the Kabanero operator.  The following YAML can be used, after substituting the required version (the example uses version 0.3.0):
 +
-```
+[source,yaml]
+----
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
@@ -49,7 +50,7 @@ metadata:
 spec:
   sourceType: grpc
   image: kabanero/kabanero-operator-registry:0.3.0
-```
+----
 
 . Create the `kabanero` namespace using `oc new-project kabanero`
 
