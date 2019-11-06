@@ -33,7 +33,7 @@ You need the proper front matter on each Docs page to get it categorized correct
 
 ## Doc Categories
 
-We currently have 3 categories you can use for the `doc-category` or `page-doc-category` front matter:
+We currently have 3 categories you can use for the `doc-category` (markdown) or `:page-doc-category:` (asciidoc) front matter:
 
 * Installation
 * Reference
@@ -85,16 +85,15 @@ In this repository you should place your new Docs page under the folder that bes
 
 ## Render Docs locally
 
-When you have your local development environment setup you can render Docs pages as your write them.
+Follow these instructions to render your docs in the website on a local dev environment.
 
 ### Prereqs
 
 - [Local development setup](https://github.com/kabanero-io/kabanero-website/blob/master/CONTRIBUTING.md#local-development-setup)
 
-### Render your guide
+### Render your docs
 
-1. Create a new `docs/` subdirectory under `src/main/content/` in your github.com/kanabero.io/kabanero-website.git repository.
-2. Copy all directories and content from your local github.com/kabanero-io/docs.git repository underneath this subdirectory.
-3. Create your new Docs file in an appropriate directory (See Doc Location).
-4. Copy any images that you are using in your guide to the `src/main/content/docs/img/` directory (This is done automatically during website build, but is needed during local development).
-5. Start your local dev server and go to https://localhost:4000/docs to see all the Docs pages rendered.
+1. From the kabanero-website repository root run the script: `./scripts/build_clone_docs.sh`
+1. Create your new `.adoc` or `.md` file in `src/main/content/docs/ref/general/` and write in your doc content.
+1. Copy any images that you are using in your doc to the `src/main/content/docs/img/` directory.
+1. Start your local dev server using instructions from the [local dev setup](https://github.com/kabanero-io/kabanero-website/blob/master/CONTRIBUTING.md#local-development-setup) and go to https://localhost:4000/docs in your browser to see all the Docs pages rendered.
