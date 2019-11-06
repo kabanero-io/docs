@@ -16,7 +16,7 @@ The Kabanero CLI is a command-line interface used by the enterprise, solution, o
 . Extract the archive. The archive holds the `./kabanero` command, which is ready to be used.
 * Test the installation by running the `./kabanero help` command and viewing the help output.
 
-. Additionally - the Operations team has to perform the following steps in order configure the CLI microservice that the CLI code calls. To do this, follow the steps outlined in the following documentation: 
+. Configure the CLI service. To do this, follow the steps outlined in the following documentation:
 ** https://kabanero.io/docs/ref/general/kabanero-cr-config.html[Configuring a Kabanero CR Instance, window="_blank"]
 ** https://kabanero.io/docs/ref/general/collection-install.html[Configuring Kabanero to use an Alternate Collection Repository, window="_blank"].
 
