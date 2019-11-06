@@ -17,8 +17,8 @@ You need the proper front matter on each Docs page to get it categorized correct
   * For Markdown, use a YAML front matter
     ```
     ---
-    layout: general-reference
-    doc-category: Configuration
+    layout: doc
+    doc-category: Reference
     title: Connecting Kabanero to GitHub with Tekton Webhooks
     ---
     ```
@@ -33,11 +33,12 @@ You need the proper front matter on each Docs page to get it categorized correct
 
 ## Doc Categories
 
-We currently have 3 categories you can use for the `doc-category` (markdown) or `:page-doc-category:` (asciidoc) front matter:
+We currently have 4 categories you can use for the `doc-category` (markdown) or `:page-doc-category:` (AsciiDoc) front matter:
 
+* Overview
 * Installation
-* Reference
 * Configuration
+* Reference
 
 If you need a new category feel free to open an issue or discussion in a pull request about the new category.
 
