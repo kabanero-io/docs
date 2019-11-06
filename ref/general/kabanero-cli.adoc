@@ -18,6 +18,8 @@ The Kabanero CLI is a command-line interface used by the enterprise, solution, o
 
 . Optional - Add the path to the `kabanero` command to your `PATH` environment variable so that you can use the `kabanero` command without specifying the path each time.
 
+. Additionally - the Operations team has to perform the following steps in order configure the CLI microservice that the CLI code calls. See https://kabanero.io/docs/ref/general/kabanero-cr-config.html and https://kabanero.io/docs/ref/general/collection-install.html
+
 == Kabanero commands
 
 Use the following commands to monitor and administer a Kabanero environment.
