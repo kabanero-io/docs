@@ -126,18 +126,19 @@ nodejs-loopback       0.1.4
 nodejs                0.2.5
 ----
 
-=== Refresh Collections
+=== Synchronize collections
 
-Run the `kabanero refresh` command to refresh the list of collections from master, making these collections current with the activated collections across all namespaces in the Kabanero instance. This command can also be used to restore deactivated collections. See <<Deactivate Kabanero>>.
+Run the `kabanero sync` command to synchronize the list of Kabanero instance collections with the curated collection from GitHub. This will activate/deactivate as well as update versions of the Kabanero collections to reflect the state of the curated collections.
+Also see <<Deactivate Kabanero>>.
 
 ----
-kabanero refresh
+kabanero sync
 ----
 
 Example results:
 
 ----
-active collection is already synchronized with master
+active collection is already synchronized with the curated collection
 ----
 
 Curated collections and active collections are now fully synchronized.
@@ -227,7 +228,7 @@ Example result:
 Logged out of kab instance: <KABANERO_CLI_URL>
 ----
 
-== Global Options
+== Global options
 
 These options can be enabled on any Kabanero command.
 
