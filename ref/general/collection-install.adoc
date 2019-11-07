@@ -1,28 +1,29 @@
 :page-layout: doc
-:page-doc-category: Reference
-:page-title: Configuring Kabanero to use an Alternate Collection Repository
+:page-doc-category: Configuration
+:page-title: Configuring a Kabanero CR instance to use an alternative collection repository
 :linkattrs:
 :sectanchors:
-= Configuring Kabanero to use an Alternate Collection Repository
+= Configuring Kabanero to use an alternative collection repository
 
-A Kabanero custom resource (CR) instance can be configured to use an alternate collection repository.  After link:collection-building.html[creating a new collection repository], follow these steps to use that collection repository with Kabanero:
+A Kabanero custom resource (CR) instance can be configured to use an alternative collection repository.  When you have created a new collection repository, as described in
+link:https://kabanero.io/guides/working-with-collections/[Working with collections], follow these steps to use that collection repository with Kabanero:
 
-. Create organizational-level teams in Github that should administer the cloned collection(s), and add members to those teams.  These members will be able to use the link:kabanero-cli.html[Kabanero CLI] to administer the collections in the namespace where the Kabanero CR instance is configured.
+. Create organizational-level teams in GitHub to administer the cloned collection(s), and add members to those teams.  These members will be able to use the link:kabanero-cli.html[Kabanero CLI] to administer the collections in the namespace where the Kabanero CR instance is configured.
 
 . Obtain the URL to the collection repository.  If a Git release was created for the collections, the URL format will be: `https://<github.com>/<organization>/collections/releases/download/<release>/kabanero-index.html`
-* Replace `<github.com>` with your Github or GHE hostname
-* Replace `<organization>` with your Github organization name
+* Replace `<github.com>` with your GitHub or GHE hostname
+* Replace `<organization>` with your GitHub organization name
 * Replace `<release>` with the name of the release that was created
 
 . Find the name of your Kabanero CR instance.  Use `oc get kabaneros -n kabanero` to obtain a list of all Kabanero CR instances in namespace `kabanero`.  The default name for the CR instance is `kabanero`.  Then, edit the speific CR instance using `oc edit kabanero <name> -n kabanero`, replacing `<name>` with the instance name.
 
-. Modify your Kabanero custom resource (CR) instance to target the new collections that were pushed to the remote Github repository, and the teams in Github that should administer the collection(s).  Specifically:
-* The `Spec.Collections.Repositories.url` attribute should be set to the URL of the alternate collection repository.
-* The `Spec.Github.organization` attribute should be set to the organization hosting the collections in the remote Github repository.  In the example above, the organization name is `my_org`.
-* The `Spec.Github.teams` attribute should be set to a comma separated list of Github teams in the remote Github repository, whose members can administer the collection using the Kabanero CLI.
-* The `Spec.Github.apiurl` attribute should be set to the API URL for the remote Github repository being used.  For example, the API URL for `github.com` is `api.github.com`.
+. Modify your Kabanero CR instance to target the new collections that were pushed to the remote GitHub repository, and the teams in GitHub that should administer the collection(s).  Specifically:
+* The `Spec.Collections.Repositories.url` attribute should be set to the URL of the alternative collection repository.
+* The `Spec.Github.organization` attribute should be set to the organization hosting the collections in the remote GitHub repository.  In the example above, the organization name is `my_org`.
+* The `Spec.Github.teams` attribute should be set to a comma separated list of GitHub teams in the remote GitHub repository, whose members can administer the collection using the Kabanero CLI.
+* The `Spec.Github.apiurl` attribute should be set to the API URL for the remote GitHub repository being used.  For example, the API URL for `github.com` is `api.github.com`.
 +
-A modified Kabanero CR instance for a collection repository located in the `my_org` organization of the `github.example.com` Github repository using release `v0.1` of collections might look like this:
+A modified Kabanero CR instance for a collection repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `v0.1` of collections might look like this:
 +
 ```yaml
 apiVersion: kabanero.io/v1alpha1
@@ -44,9 +45,9 @@ spec:
     apiurl: api.github.com
 ```
 +
-For more information about other fields that can be customized in the Kabanero CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
+For more information about other fields that can be customized in the Kabanero CR instance, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].
 +
-When you are done editing, save your changes and exit the editor.  The updated Kabanero CR instance will be applied to your cluster.
+After editing, save your changes.  The updated Kabanero CR instance is applied to your cluster.
 
 . The Kabanero operator will now load the collections in the repository.  To see a list of all collections in the `kabanero` namespace, use `oc get collections -n kabanero`.  If the kabanero-operator is unable to apply the collections, the `Status` section of the Kabanero CR instance or the Collection CR instances will contain more information.
 
