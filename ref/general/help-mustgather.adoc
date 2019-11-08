@@ -18,7 +18,7 @@ There are several mustgather scripts available:
 
 To run a `mustgather` script:
 
-1. In a terminal session, navigate to the location where you ran the `install-kabanero-foundation.sh` script.
+1. In a terminal session, navigate to the location where you cloned the kabanero-foundation repository.
 
 2. Log in to your cluster.
 
