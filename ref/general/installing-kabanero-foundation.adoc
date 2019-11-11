@@ -4,11 +4,15 @@
 :linkattrs:
 :sectanchors:
 
-Today, Kabanero has been tested on the OpenShift version 4.2. There is intent to also expand testing on additional distributions including upstream Kubernetes in the future.
+Kabanero version 0.3 has been tested on OpenShift Container Platform (OCP) 4.2. There is intent to expand testing to additional distributions, including upstream Kubernetes, in the future.
 
 == Prerequisites
 
 * link:https://www.openshift.com/products/container-platform[OCP] V4.2.0+
+
+The Kabanero Open Project intends to build on open source distributions of Kubernetes; however, the current distribution of The Origin Community Distribution of Kubernetes (OKD) is lagging the commercial distributions.   Due to a focus on building leading-edge capabilities and leveraging new features across the integrated open frameworks, the Kabanero Open Project is temporarily building on version 4 capabilities of the commercial distributions.  When there is a comparable release of OKD, the Kabanero Open Project will return to it.
+
+As a result of this temporary change in focus, there is no upgrade process from an installation built on OKD version 3.11 to an installation built on OCP 4.2.
 
 == Installation
 
@@ -26,7 +30,7 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Sev
 * If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
 * `ENABLE_KAPPNAV=yes|no ./install.sh`
 
-. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of a custom collection and the Github information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
+. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of a custom collection and the GitHub information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
 
 === Manual installation
 
@@ -58,18 +62,18 @@ spec:
 
 . Install the Kabanero operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `kabanero-catalog` catalog and the `release-0.3` channel.  This operator should be installed to the `kabanero` namespace.
 
-. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can mdify the CR instance to include the URL of a custom collection and the GitHub information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
+. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of a custom collection and the GitHub information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
 
-== After Install
+== After installing
 
 The **Kabanero Landing Page** is installed as part of the install process and is a good next step to go explore information about your Kabanero instance.
 
-=== View the Landing Page
+=== View the landing page
 . In your OpenShift Console
 .. Click on the **Kabanero** tab on the left hand navigation.
 
 **Note**: If you do not see the **Kabanero** tab, proper certificates might not be installed in your cluster. You will have to accept the self-signed certificate before the **Kabanero** tab is displayed.
-To accept the self signed certificate you will have to **go to the landing page URL in your browser and accept the self-signed certificate**.
+To accept the self-signed certificate, **go to the landing page URL in your browser and accept the self-signed certificate**.
 
 There are two ways to get the landing page URL::
 
@@ -80,28 +84,28 @@ Using the `oc` CLI:::
 Using the OpenShift Console:::
 . Switch the project to **kabanero**
 . Under **Applications** click **Routes**
-. The landing page name is **kabanero-landing** which should be in the list of routes. Click the URL under **Hostname** to open the landing application
+. The landing page name is **kabanero-landing**, which should be in the list of routes; click the URL under **Hostname** to open the landing application
 
-== Optional sample - Appsody project with manual Tekton pipeline run
+== (Optional sample) Appsody project with manual Tekton pipeline run
 
-. Retrieve the installation scripts from our kabanero-foundation repository
-* Clone the repository to get the scripts git clone https://github.com/kabanero-io/kabanero-foundation.git
+. Retrieve the installation scripts from the kabanero-foundation repository
+* Clone the repository to get the scripts: `git clone https://github.com/kabanero-io/kabanero-foundation.git`
 
-. Navigate to the scripts directory: cd kabanero-foundation/scripts
+. Navigate to the scripts directory: `cd kabanero-foundation/scripts`
 
-. Ensure you are logged into your cluster with the oc login command
+. Ensure that you are logged in to your cluster with the `oc login` command
 
-. Create a Persistent Volume for the pipeline to use. A sample hostPath `pv.yaml` is provided.
+. Create a persistent volume (PV) for the pipeline to use; a sample hostPath `pv.yaml` is provided
 * `oc apply -f pv.yaml`
 
 . Create the pipeline and execute the example manual pipeline run
 * `APP_REPO=https://github.com/dacleyra/appsody-hello-world/ ./example-tekton-pipeline-run.sh`
 
-. By default, the application container image will be built and pushed to the Internal Registry, and then deployed as a Knative Service.
-* Access the application at: `http://appsody-hello-world.kabanero.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
+. Access the application at `http://appsody-hello-world.kabanero.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
+* By default, the application container image is built and pushed to the Internal Registry, and then deployed as a Knative Service
 
-. Optional - Access the pipeline logs
+. (Optional) Access the pipeline logs
 * `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
 
-. Optional - Make detailed pipeline changes by accessing the Tekton dashboard
+. (Optional) Make detailed pipeline changes by accessing the Tekton dashboard
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
