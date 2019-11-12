@@ -6,13 +6,13 @@
 
 Kabanero version 0.3 has been tested on OpenShift Container Platform (OCP) 4.2. There is intent to expand testing to additional distributions, including upstream Kubernetes, in the future.
 
-== Prerequisites
-
-* link:https://www.openshift.com/products/container-platform[OCP] V4.2.0+
-
 The Kabanero Open Project intends to build on open source distributions of Kubernetes; however, the current distribution of The Origin Community Distribution of Kubernetes (OKD) is lagging the commercial distributions.   Due to a focus on building leading-edge capabilities and leveraging new features across the integrated open frameworks, the Kabanero Open Project is temporarily building on version 4 capabilities of the commercial distributions.  When there is a comparable release of OKD, the Kabanero Open Project will return to it.
 
 As a result of this temporary change in focus, there is no upgrade process from an installation built on OKD version 3.11 to an installation built on OCP 4.2.
+
+== Prerequisites
+
+* link:https://www.openshift.com/products/container-platform[OCP] V4.2.0+
 
 == Installation
 
