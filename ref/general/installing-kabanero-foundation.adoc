@@ -22,7 +22,7 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Sev
 . Review the `install.sh` script for any optional components that can be enabled by setting the required environment variable, or by editing the value in the script directly.  Optional components are listed at the top of the script, below the section titled `Optional components`.
 
 . As a `cluster-admin`, run the script:
-* Ensure you are logged into your cluster with the https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli.html#basic-setup-and-login[`oc login` command]
+* Ensure you are logged into your cluster with the https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands[`oc login` command]
 * `./install.sh`
 * If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
 * `ENABLE_KAPPNAV=yes|no ./install.sh`
@@ -89,17 +89,8 @@ If the landing page is not responding:::
 ```
 # oc get pods -n kabanero
 NAME                                                        READY     STATUS    RESTARTS   AGE
-appsody-operator-79ccd57895-9lsmt                           1/1       Running   0          11m
-controller-manager-0                                        1/1       Running   4          29m
-kabanero-cli-855c64f6fc-j6s44                               1/1       Running   0          11m
+...
 kabanero-landing-6dc5c798d4-ncg52                           1/1       Running   0          11m
-kabanero-operator-68877b5d6b-6wqr4                          1/1       Running   1          29m
-knative-eventing-operator-67cdf5dc9f-fhzbt                  1/1       Running   0          29m
-knative-serving-operator-b64558bbc-k5sjl                    1/1       Running   0          29m
-openshift-pipelines-operator-66c4d787cf-7kjjk               1/1       Running   0          29m
-tekton-dashboard-55fd66fbff-2bzhl                           2/2       Running   0          27m
-webhooks-extension-65d44777-tsz4j                           1/1       Running   0          27m
-webhooks-extension-sink-4wq7k-deployment-6c9cd554f5-gf7rk   2/2       Running   0          26m
 ```
 
 == Optional sample - Appsody project with manual Tekton pipeline run
