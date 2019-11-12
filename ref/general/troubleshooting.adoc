@@ -12,9 +12,18 @@ Make sure that your issues are not related to the operating system, such as disk
 
 == Errors when using a Tekton webhook to trigger pipelines
 
-When using a Tekton webhook to trigger pipelines installed with Kabanero, the last task is the `monitor-result-task`, which may fail in some cases. 
-This might also cause the webhook pod to be in the "Error" state. The following failures of `monitor-result-task` in the TaskRun view can be disregarded 
+When using a Tekton webhook to trigger pipelines installed with Kabanero, the last task is the `monitor-result-task`, which may fail in some cases.
+This might also cause the webhook pod to be in the "Error" state. The following failures of `monitor-result-task` in the TaskRun view can be disregarded
 at this time; they do not impact the application deployment:
 
 * `error creating GitHub client: error parsing PR number: pulls`
 * `IOError: [Errno 2] No such file or directory: '/workspace/pull-request/pr.json'`
+
+
+== `docker push` fails with gateway timeout error
+
+When using OpenShift Container Platform on a cloud with Kubernetes service and an internal Docker registry, performing a `docker push` into the internal Docker
+registry might result in a gateway time-out error.  This happens in cases where the input-output operations per second (IOPS) setting for the backing storage
+of the registry's persistent volume (PV) is too low.
+
+To resolve this problem, change the IOPS setting of the PV's backing storage device.

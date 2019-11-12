@@ -16,7 +16,13 @@ The Kabanero CLI is a command-line interface used by the enterprise, solution, o
 . Extract the archive. The archive holds the `./kabanero` command, which is ready to be used.
 * Test the installation by running the `./kabanero help` command and viewing the help output.
 
+. Configure the CLI service. To do this, follow the steps outlined in the following documentation:
+** https://kabanero.io/docs/ref/general/kabanero-cr-config.html[Configuring a Kabanero CR Instance, window="_blank"]
+** https://kabanero.io/docs/ref/general/collection-install.html[Configuring Kabanero to use an Alternate Collection Repository, window="_blank"].
+
+
 . Optional - Add the path to the `kabanero` command to your `PATH` environment variable so that you can use the `kabanero` command without specifying the path each time.
+
 
 == Kabanero commands
 
@@ -29,11 +35,17 @@ Use the Kabanero CLI URL to log in. There are two ways you can get this URL:
 . View the CLI URL in the Kabanero landing page instance details.
 . Log in to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
 
-Run the `kabanero login` command to authenticate to Kabanero. `<GITHUB_PAT>` is your GitHub Personal Access Token. You can also use your GitHub password for the `<GITHUB_PAT>` argument.
+Run the `kabanero login` command to authenticate to Kabanero.
 
 ----
 kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PAT>
 ----
+
+* `<KABANERO_CLI_URL>` is your Kabanero CLI URL from above.
+* `<GITHUB_USER_ID>` is your GitHub user name.
+* `<GITHUB_PAT>` is your GitHub Personal Access Token.
+** Your PAT must have the **read:org** - Read org and team membership, read org projects OAuth Scope allowed. You can select this when creating your PAT in GitHub
+* You can also use your GitHub password for the `<GITHUB_PAT>` argument.
 
 **Kabanero login options**
 
@@ -137,6 +149,16 @@ Collection Name    Version    Status
 ----        ----    ----
 nodejs        0.2.5    inactive ==> active
 ----
+
+=== Show the active repository and collections for a Kabanero instance
+
+Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the acive repository and collections for a Kabanero instance.
+
+. From the Kabanero landing page extension in the OKD console.
+. Displaying the configured Kabanero CR with the OC CLI command
+
+  `oc get kabanero -n kabanero -o yaml`
+
 
 === Show the Kabanero version
 

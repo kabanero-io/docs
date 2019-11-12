@@ -17,7 +17,7 @@ A Kabanero custom resource (CR) instance can be configured to use an alternate c
 . Find the name of your Kabanero CR instance.  Use `oc get kabaneros -n kabanero` to obtain a list of all Kabanero CR instances in namespace `kabanero`.  The default name for the CR instance is `kabanero`.  Then, edit the speific CR instance using `oc edit kabanero <name> -n kabanero`, replacing `<name>` with the instance name.
 
 . Modify your Kabanero custom resource (CR) instance to target the new collections that were pushed to the remote Github repository, and the teams in Github that should administer the collection(s).  Specifically:
-* The `Spec.Collections.Repositories.url` attribute should be set to the URL of the collection repository.
+* The `Spec.Collections.Repositories.url` attribute should be set to the URL of the alternate collection repository.
 * The `Spec.Github.organization` attribute should be set to the organization hosting the collections in the remote Github repository.  In the example above, the organization name is `my_org`.
 * The `Spec.Github.teams` attribute should be set to a comma separated list of Github teams in the remote Github repository, whose members can administer the collection using the Kabanero CLI.
 * The `Spec.Github.apiurl` attribute should be set to the API URL for the remote Github repository being used.  For example, the API URL for `github.com` is `api.github.com`.
@@ -31,14 +31,16 @@ metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  collections: 
-    repositories: 
+  collections:
+    repositories:
     - name: custom
       url: https://github.example.com/my_org/collections/releases/download/v0.1/kabanero-index.yaml
       activateDefaultCollections: true
   github:
     organization: my_org
-    teams: collection-admins,admins
+    teams:
+      - collection-admins
+      - admins
     apiurl: api.github.com
 ```
 +
