@@ -122,9 +122,9 @@ nodejs-loopback       0.1.4
 nodejs                0.2.5
 ----
 
-=== Synchronize Collections
+=== Synchronize collections
 
-Run the kabanero sync command to synchronize the list of kabanero instance collections with the curated collection from github. This will activate/deactivate as well as update versions of the kabanero collections to reflect the state of the curated collection. See also kabanero deactivate. Modifications to the curated collection may be slow to replicate in git hub and therefore may not be reflected immediately in KABANERO LIST or SYNC display output
+Run the `kabanero sync` command to synchronize the list of Kabanero instance collections with the curated collection from GitHub. This will activate/deactivate as well as update versions of the Kabanero collections to reflect the state of the curated collection. See also <<kabanero deactivate>>. Modifications to the curated collection may be slow to replicate in GitHub and therefore may not be reflected immediately in KABANERO LIST or SYNC display output.
 
 ----
 kabanero sync
@@ -150,7 +150,7 @@ nodejs        0.2.5    inactive ==> active
 
 Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the acive collections repository for a Kabanero instance.
 
-. From the OpenShift console, view Administration->Custom Resource Definitions->Kabanero->Instances->Kabanero->YAML
+. From the OpenShift console, view Administration > Custom Resource Definitions > Kabanero > Instances > Kabanero > YAML
 . Displaying the configured Kabanero CR with the OC CLI command
 
   `oc get kabanero -n kabanero -o yaml`
