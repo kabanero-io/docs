@@ -181,7 +181,7 @@ kabanero deactivate collection-name
 
 Running the deactivate command removes the specified collection from the list of available application types, without deleting it from the Kabanero instance.
 
-This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero refresh` command. See <<Refresh collections>>.
+This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero sync` command. See <<Sync collections>>.
 
 Example result:
 
