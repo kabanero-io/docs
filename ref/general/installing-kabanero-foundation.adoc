@@ -83,15 +83,13 @@ Using the OpenShift Console:::
 . Under **Applications** click **Routes**
 . The landing page name is **kabanero-landing** which should be in the list of routes. Click the URL under **Hostname** to open the landing application
 
-If the landing page is not responding:::
-. It might take some time for the landing page and other pods to be created and started. You can check the status of the Kabanero pods with `oc get pods -n kabanero`. Wait until they all have a status of *Running*.
-+
-```
-# oc get pods -n kabanero
-NAME                                                        READY     STATUS    RESTARTS   AGE
+=== If the landing page is not responding
+It might take some time for the landing page and other pods to be created and started. You can check the status of the Kabanero pods with `oc get pods -n kabanero`. Wait until they all have a status of *Running*.
+----
+NAME                                  READY     STATUS    RESTARTS   AGE
 ...
-kabanero-landing-6dc5c798d4-ncg52                           1/1       Running   0          11m
-```
+kabanero-landing-6dc5c798d4-ncg52     1/1       Running   0          11m
+----
 
 == Optional sample - Appsody project with manual Tekton pipeline run
 
