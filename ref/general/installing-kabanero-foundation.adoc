@@ -22,7 +22,7 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 . Retrieve the https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[installation scripts from our kabanero-foundation repository, window="_blank"]
 * Clone the repository to get the scripts `git clone https://github.com/kabanero-io/kabanero-foundation.git`
-* ... or download the repository as a zip file https://github.com/kabanero-io/kabanero-foundation/archive/master.zip
+* ... or, download the repository as a zip file `https://github.com/kabanero-io/kabanero-foundation/archive/master.zip`
 
 . Navigate to the **scripts** directory: `cd kabanero-foundation/scripts`
 
@@ -63,8 +63,8 @@ Using the OKD Console:::
 . Under **Applications** click **Routes**
 . The landing page name is **kabanero-landing** which should be in the list of routes. Click the URL under **Hostname** to open the landing application
 
-If its not responding:::
-. It may take some time for the landing page and other pods to be created and started. You can check the status of the Kabanero pods with `oc get pods -n kabanero` and wait until they are all in *Running* status.
+If the landing page is not responding:::
+. It might take some time for the landing page and other pods to be created and started. You can check the status of the Kabanero pods with `oc get pods -n kabanero`. Wait until they all have a status of *Running*.
 +
 ```
 # oc get pods -n kabanero
