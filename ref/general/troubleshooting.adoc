@@ -10,6 +10,49 @@ Make sure that your issues are not related to the operating system, such as disk
 
 * See https://github.com/kabanero-io/kabanero-foundation#cluster-hardware-capacity[Kabanero resource requirements, window="_blank"]
 
+== Using MustGather scripts to collect environment data
+
+You can use the `mustgather` command to collect data about your environment. This information can be useful in troubleshooting and fixing problems.
+
+There are several MustGather scripts available in the `kabanero-foundation/scripts/mustgather` directory:
+
+* `appsody-mustgather.sh`
+* `che-mustgather.sh`
+* `istio-mustgather.sh`
+* `kabanero-mustgather.sh`
+* `kappnav-mustgather.sh`
+* `knative-mustgather.sh`
+* `mustgather-all.sh`
+* `tekton-mustgather.sh`
+
+=== Run a MustGather Script
+
+. In a terminal session, navigate to the location where you cloned the *kabanero-foundation* repository and go to the `kabanero-foundation/scripts/mustgather` directory.
+
+. Log in to your cluster.
++
+[source,bash]
+----
+oc login https://<your_cluster_hostname> -u <username> -p <password>
+----
+
+. Run a `mustgather` script.
++
+For example:
++
+[source,bash]
+----
+./mustgather-all.sh
+----
+
+**Tip**: You can set the environment variable `LOGS_DIR` to specify the data output location:
+[source,bash]
+----
+LOGS_DIR=<my_directory> ./mustgather-all.sh
+----
+
+By default, MustGather data is stored in the `kabanero-debug` directory. The command also stores compressed information in the `kabanero-debug-<timestamp>.tar.gz` file.
+
 == Errors when using a Tekton webhook to trigger pipelines
 
 When using a Tekton webhook to trigger pipelines installed with Kabanero, the last task is the `monitor-result-task`, which may fail in some cases.
