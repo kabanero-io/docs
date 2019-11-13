@@ -1,14 +1,29 @@
 :page-layout: doc
 :page-doc-category: Configuration
-:page-title: Deploying applications to an alternate namespace
+:page-title: Deploying applications to an alternative namespace
 :sectanchors:
-= Deploying applications to an alternate namespace
+= Deploying applications to an alternative namespace
 
-Applications are deployed to the namespace where the Kabanero CR is deployed.  The default configuration uses the `kabanero` namespace.  Kabanero can be configured to deploy applications to a different namespace.
+By default, applications are deployed to the same namespace as the Kabanero custom resource (CR) instance, which is the `kabanero` namespace.
+However, you can configure Kabanero to deploy applications to a different namespace by following these steps:
 
-. Obtain a copy of your current Kabanero CR instance. Use `oc get kabaneros -n kabanero` to obtain a list of all Kabanero CR instances in namespace `kabanero`. The default name for the CR instance is also `kabanero`. Then, obtain the specific CR instance using `oc get kabanero <name> -o yaml > kabanero.yaml`, replacing `<name>` with the instance name, to save a copy to the current directory.
+. Obtain a copy of your current Kabanero CR instance configuration.
+* To obtain a list of all Kabanero CR instances in the `kabanero` namespace, run the following command:
++
+----
+oc get kabaneros -n kabanero
+----
++
+* To obtain the configuration for a specific CR instance, run the following command, substituting `<name>` for the instance you are targeting:
++
+----
+oc get kabanero <name> -o yaml > kabanero.yaml
+----
++
+Note that the default name for the CR instance is also `kabanero`.
 
-. Edit `kabanero.yaml` and specify the namespaces where you intend to deploy applications, using the `targetNamespaces` attribute.  Multiple namespaces are specified as a list.  For example, a Kabanero CR instance which supports application deployment to the `production` and `test` namespaces might look like this:
+. Edit `kabanero.yaml` and specify the namespaces where you intend to deploy applications, by updating the `targetNamespaces` attribute.  Specify multiple namespaces as a list.
+The following section of a `kabanero.yaml` file shows a Kabanero CR instance that supports application deployment to the `production` and `test` namespaces:
 +
 ----
 apiVersion: kabanero.io/v1alpha1
@@ -22,11 +37,17 @@ spec:
   - test
 ----
 +
-Note that collection repository and Github configuration were removed from the example above.  For a full list of supported attributes of the Kabanero CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
 
-. Apply your changes to the Kabanero CR instance. For example, in the Kabanero namespace use `oc apply -f kabanero.yaml -n kabanero`.
+For a full list of supported attributes in a `kabanero.yaml` configuration file, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].
 
-. Modify your Appsody application's `app-deploy.yaml` to use one of the namespaces you configured in the `targetNamespaces` attribute of the Kabanero CR instance.  An example `app-deploy.yaml` that deploys the `appsody-hello-world` application to the `test` namespace might look like this:
+. Apply your changes to the Kabanero CR instance. For example, to apply changes to the Kabanero CR instance in the `kabanero` namespace, run the following command:
++
+----
+oc apply -f kabanero.yaml -n kabanero
+----
++
+. Modify your Appsody application `app-deploy.yaml` file to use one of the namespaces you configured in the `targetNamespaces` attribute of the Kabanero CR instance.
+Here is an example `app-deploy.yaml` file that deploys the `appsody-hello-world` application to the `test` namespace:
 +
 ----
 apiVersion: appsody.dev/v1beta1
@@ -39,5 +60,5 @@ spec:
   stack: java-microprofile
   createKnativeService: true
 ----
-
-. Deploy the application using a manual pipeline run, or using link:tekton-webhooks.html[a webhook].
++
+. Deploy the application by running a manual pipeline or by using link:tekton-webhooks.html[a webhook].
