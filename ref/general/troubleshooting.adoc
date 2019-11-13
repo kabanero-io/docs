@@ -12,42 +12,46 @@ Make sure that your issues are not related to the operating system, such as disk
 
 == Using MustGather scripts to collect environment data
 
-You can use the `mustgather` command to collect data about your environment.  This information can be useful in troubleshooting and fixing problems.
+You can use the `mustgather` command to collect data about your environment. This information can be useful in troubleshooting and fixing problems.
 
 There are several MustGather scripts available:
-  * `appsody-mustgather.sh`
-  * `che-mustgather.sh`
-  * `istio-mustgather.sh`
-  * `kabanero-mustgather.sh`
-  * `k`appnav-mustgather.sh`
-  * `knative-mustgather.sh`
-  * `mustgather-all.sh`
-  * `tekton-mustgather.sh`
 
-To run a MustGather script:
+* `appsody-mustgather.sh`
+* `che-mustgather.sh`
+* `istio-mustgather.sh`
+* `kabanero-mustgather.sh`
+* `kappnav-mustgather.sh`
+* `knative-mustgather.sh`
+* `mustgather-all.sh`
+* `tekton-mustgather.sh`
 
-1. In a terminal session, navigate to the location where you cloned the kabanero-foundation repository.
+=== Run a MustGather Script
 
-2. Log in to your cluster.
+. In a terminal session, navigate to the location where you cloned the *kabanero-foundation* repository.
 
-  ```bash
-  oc login https://<your_cluster_hostname> -u <username> -p <password>
-  ```
+. Log in to your cluster.
++
+[source,bash]
+----
+oc login https://<your_cluster_hostname> -u <username> -p <password>
+----
 
-3. Run a `mustgather` command.
-
+. Run a `mustgather` command.
++
 For example:
-  ```bash
-  mustgather-all.sh
-  ```
++
+[source,bash]
+----
+mustgather-all.sh
+----
 
-  **Tip**: You can set the environment variable `LOGS_DIR` to specify the data output location:
-  ```bash
-  LOGS_DIR=<my_directory> ./mustgather-all.sh
-  ```
-  {:tip}
+**Tip**: You can set the environment variable `LOGS_DIR` to specify the data output location:
+[source,bash]
+----
+LOGS_DIR=<my_directory> ./mustgather-all.sh
+----
 
-  By default, MustGather data is stored in the `kabanero-debug` directory. The command also stores compressed information in the `kabaner-debug-<timestamp>.tar.gz` file.
+By default, MustGather data is stored in the `kabanero-debug` directory. The command also stores compressed information in the `kabanero-debug-<timestamp>.tar.gz` file.
 
 == Errors when using a Tekton webhook to trigger pipelines
 
