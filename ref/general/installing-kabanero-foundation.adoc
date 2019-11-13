@@ -26,9 +26,9 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Sev
 . Review the `install.sh` script for any optional components that can be enabled by setting the required environment variable, or by editing the value in the script directly.  Optional components are listed at the top of the script, below the section titled `Optional components`.
 
 . As a `cluster-admin`, run the script:
-* `./install.sh`
-* If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
-* `ENABLE_KAPPNAV=yes|no ./install.sh`
+.. Ensure you are logged into your cluster with the https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands[`oc login` command]
+.. If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
+.. `ENABLE_KAPPNAV=yes|no ./install.sh`
 
 . As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of a custom collection and the GitHub information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
 
@@ -86,7 +86,16 @@ Using the OpenShift Console:::
 . Under **Applications** click **Routes**
 . The landing page name is **kabanero-landing**, which should be in the list of routes; click the URL under **Hostname** to open the landing application
 
+=== If the landing page is not responding
+It might take some time for the landing page and other pods to be created and started. You can check the status of the Kabanero pods with `oc get pods -n kabanero`. Wait until they all have a status of *Running*.
+----
+NAME                                  READY     STATUS    RESTARTS   AGE
+...
+kabanero-landing-6dc5c798d4-ncg52     1/1       Running   0          11m
+----
+
 == (Optional sample) Appsody project with manual Tekton pipeline run
+=======
 
 . Retrieve the installation scripts from the kabanero-foundation repository
 * Clone the repository to get the scripts: `git clone https://github.com/kabanero-io/kabanero-foundation.git`
