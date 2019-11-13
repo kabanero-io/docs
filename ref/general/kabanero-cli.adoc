@@ -126,12 +126,12 @@ nodejs-loopback       0.1.4
 nodejs                0.2.5
 ----
 
-=== Refresh Collections
+=== Synchronize collections
 
-Run the `kabanero refresh` command to refresh the list of collections from master, making these collections current with the activated collections across all namespaces in the Kabanero instance. This command can also be used to restore deactivated collections. See <<Deactivate Kabanero>>.
+Run the `kabanero sync` command to synchronize the list of Kabanero instance collections with the curated collection from GitHub. This will activate/deactivate as well as update versions of the Kabanero collections to reflect the state of the curated collection. See also <<kabanero deactivate>>. Modifications to the curated collection may be slow to replicate in GitHub and therefore may not be reflected immediately in KABANERO LIST or SYNC display output.
 
 ----
-kabanero refresh
+kabanero sync
 ----
 
 Example results:
@@ -150,11 +150,11 @@ Collection Name    Version    Status
 nodejs        0.2.5    inactive ==> active
 ----
 
-=== Show the active repository and collections for a Kabanero instance
+=== Show the active repository collection for a Kabanero instance
 
-Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the acive repository and collections for a Kabanero instance.
+Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the acive collections repository for a Kabanero instance.
 
-. From the Kabanero landing page extension in the OKD console.
+. From the OpenShift console, view Administration > Custom Resource Definitions > Kabanero > Instances > Kabanero > YAML
 . Displaying the configured Kabanero CR with the OC CLI command
 
   `oc get kabanero -n kabanero -o yaml`
@@ -172,7 +172,7 @@ Example result:
 
 ----
 kabanero cli version: 0.1.0
-kabanero command line service version: 0.2.0
+kabanero command line service version: 0.3.0
 ----
 
 === Deactivate Kabanero
@@ -185,7 +185,7 @@ kabanero deactivate collection-name
 
 Running the deactivate command removes the specified collection from the list of available application types, without deleting it from the Kabanero instance.
 
-This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero refresh` command. See <<Refresh collections>>.
+This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero sync` command. See <<Synchronize collections>>.
 
 Example result:
 
