@@ -4,7 +4,7 @@
 :linkattrs:
 :sectanchors:
 
-= Working with Collections in VS Code or Eclipse
+= Working with Kabanero Collections in VS Code or Eclipse
 
 == Prerequisites
 * https://www.docker.com/get-started[Docker]
