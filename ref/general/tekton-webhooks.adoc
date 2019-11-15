@@ -56,7 +56,7 @@ Select the Pipeline in your target Namespace. PipelineRuns (and their accompanyi
 
 [#serviceaccount]
 Service Account::
-This field specifies the service account that is used by the PipelineRun. You can either specify `kabanero-pipelines-sample-sa` or create your own service account. The `kabanero-pipelines-sample-sa` service account is a sample that is configured to work with the default pipelines. Top create your own account, review the configuration of `kabanero-pipelines-sample-sa` and base your account on those settings.
+This field specifies the service account that is used by the PipelineRun. You can either specify `kabanero-pipelines-sample-sa` or create your own service account. The `kabanero-pipelines-sample-sa` service account is a sample that is configured to work with the default pipelines. To create your own account, review the configuration of `kabanero-pipelines-sample-sa` and base your account on those settings.
 
 Docker registry::
 Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace`.
