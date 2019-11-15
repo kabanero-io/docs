@@ -29,7 +29,7 @@ If you are working with a private or enterprise GitHub repository, you need to s
 . For the `Namespace`, select `kabanero` from the drop-down list.
 . For `Access To:`, select `Git Server` from the drop-down list.
 . Enter your GitHub username and the personal access token you generated in the previous section.
-. Select the service account that is used by the pipeline you want to trigger. You can either specify `pipelines` or your own custom service account. For more information, see <<#serviceaccount, Service account>>.
+. Select the service account that is used by the pipeline you want to trigger. For more information, see <<#serviceaccount, Service account>>.
 
 If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub username and password. For `Access To:`, select `Docker Registry` from the drop-down list.
 
