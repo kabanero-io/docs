@@ -1,43 +1,47 @@
 :page-layout: doc
 :page-doc-category: Reference
-:page-title: Using Kabanero Collections in Codewind
+:page-title: Working with Collections in VS Code or Eclipse
 :linkattrs:
 :sectanchors:
 
-= Using Kabanero Collections in Codewind
+= Working with Kabanero Collections in VS Code or Eclipse
 
 == Prerequisites
-* https://eclipse.com/codewind[Codewind for VS Code or Eclipse v0.3.0 or later]
 * https://www.docker.com/get-started[Docker]
-* https://appsody.dev/docs/getting-started/installation[Appsody]
-* https://github.com/eclipse/codewind-appsody-extension[Appsody Extension for Codewind v0.3.0 or later]
-** Follow the instructions `Installing the Appsody Extension on Codewind` and `Optional: Using the Same Appsody Configuration Between Local CLI and Codewind` in the README.md file
+* https://eclipse.com/codewind[Codewind for VS Code or Eclipse v0.3.0 or later]
+* (Optional) If you have an enterprise-specific Kabanero Collection Hub, you need the URL to your index file.
 
 
-== Replace the default templates with the Kabanero Collections templates
-Now that your local Appsody CLI points to the Appsody Extension, you can modify the repo's with the standard repo commands. 
+== Configuring your environment to use a Kabanero Collection Hub
 
-. First you will need to add the https://github.com/kabanero-io/collections[Kabanero Collections Repository]:
-+
-`appsody repo add kabanero https://github.com/kabanero-io/collections/releases/download/v0.1.0/kabanero-index.yaml`
+To configure your development environment to use a Kabanero Collection, you must enable the repository as a source for templates.
+As a developer, your enterprise architect might provide you with the URL of a Kabanero Collection Hub that your organisation has
+defined for developers to use. In this case, you can configure Codewind to point to the templates in this Collection Hub.
+If you haven’t been given a URL for your organisation, you should clone the public Kabanero Collection Hub locally and configure
+Codewind to use the templates from that repository instead.
 
-. Set the Kabanero Collections repo to default so you can remove the old default templates:
-+
-`appsody repo set-default kabanero`
+To enable a Kabanero Collection Hub repository, open the **Manage Template Sources** view in your IDE by right-clicking
+on **Projects(local)**. When the view opens, click the **Add New** button and enter the URL for the Kabanero Collection
+Hub repository in the pop-up field. For example, the following URL points to the public Kabanero Collection Hub repository
+for version 0.3.0:
 
-. Remove the default templates:
-+
 ----
-appsody repo remove appsodyhub
-appsody repo remove experimental
+https://github.com/kabanero-io/collections/releases/download/0.3.0/kabanero-index.json
 ----
+
+Use your local Kabanero Collection Hub repository instead.
+
+If any template sources other than Kabanero are enabled, click on the switches to deselect them; these Collections are not
+supported by the Kabanero application cluster.
 
 == Create a project from a Kabanero Collection
-Once the Kabanero templates have been added, you can create a project like you normally would in Codewind.
 
-* VS Code 
-** Open  up the Command Palette and search for: "Codewind: Create New Project". 
+When you've added the Kabanero templates, you're ready to create a new project.
 
-* Eclipse 
-** Create a new project from the Codewind Explorer window
-*** Projects that start with `Appsody` are from the Kabanero collection.
+* VS Code
+** Open up the Command Palette and search for: "Codewind: Create New Project".
+
+* Eclipse
+** Create a new project from the Codewind Explorer window.
+
+Choose from the available Kabanero templates to create your first microservice application!
