@@ -56,7 +56,7 @@ Select the Pipeline in your target Namespace. PipelineRuns (and their accompanyi
 ,
 [#serviceaccount]
 Service Account::
-This field specifies the service account that is used by the PipelineRun. To use the service account that is provided by OpenShift to work with the default Kabanero pipelines, specify `pipelines`. Alternatively, you can create your custom service account that is configured for whatever pipeline that you are running. For an example of a custom service account, see the sample-pipeline-sa.yaml file in the link:https://github.com/kabanero-io/kabanero-pipelines/tree/master/pipelines/common[Kabanero pipelines repo].
+This field specifies the service account that is used by the PipelineRun. To use the service account that is provided by OpenShift to work with the default Kabanero pipelines, specify `pipelines`. Alternatively, you can create a custom service account that is configured for whatever pipeline that you are running. For an example of a custom service account, see the sample-pipeline-sa.yaml file in the link:https://github.com/kabanero-io/kabanero-pipelines/tree/master/pipelines/common[Kabanero pipelines repo].
 
 Docker registry::
 Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace`.
