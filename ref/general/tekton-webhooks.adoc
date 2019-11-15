@@ -29,7 +29,7 @@ If you are working with a private or enterprise GitHub repository, you need to s
 . For the `Namespace`, select `kabanero` from the drop-down list.
 . For `Access To:`, select `Git Server` from the drop-down list.
 . Enter your GitHub username and the personal access token you generated in the previous section.
-. Select the service account that is used by the pipeline you want to trigger. In this case, use `kabanero-operator`.
+. Select the service account that is used by the pipeline you want to trigger. For more information, see <<#serviceaccount, Service account>>.
 
 If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub username and password. For `Access To:`, select `Docker Registry` from the drop-down list.
 
@@ -53,9 +53,10 @@ Select the Kubernetes namespace in which you want to run your pipeline. In this 
 
 Pipeline::
 Select the Pipeline in your target Namespace. PipelineRuns (and their accompanying PipelineResources) are created in this namespace. For more information, see https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Kabanero Pipelines, window="_blank"].
-
+,
+[#serviceaccount]
 Service Account::
-This field specifies the service account that is used by the PipelineRun. In this case, choose `appsody-sa`.
+This field specifies the service account that is used by the PipelineRun. OpenShift provides a `pipeline` service account, which has permissions to build and push an image. This service account can be used with simple pipelines. Alternatively, you can create a custom service account that is configured for whatever pipeline that you are running. For an example of a custom service account, see the `sample-pipeline-sa.yaml` file in the link:https://github.com/kabanero-io/kabanero-pipelines/tree/master/pipelines/common[Kabanero pipelines repo].
 
 Docker registry::
 Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace`.
