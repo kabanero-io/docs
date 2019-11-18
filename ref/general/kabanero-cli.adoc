@@ -85,7 +85,7 @@ Logged in to Kabanero instance: <KABANERO_CLI_URL>
 Run the `kabanero onboard` command to onboard a developer to the Kabanero environment.
 
 ----
-kabanero onboard <GITHUB_USER_ID> <REPO_NAME>
+kabanero onboard <GITHUB_USER_ID> 
 ----
 
 This command is under development.
@@ -93,9 +93,7 @@ This command is under development.
 Example result:
 
 ----
-{
-	"message": "Command development in progress, please go to the tekton dashboard in your browser and manually configure the webhook For gituser: <GITHUB_USER_ID>"
-}
+Please go to the tekton dashboard at <tekton-url> in your browser and manually configure the webhook for gituser: <GITHUB_USER_ID>
 ----
 
 === List Kabanero Collections
@@ -109,21 +107,21 @@ kabanero list
 Example result:
 
 ----
-Collection Name       Version   Status
----                   ---       ---
-java-microprofile     0.2.11    active
-java-spring-boot2     0.3.9     active
-nodejs                0.2.5     active
-nodejs-express        0.2.5     active
-nodejs-loopback       0.1.4     active
+Kabanero Instance Collections	Version	Status
+-----------------------------	-------	------
+java-microprofile		0.2.18	active
+java-spring-boot2		0.3.15	active
+nodejs				0.2.6	active
+nodejs-express			0.2.8	active
+nodejs-loopback			0.1.6	active
 
-Curated Collections   Version
----                   ---
-java-microprofile     0.2.11
-java-spring-boot2     0.3.9
-nodejs-express        0.2.5
-nodejs-loopback       0.1.4
-nodejs                0.2.5
+GitHub Curated Collections	Version
+--------------------------	-------
+java-microprofile		0.2.18
+java-spring-boot2		0.3.15
+nodejs				0.2.6
+nodejs-express			0.2.8
+nodejs-loopback			0.1.6
 ----
 
 === Synchronize collections
@@ -145,9 +143,9 @@ Curated collections and active collections are now fully synchronized.
 or
 
 ----
-Collection Name    Version    Status
-----        ----    ----
-nodejs        0.2.5    inactive ==> active
+Kabanero Instance Collections	Version	Status
+-----------------------------	-------	------
+nodejs				0.2.6	inactive ==> active
 ----
 
 === Show the active repository collection for a Kabanero instance
@@ -172,7 +170,7 @@ Example result:
 
 ----
 kabanero cli version: 0.1.0
-kabanero command line service version: 0.3.0
+kabanero command line service image: kabanero/kabanero-command-line-services:0.3.0
 ----
 
 === Deactivate Kabanero
@@ -196,21 +194,21 @@ Collection name: nodejs deactivated
 Running the `kabanero list` command now shows the deactivated collection as inactive.
 
 ----
-Collection Name       Version   Status
----                   ---       ---
-nodejs                0.2.5     inactive
-java-microprofile     0.2.11    active
-java-spring-boot2     0.3.9     active
-nodejs-express        0.2.5     active
-nodejs-loopback       0.1.4     active
+Kabanero Instance Collections	Version	Status
+-----------------------------	-------	------
+java-microprofile		0.2.18	active
+java-spring-boot2		0.3.15	active
+nodejs				0.2.6	inactive
+nodejs-express			0.2.8	active
+nodejs-loopback			0.1.6	active
 
-Curated Collections   Version
----                   ---
-java-microprofile     0.2.11
-java-spring-boot2     0.3.9
-nodejs-express        0.2.5
-nodejs-loopback       0.1.4
-nodejs                0.2.5
+GitHub Curated Collections	Version
+--------------------------	-------
+java-microprofile		0.2.18
+java-spring-boot2		0.3.15
+nodejs				0.2.6
+nodejs-express			0.2.8
+nodejs-loopback			0.1.6
 ----
 
 === Log out of Kabanero
