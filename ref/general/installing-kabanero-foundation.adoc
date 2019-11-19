@@ -20,8 +20,8 @@ Today, Kabanero has been tested on the Origin Community Distribution of Kubernet
 
 . In a terminal session, create and `cd` to a temporary working directory of your choice.
 
-. Retrieve the https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[installation scripts from our kabanero-foundation repository, window="_blank"]
-* Clone the repository to get the scripts `git clone https://github.com/kabanero-io/kabanero-foundation.git`
+. Retrieve the https://github.com/kabanero-io/kabanero-foundation/tree/0.2.0/scripts[0.2.0 installation scripts from our kabanero-foundation repository, window="_blank"]
+* Clone the repository `git clone https://github.com/kabanero-io/kabanero-foundation.git`, navigate into the repository, and `git checkout 0.2.0` to get the 0.2.0 scripts.
 
 . Navigate to the **scripts** directory: `cd kabanero-foundation/scripts`
 
