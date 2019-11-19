@@ -1,5 +1,6 @@
 :page-layout: doc
 :page-doc-category: Configuration
+:page-doc-number: 3
 :page-title: Connecting Kabanero to GitHub with Tekton Webhooks
 :sectanchors:
 = Connecting Kabanero to GitHub with Tekton Webhooks

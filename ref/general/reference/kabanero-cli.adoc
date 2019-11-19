@@ -1,0 +1,245 @@
+:page-layout: doc
+:page-type: doc
+:page-doc-category: Reference
+:page-doc-number: 3
+:linkattrs:
+:sectanchors:
+= Kabanero CLI
+
+The Kabanero CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the Kabanero collections. Developers use these collections to create governed applications for their business.
+
+== Installing the Kabanero CLI
+
+. Download the archive corresponding to the platform you are running on.
+* https://github.com/kabanero-io/kabanero-command-line/releases/latest[Latest CLI release, window="_blank"]
+* https://github.com/kabanero-io/kabanero-command-line/releases[All CLI releases, window="_blank"]
+
+. Extract the archive. The archive holds the `./kabanero` command, which is ready to be used.
+* Test the installation by running the `./kabanero help` command and viewing the help output.
+
+. Configure the CLI service. To do this, follow the steps outlined in the following documentation:
+** https://kabanero.io/docs/ref/general/kabanero-cr-config.html[Configuring a Kabanero CR Instance, window="_blank"]
+** https://kabanero.io/docs/ref/general/collection-install.html[Configuring Kabanero to use an Alternate Collection Repository, window="_blank"].
+
+
+. Optional - Add the path to the `kabanero` command to your `PATH` environment variable so that you can use the `kabanero` command without specifying the path each time.
+
+
+== Kabanero commands
+
+Use the following commands to monitor and administer a Kabanero environment.
+
+=== Login
+
+Use the Kabanero CLI URL to log in. There are two ways you can get this URL:
+
+. View the CLI URL in the Kabanero landing page instance details.
+. Log in to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
+
+Run the `kabanero login` command to authenticate to Kabanero.
+
+----
+kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PAT>
+----
+
+* `<KABANERO_CLI_URL>` is your Kabanero CLI URL from above.
+* `<GITHUB_USER_ID>` is your GitHub user name.
+* `<GITHUB_PAT>` is your GitHub Personal Access Token.
+** Your PAT must have the **read:org** - Read org and team membership, read org projects OAuth Scope allowed. You can select this when creating your PAT in GitHub
+* You can also use your GitHub password for the `<GITHUB_PAT>` argument.
+
+**Kabanero login options**
+
+* Pass in a GitHub password or personal access token
+** `-p <string>`
+** `--password <string>`
+* Pass in GitHub user name
+** `-u <string>`
+** `--username <string>`
+
+Log in to a Kabanero instance by using GitHub credentials and store a temporary access token for subsequent command-line calls.
+The temporary access token is stored in a `your-home-directory/.kabanero/config.yaml` file.
+Use your GitHub user ID and either a password or Personal Access Token (PAT) to log in.
+
+Examples:
+
+* Log in with A GitHub user ID and password
++
+----
+kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PASSWORD>
+----
+
+* Log in with previously used url GitHub user ID and PAT
++
+----
+kabanero login -u <GITHUB_USER_ID> -p <GITHUB_PAT>
+----
+
+Example result:
+
+----
+Logged in to Kabanero instance: <KABANERO_CLI_URL>
+----
+
+=== Onboard a developer
+
+Run the `kabanero onboard` command to onboard a developer to the Kabanero environment.
+
+----
+kabanero onboard <GITHUB_USER_ID> <REPO_NAME>
+----
+
+This command is under development.
+
+Example result:
+
+----
+{
+	"message": "Command development in progress, please go to the tekton dashboard in your browser and manually configure the webhook For gituser: <GITHUB_USER_ID>"
+}
+----
+
+=== List Kabanero Collections
+
+Run the `kabanero list` command to list all the collections in a kabanero instance, along with their status.
+
+----
+kabanero list
+----
+
+Example result:
+
+----
+Collection Name       Version   Status
+---                   ---       ---
+java-microprofile     0.2.11    active
+java-spring-boot2     0.3.9     active
+nodejs                0.2.5     active
+nodejs-express        0.2.5     active
+nodejs-loopback       0.1.4     active
+
+Curated Collections   Version
+---                   ---
+java-microprofile     0.2.11
+java-spring-boot2     0.3.9
+nodejs-express        0.2.5
+nodejs-loopback       0.1.4
+nodejs                0.2.5
+----
+
+=== Synchronize collections
+
+Run the `kabanero sync` command to synchronize the list of Kabanero instance collections with the curated collection from GitHub. This will activate/deactivate as well as update versions of the Kabanero collections to reflect the state of the curated collection. See also <<kabanero deactivate>>. Modifications to the curated collection may be slow to replicate in GitHub and therefore may not be reflected immediately in KABANERO LIST or SYNC display output.
+
+----
+kabanero sync
+----
+
+Example results:
+
+----
+active collection is already synchronized with master
+----
+
+Curated collections and active collections are now fully synchronized.
+
+or
+
+----
+Collection Name    Version    Status
+----        ----    ----
+nodejs        0.2.5    inactive ==> active
+----
+
+=== Show the active repository collection for a Kabanero instance
+
+Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the acive collections repository for a Kabanero instance.
+
+. From the OpenShift console, view Administration > Custom Resource Definitions > Kabanero > Instances > Kabanero > YAML
+. Displaying the configured Kabanero CR with the OC CLI command
+
+  `oc get kabanero -n kabanero -o yaml`
+
+
+=== Show the Kabanero version
+
+Run the `kabanero version` command to display the version of kabanero that is running.
+
+----
+kabanero version
+----
+
+Example result:
+
+----
+kabanero cli version: 0.1.0
+kabanero command line service version: 0.3.0
+----
+
+=== Deactivate Kabanero
+
+Run the `kabanero deactivate` command to prevent a collection from being shown to the development team, without deleting it.
+
+----
+kabanero deactivate collection-name
+----
+
+Running the deactivate command removes the specified collection from the list of available application types, without deleting it from the Kabanero instance.
+
+This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero sync` command. See <<Synchronize collections>>.
+
+Example result:
+
+----
+Collection name: nodejs deactivated
+----
+
+Running the `kabanero list` command now shows the deactivated collection as inactive.
+
+----
+Collection Name       Version   Status
+---                   ---       ---
+nodejs                0.2.5     inactive
+java-microprofile     0.2.11    active
+java-spring-boot2     0.3.9     active
+nodejs-express        0.2.5     active
+nodejs-loopback       0.1.4     active
+
+Curated Collections   Version
+---                   ---
+java-microprofile     0.2.11
+java-spring-boot2     0.3.9
+nodejs-express        0.2.5
+nodejs-loopback       0.1.4
+nodejs                0.2.5
+----
+
+=== Log out of Kabanero
+
+Run the `kabanero logout` command to disconnect from the Kabanero instance.
+
+----
+kabanero logout
+----
+
+Example result:
+
+----
+Logged out of kab instance: <KABANERO_CLI_URL>
+----
+
+== Global Options
+
+These options can be enabled on any Kabanero command.
+
+* Help for a Kabanero command. For example, `kabanero refresh -h`
+** `-h`
+** `--help`
+* Turn on debug output and logging to a file in `$HOME/.kabanero/logs`
+** `-v`
+** `--verbose`
+
+== Related links
+
+- link:https://github.com/kabanero-io/kabanero-command-line#kabanero-cli[Kabanero CLI repository]
+- link:https://github.com/kabanero-io/kabanero-security#support-for-authentication-and-rbac-for-kabanero-collection-maintenance[Support for authentication and RBAC for Kabanero Collection maintenance]

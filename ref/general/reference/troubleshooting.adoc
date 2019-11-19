@@ -1,5 +1,6 @@
 :page-layout: doc
 :page-doc-category: Reference
+:page-doc-number: 5
 :linkattrs:
 :sectanchors:
 = Troubleshooting

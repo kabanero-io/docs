@@ -1,5 +1,6 @@
 :page-layout: doc
 :page-doc-category: Reference
+:page-doc-number: 1
 :page-title: Appsody Hello World on Codewind
 :linkattrs:
 :sectanchors:

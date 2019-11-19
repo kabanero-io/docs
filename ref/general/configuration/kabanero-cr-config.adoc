@@ -1,5 +1,6 @@
 :page-layout: doc
 :page-doc-category: Configuration
+:page-doc-number: 1
 :page-title: Configuring a Kabanero CR Instance
 :sectanchors:
 = Configuring a Kabanero CR instance

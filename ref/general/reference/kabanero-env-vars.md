@@ -2,6 +2,7 @@
 layout: doc
 doc-category: Reference
 title: Environment variables
+doc-number: 4
 ---
 # Environment variables
 

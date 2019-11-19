@@ -1,5 +1,6 @@
 :page-layout: doc
 :page-doc-category: Installation
+:page-doc-number: 2
 :page-title: Installing Codewind in VS Code or Eclipse
 :linkattrs:
 :sectanchors:

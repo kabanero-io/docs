@@ -1,5 +1,6 @@
 :page-layout: doc
 :page-doc-category: Installation
+:page-doc-number: 1
 :page-title: Installing Kabanero Foundation
 :linkattrs:
 :sectanchors:

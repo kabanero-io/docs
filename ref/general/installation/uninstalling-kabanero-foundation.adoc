@@ -1,5 +1,6 @@
 :page-layout: doc
 :page-doc-category: Installation
+:page-doc-number: 3
 :page-title: Uninstalling Kabanero Foundation
 :linkattrs:
 :sectanchors:

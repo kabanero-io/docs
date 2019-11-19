@@ -1,5 +1,6 @@
 :page-layout: doc
 :page-doc-category: Reference
+:page-doc-number: 2
 :page-title: Working with Collections in VS Code or Eclipse
 :linkattrs:
 :sectanchors:
