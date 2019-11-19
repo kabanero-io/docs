@@ -5,7 +5,7 @@ Here is an example flow of the Kabanero release using `0.2.0` as the next releas
 
 **Assumption**: When a new release of Kabanero as a whole is ready the next version number will always be a **Major** or **Minor** increment (never a **Patch** increment).
 
-1. When `0.2.0` release date comes maintainers cut the `0.2.0` release on the repo. End of release process.
+1. When `0.2.0` release date comes maintainers cut the `0.2.0` release on the repo and that's the end of the release process.
 
 ## Docs repo needs a hot fix for `0.2.0` example
 
