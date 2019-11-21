@@ -13,7 +13,7 @@ In a public GitHub repository or a repository in GitHub Enterprise within your o
 . Click the *New Team* button.
 . On the *Create New Team* page:
 * Enter the name of the team.
-* Optionally, provide a description
+* Optionally, provide a description.
 * Accept the defaults for the remaining choices.
 * Click the *Create team* button.
 
