@@ -8,10 +8,10 @@
 You can modify your Kabanero CR instance to provide authorization to the teams in GitHub that will administer the collection(s).
 If you do not already have a team defined, see link:github-createteam.html[Creating teams in GitHub].
 
-.To provide authorization:
-* The `Spec.Github.organization` attribute should be set to the organization hosting the collections in the remote GitHub repository.  In the example above, the organization name is `my_org`.
-* The `Spec.Github.teams` attribute should be set to a yaml list of GitHub teams in the remote GitHub repository, whose members can administer the collection using the Kabanero CLI.
-* The `Spec.Github.apiurl` attribute should be set to the API URL for the remote GitHub repository being used.  For example, the API URL for `github.com` is `api.github.com`.
+* To provide authorization:
+. The `Spec.Github.organization` attribute should be set to the organization hosting the collections in the remote GitHub repository.  In the example above, the organization name is `my_org`.
+. The `Spec.Github.teams` attribute should be set to a yaml list of GitHub teams in the remote GitHub repository, whose members can administer the collection using the Kabanero CLI.
+. The `Spec.Github.apiurl` attribute should be set to the API URL for the remote GitHub repository being used.  For example, the API URL for `github.com` is `api.github.com`.
 +
 A modified Kabanero CR instance for a collection repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.3.0` of collections might look like this:
 +
