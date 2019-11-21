@@ -1,0 +1,21 @@
+:page-layout: doc
+:page-doc-category: Configuration
+:page-title: Creating teams in GitHub
+:linkattrs:
+:sectanchors:
+= Creating teams in GitHub
+
+You can define a team in a GitHub repository that will have authority to administer a collection using the Kabanero CLI.
+
+In a public GitHub repository or a repository in GitHub enterprise within your organization:
+. On the Home page of your git organization, click *Teams*.
+. Click the *New Team* button.
+. On the *Create New Team* page:
+  * Enter the name of the team.
+  * Optionally, provide a description
+  * Accept the defaults for the remaining choices.
+  * Click the *Create team* button.
+
+. On the next panel, click the *Add a member to the team* button.
+. Type the username for the person that you want to add to the team and click *Enter*.
+. Repeat the previous two steps for each person you want to add to the team.
