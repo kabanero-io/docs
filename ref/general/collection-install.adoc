@@ -17,13 +17,12 @@ link:https://kabanero.io/guides/working-with-collections/[Working with collectio
 
 . Find the name of your Kabanero CR instance.  Use `oc get kabaneros -n kabanero` to obtain a list of all Kabanero CR instances in namespace `kabanero`.  The default name for the CR instance is `kabanero`.  Then, edit the speific CR instance using `oc edit kabanero <name> -n kabanero`, replacing `<name>` with the instance name.
 
-. Modify your Kabanero CR instance to target the new collections that were pushed to the remote GitHub repository, and the teams in GitHub that should administer the collection(s).  Specifically:
+. Modify your Kabanero CR instance to target the new collections that were pushed to the remote GitHub repository and the teams in GitHub that will administer the collection(s).  Specifically:
 * The `Spec.Collections.Repositories.url` attribute should be set to the URL of the alternative collection repository.
-* The `Spec.Github.organization` attribute should be set to the organization hosting the collections in the remote GitHub repository.  In the example above, the organization name is `my_org`.
-* The `Spec.Github.teams` attribute should be set to a comma separated list of GitHub teams in the remote GitHub repository, whose members can administer the collection using the Kabanero CLI.
-* The `Spec.Github.apiurl` attribute should be set to the API URL for the remote GitHub repository being used.  For example, the API URL for `github.com` is `api.github.com`.
+* Refer to link:github-authorization.html[authorizing the Kabanero CLI service] for instructions on defining authorization to the GitHub teams.
+
 +
-A modified Kabanero CR instance for a collection repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `v0.1` of collections might look like this:
+A modified Kabanero CR instance for a collection repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.3.0` of collections might look like this:
 +
 ```yaml
 apiVersion: kabanero.io/v1alpha1
@@ -35,7 +34,7 @@ spec:
   collections:
     repositories:
     - name: custom
-      url: https://github.example.com/my_org/collections/releases/download/v0.1/kabanero-index.yaml
+      url: https://github.example.com/my_org/collections/releases/download/0.3.0/kabanero-index.yaml
       activateDefaultCollections: true
   github:
     organization: my_org
