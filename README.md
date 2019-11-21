@@ -26,6 +26,7 @@ You need the proper front matter on each Docs page to get it categorized correct
     ```
     :page-layout: general-reference
     :page-doc-category: Configuration
+    :page-doc-number: 1
     :page-title: Connecting Kabanero to GitHub with Tekton Webhooks
     :linkattrs:
     :sectanchors:
@@ -45,13 +46,20 @@ If you need a new category feel free to open an issue or discussion in a pull re
 ## Doc category order in table of contents
 
 The [doc-categories.adoc](https://github.com/kabanero-io/docs/blob/master/doc-categories.adoc) file configures the order that the doc categories will show up on our table of contents for the website. Currently the order is:
-
+  
    1. Installation
    1. Configuration
    1. Reference
 
 This file should only be updated if a *new* category is added.
    * If a new category is added you must place your category in the `page-categories` in the order you want it to show up on the site.
+
+## Doc Number
+
+Definiens the order in which the doc is displayed in a given catigory. 
+For example `:page-doc-number: 1` in the Configuration catigory will be listed in the doc dropdown menu before `:page-doc-number: 2` in the Configuration catigory.
+
+Note: If you want to insert a new doc between two other docs use a numarical value between the two :page-doc-number values for example `:page-doc-number: 1.1`.
 
 ## Doc Syntax
 
