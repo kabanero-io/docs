@@ -2,6 +2,7 @@
 :page-doc-category: Configuration
 :page-title: Connecting Kabanero to GitHub with Tekton Webhooks
 :sectanchors:
+:page-doc-number: 6.0.0
 = Connecting Kabanero to GitHub with Tekton Webhooks
 
 A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a https://github.com/kabanero-io/kabanero-pipelines/tree/Readme-updates#kabanero-pipelines[Tekton pipeline, window="_blank"]. After you configure the webhook, changes you make in your GitHub repository will trigger the Tekton pipeline and its associated tasks.
