@@ -55,10 +55,10 @@ This file should only be updated if a *new* category is added.
 
 ## Doc Number
 
-Definiens the order in which the docs are displayed in a given catigory. 
-For example `:page-doc-number: 1.0.0` in the Configuration catigory will be listed in the doc dropdown menu before `:page-doc-number: 2.0.0` in the Configuration catigory.
+Defines the order in which the docs are displayed in a given catigory. 
+For example `:page-doc-number: 1.0` in the Configuration catigory will be listed in the doc dropdown menu before `:page-doc-number: 2.0` in the Configuration catigory.
 
-Note: If you want to insert a new doc between two other docs use a numarical value between the two :page-doc-number values for example `:page-doc-number: 1.1.0`.
+Note: If you want to insert a new doc between two other docs use a numarical value between the two :page-doc-number values for example `:page-doc-number: 1.1`.
 
 ## Doc Syntax
 

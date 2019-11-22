@@ -1,7 +1,7 @@
 :page-layout: doc
 :page-doc-category: Configuration
 :page-title: Deploying applications to an alternative namespace
-:page-doc-number: 5.0.0
+:page-doc-number: 5.0
 :sectanchors:
 = Deploying applications to an alternative namespace
 

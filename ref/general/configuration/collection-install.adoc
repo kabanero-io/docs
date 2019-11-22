@@ -1,7 +1,7 @@
 :page-layout: doc
 :page-doc-category: Configuration
 :page-title: Configuring a Kabanero CR instance to use an alternative collection repository
-:page-doc-number: 2.0.0
+:page-doc-number: 2.0
 :linkattrs:
 :sectanchors:
 = Configuring Kabanero to use an alternative collection repository
