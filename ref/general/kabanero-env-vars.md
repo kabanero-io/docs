@@ -3,7 +3,6 @@ layout: doc
 doc-category: Reference
 title: Environment variables
 ---
-# Environment variables
 
 Kabanero Collections are built with a default set of configuration options that you can modify by setting environment variables.
 
