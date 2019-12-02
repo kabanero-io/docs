@@ -4,18 +4,22 @@
 :linkattrs:
 :sectanchors:
 
-== Uninstalling Kabanero Foundation
 
-A sample uninstall script is available in the kabanero-operator Github repository.  This script will perform the reverse of the `install.sh` script. Before running the `uninstall.sh` script, consider removing any resources that were not created by the 'install-kabanero-foundation' script, such as webhooks, Knative services or Appsody applications.
+A sample script to uninstall Kabanero Foundation is available in the *kabanero-operator* GitHub repository. Before running the `uninstall.sh` script,
+consider removing any resources that were not created by the `install.sh` script, such as webhooks, Knative services, or Appsody applications.
 
-The sample uninstallation script will completely remove all dependencies from the cluster, including Knative, Tekton and OpenShift Service Mesh.  You can modify your local copy of the script if desired.
+The sample script completely removes all dependencies from the cluster, including Knative, Tekton, and OpenShift Service Mesh.
+If you want to keep some of these dependencies, modify your local copy.
 
-== Uninstallation
+Follow these steps:
 
-. Obtain the uninstallation script for the release of Kabanero that you wish to install.
-* `curl -s -O -L https://github.com/kabanero-io/kabanero-operator/releases/download/0.3.1/uninstall.sh`
-
-. As a `cluster-admin`, execute the sample uninstallation script:
+. Obtain the `uninstall.sh` script for the release of Kabanero that you want to uninstall by running the following command:
++
+----
+curl -s -O -L https://github.com/kabanero-io/kabanero-operator/releases/download/<version>/uninstall.sh
+----
+Where `<version>` is the 3-digit Kabanero version number.
+. As a user with `cluster-admin` privileges, run the script:
 +
 ----
 ./uninstall.sh
