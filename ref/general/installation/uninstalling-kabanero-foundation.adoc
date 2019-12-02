@@ -2,6 +2,7 @@
 :page-doc-category: Installation
 :page-title: Uninstalling Kabanero Foundation
 :linkattrs:
+:page-doc-number: 2.0
 :sectanchors:
 
 == Uninstalling Kabanero Foundation
