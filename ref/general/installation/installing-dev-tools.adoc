@@ -2,6 +2,7 @@
 :page-doc-category: Installation
 :page-title: Installing Codewind in VS Code or Eclipse
 :linkattrs:
+:page-doc-number: 3.0
 :sectanchors:
 Eclipse Codewind enables you to develop microservice applications from Kabanero Collections in an IDE. Follow one of these
 links for your chosen IDE:

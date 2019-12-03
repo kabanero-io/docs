@@ -3,6 +3,7 @@
 :page-title: Configuring Kabanero CLI service authorization
 :linkattrs:
 :sectanchors:
+:page-doc-number: 4.0
 = Configuring Kabanero CLI service authorization
 
 You can modify your Kabanero CR instance to provide authorization to the teams in GitHub that will administer the collection(s).

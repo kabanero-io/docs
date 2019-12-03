@@ -1,6 +1,7 @@
 :page-layout: doc
 :page-doc-category: Configuration
 :page-title: Creating teams in GitHub
+:page-doc-number: 6.0
 :linkattrs:
 :sectanchors:
 = Creating teams in GitHub

@@ -53,6 +53,13 @@ The [doc-categories.adoc](https://github.com/kabanero-io/docs/blob/master/doc-ca
 This file should only be updated if a *new* category is added.
    * If a new category is added you must place your category in the `page-categories` in the order you want it to show up on the site.
 
+## Doc Number
+
+Defines the order in which the docs are displayed in a given category. 
+For example `:page-doc-number: 1.0` in the Configuration category will be listed in the doc dropdown menu before `:page-doc-number: 2.0` in the Configuration category.
+
+Note: If you want to insert a new doc between two other docs use a numerical value between the two `:page-doc-number` values. For example, if you want to add a doc between the current #1 and #2 docs you can do: `:page-doc-number: 1.1`.
+
 ## Doc Syntax
 
 Create a Markdown/AsciiDoc file that contains the documentation in a presentable format. For help on syntax you can view these references:
