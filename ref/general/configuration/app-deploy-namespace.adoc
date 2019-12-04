@@ -1,0 +1,65 @@
+:page-layout: doc
+:page-doc-category: Configuration
+:page-title: Deploying applications to an alternative namespace
+:page-doc-number: 3.0
+:sectanchors:
+= Deploying applications to an alternative namespace
+
+By default, applications are deployed to the same namespace as the Kabanero custom resource (CR) instance, which is the `kabanero` namespace.
+However, you can configure Kabanero to deploy applications to a different namespace by following these steps:
+
+. Obtain a copy of your current Kabanero CR instance configuration.
+* To obtain a list of all Kabanero CR instances in the `kabanero` namespace, run the following command:
++
+----
+oc get kabaneros -n kabanero
+----
++
+* To obtain the configuration for a specific CR instance, run the following command, substituting `<name>` for the instance you are targeting:
++
+----
+oc get kabanero <name> -o yaml > kabanero.yaml
+----
++
+Note that the default name for the CR instance is also `kabanero`.
+
+. Edit `kabanero.yaml` and specify the namespaces where you intend to deploy applications, by updating the `targetNamespaces` attribute.  Specify multiple namespaces as a list.
+The following section of a `kabanero.yaml` file shows a Kabanero CR instance that supports application deployment to the `production` and `test` namespaces:
++
+----
+apiVersion: kabanero.io/v1alpha1
+kind: Kabanero
+metadata:
+  name: kabanero
+  namespace: kabanero
+spec:
+  targetNamespaces:
+  - production
+  - test
+----
++
+
+For a full list of supported attributes in a `kabanero.yaml` configuration file, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].
+
+. Apply your changes to the Kabanero CR instance. For example, to apply changes to the Kabanero CR instance in the `kabanero` namespace, run the following command:
++
+----
+oc apply -f kabanero.yaml -n kabanero
+----
++
+. Modify your Appsody application `app-deploy.yaml` file to use one of the namespaces you configured in the `targetNamespaces` attribute of the Kabanero CR instance.
+Here is an example `app-deploy.yaml` file that deploys the `appsody-hello-world` application to the `test` namespace:
++
+----
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  name: appsody-hello-world
+  namespace: test
+spec:
+  applicationImage: docker-registry.default.svc:5000/kabanero/appsody-hello-world
+  stack: java-microprofile
+  createKnativeService: true
+----
++
+. Deploy the application by running a manual pipeline or by using link:tekton-webhooks.html[a webhook].
