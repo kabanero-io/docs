@@ -31,7 +31,7 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Sev
 .. If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
 .. `ENABLE_KAPPNAV=yes|no ./install.sh`
 
-. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of a custom collection and the GitHub information necessary to administer that collection.  For more information on customizing the CR instance, see link:kabanero-cr-config.html[the Kabanero CR configuration reference].
+. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of a custom collection and the GitHub information necessary to administer that collection.  For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the Kabanero CR configuration reference].
 
 === Manual installation
 
