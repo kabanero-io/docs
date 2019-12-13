@@ -38,7 +38,7 @@ Use the Kabanero CLI URL to log in. There are two ways you can get this URL:
 Run the `kabanero login` command to authenticate to Kabanero.
 
 ----
-kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PAT>
+kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> 
 ----
 
 * `<KABANERO_CLI_URL>` is your Kabanero CLI URL from above.
@@ -49,9 +49,6 @@ kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PAT>
 
 **Kabanero login options**
 
-* Pass in a GitHub password or personal access token
-** `-p <string>`
-** `--password <string>`
 * Pass in GitHub user name
 ** `-u <string>`
 ** `--username <string>`
@@ -65,13 +62,15 @@ Examples:
 * Log in with A GitHub user ID and password
 +
 ----
-kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> -p <GITHUB_PASSWORD>
+kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID>
+PASSWORD:<GITHUB_PASSWORD>
 ----
 
 * Log in with previously used url GitHub user ID and PAT
 +
 ----
-kabanero login -u <GITHUB_USER_ID> -p <GITHUB_PAT>
+kabanero login -u <GITHUB_USER_ID> 
+PASSWORD: <GITHUB_PAT>
 ----
 
 Example result:
