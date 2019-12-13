@@ -75,27 +75,31 @@ To resolve this problem, change the IOPS setting of the PV's backing storage dev
 
 When the webhooks extension sink does not run for extended periods of time, the KService might not be marked as `ready`, which can prevent a webhook from being created.
 
-To diagnose this problem:
+=== To diagnose this problem:
 
-1. Check that your pods in the `knative-serving`, `knative-sources`, and `knative-eventingandistio-system` namespaces are healthy, and that you have a `ServiceMeshMemberRoll` resource that includes your install namespace for the Tekton Dashboard and Webhooks Extension.
+. Check that your pods in the `knative-serving`, `knative-sources`, and `knative-eventingandistio-system` namespaces are healthy, and that you have a `ServiceMeshMemberRoll` resource that includes your install namespace for the Tekton Dashboard and Webhooks Extension.
 
-2. Inspect the logs in the `github-controller-manager-0` pod in the `knative-eventing` namespace.  For example, run:
+. Inspect the logs in the `github-controller-manager-0` pod in the `knative-eventing` namespace.  For example, run:
++
 ----
 oc logs github-controller-manager-0 -n knative-sources | grep -i 'creating GitHub webhook' -C 3
 ----
-
-3. Check for multiple "Ready" KServices. For example, run:
++
+. Check for multiple "Ready" KServices. For example, run:
++
 ----
 oc get ksvc -n *<my_install_namespace>*.
 ----
-
++
 You want the output to resemble the following example, but with different pod names:
++
 ----
 mylaptop:config myusername$ oc get ksvc
 NAME                      URL                                                            LATESTCREATED                   LATESTREADY                     READY
 tekton-8hmwh-brxps        http://tekton-8hmwh-brxps.mynamespace.apps.mysystem.com        tekton-8hmwh-brxps-pj5jx        tekton-8hmwh-brxps-pj5jx        True
 webhooks-extension-sink   http://webhooks-extension-sink.mynamespace.apps.mysystem.com   webhooks-extension-sink-5tx7l   webhooks-extension-sink-5tx7l   True
 ----
+
 If the output does not resemble the example, use `oc describe` to describe the KService that is not marked as `True` for READY and your GitHubSource.
 
 An ideal `oc describe githubsource` includes:
@@ -121,14 +125,14 @@ Status:
 
 If the data does not show a `Ready` state and the problem is persistent, there might be an issue with the webhooks extension code itself.
 
-To resolve the problem:
+=== To resolve the problem:
 
-1. Ensure that the `ServiceMeshControlPlane` namespace is in the `Ready` state.
+. Ensure that the `ServiceMeshControlPlane` namespace is in the `Ready` state.
    - Use the `oc -n istio-system describe ServiceMeshControlPlane basic-install` command.
    - If the `ServiceMeshControlPlane` is not in the `Ready` state, restart all the pods in the `istio-system` namespace.
-2. Ensure that the `KnativeServing` namespace is in `Ready` state.
+. Ensure that the `KnativeServing` namespace is in `Ready` state.
    - Use the `oc -n knative-serving describe KnativeServing knative-serving` command.
    - If the `KnativeServing` is in `Ready` is not in the `Ready` state, restart all the pods in the `knative-serving` namespace.
-3. Ensure that `webhooks-extension-sink` KService is in the `Ready` state.
+. Ensure that `webhooks-extension-sink` KService is in the `Ready` state.
    - Use the `oc get kservice -n tekton-pipelines` command.
    - If the `webhooks-extension-sink` KService is not in the `Ready` state, delete a revision object that is associated with the `webhooks-extension-sink`. For example, use the `oc delete rev -l serving.knative.dev/configuration=webhooks-extension-sink` command.
