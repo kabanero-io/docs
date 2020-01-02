@@ -5,7 +5,7 @@
 :page-doc-number: 1.0
 :sectanchors:
 
-Kabanero version 0.3 has been tested on OpenShift Container Platform (OCP) 4.2. There is intent to expand testing to additional distributions, including upstream Kubernetes, in the future.
+Kabanero version 0.4 has been tested on OpenShift Container Platform (OCP) 4.2. There is intent to expand testing to additional distributions, including upstream Kubernetes, in the future.
 
 The Kabanero Open Project intends to build on open source distributions of Kubernetes; however, the current distribution of The Origin Community Distribution of Kubernetes (OKD) is lagging the commercial distributions.   Due to a focus on building leading-edge capabilities and leveraging new features across the integrated open frameworks, the Kabanero Open Project is temporarily building on version 4 capabilities of the commercial distributions.  When there is a comparable release of OKD, the Kabanero Open Project will return to it.
 
@@ -22,7 +22,7 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Sev
 === Scripted installation
 
 . Obtain the installation script for the release of Kabanero that you wish to install.
-* `curl -s -O -L https://github.com/kabanero-io/kabanero-operator/releases/download/0.3.1/install.sh`
+* `curl -s -O -L https://github.com/kabanero-io/kabanero-operator/releases/download/0.4.0/install.sh`
 
 . Review the `install.sh` script for any optional components that can be enabled by setting the required environment variable, or by editing the value in the script directly.  Optional components are listed at the top of the script, below the section titled `Optional components`.
 
@@ -43,7 +43,7 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Sev
 
 . Install the Appsody operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `certified-operators` catalog and the `beta` channel.  This operator should be installed at the cluster scope.
 
-. Install the OLM CatalogSource containing the Kabanero operator.  The following YAML can be used, after substituting the required version (the example uses version 0.3.1):
+. Install the OLM CatalogSource containing the Kabanero operator.  The following YAML can be used, after substituting the required version (the example uses version 0.4.0):
 +
 [source,yaml]
 ----
@@ -54,7 +54,7 @@ metadata:
   namespace: openshift-marketplace
 spec:
   sourceType: grpc
-  image: kabanero/kabanero-operator-registry:0.3.1
+  image: kabanero/kabanero-operator-registry:0.4.0
 ----
 
 . Create the `kabanero` namespace using `oc new-project kabanero`
