@@ -14,7 +14,7 @@ The sample uninstallation script will completely remove all dependencies from th
 == Uninstallation
 
 . Obtain the uninstallation script for the release of Kabanero that you wish to install.
-* `curl -s -O -L https://github.com/kabanero-io/kabanero-operator/releases/download/0.3.1/uninstall.sh`
+* `curl -s -O -L https://github.com/kabanero-io/kabanero-operator/releases/download/0.4.0/uninstall.sh`
 
 . As a `cluster-admin`, execute the sample uninstallation script:
 +
