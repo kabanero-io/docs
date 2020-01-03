@@ -86,5 +86,5 @@ Your GitHub repo is connected to Kabanero with a webhook. Changes in your code c
 You can delete an existing webhook by using your Tekton Dashboard.
 
 . From your Tekton Dashboard, select `webhooks` from the sidebar menu.
-. Select the webhook(s) that you want to delete by clicking the box beside the webhook name.
+. From the list of avaiable webhooks, select the webhook(s) that you want to delete by clicking the box beside the webhook name.
 . Click `Delete`.
