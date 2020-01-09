@@ -1,0 +1,33 @@
+:page-layout: doc
+:page-doc-category: Configuration
+:page-title: Configuring Kabanero Console with OAuth
+:linkattrs:
+:sectanchors:
+= Configuring the Kabanero Console with OAuth
+
+After Kabanero is installed, you can enable optional collection management features via the Kabanero Console you must configure GitHub OAuth. This setup will allow the console to verify users via GitHub OAuth and communicate with the collections server.
+
+. From your GitHub organization page, create an OAuth Application in **Settings -> OAuth App -> New OAuth Apps**. Note: the OAuth GitHub app will need to be created in the same GitHub organization that your Kabanero Collection Hub is in. If the OAuth GitHub app and the Collection Hub repository **need** to be in different GitHub orgs, then the OAuth GitHub app can request access to data in the org with the collections. For more information see the GitHub doc - https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-oauth-app-access-restrictions[OAuth App Access and Restrictions].
+
+    * `Application name` can be anything, a suggestion is: `kabanero console`.
+    * `Homepage URL` can be anything for now since the application doesn't exist yet, you can come back and fill this in.
+    * `Application description` is optional.
+    * `Authorization callback` URL is `https://<YOUR_HOST>/ibm/api/social-login/redirect/githubLogin`
+    ** If you do not know the full Kabanero Console application hostname, you can come back and fill this in later. You can find the Kabanero Console URL from the OKD Console under **Networking -> Routes**. The route is labeled as `kabanero-landing`.
+
+. Finish creating the OAuth App by clicking the **Register application** button.
+* Note the generated `Client ID` and `Client Secret` as you will need both of these when creating the secret in the next step.
+
+. In your OKD Console, in the kabanero project namespace, click ** Workloads -> Secrets -> Create** and create a **key/value secret**.
+    * `Secret Name` is: `kabanero-github-oauth-secret`
+    * Add two key value pairs to the secret.
+    ** key: `clientID` and the value is your client ID from your GitHub OAuth App.
+    ** key: `clientSecret` and the value is your client secret from your GitHub OAuth App.
+    * Click **Create**
+
+. In your OKD Console, under the kabanero project namespace, delete the kabanero landing pod. 
+* In **Workloads -> Pods**, find the pod named `kabanero-landing-xxxxx-xxxx` and delete it.
+
+. Navigate to the Kabanero Console URL. 
+* The URL is found in your OKD Console under **Networking -> Routes** with the label `kabanero-landing`.
+. Go to the Instance page and inside the collections tile you will now see a **Manage Collections** button that will take you to the OAuth section of the console.
