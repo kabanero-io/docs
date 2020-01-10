@@ -5,7 +5,7 @@
 :sectanchors:
 = Configuring the Kabanero Console with OAuth
 
-After Kabanero is installed, you can enable optional collection management features via the Kabanero Console you must configure GitHub OAuth. This setup will allow the console to verify users via GitHub OAuth and communicate with the collections server.
+After Kabanero is installed, you can enable optional collection management features via the Kabanero Console by configuring GitHub OAuth. This setup will allow the console to verify users via GitHub OAuth and communicate with the collections server.
 
 . From your GitHub organization page, create an OAuth Application in **Settings -> OAuth App -> New OAuth Apps**. Note: the OAuth GitHub app will need to be created in the same GitHub organization that your Kabanero Collection Hub is in. If the OAuth GitHub app and the Collection Hub repository **need** to be in different GitHub orgs, then the OAuth GitHub app can request access to data in the org with the collections. For more information see the GitHub doc - https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-oauth-app-access-restrictions[OAuth App Access and Restrictions].
 
