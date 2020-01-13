@@ -39,7 +39,7 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Sev
 
 . Install the Knative Eventing operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `community-operators` catalog and the `alpha` channel.
 
-. Install the Openshift Pipelines operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `community-operators` catalog and the `dev-preview` channel.
+. Install the OpenShift Pipelines operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `community-operators` catalog and the `dev-preview` channel.
 
 . Install the Appsody operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `certified-operators` catalog and the `beta` channel.  This operator should be installed at the cluster scope.
 

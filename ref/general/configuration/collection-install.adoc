@@ -9,14 +9,14 @@
 A Kabanero custom resource (CR) instance can be configured to use an alternative collection repository.  When you have created a new collection repository, as described in
 link:https://kabanero.io/guides/working-with-collections/[Working with collections], follow these steps to use that collection repository with Kabanero:
 
-. Create organizational-level teams in GitHub to administer the cloned collection(s), and add members to those teams.  These members will be able to use the link:kabanero-cli.html[Kabanero CLI] to administer the collections in the namespace where the Kabanero CR instance is configured.
+. Create organizational-level teams in GitHub to administer the cloned collection(s), and add members to those teams.  These members will be able to use the link:../reference/kabanero-cli.html[Kabanero CLI] to administer the collections in the namespace where the Kabanero CR instance is configured.
 
 . Obtain the URL to the collection repository.  If a Git release was created for the collections, the URL format will be: `https://<github.com>/<organization>/collections/releases/download/<release>/kabanero-index.html`
 * Replace `<github.com>` with your GitHub or GHE hostname
 * Replace `<organization>` with your GitHub organization name
 * Replace `<release>` with the name of the release that was created
 
-. Find the name of your Kabanero CR instance.  Use `oc get kabaneros -n kabanero` to obtain a list of all Kabanero CR instances in namespace `kabanero`.  The default name for the CR instance is `kabanero`.  Then, edit the speific CR instance using `oc edit kabanero <name> -n kabanero`, replacing `<name>` with the instance name.
+. Find the name of your Kabanero CR instance.  Use `oc get kabaneros -n kabanero` to obtain a list of all Kabanero CR instances in namespace `kabanero`.  The default name for the CR instance is `kabanero`.  Then, edit the specific CR instance using `oc edit kabanero <name> -n kabanero`, replacing `<name>` with the instance name.
 
 . Modify your Kabanero CR instance to target the new collections that were pushed to the remote GitHub repository and the teams in GitHub that will administer the collection(s).  Specifically:
 * The `Spec.Collections.Repositories.url` attribute should be set to the URL of the alternative collection repository.

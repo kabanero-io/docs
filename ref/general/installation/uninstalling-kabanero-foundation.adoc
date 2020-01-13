@@ -7,7 +7,7 @@
 
 == Uninstalling Kabanero Foundation
 
-A sample uninstall script is available in the kabanero-operator Github repository.  This script will perform the reverse of the `install.sh` script. Before running the `uninstall.sh` script, consider removing any resources that were not created by the 'install-kabanero-foundation' script, such as webhooks, Knative services or Appsody applications.
+A sample uninstall script is available in the kabanero-operator GitHub repository.  This script will perform the reverse of the `install.sh` script. Before running the `uninstall.sh` script, consider removing any resources that were not created by the 'install-kabanero-foundation' script, such as webhooks, Knative services or Appsody applications.
 
 The sample uninstallation script will completely remove all dependencies from the cluster, including Knative, Tekton and OpenShift Service Mesh.  You can modify your local copy of the script if desired.
 
