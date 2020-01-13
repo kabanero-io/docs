@@ -24,7 +24,7 @@ The following Codewind images are pulled. These images together form the Codewin
 
 When the installation is complete, the extension is ready to use. For more information, see https://www.eclipse.org/codewind/mdt-vsc-getting-started.html[Getting started: Codewind for VS Code, window="_blank"].
 
-To get started with Kabanero Collections in VS Code, read the guide link:../../../guides/guide-codewind/[Getting Started with Codewind and Kabanero].
+To get started with Kabanero Collections in VS Code, read the guide link:../../../../guides/guide-codewind/[Getting Started with Codewind and Kabanero].
 
 
 === Updating the Codewind plug-in
@@ -78,7 +78,7 @@ see https://www.eclipse.org/codewind/mdteclipsegettingstarted.html[Getting start
 
 When Codewind creates a new project, it is created in the Codewind workspace. If you want to add an existing project to Codewind, first copy it into the Codewind workspace.
 
-To get started with Kabanero Collections in your Eclipse IDE, read the guide link:../../../guides/guide-codewind/[Getting Started with Codewind and Kabanero].
+To get started with Kabanero Collections in your Eclipse IDE, read the guide link:../../../../guides/guide-codewind/[Getting Started with Codewind and Kabanero].
 
 === Updating the Codewind plug-in
 Update the Codewind Eclipse plug-in to the latest version.

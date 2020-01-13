@@ -5,9 +5,9 @@
 :sectanchors:
 = Configuring a Kabanero CR instance
 
-A `Kabanero` custom resource (CR) instance describes a particluar Kabanero
+A `Kabanero` custom resource (CR) instance describes a particular Kabanero
 installation.  This description includes the locations of the Kabanero
-Collections, and how the Kabanero CLI should interact with Github.
+Collections, and how the Kabanero CLI should interact with GitHub.
 
 The `Spec` section of the `Kabanero` instance describes the desired
 configuration.  The `Status` section is populated by the Kabanero operator,
@@ -32,14 +32,14 @@ specify the following fields:
    `AppsodyApplication` instance is created from the `app-deploy.yaml` file
    in an application, at the end of a deploy pipeline run.
 ** `github`
-*** `organization` - The name of the Github organization where the collection
-    repositories have been cloned.  The Github teams that administer the
+*** `organization` - The name of the GitHub organization where the collection
+    repositories have been cloned.  The GitHub teams that administer the
     collections are also contained in this organization.
-*** `teams` - A yaml list of Github teams that will be allowed to
+*** `teams` - A yaml list of GitHub teams that will be allowed to
     use the Kabanero CLI to administer the collection repositories.  All users
     who want to use the Kabanero CLI to administer the collections must be a
     member of a team in this list.
-*** `apiUrl` - The Github API URL for the Github containing the collection
+*** `apiUrl` - The GitHub API URL for the GitHub containing the collection
     repositories.  For example, the API URL for github.com is api.github.com.
 ** `collections`
 *** `repositories` - A list of repositories containing Kabanero collections.
@@ -214,7 +214,7 @@ spec:
 ```
 
 The following yaml defines a `Kabanero` instance at version 0.2.0, using
-a custom collection set and its associated Github configuration.  Sessions
+a custom collection set and its associated GitHub configuration.  Sessions
 established using the Kabanero CLI remain valid for one hour.
 
 ```yaml

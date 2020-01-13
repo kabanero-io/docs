@@ -149,7 +149,7 @@ nodejs				0.2.6	inactive ==> active
 
 === Show the active repository collection for a Kabanero instance
 
-Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the acive collections repository for a Kabanero instance.
+Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the active collections repository for a Kabanero instance.
 
 . From the OpenShift console, view Administration > Custom Resource Definitions > Kabanero > Instances > Kabanero > YAML
 . Displaying the configured Kabanero CR with the OC CLI command

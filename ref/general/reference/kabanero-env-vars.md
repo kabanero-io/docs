@@ -13,7 +13,7 @@ The environment variables are listed in the following sections:
 
 ## `BUILD_ALL`
 
-When using Github and Travis as the CI/CD build process, the build scripts build only the Collections that have been modified as part of a `git push` or `git pull` request. This environment variable can be used to overwrite that behavior and build all the Collections.
+When using GitHub and Travis as the CI/CD build process, the build scripts build only the Collections that have been modified as part of a `git push` or `git pull` request. This environment variable can be used to overwrite that behavior and build all the Collections.
 
 **Default value:** `BUILD_ALL=true`
 
