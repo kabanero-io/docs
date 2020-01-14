@@ -38,7 +38,7 @@ specify the following fields:
 *** `teams` - A yaml list of GitHub teams that will be allowed to
     use the Kabanero CLI to administer the collection repositories.  All users
     who want to use the Kabanero CLI to administer the collections must be a
-    member of a team in this list.
+    member of a team in this list. To learn how to create teams in GitHub, see link:https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/creating-a-team[Creating a team, window=_blank].
 *** `apiUrl` - The GitHub API URL for the GitHub containing the collection
     repositories.  For example, the API URL for github.com is api.github.com.
 ** `collections`
@@ -58,7 +58,7 @@ specify the following fields:
     Appsody operator to watch the namespace where the Kabanero operator is
     installed, as well as any additional namespaces specified in the
     `Spec.targetNamespaces` attribute.  Valid values are `true` and `false`.
-    The default value is `true`.   Please see link:https://github.com/appsody/appsody-operator/blob/master/doc/user-guide.md[the Appsody operator user guide]
+    The default value is `true`.   Please see link:https://github.com/appsody/appsody-operator/blob/master/doc/user-guide.md[the Appsody operator user guide, window=_blank]
     for more information.
 ** `cliServices`
 *** `sessionExpirationSeconds` - The length of time (duration) that
