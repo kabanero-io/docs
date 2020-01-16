@@ -10,7 +10,7 @@ A webhook is an outbound HTTP request that helps you create a relationship betwe
 == Prerequisites
 
 * A GitHub repository
-* https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[Kabanero Foundation, window="_blank"] or Kabanero Enterprise.
+* https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[Kabanero Foundation, window="_blank"].
 ** Your Kabanero installation includes an instance of  the https://github.com/tektoncd/dashboard#installing-the-latest-release[Tekton Dashboard, window="_blank"] with the https://github.com/tektoncd/experimental/blob/master/webhooks-extension/docs/InstallReleaseBuild.md[Webhooks Extension, window="_blank"] installed.
 
 == Create a persistent volume
