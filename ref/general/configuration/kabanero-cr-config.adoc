@@ -235,7 +235,7 @@ spec:
     teams:
       - collection-admins
       - admins
-    apiurl: api.github.com
+    apiUrl: api.github.com
   cli:
     sessionExpirationSeconds: 1h
 ```
