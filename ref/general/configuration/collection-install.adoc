@@ -42,7 +42,7 @@ spec:
     teams:
       - collection-admins
       - admins
-    apiurl: api.github.com
+    apiUrl: https://api.github.com
 ```
 +
 For more information about other fields that can be customized in the Kabanero CR instance, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].

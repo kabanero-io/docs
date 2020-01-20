@@ -40,7 +40,7 @@ specify the following fields:
     who want to use the Kabanero CLI to administer the collections must be a
     member of a team in this list. To learn how to create teams in GitHub, see link:https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/creating-a-team[Creating a team, window=_blank].
 *** `apiUrl` - The GitHub API URL for the GitHub containing the collection
-    repositories.  For example, the API URL for github.com is api.github.com.
+    repositories.  For example, the API URL for github.com is https://api.github.com.
 ** `collections`
 *** `repositories` - A list of repositories containing Kabanero collections.
 **** `name` - A descriptive name of the collection repository.
@@ -235,7 +235,7 @@ spec:
     teams:
       - collection-admins
       - admins
-    apiurl: api.github.com
+    apiUrl: https://api.github.com
   cli:
     sessionExpirationSeconds: 1h
 ```
