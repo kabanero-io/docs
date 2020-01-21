@@ -23,7 +23,7 @@ link:https://kabanero.io/guides/working-with-collections/[Working with collectio
 * Refer to link:github-authorization.html[authorizing the Kabanero CLI service] for instructions on defining authorization to the GitHub teams.
 
 +
-A modified Kabanero CR instance for a collection repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.3.0` of collections might look like this:
+A modified Kabanero CR instance for a collection repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.5.0` of collections might look like this:
 +
 ```yaml
 apiVersion: kabanero.io/v1alpha1
@@ -35,7 +35,7 @@ spec:
   collections:
     repositories:
     - name: custom
-      url: https://github.example.com/my_org/collections/releases/download/0.3.0/kabanero-index.yaml
+      url: https://github.example.com/my_org/collections/releases/download/0.5.0/kabanero-index.yaml
       activateDefaultCollections: true
   github:
     organization: my_org
