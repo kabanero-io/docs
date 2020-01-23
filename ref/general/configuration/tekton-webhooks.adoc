@@ -17,13 +17,13 @@ A webhook is an outbound HTTP request that helps you create a relationship betwe
 Tekton pipelines need a persistent volume. If there is no network storage available, create a `hostPath pv`. For more information, see *Creating a persistent volume* in https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[Kabanero Pipelines, window="_blank"].
 
 [#gat]
-== Generate a GitHub access token.
+== Generate a GitHub access token
 You need to generate a GitHub personal access token to use for creating the webhook and for accessing the repository source code during PipelineRuns. To generate the token:
 
 . Go to https://github.com/settings/tokens[github.com/settings/tokens, window="_blank"] and click `Generate new token`.
 . Check the `admin:repo_hook` option and click `Generate token`. If you are working in a private repository, more options might be required. Check with your administrator for details. *Make sure to save the token to a file since you can't see it after you leave this page.*
 
-== Create secrets.
+== Create secrets
 If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret. If you are working with a public GitHub repository, you do not need to create a secret for your Tekton dashboard webhook.
 
 . From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`.
@@ -35,7 +35,7 @@ If you are working with a private or enterprise GitHub repository, you need to s
 
 If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub username and password. For `Access To:`, select `Docker Registry` from the drop-down list.
 
-== Create a webhook.
+== Create a webhook
 . From your Tekton Dashboard, select `webhooks` from the sidebar menu and click `Add Webhook`.
 . Enter your information in the `Create Webhook` window.
 +
@@ -68,7 +68,7 @@ Select the Docker registry where any built images are pushed. Use the same Docke
 
 . After you complete the necessary information, click `Create`.
 
-== Confirm your webhook.
+== Confirm your webhook
 
 . Look for the webhook in your GitHub Repository.
 * From your GitHub repository, go to the `settings` tab and select `Webhooks` from the sidebar menu. Look for the webhook you created. Sometimes the webhook initially shows a 504 error icon but after the webhook is used it changes to a green check mark.
@@ -86,5 +86,5 @@ Your GitHub repo is connected to Kabanero with a webhook. Changes in your code c
 You can delete an existing webhook by using your Tekton Dashboard.
 
 . From your Tekton Dashboard, select `webhooks` from the sidebar menu.
-. Select the webhook(s) that you want to delete by clicking the box beside the webhook name.
+. Select the webhooks that you want to delete by clicking the box beside the webhook name.
 . Click `Delete`.
