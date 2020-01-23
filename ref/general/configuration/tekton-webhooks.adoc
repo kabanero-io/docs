@@ -5,13 +5,13 @@
 :page-doc-number: 5.0
 = Connecting Kabanero to GitHub with Tekton Webhooks
 
-A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[Tekton pipeline, window="_blank"]. After you configure the webhook, changes you make in your GitHub repository will trigger the Tekton pipeline and its associated tasks.
+A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[Kabanero pipeline, window="_blank"]. After you configure the webhook, changes you make in your GitHub repository will trigger the pipeline and its associated tasks.
 
 == Prerequisites
 
 * A GitHub repository
 * https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[Kabanero Foundation, window="_blank"].
-** Your Kabanero installation includes an instance of  the https://github.com/tektoncd/dashboard#installing-the-latest-release[Tekton Dashboard, window="_blank"] with the https://github.com/tektoncd/experimental/blob/master/webhooks-extension/docs/InstallReleaseBuild.md[Webhooks Extension, window="_blank"] installed.
+** Your Kabanero installation includes an instance of the https://github.com/tektoncd/dashboard#installing-the-latest-release[Tekton Dashboard, window="_blank"] with the https://github.com/tektoncd/experimental/blob/master/webhooks-extension/README.md[Webhooks Extension, window="_blank"] and https://github.com/tektoncd/triggers/tree/v0.1.0/docs#tekton-triggers[Tekton Triggers, window="_blank"] installed.
 
 == Create a persistent volume
 Tekton pipelines need a persistent volume. If there is no network storage available, create a `hostPath pv`. For more information, see *Creating a persistent volume* in https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[Kabanero Pipelines, window="_blank"].
