@@ -1,8 +1,10 @@
 ---
-version: v0.3.0
-title: What's New In Kabanero v0.3.0
+version: v0.5.0
+title: What's New In Kabanero v0.5.0
 ---
 
-Today you can get your hands on the next monthly release of Kabanero, v0.3.0. We’ve been working hard in the kitchen to cook up some new features and bug fixes in this month's release.
+Today we proudly present the next release of Kabanero, v0.5.0.  There are several improvements to tell you about.
 
-One focus area for this release is shifting our deployment platform from OKD 3.11 to OCP 4.2. This shift from OKD to OCP is only temporary because OKD has not released 4.x version yet. Some new updates in this release include: a hosted IDE with Eclipse Che and Eclipse Codewind, and much more. Check out all the details on what’s new in our [What’s New in 0.3.0 blog post](/blog/2019/11/21/WhatsNew030.html).
+In this release we've added Tekton Triggers (TektonBindings and TektonTemplates) to Kabanero eventing; we've made improvements to collection lifecycles; and we've added the option to use GitHub OAuth through the Kabanero Console.
+
+Learn more in our [What’s New in 0.5.0 blog post](/blog/2020/01/27/WhatsNew050.html).
