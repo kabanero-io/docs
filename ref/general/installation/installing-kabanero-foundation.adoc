@@ -65,7 +65,9 @@ spec:
 
 . As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of a custom collection and the GitHub information necessary to administer that collection.  For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the Kabanero CR configuration reference].
 
-== After installing
+== After installation
+
+**Important:** Due to the addition of Tekton Triggers in Kabanero version 0.5, if you are upgrading to Kabanero version 0.5 from a previous version, you must delete any existing webhooks and create them again.  See link:/docs/ref/general/configuration/tekton-webhooks.html[Connecting Kabanero to GitHub with Tekton Webhooks] for instructions on deleting and creating webhooks.
 
 The **Kabanero Console** is installed as part of the install process and is a good next step to go explore information about your Kabanero instance.
 

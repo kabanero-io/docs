@@ -62,6 +62,17 @@ at this time; they do not impact the application deployment:
 * `error creating GitHub client: error parsing PR number: pulls`
 * `IOError: [Errno 2] No such file or directory: '/workspace/pull-request/pr.json'`
 
+== `Failed to create webhook` error
+
+An error creating webhooks will occur when the user selects a pipeline that does not have the associated TriggerTemplate and TriggerBindings when creating a webhook in the extension.
+Each pipeline must have a number of Triggers resources for the Webhooks Extension to work properly, as described here: https://github.com/tektoncd/experimental/blob/master/webhooks-extension/docs/GettingStarted.md#pipeline
+
+----
+Select the Pipeline in the target Namespace from which a PipelineRun (and accompanying PipelineResources) will be created, as described in the section
+'What does the Tekton Dashboard's Webhooks Extension do?', above. Note that you need to have related Tekton Trigger resources installed in the install
+namespace (rather than the target namespace), these resources being; a triggertemplate called <pipeline-name>-template and two triggerbindings
+<pipeline-name>-push-binding and <pipeline-name>-pullrequest-binding.
+----
 
 == `docker push` fails with gateway timeout error
 
