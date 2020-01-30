@@ -1,0 +1,40 @@
+:page-layout: doc
+:page-doc-category: Configuration
+:page-title: Configuring Kabanero to add Red Hat Single Sign On (RH-SSO)
+:linkattrs:
+:sectanchors:
+= Configuring Kabanero to add Red Hat Single Sign On
+
+After Kabanero is installed, the Kabanero operator can create an instance of Red Hat Single Sign On for development use.  After you create the required secret and persistent volume, the RHSSO instance will be created. 
+
+. Create a persistent volume of size 1gb. The type of storage used might vary depending on the environment where OpenShift is installed.
+Some types of persistent volumes such as NFS require that you set up an NFS server in your cluster first. 
+In your console, in the kabanero project namespace, click ** Storage --> Persistent Volumes --> Create Persistent Volume.  
+Edit the yaml as needed for your cluster's storage configuration.  Here is an example using NFS:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sso-pv
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  nfs:
+    path: /root/persistentvolumes
+    server: 10.26.1.100
+  persistentVolumeReclaimPolicy: Recycle
+  volumeMode: Filesystem
+```  
+
+
+. Create a secret. In your console, in the kabanero project namespace, click ** Workloads -> Secrets -> Create** and create a **key/value secret**.
+    * `Secret Name` is: `rhsso-secret`
+    * Add three key value pairs to the secret.
+    ** key: `SSO_ADMIN_USERNAME` and the value is the administrator username for RHSSO.
+    ** key: `SSO_ADMIN_PASSWORD` and the value is the administrator realm for RHSSO.
+    ** key: `SSO_REALM` and the value is the realm name for RHSSO to use. 
+    * Click **Create**
+
