@@ -1,0 +1,86 @@
+:page-layout: doc
+:page-doc-category: Configuration
+:page-title: Configuring a Stack CR Instance
+:sectanchors:
+= Configuring a Stack CR instance
+
+A `Stack` custom resource (CR) instance describes a particular Appsody
+stack.  Multiple versions of the same stack can be described in the
+same `Stack` CR instance.  
+
+The `Spec` section of the `Stack` instance describes the desired
+configuration.  The `Status` section is populated by the Stack controller,
+and shows which versions of the Stack have been activated, and which
+pipelines and tasks have been activated for that version.
+
+== Syntax (v1alpha2)
+
+See the link:#examples[examples].  To define a `Stack` instance, you can
+specify the following fields:
+
+* `Spec`
+** `name` - The name of the stack that is represented by this CR.
+** `versions` - A list of versions of this stack that should be
+   activated.  Each CR instance must define at least one version.
+*** `version` - The version of this stack
+*** `desiredState` - An optional field which describes the state
+    that this version of this stack should remain in.  An empty
+    value results in this version being activated.  Other valid
+    values are `active` and `inactive`.  If either of these values
+    is provided, the Kabanero operator will not attempt to change
+    the state for this version, even if the stack is removed from
+    the stack index which caused this Stack CR to be created.
+    This behavior can be used to permanently activate or deactivate
+    a stack, until the configuration is manually changed.
+*** `pipelines` - A list of pipelines which should be applied to
+    this stack version.
+**** `id` - A descriptive name of the pipelines contained at this URL.
+**** `Sha256` - The digest of the pipelines contained at this
+      URL.  Typically a command like `sha256sum` is used to obtain the
+      digest.
+**** `https`
+***** `url` - The URL pointing to the pipelines.  Typically this file
+       has a `.tar.gz` extension.  The URL will be accessed using
+       HTTPS.
+***** `skipCertVerification` - Controls whether the stack controller will
+       validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
+*** `images` - A list of container images that are associated with
+    this version of the stack.  A `PipelineRun` may include a step
+    that validates that an application is build using an image that
+    is included in this list.
+**** `id` - A descriptive name of this image
+**** `image` - The location of this image in the container registry.
+
+== Inspecting your Stack CR Instances
+
+You can retrieve all the Stack CR instances in a namespace using this
+command:
+
+`oc get stacks -n kabanero -o yaml`
+
+The example uses the kabanero namespace.  To use a different namespace,
+replace `-n kabanero` with the name of another namespace.
+
+== Examples
+
+The following yaml defines a `Stack` instance with a single version of
+the `java-microprofile` stack:
+
+```yaml
+apiVersion: kabanero.io/v1alpha2
+kind: Stack
+metadata:
+  name: java-microprofile
+  namespace: kabanero
+spec:
+  name: java-microprofile
+  versions:
+    - pipelines:
+        - https:
+            url: >-
+              https://github.com/kabanero-io/collections/releases/download/0.5.0/incubator.common.pipeline.default.tar.gz
+          id: default
+          sha256: 14285a7f0bb152759b3e2141db19d72ea1f94f01bbf5ffbf866cab4e60e093dd
+      version: 0.2.21
+```
