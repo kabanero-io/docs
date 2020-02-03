@@ -31,19 +31,17 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Sev
 .. If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
 .. `ENABLE_KAPPNAV=yes|no ./install.sh`
 
-. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of a custom collection and the GitHub information necessary to administer that collection.  For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the Kabanero CR configuration reference].
+. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default application stacks, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of an application stack and the GitHub information necessary to administer that application stack.  For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the CR configuration reference].
 
 === Manual installation
 
 . Install and configure the link:https://docs.openshift.com/container-platform/4.2/serverless/installing-openshift-serverless.html[OpenShift Serverless Operator].  Note that the instructions include installing and configuring the OpenShift Service Mesh.
 
-. Install the Knative Eventing operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `community-operators` catalog and the `alpha` channel.
+. Install the pipelines operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `community-operators` catalog and the `dev-preview` channel.
 
-. Install the OpenShift Pipelines operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `community-operators` catalog and the `dev-preview` channel.
+. Install the microservice deployment operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `certified-operators` catalog and the `beta` channel.  This operator should be installed at the cluster scope.
 
-. Install the Appsody operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `certified-operators` catalog and the `beta` channel.  This operator should be installed at the cluster scope.
-
-. Install the OLM CatalogSource containing the Kabanero operator.  The following YAML can be used, after substituting the required version (the example uses version 0.5.0):
+. Install the OLM CatalogSource containing the product operator.  The following YAML can be used, after substituting the required version (the example uses version 0.6.0):
 +
 [source,yaml]
 ----
@@ -54,20 +52,20 @@ metadata:
   namespace: openshift-marketplace
 spec:
   sourceType: grpc
-  image: kabanero/kabanero-operator-registry:0.5.0
+  image: kabanero/kabanero-operator-registry:0.6.0
 ----
 
 . Create the `kabanero` namespace using `oc new-project kabanero`
 
 . Install the Che operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `community-operators` catalog and the `stable` channel.  This operator should be installed to the `kabanero` namespace.
 
-. Install the Kabanero operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `kabanero-catalog` catalog and the `release-0.4` channel.  This operator should be installed to the `kabanero` namespace.
+. Install the product operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `kabanero-catalog` catalog and the `release-0.4` channel.  This operator should be installed to the `kabanero` namespace.
 
-. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a `Kabanero` custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default collections, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of a custom collection and the GitHub information necessary to administer that collection.  For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the Kabanero CR configuration reference].
+. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default application stacks, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of an application stack and the GitHub information necessary to administer that application stack. For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the CR configuration reference].
 
 == After installation
 
-**Important:** Due to the addition of Tekton Triggers in Kabanero version 0.5, if you are upgrading to Kabanero version 0.5 from a previous version, you must delete any existing webhooks and create them again.  See link:/docs/ref/general/configuration/tekton-webhooks.html[Connecting Kabanero to GitHub with Tekton Webhooks] for instructions on deleting and creating webhooks.
+**Important:** Due to the addition of Tekton Triggers in Kabanero version 0.5, if you are upgrading to Kabanero version 0.5 from a previous version, you must delete any existing webhooks and create them again.  See link:/docs/ref/general/configuration/tekton-webhooks.html[Connecting Kabanero to GitHub with Webhooks] for instructions on deleting and creating webhooks.
 
 The **Kabanero Console** is installed as part of the install process and is a good next step to go explore information about your Kabanero instance.
 
@@ -90,7 +88,7 @@ Using the OpenShift Console:::
 . The landing page name is **kabanero-landing**, which should be in the list of routes; click the URL under **Hostname** to open the landing application
 
 === If the landing page is not responding
-It might take some time for the landing page and other pods to be created and started. You can check the status of the Kabanero pods with `oc get pods -n kabanero`. Wait until they all have a status of *Running*.
+It might take some time for the landing page and other pods to be created and started. You can check the status of the product pods with `oc get pods -n kabanero`. Wait until they all have a status of *Running*.
 ----
 NAME                                  READY     STATUS    RESTARTS   AGE
 ...
@@ -99,9 +97,9 @@ kabanero-landing-6dc5c798d4-ncg52     1/1       Running   0          11m
 
 === Configure OAuth for the Kabanero Console
 
-You can add optional features to help you manage your collections, but it requires you setup OAuth for the console. To setup OAuth follow the instructions for link:/docs/ref/general/configuration/console-oauth.html[Configuring OAuth for the Kabanero Console].
+You can add optional features to help you manage your application stacks, but it requires you setup OAuth for the console. To setup OAuth follow the instructions for link:/docs/ref/general/configuration/console-oauth.html[Configuring OAuth for the product console].
 
-== (Optional sample) Appsody project with manual Tekton pipeline run
+== (Optional sample) Application deployment project with manual pipeline run
 =======
 
 . Retrieve the installation scripts from the kabanero-foundation repository
@@ -118,10 +116,10 @@ You can add optional features to help you manage your collections, but it requir
 * `APP_REPO=https://github.com/dacleyra/appsody-hello-world/ ./example-tekton-pipeline-run.sh`
 
 . Access the application at `http://appsody-hello-world.kabanero.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
-* By default, the application container image is built and pushed to the Internal Registry, and then deployed as a Knative Service
+* By default, the application container image is built and pushed to the Internal Registry, and then deployed serverless
 
 . (Optional) Access the pipeline logs
 * `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
 
-. (Optional) Make detailed pipeline changes by accessing the Tekton dashboard
+. (Optional) Make detailed pipeline changes by accessing the pipelines dashboard
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
