@@ -16,17 +16,30 @@ The following sections outline the overall architecture of the system, its compo
 
 The Kabanero architecture supports the activity of application developers, application architects, and operations teams in continuously delivering applications to Kubernetes environments. The architecture also covers non-functional requirements, such as supporting the implementation of operational policies for application management and security.
 
-The following figure illustrates the main building blocks of the architecture, which will be elaborated in the next sections. 
+The following figure illustrates the main building blocks of the architecture, which will be elaborated in the next sections.
 
-.Main Kabanero building blocks 
+.Main Kabanero building blocks
 image::/docs/img/arch-overview-main.png[link="/docs/img/arch-overview-main.png" alt="Main Kabanero building blocks"]
 
 
-=== Kabanero Collections
+=== Kabanero Application Stacks
 
-A large portion of the Kabanero experience is centered around *Kabanero Collections*. A Kabanero Collection is created by an *application architect*, as a logical set of software components for developing and deploying applications. A collection is realized as components (such as tools and container images) used at coding time by application developers, and components forming a deployment pipeline that can extract, build, and deploy the resulting application image to a running Kubernetes cluster.
+A large portion of the Kabanero experience is centered around *application stacks*. An application stack is created by an *application architect* as a logical set of software components for developing and deploying applications. An application stack is realized as components (such as tools and container images) used at coding time by application developers, and components forming a deployment pipeline that can extract, build, and deploy the resulting application image to a running Kubernetes cluster.
 
-If necessary, a collection can be customized to meet local requirements. For example, you might want to define specific maintenance levels of software components or expose a particular port for your application. Customizing a collection provides a mechanism for controlling the precise development and runtime environment for an application. In a large organization, customization ensures that applications are developed and tested with a level of consistency that promotes quality and helps guarantee a seamless implementation in your production environment.
+If necessary, an application stack can be customized to meet local requirements. For example, you might want to define specific maintenance levels of software components or expose a particular port for your application. Customizing an application stack provides a mechanism for controlling the precise development and runtime environment for an application. In a large organization, customization ensures that applications are developed and tested with a level of consistency that promotes quality and helps guarantee a seamless implementation in your production environment.
+
+A stack is realized as a container image designed, built, and published by an application architect, which can then be pulled into local registries by application developers and into the deployment pipeline upon code deliveries.
+
+.Application stacks
+image::/docs/img/arch-overview-stacks.png[link="/docs/img/arch-overview-stacks.png" alt="Application stacks"]
+
+Although a stack is ultimately delivered as a regular container image, Kabanero specifies conventions for the internal structure of that image, with a clear separation between the portions of the stack that are common across all applications created with the stack and the portions that are unique to each application, being visible and editable by application developers.
+
+Those conventions for a collection stack are detailed in the https://appsody.dev/docs/stacks/stack-structure[Stack Structure] section of the https://appsody.dev/[Appsody website]. For the portion of the stack that is common across all applications, an application architect makes choices such as the base container image, the runtime framework for the programming language being targeted by the collection, the toolset for the runtime framework, the management choices for the running application, and many other choices not directly related to the functional aspects of the application.
+
+The stack structure also contains at least one application template: a set of source code files matching the technology of the stack. A template is used by the client portion of Kabanero upon request by application developers to create the first version of an application. As examples, a template may contain an empty website and web folder with all the visual branding elements for an organization, whereas another template may contain an empty REST-based application secured by API keys.
+
+Kabanero provides initial application stacks for the most popular software development frameworks, but it is expected that feedback from developers, regular upgrades, and ever-evolving organizational requirements start to drive the creation of custom application stacks or the updating of existing ones.
 
 === Developer Experience
 
@@ -40,28 +53,13 @@ Both Appsody and the local IDE extensions of Codewind depend on a running docker
 
 === Kabanero Foundation
 
-The *Kabanero Foundation* sits on the opposite side of the developer experience, as a managed pipeline that handles the workflows after application developers deliver their source code to a remote repository. Kabanero Foundation is a set of Kubernetes components covering the disciplines of serving applications (https://knative.dev/[Knative]), service mesh (https://istio.io/[Istio]), build (https://cloud.google.com/tekton/[Tekton]), and deployment (https://github.com/operator-framework[Operator Framework]).
+The *Kabanero Foundation* sits on the opposite side of the developer experience, as a managed pipeline that handles the workflows after application developers deliver their source code to a remote repository. Kabanero Foundation is a set of Kubernetes components covering the disciplines of serving applications, service mesh, build, and deployment.
 
-With these components deployed to a Kubernetes cluster, the Kabanero Foundation monitors changes to source code repositories (such as git) and triggers pipeline runs that will extract the source code, reassemble it according to the structure and runtime specifications of the underlying Kabanero Collection, execute all the build and verification steps, and then make the final application container pods available in the cluster.
+With these components deployed to a Kubernetes cluster, the Kabanero Foundation monitors changes to source code repositories (such as git) and triggers pipeline runs that will extract the source code, reassemble it according to the structure and runtime specifications of the underlying Kabanero application stack, execute all the build and verification steps, and then make the final application container pods available in the cluster.
 
 === Kabanero Unified Experience
 
 Applications in a production environment are subject to common operational policies and lifecycle operations. Kabanero combines a set of open-source projects to support operations teams in those activities, ranging from the Kubernetes CLI for managing the Kabanero custom resources, passing through the upcoming Kabanero CLI, all to way to Razee, a user interface for managing deployments across Kubernetes clusters.
-
-=== Collection Stacks
-
-A *stack* is part of a Kabanero Collection and it deserved its section in this guide as the single architectural component shared between application development and application deployment activities. A stack is realized as a container image designed, built, and published by an application architect, which can then be pulled into local registries by application developers and into the deployment pipeline upon code deliveries.
-
-.Collection stacks
-image::/docs/img/arch-overview-stacks.png[link="/docs/img/arch-overview-stacks.png" alt="Collection stacks"]
-
-Although a stack is ultimately delivered as a regular container image, Kabanero specifies conventions for the internal structure of that image, with a clear separation between the portions of the stack that are common across all applications created with the stack and the portions that are unique to each application, being visible and editable by application developers. 
-
-Those conventions for a collection stack are detailed in the https://appsody.dev/docs/stacks/stack-structure[Stack Structure] section of the https://appsody.dev/[Appsody website]. For the portion of the stack that is common across all applications, an application architect makes choices such as the base container image, the runtime framework for the programming language being targeted by the collection, the toolset for the runtime framework, the management choices for the running application, and many other choices not directly related to the functional aspects of the application.
-
-The stack structure also contains at least one application template: a set of source code files matching the technology of the stack. A template is used by the client portion of Kabanero upon request by application developers to create the first version of an application. As examples, a template may contain an empty website and web folder with all the visual branding elements for an organization, whereas another template may contain an empty REST-based application secured by API keys.
-
-Kabanero provides initial collections for the most popular software development frameworks, but it is expected that feedback from developers, regular upgrades, and ever-evolving organizational requirements start to drive the creation of custom collections or the updating of existing ones.
 
 == Workflows
 
@@ -73,13 +71,13 @@ image::/docs/img/arch-overview-workflows.png[link="/docs/img/arch-overview-workf
 
 === Create a new application (application developer)
 
-Assuming an organization has decided to begin with the initial collections shipped with Kabanero, an application developer would https://appsody.dev/docs/getting-started/installation[install Appsody] to its local system and lookup the collection and use the collection name to initialize a local directory with an initial application template. That activity is explained https://appsody.dev/docs/using-appsody/initializing-project[in detail] in the Appsody website but can be summarized as follows:
+Assuming an organization has decided to begin with the initial application stacks shipped with Kabanero, an application developer would https://appsody.dev/docs/getting-started/installation[install Appsody] to its local system and lookup the collection and use the application stack name to initialize a local directory with an initial application template. That activity is explained https://appsody.dev/docs/using-appsody/initializing-project[in detail] in the Appsody website but can be summarized as follows:
 
 ----
 
 > appsody list
 ...
-incubator nodejs-express 0.2.10 scaffold, *simple Express web framework for Node.js 
+incubator nodejs-express 0.2.10 scaffold, *simple Express web framework for Node.js
 ...
 
 > mkdir -p ~/workspace/myapp
@@ -89,13 +87,13 @@ incubator nodejs-express 0.2.10 scaffold, *simple Express web framework for Node
 
 === Iterate over application changes (application developer)
 
-As described in the https://appsody.dev/docs/stacks/stack-structure[Stack Structure] section of Appsody, besides the "Initialization" mode exercised during the creation of a new application, there are also "Rapid Local Development" and "Build and Deploy" modes, with the first mode being exercised the most during local application changes. The application architect designing that experience is expected to leverage the underlying framework capabilities to ensure code changes are reflected as quickly as possible. 
+As described in the https://appsody.dev/docs/stacks/stack-structure[Stack Structure] section of Appsody, besides the "Initialization" mode exercised during the creation of a new application, there are also "Rapid Local Development" and "Build and Deploy" modes, with the first mode being exercised the most during local application changes. The application architect designing that experience is expected to leverage the underlying framework capabilities to ensure code changes are reflected as quickly as possible.
 
 ----
 
 > appsody run
 ...
-// Wait for the local container to indicate it is ready, typically via 
+// Wait for the local container to indicate it is ready, typically via
 // console output
 
 // Make code changes, test code changes
@@ -106,7 +104,7 @@ As described in the https://appsody.dev/docs/stacks/stack-structure[Stack Struct
 ..
 ----
 
-Note that https://semver.org/[patches] to the Kabanero collection may be picked up between executions of "appsody run", triggering the download of the new base image for the stack. In the case of minor or major patches, the application architect is expected to notify application developers about the new release and implications to existing applications, at which point the application developers need to update the Kabanero metadata in the application directory to pick up these changes.
+Note that https://semver.org/[patches] to the Kabanero application stack may be picked up between executions of "appsody run", triggering the download of the new base image for the stack. In the case of minor or major patches, the application architect is expected to notify application developers about the new release and implications to existing applications, at which point the application developers need to update the Kabanero metadata in the application directory to pick up these changes.
 
 
 === Test build (application developer)
@@ -144,21 +142,21 @@ Similarly to testing a local build, application developers can preempt problems 
 Assuming the observance of proper controls and operational policies for the target Kubernetes cluster, "appsody deploy" can be used to deploy an application directly to that cluster. For actual production environments, access to the cluster will likely be restricted to an automated pipeline like the one included in Kabanero.
 
 === Deliver source code changes (application developer, pipeline)
- 
+
 With all code modifications, local build, and local deployment in place, this is the culmination of a local development session, which ends with a code push towards the application source code repository.
 
 At that point, Kabanero Foundation will detect the code delivery and execute a pipeline run that will ultimately result in the publication of the finished application.
 
 
-=== Modify and publish updated collection stack (application architect)
+=== Modify and publish updated application stack (application architect)
 
-After several iterations of the previous workflows, application developers will have provided valuable feedback to the application architect responsible for a given collection.
+After several iterations of the previous workflows, application developers will have provided valuable feedback to the application architect responsible for a given application stack.
 
 The overall process for modifying a stack is explained in the https://kabanero.io/guides/working-with-collections["Working with Kabanero Collections"] guide.
 
-At this point, the application architect must judge the nature of the changes in light of https://semver.org/[semantic versioning] guidelines and decide on the new version number for the stack. Kabanero collections are expected to have application templates set to adopt all new patches automatically and set to require a manual change to the application code to adopt minor and major versions. 
+At this point, the application architect must judge the nature of the changes in light of https://semver.org/[semantic versioning] guidelines and decide on the new version number for the stack. Application stacks are expected to have application templates set to adopt all new patches automatically and set to require a manual change to the application code to adopt minor and major versions.
 
-Once the decision about the new version is made. the collection must be published to the remote location hosting the collection, a process also described in the https://kabanero.io/guides/working-with-collections["Working with Kabanero Collections"] guide.
+Once the decision about the new version is made, the application stack must be published to the remote location hosting the application stack, a process also described in the https://kabanero.io/guides/working-with-collections["Working with Kabanero Collections"] guide.
 
 
 === Install Kabanero Foundation to Kubernetes cluster (operations team)
