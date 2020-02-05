@@ -150,7 +150,7 @@ If the data does not show a `Ready` state and the problem is persistent, there m
 
 == Debugging subcomponents
 
-You can use the `oc get` or the `oc describe` command to obtain the status of the subcomponents for the Kabanero operator.
+You can use the `oc get` or the `oc describe` command to obtain the status of the subcomponents for the product operator.
 
 For example, run the following command: 
 
