@@ -53,9 +53,9 @@ LOGS_DIR=<my_directory> ./mustgather-all.sh
 
 By default, MustGather data is stored in the `kabanero-debug` directory. The command also stores compressed information in the `kabanero-debug-<timestamp>.tar.gz` file.
 
-== Errors when using a Tekton webhook to trigger pipelines
+== Errors when using a webhook to trigger pipelines
 
-When using a Tekton webhook to trigger pipelines installed with Kabanero, the last task is the `monitor-result-task`, which may fail in some cases.
+When using a webhook to trigger a default pipeline, the last task is the `monitor-result-task`, which may fail in some cases.
 This might also cause the webhook pod to be in the "Error" state. The following failures of `monitor-result-task` in the TaskRun view can be disregarded
 at this time; they do not impact the application deployment:
 
@@ -65,11 +65,11 @@ at this time; they do not impact the application deployment:
 == `Failed to create webhook` error
 
 An error creating webhooks will occur when the user selects a pipeline that does not have the associated TriggerTemplate and TriggerBindings when creating a webhook in the extension.
-Each pipeline must have a number of Triggers resources for the Webhooks Extension to work properly, as described here: https://github.com/tektoncd/experimental/blob/master/webhooks-extension/docs/GettingStarted.md#pipeline
+Each pipeline must have a number of triggers resources for the Webhooks Extension to work properly, as described here: https://github.com/tektoncd/experimental/blob/master/webhooks-extension/docs/GettingStarted.md#pipeline
 
 ----
-Select the Pipeline in the target Namespace from which a PipelineRun (and accompanying PipelineResources) will be created, as described in the section
-'What does the Tekton Dashboard's Webhooks Extension do?', above. Note that you need to have related Tekton Trigger resources installed in the install
+Select the pipeline in the target Namespace from which a PipelineRun (and accompanying PipelineResources) will be created, as described in the section
+'What does the Tekton Dashboard's Webhooks Extension do?', above. Note that you need to have related trigger resources installed in the install
 namespace (rather than the target namespace), these resources being; a triggertemplate called <pipeline-name>-template and two triggerbindings
 <pipeline-name>-push-binding and <pipeline-name>-pullrequest-binding.
 ----
@@ -82,13 +82,13 @@ of the registry's persistent volume (PV) is too low.
 
 To resolve this problem, change the IOPS setting of the PV's backing storage device.
 
-== Webhooks are not created in GitHub, even though the Tekton dashboard says webhook creation was successful
+== Webhooks are not created in GitHub, even though the pipelines dashboard says webhook creation was successful
 
 When the webhooks extension sink does not run for extended periods of time, the KService might not be marked as `ready`, which can prevent a webhook from being created.
 
 === To diagnose this problem:
 
-. Check that your pods in the `knative-serving`, `knative-sources`, and `knative-eventingandistio-system` namespaces are healthy, and that you have a `ServiceMeshMemberRoll` resource that includes your install namespace for the Tekton Dashboard and Webhooks Extension.
+. Check that your pods in the `knative-serving`, `knative-sources`, and `knative-eventingandistio-system` namespaces are healthy, and that you have a `ServiceMeshMemberRoll` resource that includes your install namespace for the pipelines dashboard and webhooks extension.
 
 . Inspect the logs in the `github-controller-manager-0` pod in the `knative-eventing` namespace.  For example, run:
 +
