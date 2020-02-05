@@ -38,7 +38,7 @@ Use the Kabanero CLI URL to log in. There are two ways you can get this URL:
 Run the `kabanero login` command to authenticate to Kabanero.
 
 ----
-kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID> 
+kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID>
 ----
 
 * `<KABANERO_CLI_URL>` is your Kabanero CLI URL from above.
@@ -69,7 +69,7 @@ PASSWORD:<GITHUB_PASSWORD>
 * Log in with previously used url GitHub user ID and PAT
 +
 ----
-kabanero login -u <GITHUB_USER_ID> 
+kabanero login -u <GITHUB_USER_ID>
 PASSWORD: <GITHUB_PAT>
 ----
 
@@ -92,12 +92,12 @@ This command is under development.
 Example result:
 
 ----
-Please go to the tekton dashboard at <tekton-url> in your browser and manually configure the webhook for gituser: <GITHUB_USER_ID>
+Go to the pipelines dashboard at <tekton-url> in your browser and manually configure the webhook for gituser: <GITHUB_USER_ID>
 ----
 
-=== List Kabanero Collections
+=== List Kabanero Application Stacks
 
-Run the `kabanero list` command to list all the collections in a kabanero instance, along with their status.
+Run the `kabanero list` command to list all the application stacks in a kabanero instance, along with their status.
 
 ----
 kabanero list
@@ -106,7 +106,7 @@ kabanero list
 Example result:
 
 ----
-Kabanero Instance Collections	Version	Status
+Kabanero Instance Application Stacks	Version	Status
 -----------------------------	-------	------
 java-microprofile		0.2.18	active
 java-spring-boot2		0.3.15	active
@@ -125,7 +125,7 @@ nodejs-loopback			0.1.6
 
 === Synchronize collections
 
-Run the `kabanero sync` command to synchronize the list of Kabanero instance collections with the curated collection from GitHub. This will activate/deactivate as well as update versions of the Kabanero collections to reflect the state of the curated collection. See also <<kabanero deactivate>>. Modifications to the curated collection may be slow to replicate in GitHub and therefore may not be reflected immediately in KABANERO LIST or SYNC display output.
+Run the `kabanero sync` command to synchronize the list of Kabanero instance stack hubs with the curated application stack from GitHub. This will activate/deactivate as well as update versions of the Kabanero stack hub to reflect the state of the curated application stack. See also <<kabanero deactivate>>. Modifications to the curated application stack may be slow to replicate in GitHub and therefore may not be reflected immediately in KABANERO LIST or SYNC display output.
 
 ----
 kabanero sync
@@ -134,22 +134,22 @@ kabanero sync
 Example results:
 
 ----
-active collection is already synchronized with master
+active application stack is already synchronized with master
 ----
 
-Curated collections and active collections are now fully synchronized.
+Curated application stacks and active application stacks are now fully synchronized.
 
 or
 
 ----
-Kabanero Instance Collections	Version	Status
+Kabanero Instance Application Stacks	Version	Status
 -----------------------------	-------	------
 nodejs				0.2.6	inactive ==> active
 ----
 
-=== Show the active repository collection for a Kabanero instance
+=== Show the active repository application stack for a Kabanero instance
 
-Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the active collections repository for a Kabanero instance.
+Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the active application stacks repository for a Kabanero instance.
 
 . From the OpenShift console, view Administration > Custom Resource Definitions > Kabanero > Instances > Kabanero > YAML
 . Displaying the configured Kabanero CR with the OC CLI command
@@ -174,26 +174,26 @@ kabanero command line service image: kabanero/kabanero-command-line-services:0.3
 
 === Deactivate Kabanero
 
-Run the `kabanero deactivate` command to prevent a collection from being shown to the development team, without deleting it.
+Run the `kabanero deactivate` command to prevent an application stack from being shown to the development team, without deleting it.
 
 ----
-kabanero deactivate collection-name
+kabanero deactivate application-stack-name
 ----
 
-Running the deactivate command removes the specified collection from the list of available application types, without deleting it from the Kabanero instance.
+Running the deactivate command removes the specified application stack from the list of available application types, without deleting it from the Kabanero instance.
 
-This command is useful when you clone a collection and customize it for your business needs. Deactivation keeps the base collection in the app hub. The base collection continues to be updated and the updates percolate up to your cloned collection. To restore a deactivated collection, run the `kabanero sync` command. See <<Synchronize collections>>.
+This command is useful when you clone an application stack and customize it for your business needs. Deactivation keeps the base application stack in the application stack hub. The base application stack continues to be updated and the updates percolate up to your cloned application stack. To restore a deactivated application stack, run the `kabanero sync` command. See <<Synchronize application stacks>>.
 
 Example result:
 
 ----
-Collection name: nodejs deactivated
+Application stack name: nodejs deactivated
 ----
 
-Running the `kabanero list` command now shows the deactivated collection as inactive.
+Running the `kabanero list` command now shows the deactivated application stack as inactive.
 
 ----
-Kabanero Instance Collections	Version	Status
+Kabanero Instance Application Stacks	Version	Status
 -----------------------------	-------	------
 java-microprofile		0.2.18	active
 java-spring-boot2		0.3.15	active
@@ -201,7 +201,7 @@ nodejs				0.2.6	inactive
 nodejs-express			0.2.8	active
 nodejs-loopback			0.1.6	active
 
-GitHub Curated Collections	Version
+GitHub Curated Application Stacks	Version
 --------------------------	-------
 java-microprofile		0.2.18
 java-spring-boot2		0.3.15
@@ -238,4 +238,4 @@ These options can be enabled on any Kabanero command.
 == Related links
 
 - link:https://github.com/kabanero-io/kabanero-command-line#kabanero-cli[Kabanero CLI repository]
-- link:https://github.com/kabanero-io/kabanero-security#support-for-authentication-and-rbac-for-kabanero-collection-maintenance[Support for authentication and RBAC for Kabanero Collection maintenance]
+- link:https://github.com/kabanero-io/kabanero-security#support-for-authentication-and-rbac-for-kabanero-collection-maintenance[Support for authentication and RBAC for Kabanero application stack maintenance]
