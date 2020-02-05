@@ -6,7 +6,7 @@
 
 Learn how to isolate and resolve problems with Kabanero.
 
-Make sure that your enters are not related to the operating system, such as disk, memory, and CPU capacities.
+Make sure that your issues are not related to the operating system, such as disk, memory, and CPU capacities.
 
 * See https://github.com/kabanero-io/kabanero-foundation#cluster-hardware-capacity[Kabanero resource requirements, window="_blank"]
 
@@ -134,7 +134,7 @@ Status:
   Sink Uri:                http://webhooks-extension-sink.myinstallnamespacesvc.cluster.local
 ----
 
-If the data does not show a `Ready` state and the problem is persistent, there might be an enter with the webhooks extension code itself.
+If the data does not show a `Ready` state and the problem is persistent, there might be an issue with the webhooks extension code itself.
 
 === To resolve the problem:
 
