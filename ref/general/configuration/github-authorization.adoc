@@ -6,7 +6,7 @@
 :page-doc-number: 4.0
 = Configuring Kabanero CLI service authorization
 
-You can modify your Kabanero CR instance to provide authorization to the teams in GitHub that will administer the collection(s).
+You can modify your Kabanero CR instance to provide authorization to the teams in GitHub that will administer the application stacks.
 If you do not already have a team defined, see link:https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/creating-a-team[Creating a team, window=_blank].
 
 .To provide authorization:
@@ -14,7 +14,7 @@ If you do not already have a team defined, see link:https://help.github.com/en/g
 * The `Spec.Github.teams` attribute should be set to a yaml list of GitHub teams in the remote GitHub repository, whose members can administer the collection using the Kabanero CLI.
 * The `Spec.Github.apiUrl` attribute should be set to the API URL for the remote GitHub repository being used.  For example, the API URL for `github.com` is `https://api.github.com`.
 +
-A modified Kabanero CR instance for a collection repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.5.0` of collections might look like this:
+A modified Kabanero CR instance for an application stack repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.5.0` of collections might look like this:
 +
 ```yaml
 apiVersion: kabanero.io/v1alpha1
