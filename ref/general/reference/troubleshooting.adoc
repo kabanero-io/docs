@@ -167,17 +167,17 @@ status:
   appsody:
     ready: "True"
     version: 0.3.0
-  che:
-    cheOperator:
-      version: 7.3.1
-    errorMessage: Unavailable
-    kabaneroChe:
-      version: 0.6.0
-    kabaneroCheInstance:
-      cheImage: kabanero/kabanero-che
-      cheImageTag: 0.6.0
-      cheWorkspaceClusterRole: eclipse-codewind
-    ready: "False"
+  codereadyWorkspaces:
+    ready: True
+    message: Error message here
+    operator:
+      version: 2.0.0
+      instance:
+        devfileRegistryImage: repository:tag
+        cheWorkspaceClusterRole: role-name
+        openShiftOAuth: false
+        selfSignedCert: false
+        tlsSupport: false  
   cli:
     hostnames:
     - kabanero-cli-kabanero.apps.mycluster.os.example.com
@@ -242,7 +242,7 @@ To obtain the logs, enter the following command:
 oc -n openshift-operators logs $(oc -n openshift-operators get pods -l name=appsody-operator -o=jsonpath={.items[0].metadata.name})
 ----
 
-=== che
+=== CodeReady Workspaces
 
 The CodeReady Workspaces component provides a hosted Integrated Development Environment (IDE).
 
