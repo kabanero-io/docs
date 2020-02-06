@@ -228,7 +228,7 @@ oc -n kabanero logs $(oc -n kabanero get pods -l name=kabanero-operator-admissio
 
 === appsody
 
-The appsocy component manages the deployment of the application container.
+The appsody component manages the deployment of the application container.
 
 To obtain the state, enter the following command:
 
@@ -244,18 +244,18 @@ oc -n openshift-operators logs $(oc -n openshift-operators get pods -l name=apps
 
 === che
 
-The che component provides a hosted Integrated Development Environment (IDE).
+The CodeReady Workspaces component provides a hosted Integrated Development Environment (IDE).
 
 To obtain the state, enter the following command:
 
 ----
-oc -n kabanero describe pods -l app=che-operator
+oc -n kabanero describe pods -l app=codeready-operator
 ----
 
 To obtain the logs, enter the following command:
 
 ----
-oc -n kabanero logs $(oc -n kabanero get pods -l app=che-operator -o=jsonpath={.items[0].metadata.name})
+oc -n kabanero logs $(oc -n kabanero get pods -l app=codeready-operator -o=jsonpath={.items[0].metadata.name})
 ----
 
 === cli
