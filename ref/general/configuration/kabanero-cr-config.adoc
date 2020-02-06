@@ -41,9 +41,6 @@ specify the following fields:
     member of a team in this list. To learn how to create teams in GitHub, see link:https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/creating-a-team[Creating a team, window=_blank].
 *** `apiUrl` - The GitHub API URL for the GitHub containing the collection
     repositories.  For example, the API URL for github.com is https://api.github.com.
-** `sso`
-*** `adminSecretName` - The secret that contains the Red Hat Single Sign On administor id, password and security realm.
-*** `enable` - Controls whether the kabanero operator will configure RHSSO.  Valid values are `true` and `false`
 ** `collections`
 *** `repositories` - A list of repositories containing Kabanero collections.
 **** `name` - A descriptive name of the collection repository.

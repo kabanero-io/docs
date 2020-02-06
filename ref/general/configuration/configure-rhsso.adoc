@@ -5,11 +5,12 @@
 :sectanchors:
 = Configuring Kabanero to add Red Hat Single Sign On
 
-After Kabanero is installed, the Kabanero operator can create an instance of Red Hat Single Sign On for development use.  After you create the required secret and persistent volume, and edit the Kabanero CR, the RHSSO instance will be created. 
+After Kabanero is installed, the Kabanero operator can optionally create an instance of Red Hat Single Sign On (RHSSO) for development use.
+To create the RHSSO instance, create the required secret and the persistent volume and then edit the Kabnero custom resource (CR).
 
-. Create a persistent volume of size 1gb. The type of storage used might vary depending on the environment where OpenShift is installed.
-Some types of persistent volumes such as NFS require that you set up an NFS server in your cluster first. 
-In your console, in the kabanero project namespace, click ** Storage --> Persistent Volumes --> Create Persistent Volume.  
+. Create a persistent volume (PV) of size 1 GB. The type of storage used might vary depending on the environment where OpenShift is installed.
+Some types of persistent volumes, such as NFS require that you set up an NFS server in your cluster first. 
+In your OCP console, in the kabanero project namespace, click Storage --> Persistent Volumes --> Create Persistent Volume.  
 Edit the yaml as needed for your cluster's storage configuration.  Here is an example using NFS:
 
 ```yaml
@@ -29,15 +30,15 @@ spec:
   volumeMode: Filesystem
 ```  
 
-Note that other components may also require a persistent volume.  run 'oc get pv' and check that the PV remains available. If some other 
-component binds to it (status is BOUND), create another one, or disable the other component if it is not being used. 
+Note that other components may also require a persistent volume.  Run 'oc get pv' and check that the PV remains available. If some other 
+component binds to it (status is BOUND), create another PV, or disable the other component if it is not being used. 
 
-. Create a secret. In your console, in the kabanero project namespace, click ** Workloads -> Secrets -> Create** and create a **key/value secret**.
-    * `Secret Name` is: `rhsso-secret`
-    * Add three key value pairs to the secret.
-    ** key: `SSO_ADMIN_USERNAME` and the value is the administrator username for RHSSO.
-    ** key: `SSO_ADMIN_PASSWORD` and the value is the administrator realm for RHSSO.
-    ** key: `SSO_REALM` and the value is the realm name for RHSSO to use. 
+. Create a secret. In your OCP console, in the kabanero project namespace, click ** Workloads -> Secrets -> Create** and create a **key/value secret**.
+    * `Secret Name` can be: `rhsso-secret` (Make a note of the name that you use for updating the Kabanero CR later.)
+    * Add three key-value pairs to the secret. (Select add Key/Value to add the other pairs after the first pair.)
+    ** Key: `SSO_ADMIN_USERNAME` Value:  The administrator username for RHSSO, for example `myadminid`.
+    ** Key: `SSO_ADMIN_PASSWORD` Value:  The administrator password for RHSSO, for example `myadminpassword`.
+    ** Key: `SSO_REALM` Value: The security realm name for RHSSO to use, for example `testing_realm`.
     * Click **Create**
 
 . Edit the Kabanero CR, under sso:
