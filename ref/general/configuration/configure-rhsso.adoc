@@ -30,7 +30,7 @@ spec:
 ```  
 
 Note that other components may also require a persistent volume.  run 'oc get pv' and check that the PV remains available. If some other 
-component binds to it (status is BOUND), create another one, or disable the other compenent if it is not being used. 
+component binds to it (status is BOUND), create another one, or disable the other component if it is not being used. 
 
 . Create a secret. In your console, in the kabanero project namespace, click ** Workloads -> Secrets -> Create** and create a **key/value secret**.
     * `Secret Name` is: `rhsso-secret`
@@ -41,6 +41,6 @@ component binds to it (status is BOUND), create another one, or disable the othe
     * Click **Create**
 
 . Edit the Kabanero CR, under sso:
-    * set enable to "true"
+    * set enable to `true`
     * set adminSecretName to `rhsso-secret`
 
