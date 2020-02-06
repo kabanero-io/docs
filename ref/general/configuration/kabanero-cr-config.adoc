@@ -110,6 +110,14 @@ specify the following fields:
       requires that `tlsSupport` is also set to `true`.
 ***** `tlsSupport` - Controls whether TLS is enabled for the CodeReady
       Workspaces instance.  Valid values are `true` and `false`.
+** `sso` - Configuration for the Red Hat SSO Server
+*** `enable` - Controls whether Kabanero will deploy an instance of 
+    the Red Hat SSO Server for application use.  Valid values are `true` a
+    nd `false`.  The default value is `false`.
+*** `adminSecretName` - The name of a secret that contains keys for
+    `username`, `password`, and `realm`.  These values will become the
+    admin username and password for the Red Hat SSO server, as well as
+    define the realm that the SSO server will use.
 
 The following `Status` fields are maintained by the Kabanero operator to
 provide information about the installed components, and the health of the
@@ -211,12 +219,21 @@ Kabanero instance:
 ***** `openShiftOAuth` - Displays whether your cluster's OpenShift user
       accounts are used to log into CodeReady Workspaces.  Requires
       permanent users (accounts other than `kube:admin`) set up first.
-      Valid values are `true` and `false`
+      Valid values are `True` and `False`
 ***** `selfSignedCert` - Displays whether the CodeReady Workspaces instance
       is using self-signed certificates when communicating over TLS.
-      Valid values are `true` and `false`.
+      Valid values are `True` and `False`.
 ***** `tlsSupport` - Displays whether TLS is enabled for the CodeReady
-      Workspaces instance.  Valid values are `true` and `false`.
+      Workspaces instance.  Valid values are `True` and `False`.
+** `sso` - Contains information about the Red Hat SSO Server
+*** `configured` - Displays whether the Red Hat SSO Server configuration
+    is present in this Kabanero CR instance.  Valid values are `True`
+    and `False`.
+*** `ready` - The overall status of the Red Hat SSO Server.  A value
+    of `True` indicates it was installed and configured successfully.
+    A value of `False` indicates that there was a problem, and more
+    information can be found by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
 
 == Inspecting your Kabanero CR Instance
 
