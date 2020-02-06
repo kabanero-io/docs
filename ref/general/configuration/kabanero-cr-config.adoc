@@ -89,12 +89,27 @@ specify the following fields:
 *** `enable` - Controls whether the Kabanero landing page is deployed by
     the Kabanero operator.  Valid values are `true` and `false`.  The default
     value is `true`.
-** `che`
-*** `enable` - Controls whether Kabanero will deploy an instance of Che.
-    Valid values are `true` and `false`.  The default value is `false`.
-*** `cheOperatorInstance`
-**** `cheWorkspaceClusterRole` - The workspace cluster role used
-     by Che.  By default, the `eclipse-codewind` cluster role is used.
+** `codereadyWorkspaces`
+*** `enable` - Controls whether Kabanero will deploy an instance of 
+    CodeReady Workspaces.  Valid values are `true` and `false`.
+    The default value is `false`.
+*** `operator` - Configuration for the CodeReady Workspaces operator.
+**** `instance`
+***** `devFileRegistryImage` - The devfile image that should be used by
+      the CodeReady Workspaces instance.
+***** `cheWorkspaceClusterRole` - The workspace cluster role used
+      by CodeReady Workspaces.  By default, the `eclipse-codewind`
+      cluster role is used.
+***** `openShiftOAuth` - Controls whether your cluster's OpenShift user
+      accounts are used to log into CodeReady Workspaces.  Requires
+      permanent users (accounts other than `kube:admin`) set up first.
+      Valid values are `true` and `false`
+***** `selfSignedCert` - Controls whether the CodeReady Workspaces instance
+      should use a self-signed certificates when communicating over TLS.
+      Valid values are `true` and `false`.  Note that a value of `true`
+      requires that `tlsSupport` is also set to `true`.
+***** `tlsSupport` - Controls whether TLS is enabled for the CodeReady
+      Workspaces instance.  Valid values are `true` and `false`.
 
 The following `Status` fields are maintained by the Kabanero operator to
 provide information about the installed components, and the health of the
@@ -106,15 +121,15 @@ Kabanero instance:
 *** `ready` - The overall Status of Kabanero.  A value of `True`
     indicates Kabanero has been installed successfully.  A value of `False`
     indicates that there was a problem, and more information can be found
-    by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+    by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
 *** `version` - Shows the version of Kabanero that is currently installed.
     This version can be different from `Spec.version` if there is a problem
     configuring and installing the `Spec.version`.
 ** `serverless` - Contains information about the OpenShift Serverless
    operator which was found on this cluster.
 *** `ready` - The overall status of the Serverless operator.
-*** `errorMessage` - Provides more details for a `ready` status of
+*** `message` - Provides more details for a `ready` status of
     `False`.
 *** `version` - The version of the Serverless operator as reported by
     the CSV for the Serverless operator.
@@ -123,8 +138,8 @@ Kabanero instance:
 **** `ready` - The overall status of the Knative Serving operator,
     as reported by the `KnativeServing` CR instance.  A value of `False`
     indicates there was a problem, and more information can be found by
-    looking in the `errorMessage` attribute.
-**** `errorMessage` - Provides more details for a `ready` status of `False`.
+    looking in the `message` attribute.
+**** `message` - Provides more details for a `ready` status of `False`.
     The error message is copied from the `ready` condition on the
     `KnativeServing` CR instance.
 **** `version` - The version of Knative Serving as reported by the
@@ -133,9 +148,9 @@ Kabanero instance:
    on this cluster.
 *** `ready` - The overall status of Tekton, as reported by the
     Tekton `Config` CR instance.  A value of `False` indicates there was a
-    problem, and more information can be found by looking in the `errorMessage`
+    problem, and more information can be found by looking in the `message`
     attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+*** `message` - Provides more details for a `ready` status of `False`.
     The error message is copied from the `ready` condition on the `Config`
     CR instance.
 *** `version` - The version of Tekton as reported by the Tekton `Config`
@@ -144,9 +159,9 @@ Kabanero instance:
 *** `ready` - The overall status of the Kabanero CLI backend
     service.  A value of `True` indicates the service was installed
     successfully.  A value of `False` indicates there was a problem, and
-    more information can be found by looking in the `errorMessage`
+    more information can be found by looking in the `message`
     attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+*** `message` - Provides more details for a `ready` status of `False`.
 *** `hostnames` - Provides the hostnames from the `Route` that was created
     for the Kabanero CLI service.  The hostname can be used in the Kabanero
     CLI to connect to this Kabanero instance.
@@ -154,16 +169,16 @@ Kabanero instance:
 *** `ready` - The overall status of the Kabanero landing page.
     A value of `True` indicates the landing page was deployed successfully.
     A value of `False` indicates there was a problem, and more information can
-    be found by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+    be found by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
 *** `version` - The version of the landing page that was deployed.
 ** `appsody` - Contains information about the Appsody operator that was
    deployed by the Kabanero operator.
 *** `ready` - The overall status of the Appsody operator.  A value
     of `True` indicates the operator was deployed successfully.  A value of
     `False` indicates there was a problem, and more information can be found
-    by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False.
+    by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False.
 ** `kappnav` Contains information about the kAppNav that was found on the
    cluster.  kAppNav is an optional component of Kabanero.  If kAppNav is
    not found in its default location in the `kappnav` namespace, its status
@@ -171,32 +186,37 @@ Kabanero instance:
 *** `ready` - The overall status of kAppNav.  A value of `True`
     indicates kAppNav was installed and configured successfully.  A value
     of `False` indicates that there was a problem, and more information can
-    be found by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+    be found by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
 *** `uiLocations` - The location (URL) of the UI endpoint of kAppNav.
     This information is copied from the `Route` for the kAppNav UI service.
 *** `apiLocations` - The location (URL) of the API endpoint of
     kAppNav.  This information is copied from the `Route` for the kAppNav API
     service.
-** `che` - Contains information about the Che instance that is deployed by
-   the Kabanero operator.
-*** `ready` - The overall status of Che.  A value of `True`
-    indicates Che was installed and configured successfully.  A value of
+** `codereadyWorkspaces` - Contains information about the CodeReady
+   Workspaces instance that is deployed by the Kabanero operator.
+*** `ready` - The overall status of CodeReady Workspaces.  A value of `True`
+    indicates it was installed and configured successfully.  A value of
     `False` indicates that there was a problem, and more information can be
-    found by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
-*** `cheOperator`
-**** `version` - The version of the Che operator used.
-*** `kabaneroChe`
-**** `version` - The version of the Kabanero-Che container used
-     to configure the Che instance.
-*** `kabaneroCheInstance`
-**** `cheImage` - The Kabanero-Che image name used by this Che
-     instance.
-**** `cheImageTag` - The tag of the Kabanero-Che image used by this
-     Che instance.
-**** `cheWorkspaceClusterRole` - The name of the cluster role used
-     by the workspaces that are created by this Che instance.
+    found by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
+*** `operator`
+**** `version` - The version of the CodeReady Workspaces operator used.
+**** `instance`
+***** `devFileRegistryImage` - The devfile image that should be used by
+      the CodeReady Workspaces instance.
+***** `cheWorkspaceClusterRole` - The workspace cluster role used
+      by CodeReady Workspaces.  By default, the `eclipse-codewind`
+      cluster role is used.
+***** `openShiftOAuth` - Displays whether your cluster's OpenShift user
+      accounts are used to log into CodeReady Workspaces.  Requires
+      permanent users (accounts other than `kube:admin`) set up first.
+      Valid values are `true` and `false`
+***** `selfSignedCert` - Displays whether the CodeReady Workspaces instance
+      is using self-signed certificates when communicating over TLS.
+      Valid values are `true` and `false`.
+***** `tlsSupport` - Displays whether TLS is enabled for the CodeReady
+      Workspaces instance.  Valid values are `true` and `false`.
 
 == Inspecting your Kabanero CR Instance
 
