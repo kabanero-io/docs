@@ -30,8 +30,7 @@ spec:
   volumeMode: Filesystem
 ```  
 
-Note that other components may also require a persistent volume.  Run 'oc get pv' and check that the PV remains available. If some other 
-component binds to it (status is BOUND), create another PV, or disable the other component if it is not being used. 
+Note that other components may also require a persistent volume.  Run 'oc -n kabanero get pv' and check that the PV remains available. If some other component binds to it (status is BOUND), create another PV, or disable the other component if it is not being used. 
 
 . Create a secret. In your OCP console, in the kabanero project namespace, click ** Workloads -> Secrets -> Create** and create a **key/value secret**.
     * `Secret Name` can be: `rhsso-secret` (Make a note of the name that you use for updating the Kabanero CR later.)
@@ -46,5 +45,5 @@ component binds to it (status is BOUND), create another PV, or disable the other
     * set adminSecretName to `rhsso-secret`
     * click **Save**
 
-. The URL to the RHSSO console can be found in the OCP console, in the kabanero project namespace, under networking, in the "sso" route.  
+. The URL to the RHSSO console can be found in the OCP console, in the kabanero project namespace, under networking, in the "sso" route.  Use the values that were supplied in the secret for `SSO_ADMIN_USERNAME` and `SSO_ADMIN_PASSWORD` to login in to the RHSSO console. 
 
