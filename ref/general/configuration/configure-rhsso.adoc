@@ -44,4 +44,7 @@ component binds to it (status is BOUND), create another PV, or disable the other
 . Edit the Kabanero CR, under sso:
     * set enable to `true`
     * set adminSecretName to `rhsso-secret`
+    * click **Save**
+
+. The URL to the RHSSO console can be found in the OCP console, in the kabanero project namespace, under networking, in the "sso" route.  
 
