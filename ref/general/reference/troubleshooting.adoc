@@ -147,3 +147,231 @@ If the data does not show a `Ready` state and the problem is persistent, there m
 . Ensure that `webhooks-extension-sink` KService is in the `Ready` state.
    - Use the `oc get kservice -n tekton-pipelines` command.
    - If the `webhooks-extension-sink` KService is not in the `Ready` state, delete a revision object that is associated with the `webhooks-extension-sink`. For example, use the `oc delete rev -l serving.knative.dev/configuration=webhooks-extension-sink` command.
+
+== Debugging subcomponents
+
+You can use the `oc get` or the `oc describe` command to obtain the status of the subcomponents for the product operator.
+
+For example, run the following command: 
+
+----
+oc -n kabanero get kabanero kabanero -o=yaml
+----
+
+If the command is successful, it returns information like the following example: 
+
+----
+status:
+  admissionControllerWebhook:
+    ready: "True"
+  appsody:
+    ready: "True"
+    version: 0.3.0
+  codereadyWorkspaces:
+    ready: True
+    message: Error message here
+    operator:
+      version: 2.0.0
+      instance:
+        devfileRegistryImage: repository:tag
+        cheWorkspaceClusterRole: role-name
+        openShiftOAuth: false
+        selfSignedCert: false
+        tlsSupport: false  
+  cli:
+    hostnames:
+    - kabanero-cli-kabanero.apps.mycluster.os.example.com
+    ready: "True"
+  collectionController:
+    ready: "True"
+    version: 0.6.0-alpha.1
+  kabaneroInstance:
+    errorMessage: One or more resource dependencies are not ready.
+    ready: "False"
+    version: 0.6.0
+  landing:
+    ready: "True"
+    version: 0.5.0
+  serverless:
+    knativeServing:
+      ready: "True"
+      version: 0.10.0
+    ready: "True"
+    version: 1.3.0
+  stackController:
+    ready: "True"
+    version: 0.6.0-alpha.1
+  tekton:
+    ready: "True"
+    version: v0.8.0
+----
+
+When a subcomponent is not ready or is failing, the product returns an error message, which could come directly 
+from the subcomponent. You can gather more information on why a subcomponent is not ready or is failing by referring to the description of each
+subcomponent that follows. Each description includes a command to determine the state for the component and a command to gather logs for the componenet.
+
+=== admissionControllerWebhook
+
+The admissionControllerWebhook component is part of the product operator and includes a deployment, a replicaset, and a pod.
+
+To obtain the state, enter the following command: 
+
+----
+oc -n kabanero describe pods -l name=kabanero-operator-admission-webhook
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n kabanero logs $(oc -n kabanero get pods -l name=kabanero-operator-admission-webhook -o=jsonpath={.items[0].metadata.name}
+----
+
+=== appsody
+
+The appsody component manages the deployment of the application container.
+
+To obtain the state, enter the following command:
+
+----
+oc -n openshift-operators describe pods -l name=appsody-operator
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n openshift-operators logs $(oc -n openshift-operators get pods -l name=appsody-operator -o=jsonpath={.items[0].metadata.name})
+----
+
+=== CodeReady Workspaces
+
+The CodeReady Workspaces component provides a hosted Integrated Development Environment (IDE).
+
+To obtain the state, enter the following command:
+
+----
+oc -n kabanero describe pods -l app=codeready-operator
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n kabanero logs $(oc -n kabanero get pods -l app=codeready-operator -o=jsonpath={.items[0].metadata.name})
+----
+
+=== cli
+
+The cli component provides a service for interacting with the product instance.
+
+To obtain the state, enter the following command:
+
+----
+oc -n kabanero describe pods -l app=kabanero-cli
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n kabanero logs $(oc -n kabanero get pods -l app=kabanero-cli -o=jsonpath={.items[0].metadata.name})
+----
+
+=== collectionController
+
+The collectionController component manages product Collection resources.
+
+To obtain the state, enter the following command:
+
+----
+oc -n kabanero describe pods -l app=kabanero-operator-collection-controller
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n kabanero logs $(oc -n kabanero get pods -l app=kabanero-operator-collection-controller -o=jsonpath={.items[0].metadata.name})
+----
+
+=== kabaneroInstance
+
+The kabaneroInstance component is the collective state of the product operator and its subcomponents.
+
+To obtain the state, enter the following command:
+
+----
+oc -n kabanero describe kabanero kabanero
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n kabanero logs $(oc -n kabanero get pods -l name=kabanero-operator -o=jsonpath={.items[0].metadata.name})
+----
+
+=== landing 
+
+The landing component provides the landing page for the console.
+
+To obtain the state, enter the following command:
+
+----
+oc -n kabanero describe pods -l app=kabanero-landing
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n kabanero logs $(oc -n kabanero get pods -l app=kabanero-landing -o=jsonpath={.items[0].metadata.name})
+----
+
+=== serverless
+
+The serverless component manages the KnativeServing instances. 
+
+To obtain the state, enter the following command:
+
+----
+oc -n openshift-operators describe pods -l name=knative-serving-operator
+----
+
+To obtain the instance of the state, enter the following command: 
+
+----
+oc -n knative-serving describe knativeserving knative-serving
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n openshift-operators logs $(oc -n openshift-operators get pods -l name=knative-serving-operator -o=jsonpath={.items[0].metadata.name})
+----
+
+=== stackController
+
+The stackController component manages the application stack resources.
+
+To obtain the state, enter the following command:
+
+----
+oc -n kabanero describe pods -l app=kabanero-operator-stack-controller
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n kabanero logs $(oc -n kabanero get pods -l app=kabanero-operator-stack-controller -o=jsonpath={.items[0].metadata.name})
+----
+
+=== pipeline
+
+The pipeline component provides pipeline, task, and trigger resources used by stacks.
+
+To obtain the state, enter the following command:
+
+----
+oc -n openshift-operators describe pods -l name=openshift-pipelines-operator
+----
+
+To obtain the logs, enter the following command:
+
+----
+oc -n openshift-operators logs $(oc -n openshift-operators get pods -l name=openshift-pipelines-operator -o=jsonpath={.items[0].metadata.name})
+----
