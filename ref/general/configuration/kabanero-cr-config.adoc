@@ -6,8 +6,8 @@
 = Configuring a Kabanero CR instance
 
 A `Kabanero` custom resource (CR) instance describes a particular Kabanero
-installation.  This description includes the locations of the Appsody
-Stacks, and how the Kabanero CLI should interact with GitHub.
+installation.  This description includes the locations of the application
+stacks, and how the Kabanero CLI should interact with GitHub.
 
 The `Spec` section of the `Kabanero` instance describes the desired
 configuration.  The `Status` section is populated by the Kabanero operator,
@@ -23,10 +23,10 @@ specify the following fields:
 
 * `Spec`
 ** `version` - The release of Kabanero that you want to install.
-   The levels of the individual components, such as the Appsody operator
+   The levels of the individual components, such as the application operator
    and CLI services, are selected automatically based on this level.  The
    release follows semver notation (for example, 0.6.0).
-** `targetNamespaces` - A list of namespaces which the Appsody operator will
+** `targetNamespaces` - A list of namespaces which the application operator will
    watch for `AppsodyApplication` instances, in addition to the namespace
    where the Kabanero CR instance is deployed.  Typically an
    `AppsodyApplication` instance is created from the `app-deploy.yaml` file
@@ -56,7 +56,7 @@ specify the following fields:
 ***** `skipCertVerification` - Controls whether the Kabanero controller will
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
-*** `repositories` - A list of repositories containing Appsody stacks.
+*** `repositories` - A list of repositories containing application stacks.
 **** `name` - A descriptive name of the stack repository.
 **** `https`
 ***** `url` - The URL pointing to the stack repository.  The URL will
@@ -117,7 +117,8 @@ specify the following fields:
 *** `adminSecretName` - The name of a secret that contains keys for
     `username`, `password`, and `realm`.  These values will become the
     admin username and password for the Red Hat SSO server, as well as
-    define the realm that the SSO server will use.
+    define the realm that the SSO server will use.  For more information
+    about setting up the secret, see link:rhsso.html[the SSO configuration instructions].
 
 The following `Status` fields are maintained by the Kabanero operator to
 provide information about the installed components, and the health of the
@@ -152,16 +153,16 @@ Kabanero instance:
     `KnativeServing` CR instance.
 **** `version` - The version of Knative Serving as reported by the
     `KnativeServing` CR instance.
-** `tekton` - Contains information about the Tekton instance which was found
+** `tekton` - Contains information about the pipelines instance which was found
    on this cluster.
-*** `ready` - The overall status of Tekton, as reported by the
-    Tekton `Config` CR instance.  A value of `False` indicates there was a
+*** `ready` - The overall status of pipelines, as reported by the
+    pipelines `Config` CR instance.  A value of `False` indicates there was a
     problem, and more information can be found by looking in the `message`
     attribute.
 *** `message` - Provides more details for a `ready` status of `False`.
     The error message is copied from the `ready` condition on the `Config`
     CR instance.
-*** `version` - The version of Tekton as reported by the Tekton `Config`
+*** `version` - The version of pipelines as reported by the pipelines `Config`
     CR instance.
 ** `cli` - Contains information about the Kabanero CLI backend service.
 *** `ready` - The overall status of the Kabanero CLI backend
@@ -180,9 +181,9 @@ Kabanero instance:
     be found by looking in the `message` attribute.
 *** `message` - Provides more details for a `ready` status of `False`.
 *** `version` - The version of the landing page that was deployed.
-** `appsody` - Contains information about the Appsody operator that was
+** `appsody` - Contains information about the application operator that was
    deployed by the Kabanero operator.
-*** `ready` - The overall status of the Appsody operator.  A value
+*** `ready` - The overall status of the application operator.  A value
     of `True` indicates the operator was deployed successfully.  A value of
     `False` indicates there was a problem, and more information can be found
     by looking in the `message` attribute.
@@ -247,7 +248,7 @@ replace `-n kabanero` with the name of another namespace.
 
 == Examples
 
-The following yaml defines a `Kabanero` instance at version 0.6.0, using
+This example yaml defines a `Kabanero` instance at version 0.6.0, using
 the default stacks.
 
 ```yaml
@@ -265,7 +266,7 @@ spec:
         url: https://github.com/kabanero-io/collections/releases/download/v0.6.0/kabanero-index.yaml
 ```
 
-The following yaml defines a `Kabanero` instance at version 0.6.0, using
+This example yaml defines a `Kabanero` instance at version 0.6.0, using
 custom stacks and their associated GitHub configuration.  Sessions
 established using the Kabanero CLI remain valid for one hour.
 

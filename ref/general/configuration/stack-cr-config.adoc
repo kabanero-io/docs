@@ -4,7 +4,7 @@
 :sectanchors:
 = Configuring a Stack CR instance
 
-A `Stack` custom resource (CR) instance describes a particular Appsody
+A `Stack` custom resource (CR) instance describes a particular application
 stack.  Multiple versions of the same stack can be described in the
 same `Stack` CR instance.  
 
@@ -52,7 +52,7 @@ specify the following fields:
 **** `id` - A descriptive name of this image
 **** `image` - The location of this image in the container registry.
 
-== Inspecting your Stack CR Instances
+== Inspecting your Stack CR instances
 
 You can retrieve all the Stack CR instances in a namespace using this
 command:
@@ -64,7 +64,7 @@ replace `-n kabanero` with the name of another namespace.
 
 == Examples
 
-The following yaml defines a `Stack` instance with a single version of
+This example yaml defines a `Stack` instance with a single version of
 the `java-microprofile` stack:
 
 ```yaml
