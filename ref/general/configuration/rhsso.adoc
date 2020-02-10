@@ -48,4 +48,4 @@ spec:
 .. set adminSecretName to `rhsso-secret`
 .. click **Save**
 
-. The URL to the RHSSO console can be found in the OCP console, in the kabanero project namespace, under networking, in the **sso** route.  Use the values that were supplied in the secret for `SSO_ADMIN_USERNAME` and `SSO_ADMIN_PASSWORD` to login in to the RHSSO console. 
+. The URL to the RHSSO console can be found in the OCP console, in the kabanero project namespace, under networking, in the **sso** route.  Use the values that were supplied in the secret for `username` and `password` to login in to the RHSSO console. 
