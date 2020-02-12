@@ -65,7 +65,7 @@ spec:
 
 == After installation
 
-**Important:** Due to the addition of Tekton Triggers in Kabanero version 0.5, if you are upgrading to Kabanero version 0.5 or later from any version prior to 0.5, you must delete any existing webhooks and create them again.  See link:/docs/ref/general/configuration/tekton-webhooks.html[Connecting Kabanero to GitHub with Webhooks] for instructions on deleting and creating webhooks.
+**Important:** Due to the addition of Tekton Triggers in Kabanero version 0.5, and an update to Tekton Triggers in Kabanero version 0.6, if you are upgrading to Kabanero version 0.5 or later from any previous version, you must delete any existing webhooks and create them again.  See link:/docs/ref/general/configuration/tekton-webhooks.html[Connecting Kabanero to GitHub with Webhooks] for instructions on deleting and creating webhooks.
 
 The **Kabanero Console** is installed as part of the install process and is a good next step to go explore information about your Kabanero instance.
 
