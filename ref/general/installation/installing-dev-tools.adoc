@@ -4,7 +4,7 @@
 :linkattrs:
 :page-doc-number: 3.0
 :sectanchors:
-Eclipse Codewind enables you to develop microservice applications from Kabanero Collections in an IDE. Follow one of these
+Eclipse Codewind enables you to develop microservice applications from application stacks in an IDE. Follow one of these
 links for your chosen IDE:
 
 - link:installing-dev-tools.html#installing-codewind-for-vs-code[Installing Codewind for VS Code]
@@ -24,7 +24,7 @@ The following Codewind images are pulled. These images together form the Codewin
 
 When the installation is complete, the extension is ready to use. For more information, see https://www.eclipse.org/codewind/mdt-vsc-getting-started.html[Getting started: Codewind for VS Code, window="_blank"].
 
-To get started with Kabanero Collections in VS Code, read the guide link:../../../../guides/guide-codewind/[Getting Started with Codewind and Kabanero].
+To get started with application stacks in VS Code, read the guide link:../../../../guides/guide-codewind/[Getting Started with Codewind and Kabanero].
 
 
 === Updating the Codewind plug-in
@@ -56,7 +56,7 @@ For more information about troubleshooting Codewind, see the https://www.eclipse
 '''
 
 == Installing Codewind for Eclipse
-The Codewind installation includes two steps and 1 optional step:
+The Codewind installation includes two steps and one optional step:
 
 . The Eclipse plug-in installs when you install Codewind from the Eclipse Marketplace or when you install by searching in the "Eclipse Extensions" view.
 . The Codewind back end containers install after you click "Install" when you are prompted. After you click "Install," the necessary images are downloaded from the internet. The download is approximately 1 GB.
@@ -78,7 +78,7 @@ see https://www.eclipse.org/codewind/mdteclipsegettingstarted.html[Getting start
 
 When Codewind creates a new project, it is created in the Codewind workspace. If you want to add an existing project to Codewind, first copy it into the Codewind workspace.
 
-To get started with Kabanero Collections in your Eclipse IDE, read the guide link:../../../../guides/guide-codewind/[Getting Started with Codewind and Kabanero].
+To get started with application stacks in your Eclipse IDE, read the guide link:../../../../guides/guide-codewind/[Getting Started with Codewind and Kabanero].
 
 === Updating the Codewind plug-in
 Update the Codewind Eclipse plug-in to the latest version.
