@@ -76,7 +76,7 @@ Select the Docker registry where any built images are pushed. Use the same Docke
 . Update code and merge a PR.
 * Make any update to your code, create a PR, and merge it. This change kicks off a PipelineRun.
 
-. Check the PipelineRun from your pipelinesd dashboard.
+. Check the PipelineRun from your pipelines dashboard.
 * From your pipelines dashboard, select `PipelineRuns` from the sidebar menu. Look for the PipelineRun you just kicked off.
 
 Your GitHub repo is connected to Kabanero with a webhook. Changes in your code can now automatically trigger tasks that are specified by the pipeline.

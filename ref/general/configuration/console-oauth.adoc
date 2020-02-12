@@ -5,7 +5,7 @@
 :sectanchors:
 = Configuring the product console with OAuth
 
-You can enable optional stack hub management features via the product console by configuring GitHub OAuth. This setup will allow the console to verify users via GitHub OAuth and communicate with the stack hub server.
+You can enable optional stack management features via the product console by configuring GitHub OAuth. This setup will allow the console to verify users via GitHub OAuth.
 
 . From your GitHub organization page, create an OAuth Application in **Settings -> OAuth App -> New OAuth Apps**. Note: the OAuth GitHub app will need to be created in the same GitHub organization that your stack hub is in. If the OAuth GitHub app and the stack hub repository **need** to be in different GitHub orgs, then the OAuth GitHub app can request access to data in the org with the application stacks. For more information see the GitHub doc - https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-oauth-app-access-restrictions[OAuth App Access and Restrictions].
 
