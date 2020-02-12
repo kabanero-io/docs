@@ -38,9 +38,9 @@ spec:
 .. In your OCP console, in the kabanero project namespace, click **Workloads -> Secrets -> Create** and create a **key/value secret**.
 .. `Secret Name` can be: `rhsso-secret` (Make a note of the name that you use for updating the Kabanero CR later.)
 .. Add three key-value pairs to the secret. (Select add Key/Value to add the other pairs after the first pair.)
-... Key: `SSO_ADMIN_USERNAME` Value:  The administrator username for RHSSO, for example `myadminid`.
-... Key: `SSO_ADMIN_PASSWORD` Value:  The administrator password for RHSSO, for example `myadminpassword`.
-... Key: `SSO_REALM` Value: The security realm name for RHSSO to use, for example `testing_realm`.
+... Key: `username` Value:  The administrator username for RHSSO, for example `myadminid`.
+... Key: `password` Value:  The administrator password for RHSSO, for example `myadminpassword`.
+... Key: `realm` Value: The security realm name for RHSSO to use, for example `testing_realm`.
 . Click **Create**
 
 . Edit the Kabanero CR, under sso:
@@ -48,4 +48,4 @@ spec:
 .. set adminSecretName to `rhsso-secret`
 .. click **Save**
 
-. The URL to the RHSSO console can be found in the OCP console, in the kabanero project namespace, under networking, in the **sso** route.  Use the values that were supplied in the secret for `SSO_ADMIN_USERNAME` and `SSO_ADMIN_PASSWORD` to login in to the RHSSO console. 
+. The URL to the RHSSO console can be found in the OCP console, in the kabanero project namespace, under networking, in the **sso** route.  Use the values that were supplied in the secret for `username` and `password` to login in to the RHSSO console. 
