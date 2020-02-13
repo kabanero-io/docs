@@ -1,20 +1,20 @@
 :page-layout: doc
 :page-doc-category: Configuration
-:page-title: Connecting Kabanero to GitHub with Tekton Webhooks
+:page-title: Connecting Kabanero to GitHub with webhooks
 :sectanchors:
 :page-doc-number: 5.0
-= Connecting Kabanero to GitHub with Tekton Webhooks
+= Connecting Kabanero to GitHub with webhooks
 
-A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[Kabanero pipeline, window="_blank"]. After you configure the webhook, changes you make in your GitHub repository will trigger the pipeline and its associated tasks.
+A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[pipeline, window="_blank"]. After you configure the webhook, changes you make in your GitHub repository will trigger the pipeline and its associated tasks.
 
 == Prerequisites
 
 * A GitHub repository
 * https://github.com/kabanero-io/kabanero-foundation/tree/master/scripts[Kabanero Foundation, window="_blank"].
-** Your Kabanero installation includes an instance of the https://github.com/tektoncd/dashboard#installing-the-latest-release[Tekton Dashboard, window="_blank"] with the https://github.com/tektoncd/experimental/blob/master/webhooks-extension/README.md[Webhooks Extension, window="_blank"] and https://github.com/tektoncd/triggers/tree/v0.1.0/docs#tekton-triggers[Tekton Triggers, window="_blank"] installed.
+** Your Kabanero installation must include an instance of the https://github.com/tektoncd/dashboard#installing-the-latest-release[pipelines dashboard, window="_blank"] with the https://github.com/tektoncd/experimental/blob/master/webhooks-extension/README.md[webhooks extension, window="_blank"] and https://github.com/tektoncd/triggers/tree/v0.1.0/docs#tekton-triggers[triggers, window="_blank"] installed.
 
 == Create a persistent volume
-Tekton pipelines need a persistent volume. If there is no network storage available, create a `hostPath pv`. For more information, see *Creating a persistent volume* in https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[Kabanero Pipelines, window="_blank"].
+Pipelines need a persistent volume. If there is no network storage available, create a `hostPath pv`. For more information, see *Creating a persistent volume* in https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[Pipelines, window="_blank"].
 
 [#gat]
 == Generate a GitHub access token
@@ -24,9 +24,9 @@ You need to generate a GitHub personal access token to use for creating the webh
 . Check the `admin:repo_hook` option and click `Generate token`. If you are working in a private repository, more options might be required. Check with your administrator for details. *Make sure to save the token to a file since you can't see it after you leave this page.*
 
 == Create secrets
-If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret. If you are working with a public GitHub repository, you do not need to create a secret for your Tekton dashboard webhook.
+If you are working with a private or enterprise GitHub repository, you need to store your access token in a Kubernetes secret. If you are working with a public GitHub repository, you do not need to create a secret for your pipelines dashboard webhook.
 
-. From your Tekton Dashboard, select `Secrets` from the sidebar menu and click `Add Secret`.
+. From your pipelines dashboard, select `Secrets` from the sidebar menu and click `Add Secret`.
 . Give your secret a unique name.
 . For the `Namespace`, select `kabanero` from the drop-down list.
 . For `Access To:`, select `Git Server` from the drop-down list.
@@ -36,7 +36,7 @@ If you are working with a private or enterprise GitHub repository, you need to s
 If you want to push the image to Docker Hub, you need to create a separate secret to connect to Docker Hub. Follow the same procedure but use your Docker Hub username and password. For `Access To:`, select `Docker Registry` from the drop-down list.
 
 == Create a webhook
-. From your Tekton Dashboard, select `webhooks` from the sidebar menu and click `Add Webhook`.
+. From your pipelines dashboard, select `webhooks` from the sidebar menu and click `Add Webhook`.
 . Enter your information in the `Create Webhook` window.
 +
 Name::
@@ -46,7 +46,7 @@ Repository URL::
 The URL of the GitHub repository that you want to connect to Kabanero.
 
 Access token::
-Use this field to create a secret to store your GitHub personal access token. Even if you already created a token-based Git secret from your Tekton Dashboard, you must also store your GitHub personal access token in this field. Click the green plus icon beside the field to open the `Create Access Token Secret` window.
+Use this field to create a secret to store your GitHub personal access token. Even if you already created a token-based Git secret from your pipelines dashboard, you must also store your GitHub personal access token in this field. Click the green plus icon beside the field to open the `Create Access Token Secret` window.
 +
 Give your access token secret a descriptive name. In the `Access token` field, enter the GitHub personal access token that you previously generated in the <<#gat,Generate a GitHub access token step>>.
 
@@ -54,14 +54,14 @@ Namespace::
 Select the Kubernetes namespace in which you want to run your pipeline. In this case, choose `kabanero`.
 
 Pipeline::
-Select the Pipeline in your target Namespace. PipelineRuns (and their accompanying PipelineResources) are created in this namespace. For more information, see https://github.com/kabanero-io/kabanero-pipelines#kabanero-pipelines[Kabanero Pipelines, window="_blank"].
+Select the pipeline in your target Namespace. PipelineRuns (and their accompanying PipelineResources) are created in this namespace. For more information, see https://github.com/kabanero-io/kabanero-pipelines#kabanero-pipelines[Kabanero Pipelines, window="_blank"].
 
 Service Account::
 Select a service account to be used by the PipelineRun. There are two default service account options. Either of these accounts can be used as a template to create your own customized service accounts that fit your pipeline requirements.
 
-* If you are deploying pipelines in a single namespace, OpenShift provides the `pipeline` service account, which has permissions to build and push an image. This service account can be used with simple pipelines. However, it has limited access to the current namespace and does not work for cross-namespace operations and deployments.
+* If you are deploying pipelines in a single namespace, the `pipeline` service account is provided, which has permissions to build and push an image. This service account can be used with simple pipelines. However, it has limited access to the current namespace and does not work for cross-namespace operations and deployments.
 
-* If you need to deploy pipelines across multiple namespaces, the Kabanero operator provides the `kabanero-pipeline` service account with this capability. If you are running a custom pipeline that requires more or less access than the kabanero-pipeline service account is configured to provide, do not edit this account . Instead, create a new service account, such as `custom-kabanero-pipeline-sa`, and configure it according to your needs. For example service accounts, see the link:https://github.com/kabanero-io/kabanero-pipelines/tree/master/pipelines/common[Kabanero pipelines repo].
+* If you need to deploy pipelines across multiple namespaces, the product operator provides the `kabanero-pipeline` service account with this capability. If you are running a custom pipeline that requires more or less access than the kabanero-pipeline service account is configured to provide, do not edit this account. Instead, create a new service account, such as `custom-kabanero-pipeline-sa`, and configure it according to your needs. For example service accounts, see the link:https://github.com/kabanero-io/kabanero-pipelines/tree/master/pipelines/common[Kabanero pipelines repo].
 
 Docker registry::
 Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace`.
@@ -76,15 +76,15 @@ Select the Docker registry where any built images are pushed. Use the same Docke
 . Update code and merge a PR.
 * Make any update to your code, create a PR, and merge it. This change kicks off a PipelineRun.
 
-. Check the PipelineRun from your Tekton Dashboard.
-* From your Tekton Dashboard, select `PipelineRuns` from the sidebar menu. Look for the PipelineRun you just kicked off.
+. Check the PipelineRun from your pipelines dashboard.
+* From your pipelines dashboard, select `PipelineRuns` from the sidebar menu. Look for the PipelineRun you just kicked off.
 
 Your GitHub repo is connected to Kabanero with a webhook. Changes in your code can now automatically trigger tasks that are specified by the pipeline.
 
 == Deleting a webhook
 
-You can delete an existing webhook by using your Tekton Dashboard.
+You can delete an existing webhook using your pipelines dashboard.
 
-. From your Tekton Dashboard, select `webhooks` from the sidebar menu.
+. From your pipelines dashboard, select `webhooks` from the sidebar menu.
 . Select the webhooks that you want to delete by clicking the box beside the webhook name.
 . Click `Delete`.
