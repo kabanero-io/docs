@@ -6,7 +6,7 @@
 = Configuring Kabanero with Red Hat Single Sign On
 
 After Kabanero is installed, the Kabanero operator can optionally create an instance of Red Hat Single Sign On (RHSSO) for development use.
-To create the RHSSO instance, create the required secret and the persistent volume and then edit the Kabnero custom resource (CR).
+To create the RHSSO instance, create the required secret and the persistent volume and then edit the Kabanero custom resource (CR).
 
 . Create a persistent volume (PV) of size 1 GB. The type of storage used might vary depending on the environment where OpenShift is installed.
 Some types of persistent volumes, such as NFS require that you set up an NFS server in your cluster first.

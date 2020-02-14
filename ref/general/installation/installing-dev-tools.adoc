@@ -28,7 +28,7 @@ To get started with application stacks in VS Code, read the guide link:../../../
 
 
 === Updating the Codewind plug-in
-Update your Codewind plug-in without unintalling the extension.
+Update your Codewind plug-in without uninstalling the extension.
 
 . Go to the *Extensions* view in VS Code
 . Search for the latest Codewind version in the Marketplace
