@@ -6,7 +6,7 @@
 
 = Architecture and Development Workflows
 
-Kabanero is designed to deliver an integrated workflow for application architects, application developers, and operations teams, allowing them to focus more intently in their respective areas of expertise.
+Kabanero is designed to deliver integrated workflows for application architects, application developers, and operations teams, allowing them to focus more intently in their respective areas of expertise.
 
 Kabanero workflows covers common scenarios for these different roles, such as architects defining base images and starter applications for developers, developers iterating through code changes from their favorite IDE without worrying about the setup of a Kubernetes cluster, and operation teams using pipelines that can continuously monitor code deliveries and deploy the finished applications to a running cluster.
 
@@ -43,7 +43,7 @@ Kabanero provides initial application stacks for the most popular software devel
 
 === Developer Experience
 
-For *application developers*, the Kabanero experience is realized as tooling that allows a developer to continuously iterate over changes to source code and validate the changes, considerably reducing or even eliminating the amount of time spent setting up and dealing with infrastructure such as Docker containers and Kubernetes clusters. The current tooling is offered as a combination of the following initial offerings:
+For *application developers*, the Kabanero experience is realized as tooling that allows a developer to continuously iterate over changes to source code and validate the changes, considerably reducing or even eliminating the amount of time spent setting up and dealing with infrastructures such as Docker containers and Kubernetes clusters. The current tooling is offered as a combination of the following initial offerings:
 
 * https://appsody.dev[Appsody]: A Command-line interface with commands for creating, building, running, and deploying applications. Appsody also has extensions that are used by other portions of the architecture to reassemble the application as a container image and to deploy it to a running container, and those will be covered in the respective sections of this overview.
 
@@ -152,11 +152,11 @@ At that point, Kabanero Foundation will detect the code delivery and execute a p
 
 After several iterations of the previous workflows, application developers will have provided valuable feedback to the application architect responsible for a given application stack.
 
-The overall process for modifying a stack is explained in the https://kabanero.io/guides/working-with-collections["Working with Kabanero Collections"] guide.
+The overall process for modifying a stack is explained in the https://appsody.dev/docs/stacks/stacks-overview["Stacks Overview"] page of the Appsody website.
 
 At this point, the application architect must judge the nature of the changes in light of https://semver.org/[semantic versioning] guidelines and decide on the new version number for the stack. Application stacks are expected to have application templates set to adopt all new patches automatically and set to require a manual change to the application code to adopt minor and major versions.
 
-Once the decision about the new version is made, the application stack must be published to the remote location hosting the application stack, a process also described in the https://kabanero.io/guides/working-with-collections["Working with Kabanero Collections"] guide.
+Once the decision about the new version is made, the application stack must be published to the remote location hosting the application stack, a process also described in the https://appsody.dev/docs/stacks/publish["Publishing Stacks"] page of the Appsody website.
 
 
 === Install Kabanero Foundation to Kubernetes cluster (operations team)
