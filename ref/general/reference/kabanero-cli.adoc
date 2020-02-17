@@ -167,6 +167,7 @@ nodejs-express		0.2.8	central
 nodejs-express		0.2.8	central2
 nodejs-loopback		0.1.8	central
 nodejs-loopback		0.1.6	central2
+----
 
 === Synchronize stacks
 
