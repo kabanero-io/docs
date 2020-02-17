@@ -171,7 +171,7 @@ nodejs-loopback		0.1.6	central2
 
 === Synchronize stacks
 
-Running the `kabanero sync` will ensure that the desired states of stacks are consistent with the current configuration. This activates/deactivates and updates versions of the Kabanero stack hub to reflect the state of the curated application stack. See also <<kabanero deactivate>>. Modifications to the curated application stack might be slow to replicate in GitHub and therefore might not be reflected immediately in KABANERO LIST or SYNC display output.
+Running the `kabanero sync` will ensure that the desired states of stacks are consistent with the current configuration. Sync activates, deletes, and updates versions of the Kabanero stacks to reflect the state of the curated application stack. See also <<kabanero deactivate>>. Modifications to the curated application stack might be slow to replicate in GitHub and therefore might not be reflected immediately in KABANERO LIST or SYNC display output.
 
 ----
 kabanero sync
