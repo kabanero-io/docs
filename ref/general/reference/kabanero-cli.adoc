@@ -119,8 +119,8 @@ nodejs-loopback			0.1.8	active
 
 
 GitHub Curated Stacks (repo name - url):
-  central - https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
-  central2 - https://github.com/kabanero-io/collections/releases/download/0.3.5/kabanero-index.yaml
+  central - <stack_hub_index_1_url>
+  central2 - <stack_hub_index_2_url>
 
 GitHub Curated Stacks	Version	Repo
 ---------------------	-------	----
@@ -153,8 +153,8 @@ nodejs-loopback			0.1.8	active
 java-microprofile	        0.2.21	obsolete
 
 GitHub Curated Stacks (repo name - url):
-  central - https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
-  central2 - https://github.com/kabanero-io/collections/releases/download/0.3.5/kabanero-index.yaml
+  central - <stack_hub_index_1_url>
+  central2 - <stack_hub_index_2_url>
 
 GitHub Curated Stacks	Version	Repo
 ---------------------	-------	----
@@ -171,7 +171,7 @@ nodejs-loopback		0.1.6	central2
 
 === Synchronize stacks
 
-Running the `kabanero sync` will ensure that the desired states of stacks are consistent with the current configuration. Sync activates, deletes, and updates versions of the Kabanero stacks to reflect the state of the curated application stack. See also <<kabanero deactivate>>. Modifications to the curated application stack might be slow to replicate in GitHub and therefore might not be reflected immediately in KABANERO LIST or SYNC display output.
+Running the `kabanero sync` will ensure that the desired states of stacks are consistent with the current configuration. Sync activates, deletes, and updates versions of the Kabanero stacks to reflect the state of the curated application stack hub. See also <<kabanero deactivate>>. Modifications to the curated application stack hub index might be slow to replicate in GitHub and therefore might not be reflected immediately in KABANERO LIST or SYNC display output.
 
 ----
 kabanero sync
@@ -184,6 +184,14 @@ active stack is already synchronized with master
 ----
 
 Curated stacks and active stacks are now fully synchronized.
+
+or
+
+----
+Kabanero Instance Stacks	Version	Status
+-----------------------------	-------	------
+nodejs				0.2.6	inactive ==> active
+----
 
 or
 
@@ -268,8 +276,8 @@ nodejs-loopback			0.1.6	active
 nodejs-loopback			0.1.8	active
 
 GitHub Curated Stacks (repo name - url):
-  central - https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
-  central2 - https://github.com/kabanero-io/collections/releases/download/0.3.5/kabanero-index.yaml
+  central - <stack_hub_index_1_url>
+  central2 - <stack_hub_index_2_url>
 
 GitHub Curated Stacks	Version	Repo
 ---------------------	-------	----
