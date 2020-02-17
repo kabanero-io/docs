@@ -5,7 +5,7 @@
 :sectanchors:
 = Kabanero CLI
 
-The Kabanero CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the Kabanero collections. Developers use these collections to create governed applications for their business.
+The Kabanero CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the Kabanero stacks. Developers use these stacks to create governed applications for their business.
 
 == Installing the Kabanero CLI
 
@@ -135,7 +135,7 @@ nodejs-loopback		0.1.8	central
 nodejs-loopback		0.1.6	central2
 ----
 
-If a stack is removed from the curated collection on GitHub, its status shows as obsolete.  If a stack is obsolete, a SYNC command deletes it.
+If a stack is removed from the curated stack hub on GitHub, its status shows as obsolete.  If a stack is obsolete, a SYNC command deletes it.
 
 Example result showing stack with an obsolete status:
 
