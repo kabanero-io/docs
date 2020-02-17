@@ -206,9 +206,9 @@ Running the `kabanero sync` command when one of the stacks is obsolete deletes t
 Example result:
 
 ----
-Kabanero Instance Stacks    Version Status
--------------------------   ------- ------
-java-microprofile       0.2.21  deleted
+Kabanero Instance Stacks 	Version	Status
+-------------------------	-------	------
+java-microprofile		0.2.21	deleted
 ----
 
 
