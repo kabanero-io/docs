@@ -5,43 +5,43 @@
 :page-doc-number: 1.0
 :sectanchors:
 
-Kabanero version 0.5 has been tested on OpenShift Container Platform (OCP) 4.2. There is intent to expand testing to additional distributions, including upstream Kubernetes, in the future.
+Kabanero version 0.6 has been tested on OpenShift Container Platform (OCP) 4.3. There is intent to expand testing to additional distributions, including upstream Kubernetes, in the future.
 
-The Kabanero Open Project intends to build on open source distributions of Kubernetes; however, the current distribution of The Origin Community Distribution of Kubernetes (OKD) is lagging the commercial distributions.   Due to a focus on building leading-edge capabilities and leveraging new features across the integrated open frameworks, the Kabanero Open Project is temporarily building on version 4 capabilities of the commercial distributions.  When there is a comparable release of OKD, the Kabanero Open Project will return to it.
+The Kabanero Open Project intends to build on open source distributions of Kubernetes; however, the current distribution of The Origin Community Distribution of Kubernetes (OKD) is lagging the commercial distributions. Due to a focus on building leading-edge capabilities and leveraging new features across the integrated open frameworks, the Kabanero Open Project is temporarily building on version 4 capabilities of the commercial distributions. When there is a comparable release of OKD, the Kabanero Open Project will return to it.
 
-As a result of this temporary change in focus, there is no upgrade process from an installation built on OKD version 3.11 to an installation built on OCP 4.2.
+As a result of this temporary change in focus, there is no upgrade process from an installation built on OKD version 3.11 to an installation built on OCP 4.3.
 
 == Prerequisites
 
-* link:https://www.openshift.com/products/container-platform[OCP] V4.2.0+
+* link:https://www.openshift.com/products/container-platform[OCP] V4.3.0+
 
 == Installation
 
-Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites.  Several operators must be installed before Kabanero can be used.  You can choose to perform a scripted installation or a manual installation.  In the scripted installation, the provided installation script subscribes to and configures the prerequisite operators.  If you prefer, the installation can be performed manually.
+Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites. Several operators must be installed before Kabanero can be used. You can choose to perform a scripted installation or a manual installation. In the scripted installation, the provided installation script subscribes to and configures the prerequisite operators. If you prefer, the installation can be performed manually.
 
 === Scripted installation
 
 . Obtain the installation script for the release of Kabanero that you wish to install.
-* `curl -s -O -L https://github.com/kabanero-io/kabanero-operator/releases/download/0.5.0/install.sh`
+* `curl -s -O -L https://github.com/kabanero-io/kabanero-operator/releases/download/0.6.0/install.sh`
 
-. Review the `install.sh` script for any optional components that can be enabled by setting the required environment variable, or by editing the value in the script directly.  Optional components are listed at the top of the script, below the section titled `Optional components`.
+. Review the `install.sh` script for any optional components that can be enabled by setting the required environment variable, or by editing the value in the script directly. Optional components are listed at the top of the script, below the section titled `Optional components`.
 
 . As a `cluster-admin`, run the script:
-.. Ensure you are logged into your cluster with the https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands[`oc login` command]
+.. Ensure you are logged into your cluster with the https://docs.openshift.com/container-platform/4.3/cli_reference/openshift_cli/getting-started-cli.html#cli-logging-in_cli-developer-commands[`oc login` command]
 .. If installing the optional kAppNav component, specify `yes` on the ENABLE_KAPPNAV environment variable.  If not, specify `no`.
 .. `ENABLE_KAPPNAV=yes|no ./install.sh`
 
-. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default application stacks, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of an application stack and the GitHub information necessary to administer that application stack.  For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the CR configuration reference].
+. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a custom resource (CR) instance. A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default application stacks, is shown when the `install.sh` script finishes running. You can modify the CR instance to include the URL of an application stack and the GitHub information necessary to administer that application stack. For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the CR configuration reference].
 
 === Manual installation
 
-. Install and configure the link:https://docs.openshift.com/container-platform/4.2/serverless/installing-openshift-serverless.html[OpenShift Serverless Operator].  Note that the instructions include installing and configuring the OpenShift Service Mesh.
+. Install and configure the link:https://docs.openshift.com/container-platform/4.3/serverless/installing-openshift-serverless.html[OpenShift Serverless Operator]. Note that the instructions include installing and configuring the OpenShift Service Mesh.
 
-. Install the pipelines operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `community-operators` catalog and the `dev-preview` channel.
+. Install the pipelines operator using the instructions to link:https://docs.openshift.com/container-platform/4.3/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster]. Select the `community-operators` catalog and the `dev-preview` channel.
 
-. Install the microservice deployment operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `certified-operators` catalog and the `beta` channel.  This operator should be installed at the cluster scope.
+. Install the microservice deployment operator using the instructions to link:https://docs.openshift.com/container-platform/4.3/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster]. Select the `certified-operators` catalog and the `beta` channel. This operator should be installed at the cluster scope.
 
-. Install the OLM CatalogSource containing the product operator.  The following YAML can be used, after substituting the required version (the example uses version 0.6.0):
+. Install the OLM CatalogSource containing the product operator. The following YAML can be used, after substituting the required version (the example uses version 0.6.0):
 +
 [source,yaml]
 ----
@@ -57,15 +57,15 @@ spec:
 
 . Create the `kabanero` namespace using `oc new-project kabanero`
 
-. Install the Che operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `community-operators` catalog and the `stable` channel.  This operator should be installed to the `kabanero` namespace.
+. Install the Che operator using the instructions to link:https://docs.openshift.com/container-platform/4.3/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster]. Select the `community-operators` catalog and the `stable` channel. This operator should be installed to the `kabanero` namespace.
 
-. Install the product operator using the instructions to link:https://docs.openshift.com/container-platform/4.2/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster].  Select the `kabanero-catalog` catalog and the `release-0.4` channel.  This operator should be installed to the `kabanero` namespace.
+. Install the product operator using the instructions to link:https://docs.openshift.com/container-platform/4.3/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster]. Select the `kabanero-catalog` catalog and the `release-0.4` channel. This operator should be installed to the `kabanero` namespace.
 
-. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a custom resource (CR) instance.  A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default application stacks, is shown when the `install.sh` script finishes running.  You can modify the CR instance to include the URL of an application stack and the GitHub information necessary to administer that application stack. For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the CR configuration reference].
+. As a `cluster-admin`, or as a user with `create` and `update` authority to the `kabaneros.kabanero.io` kind, create a custom resource (CR) instance. A sample `oc apply` command which applies the default instance for this release of Kabanero, including the default application stacks, is shown when the `install.sh` script finishes running. You can modify the CR instance to include the URL of an application stack and the GitHub information necessary to administer that application stack. For more information on customizing the CR instance, see link:/docs/ref/general/configuration/kabanero-cr-config.html[the CR configuration reference].
 
 == After installation
 
-**Important:** Due to the addition of Tekton Triggers in Kabanero version 0.5, and an update to Tekton Triggers in Kabanero version 0.6, if you are upgrading to Kabanero version 0.5 or later from any previous version, you must delete any existing webhooks and create them again.  See link:/docs/ref/general/configuration/tekton-webhooks.html[Connecting Kabanero to GitHub with Webhooks] for instructions on deleting and creating webhooks.
+**Important:** Due to the addition of Triggers in Kabanero version 0.5, and an update to Triggers in Kabanero version 0.6, if you are upgrading to Kabanero version 0.5 or later from any previous version, you must delete any existing webhooks and create them again. See link:/docs/ref/general/configuration/tekton-webhooks.html[Connecting Kabanero to GitHub with Webhooks] for instructions on deleting and creating webhooks.
 
 The **Kabanero Console** is installed as part of the install process and is a good next step to go explore information about your Kabanero instance.
 
