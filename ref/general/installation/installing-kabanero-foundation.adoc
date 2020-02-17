@@ -35,7 +35,7 @@ Kabanero uses Operator Lifecycle Manager (OLM) to manage its prerequisites. Seve
 
 === Manual installation
 
-. Install and configure the link:https://docs.openshift.com/container-platform/4.3/serverless/installing-openshift-serverless.html[OpenShift Serverless Operator]. Note that the instructions include installing and configuring the OpenShift Service Mesh.
+. Install and configure the link:https://docs.openshift.com/container-platform/4.3/serverless/installing-openshift-serverless.html[OpenShift Serverless Operator].
 
 . Install the pipelines operator using the instructions to link:https://docs.openshift.com/container-platform/4.3/operators/olm-adding-operators-to-cluster.html[add an operator to your cluster]. Select the `community-operators` catalog and the `dev-preview` channel.
 
