@@ -63,7 +63,7 @@ Examples:
 +
 ----
 kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID>
-PASSWORD:<GITHUB_PASSWORD>
+PASSWORD: <GITHUB_PASSWORD>
 ----
 
 * Log in with previously used url GitHub user ID and PAT
@@ -106,26 +106,71 @@ kabanero list
 Example result:
 
 ----
-Kabanero Instance Application Stacks	Version	Status
------------------------------	-------	------
-java-microprofile		0.2.18	active
-java-spring-boot2		0.3.15	active
-nodejs				0.2.6	active
+Kabanero Instance Stacks 	Version	Status
+-------------------------	-------	------
+java-microprofile		0.2.19	active
+java-spring-boot2		0.3.18	active
+java-spring-boot2		0.3.21	active
+nodejs				0.2.6	inactive
+nodejs				0.3.1	active
 nodejs-express			0.2.8	active
 nodejs-loopback			0.1.6	active
+nodejs-loopback			0.1.8	active
 
-GitHub Curated Collections	Version
---------------------------	-------
-java-microprofile		0.2.18
-java-spring-boot2		0.3.15
-nodejs				0.2.6
-nodejs-express			0.2.8
-nodejs-loopback			0.1.6
+
+GitHub Curated Stacks (repo name - url):
+  central - https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
+  central2 - https://github.com/kabanero-io/collections/releases/download/0.3.5/kabanero-index.yaml
+
+GitHub Curated Stacks	Version	Repo
+---------------------	-------	----
+java-microprofile	0.2.19	central
+java-spring-boot2	0.3.21	central
+java-spring-boot2	0.3.18	central2
+nodejs			0.3.1	central
+nodejs			0.2.6	central2
+nodejs-express		0.2.8	central
+nodejs-express		0.2.8	central2
+nodejs-loopback		0.1.8	central
+nodejs-loopback		0.1.6	central2
 ----
 
-=== Synchronize collections
+If a stack is removed from the curated collection on GitHub, its status shows as obsolete.  If a stack is obsolete, a SYNC command deletes it.
 
-Run the `kabanero sync` command to synchronize the list of Kabanero instance stack hubs with the curated application stack from GitHub. This will activate/deactivate as well as update versions of the Kabanero stack hub to reflect the state of the curated application stack. See also <<kabanero deactivate>>. Modifications to the curated application stack may be slow to replicate in GitHub and therefore may not be reflected immediately in KABANERO LIST or SYNC display output.
+Example result showing stack with an obsolete status:
+
+----
+Kabanero Instance Stacks 	Version	Status
+-------------------------	-------	------
+java-microprofile		0.2.19	active
+java-spring-boot2		0.3.18	active
+java-spring-boot2		0.3.21	active
+nodejs				0.2.6	inactive
+nodejs				0.3.1	active
+nodejs-express			0.2.8	active
+nodejs-loopback			0.1.6	active
+nodejs-loopback			0.1.8	active
+java-microprofile	        0.2.21	obsolete
+
+GitHub Curated Stacks (repo name - url):
+  central - https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
+  central2 - https://github.com/kabanero-io/collections/releases/download/0.3.5/kabanero-index.yaml
+
+GitHub Curated Stacks	Version	Repo
+---------------------	-------	----
+java-microprofile	0.2.19	central
+java-spring-boot2	0.3.21	central
+java-spring-boot2	0.3.18	central2
+nodejs			0.3.1	central
+nodejs			0.2.6	central2
+nodejs-express		0.2.8	central
+nodejs-express		0.2.8	central2
+nodejs-loopback		0.1.8	central
+nodejs-loopback		0.1.6	central2
+
+=== Synchronize stacks
+
+Running the `kabanero sync` will ensure that the desired states of stacks are consistent with the current configuration. This activates/deactivates and updates versions of the Kabanero stack hub to reflect the state of the curated application stack. See also <<kabanero deactivate>>. Modifications to the curated application stack might be slow to replicate in GitHub and therefore might not be reflected immediately in KABANERO LIST or SYNC display output.
 
 ----
 kabanero sync
@@ -134,18 +179,29 @@ kabanero sync
 Example results:
 
 ----
-active application stack is already synchronized with master
+active stack is already synchronized with master
 ----
 
-Curated application stacks and active application stacks are now fully synchronized.
+Curated stacks and active stacks are now fully synchronized.
 
 or
 
 ----
-Kabanero Instance Application Stacks	Version	Status
------------------------------	-------	------
-nodejs				0.2.6	inactive ==> active
+Kabanero Instance Stacks 	Version	Status
+-------------------------	-------	------
+java-microprofile		0.2.21	added to Kabanero
 ----
+
+Running the `kabanero sync` command when one of the stacks is obsolete deletes the stack.
+
+Example result:
+
+----
+Kabanero Instance Stacks    Version Status
+-------------------------   ------- ------
+java-microprofile       0.2.21  deleted
+----
+
 
 === Show the active repository application stack for a Kabanero instance
 
@@ -174,40 +230,57 @@ kabanero command line service image: kabanero/kabanero-command-line-services:0.3
 
 === Deactivate Kabanero
 
-Run the `kabanero deactivate` command to prevent an application stack from being shown to the development team, without deleting it.
+Run the `kabanero deactivate` command to prevent a specific version of an application stack from being used in pipeline builds.
 
 ----
-kabanero deactivate application-stack-name
+kabanero deactivate stack-name version-number
 ----
 
 Running the deactivate command removes the specified application stack from the list of available application types, without deleting it from the Kabanero instance.
 
-This command is useful when you clone an application stack and customize it for your business needs. Deactivation keeps the base application stack in the application stack hub. The base application stack continues to be updated and the updates percolate up to your cloned application stack. To restore a deactivated application stack, run the `kabanero sync` command. See <<Synchronize application stacks>>.
+To restore a deactivated application stack, run the `kabanero sync` command. See <<Synchronize application stacks>>.
+
+Example:
+
+----
+kabanero deactivate nodejs 0.3.1
+----
 
 Example result:
 
 ----
-Application stack name: nodejs deactivated
+Stack name: nodejs version: 0.3.1 deactivated
 ----
 
 Running the `kabanero list` command now shows the deactivated application stack as inactive.
 
 ----
-Kabanero Instance Application Stacks	Version	Status
------------------------------	-------	------
-java-microprofile		0.2.18	active
-java-spring-boot2		0.3.15	active
+Kabanero Instance Stacks 	Version	Status
+-------------------------	-------	------
+java-microprofile		0.2.19	active
+java-spring-boot2		0.3.18	active
+java-spring-boot2		0.3.21	active
 nodejs				0.2.6	inactive
+nodejs				0.3.1	inactive
 nodejs-express			0.2.8	active
 nodejs-loopback			0.1.6	active
+nodejs-loopback			0.1.8	active
 
-GitHub Curated Application Stacks	Version
---------------------------	-------
-java-microprofile		0.2.18
-java-spring-boot2		0.3.15
-nodejs				0.2.6
-nodejs-express			0.2.8
-nodejs-loopback			0.1.6
+GitHub Curated Stacks (repo name - url):
+  central - https://github.com/kabanero-io/collections/releases/download/0.5.0/kabanero-index.yaml
+  central2 - https://github.com/kabanero-io/collections/releases/download/0.3.5/kabanero-index.yaml
+
+GitHub Curated Stacks	Version	Repo
+---------------------	-------	----
+java-microprofile	0.2.19	central
+java-spring-boot2	0.3.21	central
+java-spring-boot2	0.3.18	central2
+nodejs			0.3.1	central
+nodejs			0.2.6	central2
+nodejs-express		0.2.8	central
+nodejs-express		0.2.8	central2
+nodejs-loopback		0.1.8	central
+nodejs-loopback		0.1.6	central2
 ----
 
 === Log out of Kabanero
