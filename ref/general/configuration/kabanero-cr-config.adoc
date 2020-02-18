@@ -6,8 +6,8 @@
 = Configuring a Kabanero CR instance
 
 A `Kabanero` custom resource (CR) instance describes a particular Kabanero
-installation.  This description includes the locations of the Kabanero
-Collections, and how the Kabanero CLI should interact with GitHub.
+installation.  This description includes the locations of the application
+stacks, and how the Kabanero CLI should interact with GitHub.
 
 The `Spec` section of the `Kabanero` instance describes the desired
 configuration.  The `Status` section is populated by the Kabanero operator,
@@ -15,7 +15,7 @@ and shows the versions of the components that make up Kabanero.  In some
 cases, the `Status` also contains URLs that can be used to interact with
 the components of Kabanero.
 
-== Syntax
+== Syntax (v1alpha2)
 
 A `Kabanero` CR can be comprised of only a few attributes.
 See the link:#examples[examples].  To define a `Kabanero` instance, you can
@@ -23,43 +23,62 @@ specify the following fields:
 
 * `Spec`
 ** `version` - The release of Kabanero that you want to install.
-   The levels of the individual components, such as the Appsody operator
+   The levels of the individual components, such as the application operator
    and CLI services, are selected automatically based on this level.  The
-   release follows semver notation (for example, 0.2.0).
-** `targetNamespaces` - A list of namespaces which the Appsody operator will
+   release follows semver notation (for example, 0.6.0).
+** `targetNamespaces` - A list of namespaces which the application operator will
    watch for `AppsodyApplication` instances, in addition to the namespace
    where the Kabanero CR instance is deployed.  Typically an
    `AppsodyApplication` instance is created from the `app-deploy.yaml` file
    in an application, at the end of a deploy pipeline run.
 ** `github`
-*** `organization` - The name of the GitHub organization where the collection
-    repositories have been cloned.  The GitHub teams that administer the
-    collections are also contained in this organization.
+*** `organization` - The name of the GitHub organization where the stack
+    repositories are located.  The GitHub teams that administer the
+    stacks are also contained in this organization.
 *** `teams` - A yaml list of GitHub teams that will be allowed to
-    use the Kabanero CLI to administer the collection repositories.  All users
-    who want to use the Kabanero CLI to administer the collections must be a
+    use the Kabanero CLI to administer the stack repositories.  All users
+    who want to use the Kabanero CLI to administer the stacks must be a
     member of a team in this list. To learn how to create teams in GitHub, see link:https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/creating-a-team[Creating a team, window=_blank].
-*** `apiUrl` - The GitHub API URL for the GitHub containing the collection
+*** `apiUrl` - The GitHub API URL for the GitHub containing the stack
     repositories.  For example, the API URL for github.com is https://api.github.com.
-** `collections`
-*** `repositories` - A list of repositories containing Kabanero collections.
-**** `name` - A descriptive name of the collection repository.
-**** `url` - The URL pointing to the collection repository.  For example, the
-     default collection repository for Kabanero version 0.1.2 is
-     https://github.com/kabanero-io/collections/releases/download/v0.1.2/kabanero-index.yaml
-**** `activateDefaultCollections` - Controls whether the collections in the
-     repository will be automatically activated by the Kabanero controller.
-     Valid values are `true` and `false`.
-**** `skipCertVerification` - Controls whether the Kabanero controller will
-     validate SSL/TLS certificates presented by the repository URL.
-     Valid values are `true` and `false`.
-** `appsodyOperator`
-*** `enable` - Controls whether the Kabanero operator will configure the
-    Appsody operator to watch the namespace where the Kabanero operator is
-    installed, as well as any additional namespaces specified in the
-    `Spec.targetNamespaces` attribute.  Valid values are `true` and `false`.
-    The default value is `true`.   Please see link:https://github.com/appsody/appsody-operator/blob/master/doc/user-guide.md[the Appsody operator user guide, window=_blank]
-    for more information.
+** `stacks`
+*** `pipelines` - A list of pipelines that should be applied to all
+    stacks in all repositories, unless a repository has provided
+    its own pipeline definitions.
+**** `id` - A descriptive name of the pipelines contained at this URL.
+**** `Sha256` - The digest of the pipelines contained at this
+      URL.  Typically a command like `sha256sum` is used to obtain the
+      digest.
+**** `https`
+***** `url` - The URL pointing to the pipelines.  Typically this file
+       has a `.tar.gz` extension.  The URL will be accessed using
+       HTTPS.
+***** `skipCertVerification` - Controls whether the Kabanero controller will
+       validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
+*** `repositories` - A list of repositories containing application stacks.
+**** `name` - A descriptive name of the stack repository.
+**** `https`
+***** `url` - The URL pointing to the stack repository.  The URL will
+      be accessed using HTTPS.  For example, the 
+      default stack repository for Kabanero version 0.5.0 is
+      https://github.com/kabanero-io/collections/releases/download/v0.5.0/kabanero-index.yaml
+***** `skipCertVerification` - Controls whether the Kabanero controller will
+      validate SSL/TLS certificates presented by the repository URL.
+      Valid values are `true` and `false`.
+**** `pipelines` - A list of pipelines that should be applied to the
+      stacks in this repository.
+***** `id` - A descriptive name of the pipelines contained at this URL.
+***** `Sha256` - The digest of the pipelines contained at this
+      URL.  Typically a command like `sha256sum` is used to obtain the
+      digest.
+***** `https`
+****** `url` - The URL pointing to the pipelines.  Typically this file
+       has a `.tar.gz` extension.  The URL will be accessed using
+       HTTPS.
+****** `skipCertVerification` - Controls whether the Kabanero controller will
+       validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
 ** `cliServices`
 *** `sessionExpirationSeconds` - The length of time (duration) that
     a session established by a Kabanero CLI login remains valid.  The duration
@@ -70,12 +89,36 @@ specify the following fields:
 *** `enable` - Controls whether the Kabanero landing page is deployed by
     the Kabanero operator.  Valid values are `true` and `false`.  The default
     value is `true`.
-** `che`
-*** `enable` - Controls whether Kabanero will deploy an instance of Che.
-    Valid values are `true` and `false`.  The default value is `false`.
-*** `cheOperatorInstance`
-**** `cheWorkspaceClusterRole` - The workspace cluster role used
-     by Che.  By default, the `eclipse-codewind` cluster role is used.
+** `codereadyWorkspaces`
+*** `enable` - Controls whether Kabanero will deploy an instance of 
+    CodeReady Workspaces.  Valid values are `true` and `false`.
+    The default value is `false`.
+*** `operator` - Configuration for the CodeReady Workspaces operator.
+**** `instance`
+***** `devFileRegistryImage` - The devfile image that should be used by
+      the CodeReady Workspaces instance.
+***** `cheWorkspaceClusterRole` - The workspace cluster role used
+      by CodeReady Workspaces.  By default, the `eclipse-codewind`
+      cluster role is used.
+***** `openShiftOAuth` - Controls whether your cluster's OpenShift user
+      accounts are used to log into CodeReady Workspaces.  Requires
+      permanent users (accounts other than `kube:admin`) set up first.
+      Valid values are `true` and `false`
+***** `selfSignedCert` - Controls whether the CodeReady Workspaces instance
+      should use a self-signed certificates when communicating over TLS.
+      Valid values are `true` and `false`.  Note that a value of `true`
+      requires that `tlsSupport` is also set to `true`.
+***** `tlsSupport` - Controls whether TLS is enabled for the CodeReady
+      Workspaces instance.  Valid values are `true` and `false`.
+** `sso` - Configuration for the Red Hat SSO Server
+*** `enable` - Controls whether Kabanero will deploy an instance of 
+    the Red Hat SSO Server for application use.  Valid values are `true` a
+    nd `false`.  The default value is `false`.
+*** `adminSecretName` - The name of a secret that contains keys for
+    `username`, `password`, and `realm`.  These values will become the
+    admin username and password for the Red Hat SSO server, as well as
+    define the realm that the SSO server will use.  For more information
+    about setting up the secret, see link:rhsso.html[the SSO configuration instructions].
 
 The following `Status` fields are maintained by the Kabanero operator to
 provide information about the installed components, and the health of the
@@ -87,51 +130,47 @@ Kabanero instance:
 *** `ready` - The overall Status of Kabanero.  A value of `True`
     indicates Kabanero has been installed successfully.  A value of `False`
     indicates that there was a problem, and more information can be found
-    by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+    by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
 *** `version` - Shows the version of Kabanero that is currently installed.
     This version can be different from `Spec.version` if there is a problem
     configuring and installing the `Spec.version`.
-** `knativeEventing` - Contains information about the Knative Eventing
-   instance which was found on this cluster.
-*** `ready` - The overall status of the Knative Eventing operator,
-    as reported by the `KnativeEventing` CR instance.  A value of `False`
-    indicates there was a problem, and more information can be found by
-    looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
-    The error message is copied from the `ready` condition on the
-    `KnativeEventing` CR instance.
-*** `version` - The version of Knative Eventing as reported by the
-    `KnativeEventing` CR instance.
-** `knativeServing` - Contains information about the Knative Serving
-   instance which was found on this cluster.
-*** `ready` - The overall status of the Knative Serving operator,
+** `serverless` - Contains information about the OpenShift Serverless
+   operator which was found on this cluster.
+*** `ready` - The overall status of the Serverless operator.
+*** `message` - Provides more details for a `ready` status of
+    `False`.
+*** `version` - The version of the Serverless operator as reported by
+    the CSV for the Serverless operator.
+*** `knativeServing` - Contains information about the Knative Serving
+    instance managed by the Serverless operator.
+**** `ready` - The overall status of the Knative Serving operator,
     as reported by the `KnativeServing` CR instance.  A value of `False`
     indicates there was a problem, and more information can be found by
-    looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+    looking in the `message` attribute.
+**** `message` - Provides more details for a `ready` status of `False`.
     The error message is copied from the `ready` condition on the
     `KnativeServing` CR instance.
-*** `version` - The version of Knative Serving as reported by the
+**** `version` - The version of Knative Serving as reported by the
     `KnativeServing` CR instance.
-** `tekton` - Contains information about the Tekton instance which was found
+** `tekton` - Contains information about the pipelines instance which was found
    on this cluster.
-*** `ready` - The overall status of Tekton, as reported by the
-    Tekton `Config` CR instance.  A value of `False` indicates there was a
-    problem, and more information can be found by looking in the `errorMessage`
+*** `ready` - The overall status of pipelines, as reported by the
+    pipelines `Config` CR instance.  A value of `False` indicates there was a
+    problem, and more information can be found by looking in the `message`
     attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+*** `message` - Provides more details for a `ready` status of `False`.
     The error message is copied from the `ready` condition on the `Config`
     CR instance.
-*** `version` - The version of Tekton as reported by the Tekton `Config`
+*** `version` - The version of pipelines as reported by the pipelines `Config`
     CR instance.
 ** `cli` - Contains information about the Kabanero CLI backend service.
 *** `ready` - The overall status of the Kabanero CLI backend
     service.  A value of `True` indicates the service was installed
     successfully.  A value of `False` indicates there was a problem, and
-    more information can be found by looking in the `errorMessage`
+    more information can be found by looking in the `message`
     attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+*** `message` - Provides more details for a `ready` status of `False`.
 *** `hostnames` - Provides the hostnames from the `Route` that was created
     for the Kabanero CLI service.  The hostname can be used in the Kabanero
     CLI to connect to this Kabanero instance.
@@ -139,16 +178,16 @@ Kabanero instance:
 *** `ready` - The overall status of the Kabanero landing page.
     A value of `True` indicates the landing page was deployed successfully.
     A value of `False` indicates there was a problem, and more information can
-    be found by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+    be found by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
 *** `version` - The version of the landing page that was deployed.
-** `appsody` - Contains information about the Appsody operator that was
+** `appsody` - Contains information about the application operator that was
    deployed by the Kabanero operator.
-*** `ready` - The overall status of the Appsody operator.  A value
+*** `ready` - The overall status of the application operator.  A value
     of `True` indicates the operator was deployed successfully.  A value of
     `False` indicates there was a problem, and more information can be found
-    by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False.
+    by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False.
 ** `kappnav` Contains information about the kAppNav that was found on the
    cluster.  kAppNav is an optional component of Kabanero.  If kAppNav is
    not found in its default location in the `kappnav` namespace, its status
@@ -156,32 +195,46 @@ Kabanero instance:
 *** `ready` - The overall status of kAppNav.  A value of `True`
     indicates kAppNav was installed and configured successfully.  A value
     of `False` indicates that there was a problem, and more information can
-    be found by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
+    be found by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
 *** `uiLocations` - The location (URL) of the UI endpoint of kAppNav.
     This information is copied from the `Route` for the kAppNav UI service.
 *** `apiLocations` - The location (URL) of the API endpoint of
     kAppNav.  This information is copied from the `Route` for the kAppNav API
     service.
-** `che` - Contains information about the Che instance that is deployed by
-   the Kabanero operator.
-*** `ready` - The overall status of Che.  A value of `True`
-    indicates Che was installed and configured successfully.  A value of
+** `codereadyWorkspaces` - Contains information about the CodeReady
+   Workspaces instance that is deployed by the Kabanero operator.
+*** `ready` - The overall status of CodeReady Workspaces.  A value of `True`
+    indicates it was installed and configured successfully.  A value of
     `False` indicates that there was a problem, and more information can be
-    found by looking in the `errorMessage` attribute.
-*** `errorMessage` - Provides more details for a `ready` status of `False`.
-*** `cheOperator`
-**** `version` - The version of the Che operator used.
-*** `kabaneroChe`
-**** `version` - The version of the Kabanero-Che container used
-     to configure the Che instance.
-*** `kabaneroCheInstance`
-**** `cheImage` - The Kabanero-Che image name used by this Che
-     instance.
-**** `cheImageTag` - The tag of the Kabanero-Che image used by this
-     Che instance.
-**** `cheWorkspaceClusterRole` - The name of the cluster role used
-     by the workspaces that are created by this Che instance.
+    found by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
+*** `operator`
+**** `version` - The version of the CodeReady Workspaces operator used.
+**** `instance`
+***** `devFileRegistryImage` - The devfile image that should be used by
+      the CodeReady Workspaces instance.
+***** `cheWorkspaceClusterRole` - The workspace cluster role used
+      by CodeReady Workspaces.  By default, the `eclipse-codewind`
+      cluster role is used.
+***** `openShiftOAuth` - Displays whether your cluster's OpenShift user
+      accounts are used to log into CodeReady Workspaces.  Requires
+      permanent users (accounts other than `kube:admin`) set up first.
+      Valid values are `True` and `False`
+***** `selfSignedCert` - Displays whether the CodeReady Workspaces instance
+      is using self-signed certificates when communicating over TLS.
+      Valid values are `True` and `False`.
+***** `tlsSupport` - Displays whether TLS is enabled for the CodeReady
+      Workspaces instance.  Valid values are `True` and `False`.
+** `sso` - Contains information about the Red Hat SSO Server
+*** `configured` - Displays whether the Red Hat SSO Server configuration
+    is present in this Kabanero CR instance.  Valid values are `True`
+    and `False`.
+*** `ready` - The overall status of the Red Hat SSO Server.  A value
+    of `True` indicates it was installed and configured successfully.
+    A value of `False` indicates that there was a problem, and more
+    information can be found by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
 
 == Inspecting your Kabanero CR Instance
 
@@ -195,45 +248,45 @@ replace `-n kabanero` with the name of another namespace.
 
 == Examples
 
-The following yaml defines a `Kabanero` instance at version 0.2.0, using
-the default collection set.
+This example yaml defines a `Kabanero` instance at version 0.6.0, using
+the default stacks.
 
 ```yaml
-apiVersion: kabanero.io/v1alpha1
+apiVersion: kabanero.io/v1alpha2
 kind: Kabanero
 metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  version: "0.2.0"
-  collections:
+  version: "0.6.0"
+  stacks:
     repositories:
     - name: central
-      url: https://github.com/kabanero-io/collections/releases/download/v0.2.0-rc1/kabanero-index.yaml
-      activateDefaultCollections: true
+      https:
+        url: https://github.com/kabanero-io/collections/releases/download/v0.6.0/kabanero-index.yaml
 ```
 
-The following yaml defines a `Kabanero` instance at version 0.2.0, using
-a custom collection set and its associated GitHub configuration.  Sessions
+This example yaml defines a `Kabanero` instance at version 0.6.0, using
+custom stacks and their associated GitHub configuration.  Sessions
 established using the Kabanero CLI remain valid for one hour.
 
 ```yaml
-apiVersion: kabanero.io/v1alpha1
+apiVersion: kabanero.io/v1alpha2
 kind: Kabanero
 metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  version: "0.2.0"
-  collections:
+  version: "0.6.0"
+  stacks:
     repositories:
     - name: central
-      url: https://github.com/my-organization/collections/releases/download/v0.1/kabanero-index.yaml
-      activateDefaultCollections: true
+      https: 
+        url: https://github.com/my-organization/stacks/releases/download/v0.1/kabanero-index.yaml
   github:
     organization: my-organization
     teams:
-      - collection-admins
+      - stack-admins
       - admins
     apiUrl: https://api.github.com
   cli:
