@@ -11,7 +11,7 @@ The Kabanero CLI is a command-line interface used by the enterprise, solution, o
 
 . Download the archive corresponding to the platform you are running on.
 * https://github.com/kabanero-io/kabanero-command-line/releases/latest[Latest CLI release, window="_blank"]
-* Latest CLI release (optional) - If you are using Homebrew, you can use the `brew install kabanero-io/kabanero/kabanero` command to do a brew install of the latest version
+* Latest CLI release - If you are using Homebrew, you can use the `brew install kabanero-io/kabanero/kabanero` command to do a brew install of the latest version
 * https://github.com/kabanero-io/kabanero-command-line/releases[All CLI releases, window="_blank"]
 
 . Extract the archive. The archive holds the `./kabanero` command, which is ready to be used.
