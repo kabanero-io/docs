@@ -28,7 +28,7 @@ spec:
   nfs:
     path: /root/persistentvolumes
     server: 10.26.1.100
-  persistentVolumeReclaimPolicy: Recycle
+  persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
 ----
 +
