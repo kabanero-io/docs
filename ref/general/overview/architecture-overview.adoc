@@ -24,18 +24,18 @@ image::/docs/img/arch-overview-main.png[link="/docs/img/arch-overview-main.png" 
 
 === Kabanero Application Stacks
 
-A large portion of the Kabanero experience is centered around *application stacks*. An application stack is created by an *application architect* as a logical set of software components for developing and deploying applications. An application stack is realized as components (such as tools and container images) used at coding time by application developers, and components forming a deployment pipeline that can extract, build, and deploy the resulting application image to a running Kubernetes cluster.
+A large portion of the Kabanero experience is centered around *application stacks*. An application stack is created by an *application architect* as a logical set of software components for developing and deploying applications. Although the application architect builds the stacks, all of the software components that comprise them should be agreed upon by operations, enterprise, and developer advocates. An application stack is realized as components (such as tools and container images) used at coding time by application developers.  Application stack configuration is done via standard Kubernetes operator (CRD) configuration.
 
-If necessary, an application stack can be customized to meet local requirements. For example, you might want to define specific maintenance levels of software components or expose a particular port for your application. Customizing an application stack provides a mechanism for controlling the precise development and runtime environment for an application. In a large organization, customization ensures that applications are developed and tested with a level of consistency that promotes quality and helps guarantee a seamless implementation in your production environment.
+If necessary, an application stack can be customized to meet local requirements. For example, you might want to define specific maintenance levels of software components or expose particular ports for use by the applications that are based on the stack. Customizing an application stack provides a mechanism for controlling the precise development and runtime environment for an application. In a large organization, customization ensures that applications are developed and tested with a level of consistency that promotes quality and helps guarantee a seamless implementation in your production environment.
 
-A stack is realized as a container image designed, built, and published by an application architect, which can then be pulled into local registries by application developers and into the deployment pipeline upon code deliveries.
+A stack is designed, built, and published by an application architect, which can then be pulled into local registries by application developers and into the deployment pipeline upon code deliveries.
 
 .Application stacks
 image::/docs/img/arch-overview-stacks.png[link="/docs/img/arch-overview-stacks.png" alt="Application stacks"]
 
-Although a stack is ultimately delivered as a regular container image, Kabanero specifies conventions for the internal structure of that image, with a clear separation between the portions of the stack that are common across all applications created with the stack and the portions that are unique to each application, being visible and editable by application developers.
+A stack has conventions for its internal structure, with a clear separation between the portions of the stack that are common across all applications created with the stack and the portions that are unique to each application, being visible and editable by application developers.
 
-Those conventions for a collection stack are detailed in the https://appsody.dev/docs/stacks/stack-structure[Stack Structure] section of the https://appsody.dev/[Appsody website]. For the portion of the stack that is common across all applications, an application architect makes choices such as the base container image, the runtime framework for the programming language being targeted by the collection, the toolset for the runtime framework, the management choices for the running application, and many other choices not directly related to the functional aspects of the application.
+Those conventions for a stack are detailed in the https://appsody.dev/docs/stacks/stack-structure[Stack Structure] section of the https://appsody.dev/[Appsody website]. For the portion of the stack that is common across all applications, an application architect makes choices such as the base container image, the runtime framework for the programming language being targeted by the stack, the toolset for the runtime framework, the management choices for the running application, and many other choices not directly related to the functional aspects of the application.
 
 The stack structure also contains at least one application template: a set of source code files matching the technology of the stack. A template is used by the client portion of Kabanero upon request by application developers to create the first version of an application. As examples, a template may contain an empty website and web folder with all the visual branding elements for an organization, whereas another template may contain an empty REST-based application secured by API keys.
 
@@ -43,7 +43,7 @@ Kabanero provides initial application stacks for the most popular software devel
 
 === Developer Experience
 
-For *application developers*, the Kabanero experience is realized as tooling that allows a developer to continuously iterate over changes to source code and validate the changes, considerably reducing or even eliminating the amount of time spent setting up and dealing with infrastructures such as Docker containers and Kubernetes clusters. The current tooling is offered as a combination of the following initial offerings:
+For *application developers*, the Kabanero experience is realized as tools that allows a developer to continuously iterate over changes to source code and validate the changes, considerably reducing or even eliminating the amount of time spent setting up and dealing with infrastructures such as Docker containers and Kubernetes clusters. The current tools are offered as a combination of the following initial offerings:
 
 * https://appsody.dev[Appsody]: A Command-line interface with commands for creating, building, running, and deploying applications. Appsody also has extensions that are used by other portions of the architecture to reassemble the application as a container image and to deploy it to a running container, and those will be covered in the respective sections of this overview.
 
@@ -53,13 +53,13 @@ Both Appsody and the local IDE extensions of Codewind depend on a running docker
 
 === Kabanero Foundation
 
-The *Kabanero Foundation* sits on the opposite side of the developer experience, as a managed pipeline that handles the workflows after application developers deliver their source code to a remote repository. Kabanero Foundation is a set of Kubernetes components covering the disciplines of serving applications, service mesh, build, and deployment.
+The *Kabanero Foundation* sits on the opposite side of the developer experience, as a set of managed pipelines that provide consistent, managed, and governed CI/CD processes that react to repository events that occur during code development. Kabanero Foundation is a set of Kubernetes components covering the disciplines of serving applications, service mesh, build, and deployment.
 
-With these components deployed to a Kubernetes cluster, the Kabanero Foundation monitors changes to source code repositories (such as git) and triggers pipeline runs that will extract the source code, reassemble it according to the structure and runtime specifications of the underlying Kabanero application stack, execute all the build and verification steps, and then make the final application container pods available in the cluster.
+With these components deployed to a Kubernetes cluster, webhooks are utilized to connect the source code repositories (such as GitHub) to pipelines that extract the source code, reassemble it according to the structure and runtime specifications of the underlying Kabanero application stack, execute all the build and verification steps, and then make the final application container pods available in the cluster.
 
 === Kabanero Unified Experience
 
-Applications in a production environment are subject to common operational policies and lifecycle operations. Kabanero combines a set of open-source projects to support operations teams in those activities, ranging from the Kubernetes CLI for managing the Kabanero custom resources, passing through the upcoming Kabanero CLI, all to way to Razee, a user interface for managing deployments across Kubernetes clusters.
+Applications in a production environment are subject to common operational policies and lifecycle operations. Kabanero combines a set of open-source projects to support operations teams in those activities, ranging from the Kubernetes CLI for managing the Kabanero custom resources to Application Navigator (kAppNav) to view related application resources in a single, simplified view.
 
 == Workflows
 
@@ -104,7 +104,7 @@ As described in the https://appsody.dev/docs/stacks/stack-structure[Stack Struct
 ..
 ----
 
-Note that https://semver.org/[patches] to the Kabanero application stack may be picked up between executions of "appsody run", triggering the download of the new base image for the stack. In the case of minor or major patches, the application architect is expected to notify application developers about the new release and implications to existing applications, at which point the application developers need to update the Kabanero metadata in the application directory to pick up these changes.
+Note that https://semver.org/[patches] to the application stack may be picked up between executions of "appsody run", triggering the download of the new base image for the stack. In the case of minor or major patches, the application architect is expected to notify application developers about the new release and implications to existing applications, at which point the application developers need to update the Kabanero metadata in the application directory to pick up these changes.
 
 
 === Test build (application developer)
@@ -154,9 +154,9 @@ After several iterations of the previous workflows, application developers will 
 
 The overall process for modifying a stack is explained in the https://appsody.dev/docs/stacks/stacks-overview["Stacks Overview"] page of the Appsody website.
 
-At this point, the application architect must judge the nature of the changes in light of https://semver.org/[semantic versioning] guidelines and decide on the new version number for the stack. Application stacks are expected to have application templates set to adopt all new patches automatically and set to require a manual change to the application code to adopt minor and major versions.
+The application architect must judge the nature of the changes in light of https://semver.org/[semantic versioning] guidelines and decide on the new version number for the stack. Application stacks are expected to have application templates set to adopt all new patches automatically and set to require a manual change to the application code to adopt minor and major versions.
 
-Once the decision about the new version is made, the application stack must be published to the remote location hosting the application stack, a process also described in the https://appsody.dev/docs/stacks/publish["Publishing Stacks"] page of the Appsody website.
+Once the decision about the new version is made, the application stack must be published to the remote location hosting the application stack, a process also described in the https://kabanero.io/guides/working-with-stacks/["Working with stacks"] guide.
 
 
 === Install Kabanero Foundation to Kubernetes cluster (operations team)
