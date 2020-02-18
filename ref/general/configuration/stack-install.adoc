@@ -1,0 +1,61 @@
+:page-layout: doc
+:page-doc-category: Configuration
+:page-title: Configuring a Kabanero CR instance to use an alternative stack repository
+:page-doc-number: 2.0
+:linkattrs:
+:sectanchors:
+= Configuring Kabanero to use an alternative stack repository
+
+A Kabanero custom resource (CR) instance can be configured to use an alternative stack repository.  When you have published a new stack repository, as described in
+link:https://appsody.dev/docs/stacks/publish[Publishing Stacks], follow these steps to use that stack index with Kabanero:
+
+. Create organizational-level teams in GitHub to administer the cloned stacks, and add members to those teams.  These members will be able to use the link:../reference/kabanero-cli.html[Kabanero CLI] to administer the stacks in the namespace where the Kabanero CR instance is configured.
+
+. Obtain the URL to the stack repository.  If a Git release was created for the stacks, the URL format might be: `https://<github.com>/<organization>/stacks/releases/download/<release>/incubator-index.html`
+* Replace `<github.com>` with your GitHub or GHE hostname
+* Replace `<organization>` with your GitHub organization name
+* Replace `<release>` with the name of the release that was created
+
+. Find the name of your Kabanero CR instance.  Use `oc get kabaneros -n kabanero` to obtain a list of all Kabanero CR instances in namespace `kabanero`.  The default name for the CR instance is `kabanero`.  Then, edit the specific CR instance using `oc edit kabanero <name> -n kabanero`, replacing `<name>` with the instance name.
+
+. Modify your Kabanero CR instance to target the new stacks that were pushed to the remote GitHub repository and the teams in GitHub that will administer the stacks.  Specifically:
+* The `Spec.Stacks.Repositories.Https.url` attribute should be set to the URL of the alternative stack repository.
+* Refer to link:github-authorization.html[authorizing the Kabanero CLI service] for instructions on defining authorization to the GitHub teams.
+
++
+A modified Kabanero CR instance for a stack repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.1.2` of stacks might look like this:
++
+```yaml
+apiVersion: kabanero.io/v1alpha2
+kind: Kabanero
+metadata:
+  name: kabanero
+  namespace: kabanero
+spec:
+  stacks:
+    repositories:
+    - name: custom
+      https:
+        url: https://github.example.com/my_org/stacks/releases/download/0.1.2/incubator-index.yaml
+    pipelines:
+    - id: default
+      sha256: 14285a7f0bb152759b3e2141db19d72ea1f94f01bbf5ffbf866cab4e60e093dd
+      https:
+        url: https://github.com/kabanero-io/collections/releases/download/0.5.0/incubator.common.pipeline.default.tar.gz
+  github:
+    organization: my_org
+    teams:
+      - stack-admins
+      - admins
+    apiUrl: https://api.github.com
+```
++
+For more information about other fields that can be customized in the Kabanero CR instance, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].
++
+After editing, save your changes.  The updated Kabanero CR instance is applied to your cluster.
+
+. The Kabanero operator will now load the stacks in the repository.  To see a list of all stacks in the `kabanero` namespace, use `oc get stacks -n kabanero`.  If the kabanero-operator is unable to apply the stacks, the `Status` section of the Kabanero CR instance or the Stack CR instances will contain more information.
+
+== Need help?
+If you have questions, we would like to hear from you.
+You can reach out to the community for assistance on the https://ibm-cloud-tech.slack.com/messages/CJZCYTD0Q[Kabanero Slack channel, window="_blank"].
