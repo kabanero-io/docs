@@ -185,7 +185,7 @@ active stack is already synchronized with master
 
 Curated stacks and active stacks are now fully synchronized.
 
-or
+Inactive stacks are activated during the sync operation, as shown in the following example:
 
 ----
 Kabanero Instance Stacks	Version	Status
@@ -193,7 +193,7 @@ Kabanero Instance Stacks	Version	Status
 nodejs				0.2.6	inactive ==> active
 ----
 
-or
+This example result shows a stack added to Kabanero from stack entry in curated stack hub:
 
 ----
 Kabanero Instance Stacks 	Version	Status
@@ -203,7 +203,7 @@ java-microprofile		0.2.21	added to Kabanero
 
 Running the `kabanero sync` command when one of the stacks is obsolete deletes the stack.
 
-Example result:
+This example result shows a stack deleted from Kabanero because it is no longer in curated stack hub:
 
 ----
 Kabanero Instance Stacks 	Version	Status
