@@ -89,7 +89,7 @@ specify the following fields:
 *** `enable` - Controls whether the Kabanero landing page is deployed by
     the Kabanero operator.  Valid values are `true` and `false`.  The default
     value is `true`.
-** `codereadyWorkspaces`
+** `codeReadyWorkspaces`
 *** `enable` - Controls whether Kabanero will deploy an instance of 
     CodeReady Workspaces.  Valid values are `true` and `false`.
     The default value is `false`.
