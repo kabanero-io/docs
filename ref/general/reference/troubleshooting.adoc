@@ -208,7 +208,7 @@ status:
 
 When a subcomponent is not ready or is failing, the product returns an error message, which could come directly 
 from the subcomponent. You can gather more information on why a subcomponent is not ready or is failing by referring to the description of each
-subcomponent that follows. Each description includes a command to determine the state for the component and a command to gather logs for the componenet.
+subcomponent that follows. Each description includes a command to determine the state for the component and a command to gather logs for the component.
 
 === admissionControllerWebhook
 
