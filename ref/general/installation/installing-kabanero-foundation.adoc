@@ -70,13 +70,8 @@ spec:
 The **Kabanero Console** is installed as part of the install process and is a good next step to go explore information about your Kabanero instance.
 
 === View the Console's landing page
-. In your OpenShift Console
-.. Click on the **Kabanero** tab on the left hand navigation.
 
-**Note**: If you do not see the **Kabanero** tab, proper certificates might not be installed in your cluster. You will have to accept the self-signed certificate before the **Kabanero** tab is displayed.
-To accept the self-signed certificate, **go to the Kabanero console's URL in your browser and accept the self-signed certificate**.
-
-There are two ways to get the URL::
+There are two ways to get the console's URL::
 
 Using the `oc` CLI:::
 . Open a terminal and run: `oc get routes -n kabanero`
@@ -99,7 +94,14 @@ kabanero-landing-6dc5c798d4-ncg52     1/1       Running   0          11m
 
 You can add optional features to help you manage your application stacks, but it requires you setup OAuth for the console. To setup OAuth follow the instructions for link:/docs/ref/general/configuration/console-oauth.html[Configuring OAuth for the product console].
 
+=== View the Kabanero Guides
+
+The quickest way to get started using Kabanero is by viewing link:https://kabanero.io/guides/[our guides].  Learn how to build and deploy applications, set up logging and monitoring, and more!
+
 == (Optional sample) Application deployment project with manual pipeline run
+
+You can build and deploy a simple java-microprofile application using the default java-microprofile pipelines by following these steps:
+
 =======
 
 . Retrieve the installation scripts from the kabanero-foundation repository
