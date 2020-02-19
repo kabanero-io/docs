@@ -71,7 +71,7 @@ image::/docs/img/arch-overview-workflows.png[link="/docs/img/arch-overview-workf
 
 === Create a new application (application developer)
 
-Assuming an organization has decided to begin with the initial application stacks shipped with Kabanero, an application developer would https://appsody.dev/docs/getting-started/installation[install Appsody] to its local system and lookup the collection and use the application stack name to initialize a local directory with an initial application template. That activity is explained https://appsody.dev/docs/using-appsody/initializing-project[in detail] in the Appsody website but can be summarized as follows:
+An application developer installs and configures Appsody on their local system to use the application stacks that have been customized for their organization. These stacks can be initialized with an initial application template. This activity is explained https://appsody.dev/docs/using-appsody/initializing-project[in detail] in the Appsody website but can be summarized as follows:
 
 ----
 
