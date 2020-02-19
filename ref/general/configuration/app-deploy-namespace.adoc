@@ -55,7 +55,7 @@ oc get smmr default -n istio-system -o yaml > smmr.yaml
 ----
 +
 
-Edit the `smmr.yaml` file and specify the namespaces where you intend to deploy applications as separate entries in list for the `members` attribute.  Specify multiple namespaces as a list.
+Edit the `smmr.yaml` file and specify the namespaces where you intend to deploy applications as separate entries in the list for the `members` attribute.
 The following section of a `smmr.yaml` file shows the `production` and `test` namespaces in the `members` list, after the existing namespaces:
 +
 ----
