@@ -55,8 +55,8 @@ oc get smmr default -n istio-system -o yaml > smmr.yaml
 ----
 +
 
-Edit `smmr.yaml` and specify the namespaces where you intend to deploy applications, by updating the `members` attribute.  Specify multiple namespaces as a list.
-The following section of a `smmr.yaml` file shows the `production` and `test` namespaces in the members list, after the existing namespaces:
+Edit the `smmr.yaml` file and specify the namespaces where you intend to deploy applications as separate entries in list for the `members` attribute.  Specify multiple namespaces as a list.
+The following section of a `smmr.yaml` file shows the `production` and `test` namespaces in the `members` list, after the existing namespaces:
 +
 ----
 apiVersion: maistra.io/v1
