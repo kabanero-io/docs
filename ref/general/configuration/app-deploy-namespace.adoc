@@ -47,6 +47,40 @@ For a full list of supported attributes in a `kabanero.yaml` configuration file,
 oc apply -f kabanero.yaml -n kabanero
 ----
 +
+
+. If your application's `app-deploy.yaml` sets `spec.createKnativeService` to `true`, you will need to modify the Service Mesh Member Role to include the deployment namespaces.  Obtain a copy of the Service Mesh Member Role (SMMR) by running the following command:
++
+----
+oc get smmr default -n istio-system -o yaml > smmr.yaml
+----
++
+
+Edit the `smmr.yaml` file and specify the namespaces where you intend to deploy applications as separate entries in the list for the `members` attribute.
+The following section of a `smmr.yaml` file shows the `production` and `test` namespaces in the `members` list, after the existing namespaces:
++
+----
+apiVersion: maistra.io/v1
+kind: ServiceMeshMemberRole
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  members:
+  - knative-serving
+  - tekton-pipelines
+  - kabanero
+  - production
+  - test
+----
++
+
+Apply your changes to the Service Mesh Member Role by running the following command:
++
+----
+oc apply -f smmr.yaml -n istio-system
+----
++
+
 . Modify your Appsody application `app-deploy.yaml` file to use one of the namespaces you configured in the `targetNamespaces` attribute of the Kabanero CR instance.
 Here is an example `app-deploy.yaml` file that deploys the `appsody-hello-world` application to the `test` namespace:
 +
