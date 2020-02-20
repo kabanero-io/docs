@@ -22,26 +22,47 @@ apiVersion: kabanero.io/v1alpha2
 kind: Kabanero
 metadata:
   name: kabanero
-  namespace: kabanero
 spec:
-  stacks:
-    repositories:
-    - name: custom
-      https:
-        url: https://github.example.com/my_org/stacks/releases/download/0.6.0/incubator-index.yaml
-  codeReadyWorkspaces
+  version: "0.6.0"
+  codeReadyWorkspaces:
     enable: true
+    operator:
+      customResourceInstance:
+        tlsSupport: true
+        selfSignedCert: true
+  stacks: 
+    repositories: 
+    - name: central
+      https:
+        url: https://github.com/kabanero-io/collections/releases/download/0.6.0/kabanero-index.yaml
 ```
 
 === Configuring CodeReady Workspaces
 The Kabanero CR instance provides additional fields allowing you to configure your install of CodeReady Workspaces. 
 
-* Set `Spec.codeReadyWorkspaces.operator.instance.tlsSupport` to `true` if you wish to install CodeReady Workspaces with TLS Support. 
-  *Note:* If your cluster is set up with self-signed certificates, `Spec.codeReadyWorkspaces.operator.instance.selfSignedCert` must also be set to `true`
-* Set `Spec.codeReadyWorkspaces.operator.instance.openShiftOAuth` to `true` if you wish to use your OpenShift accounts with CodeReady Workspaces.  Requires permanent users (accounts other than kube:admin) set up first.
+* Set `Spec.codeReadyWorkspaces.operator.customResourceInstance.tlsSupport` to `true` if you wish to install CodeReady Workspaces with TLS Support. 
+  *Note:* If your OpenShift cluster's router is set up with self-signed certificates, `Spec.codeReadyWorkspaces.operator.instance.selfSignedCert` must also be set to `true`. 
+* Set `Spec.codeReadyWorkspaces.operator.customResourceInstance.openShiftOAuth` to `true` if you wish to use your OpenShift accounts with CodeReady Workspaces.  Requires permanent users (accounts other than kube:admin) set up first.
 
 Consult link:kabanero-cr-config.html[Configuring a Kabanero CR Instance] for the full list of configurable fields
 
+=== Using CodeReady Workspaces with Self-Signed certificates
+If CodeReady Workspaces is set up to use the self-signed certificates provided by the OpenShift cluster's router, then you must do the following:
+
+*Google Chrome:*
+
+. Access the CodeReady Workspaces route in your browser
+. Download the route's certificate to your system
+. Go to Settings -> Privacy and Security -> Manage certificates
+. Import the certificate into your system and set its trust to `Always trust`
+
+*Firefox:*
+
+. Access the CodeReady Workspaces route in your browser
+. View the route's certificate in your browser
+. Download the certificate titled `ingress-operator`
+. Go to Preferences -> Privacy and Security -> View certificates
+. Import the `ingress-operator` certificate as an authority into Firefox.
 
 == Installing Codewind
 Ensure CodeReady Workspaces is installed on your OpenShift cluster.
