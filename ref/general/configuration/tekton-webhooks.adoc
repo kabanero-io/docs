@@ -14,7 +14,7 @@ A webhook is an outbound HTTP request that helps you create a relationship betwe
 ** Your Kabanero installation must include an instance of the https://github.com/tektoncd/dashboard#installing-the-latest-release[pipelines dashboard, window="_blank"] with the https://github.com/tektoncd/experimental/blob/master/webhooks-extension/README.md[webhooks extension, window="_blank"] and https://github.com/tektoncd/triggers/tree/v0.1.0/docs#tekton-triggers[triggers, window="_blank"] installed.
 
 == Create a persistent volume
-Pipelines need a persistent volume. For more information, see *Setting up a persistent volume to run pipelines* in the https://kabanero.io/guides/guides/pipelines-getting-started/[Build and deploy applications with pipelines, window="_blank"] guide.
+Pipelines need a persistent volume. For more information, see *Setting up a persistent volume to run pipelines* in the https://kabanero.io/guides/pipelines-getting-started/[Build and deploy applications with pipelines, window="_blank"] guide.
 
 [#gat]
 == Generate a GitHub access token
