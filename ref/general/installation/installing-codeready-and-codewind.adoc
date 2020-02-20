@@ -14,7 +14,7 @@ CodeReady Workspaces requires at least two 1Gi ReadWriteOnce (RWO) persistent vo
 Each Codewind workspace also requires at least on 1Gi ReadWriteMany (RWX) persistent volume.
 
 == Installing CodeReady Workspaces
-To install CodeReady Workspaces, set `Spec.codeReadyWorkspaces.enable: true` in the Kabanero custom resource (CR) instance and apply it.
+To install CodeReady Workspaces, set `Spec.codeReadyWorkspaces.enable: true` in the Kabanero custom resource (Kabanero CR) instance and apply it.
 
 A sample Kabanero CR instance might look like:
 ```yaml
@@ -73,7 +73,7 @@ Ensure CodeReady Workspaces is installed on your OpenShift cluster.
 . Under `Select Stack`, select `Codewind`.
 . Click `Create & Open` to create and start Codewind in CodeReady Workspaces.
 
-CodeReady Workspaces will proceed to bring up Codewind, and install the Codewind plugins. This process may take a couple of minutes for all of the necessary components to get pulled and started.
+CodeReady Workspaces then proceeds to bring up Codewind, and install the Codewind plugins. This process may take a couple of minutes for all of the necessary components to get pulled and started.
 
 Consult the https://www.eclipse.org/codewind/mdt-che-overview.html[Codewind on Che documentation, window="_blank"] for additional information and next steps.
 
