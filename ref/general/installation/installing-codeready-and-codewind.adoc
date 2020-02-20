@@ -11,7 +11,7 @@ links for your chosen IDE:
 
 CodeReady Workspaces requires at least two 1Gi ReadWriteOnce (RWO) persistent volumes on the cluster to install and a 1Gi RWO volume for each created workspace.
 
-Each Codewind Workspace also requires at least on 1Gi ReadWriteMany (RWX) persistent volume.
+Each Codewind workspace also requires at least on 1Gi ReadWriteMany (RWX) persistent volume.
 
 == Installing CodeReady Workspaces
 To install CodeReady Workspaces, set `Spec.codeReadyWorkspaces.enable: true` in the Kabanero custom resource (CR) instance and apply it.
@@ -78,12 +78,12 @@ CodeReady Workspaces will proceed to bring up Codewind, and install the Codewind
 Consult the https://www.eclipse.org/codewind/mdt-che-overview.html[Codewind on Che documentation, window="_blank"] for additional information and next steps.
 
 === Stopping or Uninstalling Codewind
-If at any point, you need to stop the Codewind Workspace, you can:
+If at any point, you need to stop the Codewind workspace, you can:
 
-. Log in to your CodeReady Workspaces account and access the dashboard.
+. Log in to your CodeReady workspaces account and access the dashboard.
 . Click on `Workspaces` in the sidebar.
-. To pause the Codewind Workspace: Select the Codewind Workspace and under `Actions` click the `Stop workspace` button.
-. To delete the Codewind Workspace: Select the Codewind Workspace and click the `Delete` button.
+. To pause the Codewind workspace: Select the Codewind workspace and under `Actions` click the `Stop workspace` button.
+. To delete the Codewind workspace: Select the Codewind workspace and click the `Delete` button.
 
 === Troubleshooting
 To troubleshoot Codewind, see the https://www.eclipse.org/codewind/troubleshooting.html[Codewind Troubleshooting page, window="_blank"].
