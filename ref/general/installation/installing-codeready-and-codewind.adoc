@@ -56,7 +56,7 @@ If CodeReady Workspaces is set up to use the self-signed certificates provided b
 . Go to Settings -> Privacy and Security -> Manage certificates.
 . Import the certificate into your system and set its trust to `Always trust`.
 
-*Firefox:*
+*Firefox (version 71 or newer):*
 
 . Access the CodeReady Workspaces route in your browser.
 . View the route's certificate in your browser.
