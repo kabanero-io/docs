@@ -219,7 +219,7 @@ Make sure the Kabanero instance is installed in the Kabanero namespace. There ar
 . From the OpenShift console, view Administration > Custom Resource Definitions > Kabanero > Instances > Kabanero > YAML
 . Displaying the configured Kabanero CR with the OC CLI command
 
-  `oc get kabanero -n kabanero -o yaml`
+  oc get kabanero -n kabanero -o yaml
 
 
 === Show the Kabanero version
