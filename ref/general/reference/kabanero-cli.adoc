@@ -106,8 +106,8 @@ kabanero list
 Example result:
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
+Kabanero Instance Stacks  Version	Status
+------------------------  ------- ------
 java-microprofile         0.2.19  active
 java-spring-boot2         0.3.18  active
 java-spring-boot2         0.3.21  active
@@ -139,8 +139,8 @@ If a stack is removed from the curated stack hub on GitHub, its status shows as 
 Example result showing stack with an obsolete status:
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
 java-microprofile         0.2.19  active
 java-spring-boot2         0.3.18  active
 java-spring-boot2         0.3.21  active
@@ -187,16 +187,16 @@ Curated stacks and active stacks are now fully synchronized.
 Inactive stacks are activated during the sync operation, as shown in the following example:
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
 nodejs                    0.2.6   inactive ==> active
 ----
 
 This example result shows a stack added to Kabanero from a stack entry in curated stack hub:
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
 java-microprofile         0.2.21  added to Kabanero
 ----
 
@@ -205,8 +205,8 @@ Running the `kabanero sync` command when one of the stacks is obsolete deletes t
 This example result shows a stack deleted from Kabanero because it is no longer in curated stack hub:
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
 java-microprofile         0.2.21  deleted
 ----
 
@@ -263,8 +263,8 @@ Stack name: nodejs version: 0.3.1 deactivated
 Running the `kabanero list` command now shows the deactivated application stack as inactive.
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
 java-microprofile         0.2.19  active
 java-spring-boot2         0.3.18  active
 java-spring-boot2         0.3.21  active
