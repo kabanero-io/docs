@@ -106,7 +106,7 @@ kabanero list
 Example result:
 
 ----
-Kabanero Instance Stacks  Version	Status
+Kabanero Instance Stacks  Version Status
 ------------------------  ------- ------
 java-microprofile         0.2.19  active
 java-spring-boot2         0.3.18  active
