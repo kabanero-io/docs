@@ -10,8 +10,8 @@ You can modify your Kabanero CR instance to provide authorization to the teams i
 If you do not already have a team defined, see link:https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/creating-a-team[Creating a team, window=_blank].
 
 .To provide authorization:
-* The `Spec.Github.organization` attribute should be set to the organization hosting the collections in the remote GitHub repository.  In the example above, the organization name is `my_org`.
-* The `Spec.Github.teams` attribute should be set to a yaml list of GitHub teams in the remote GitHub repository, whose members can administer the collection using the Kabanero CLI.
+* The `Spec.Github.organization` attribute should be set to the organization hosting the stacks in the remote GitHub repository.  In the example above, the organization name is `my_org`.
+* The `Spec.Github.teams` attribute should be set to a yaml list of GitHub teams in the remote GitHub repository, whose members can administer the stack using the Kabanero CLI.
 * The `Spec.Github.apiUrl` attribute should be set to the API URL for the remote GitHub repository being used.  For example, the API URL for `github.com` is `https://api.github.com`.
 +
 A modified Kabanero CR instance for an application stack repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.6.0` of stacks might look like this:
@@ -31,7 +31,7 @@ spec:
   github:
     organization: my_org
     teams:
-      - collection-admins
+      - stack-admins
       - admins
     apiUrl: https://api.github.com
 ```
