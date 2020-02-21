@@ -106,33 +106,32 @@ kabanero list
 Example result:
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
-java-microprofile		0.2.19	active
-java-spring-boot2		0.3.18	active
-java-spring-boot2		0.3.21	active
-nodejs				0.2.6	inactive
-nodejs				0.3.1	active
-nodejs-express			0.2.8	active
-nodejs-loopback			0.1.6	active
-nodejs-loopback			0.1.8	active
-
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
+java-microprofile         0.2.19  active
+java-spring-boot2         0.3.18  active
+java-spring-boot2         0.3.21  active
+nodejs                    0.2.6   inactive
+nodejs                    0.3.1   active
+nodejs-express            0.2.8   active
+nodejs-loopback           0.1.6   active
+nodejs-loopback           0.1.8   active
 
 GitHub Curated Stacks (repo name - url):
   central - <stack_hub_index_1_url>
   central2 - <stack_hub_index_2_url>
 
-GitHub Curated Stacks	Version	Repo
----------------------	-------	----
-java-microprofile	0.2.19	central
-java-spring-boot2	0.3.21	central
-java-spring-boot2	0.3.18	central2
-nodejs			0.3.1	central
-nodejs			0.2.6	central2
-nodejs-express		0.2.8	central
-nodejs-express		0.2.8	central2
-nodejs-loopback		0.1.8	central
-nodejs-loopback		0.1.6	central2
+GitHub Curated Stacks     Version Repo
+---------------------     ------- ----
+java-microprofile         0.2.19  central
+java-spring-boot2         0.3.21  central
+java-spring-boot2         0.3.18  central2
+nodejs                    0.3.1   central
+nodejs                    0.2.6   central2
+nodejs-express            0.2.8   central
+nodejs-express            0.2.8   central2
+nodejs-loopback           0.1.8   central
+nodejs-loopback           0.1.6   central2
 ----
 
 If a stack is removed from the curated stack hub on GitHub, its status shows as obsolete.  If a stack is obsolete, a SYNC command deletes it.
@@ -140,33 +139,33 @@ If a stack is removed from the curated stack hub on GitHub, its status shows as 
 Example result showing stack with an obsolete status:
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
-java-microprofile		0.2.19	active
-java-spring-boot2		0.3.18	active
-java-spring-boot2		0.3.21	active
-nodejs				0.2.6	inactive
-nodejs				0.3.1	active
-nodejs-express			0.2.8	active
-nodejs-loopback			0.1.6	active
-nodejs-loopback			0.1.8	active
-java-microprofile	        0.2.21	obsolete
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
+java-microprofile         0.2.19  active
+java-spring-boot2         0.3.18  active
+java-spring-boot2         0.3.21  active
+nodejs                    0.2.6   inactive
+nodejs                    0.3.1   active
+nodejs-express            0.2.8   active
+nodejs-loopback           0.1.6   active
+nodejs-loopback           0.1.8   active
+java-microprofile         0.2.21  obsolete
 
 GitHub Curated Stacks (repo name - url):
   central - <stack_hub_index_1_url>
   central2 - <stack_hub_index_2_url>
 
-GitHub Curated Stacks	Version	Repo
----------------------	-------	----
-java-microprofile	0.2.19	central
-java-spring-boot2	0.3.21	central
-java-spring-boot2	0.3.18	central2
-nodejs			0.3.1	central
-nodejs			0.2.6	central2
-nodejs-express		0.2.8	central
-nodejs-express		0.2.8	central2
-nodejs-loopback		0.1.8	central
-nodejs-loopback		0.1.6	central2
+GitHub Curated Stacks     Version Repo
+---------------------     ------- ----
+java-microprofile         0.2.19  central
+java-spring-boot2         0.3.21  central
+java-spring-boot2         0.3.18  central2
+nodejs                    0.3.1   central
+nodejs                    0.2.6   central2
+nodejs-express            0.2.8   central
+nodejs-express            0.2.8   central2
+nodejs-loopback           0.1.8   central
+nodejs-loopback           0.1.6   central2
 ----
 
 === Synchronize stacks
@@ -180,7 +179,7 @@ kabanero sync
 Example results:
 
 ----
-active stack is already synchronized with master
+kabanero instance stacks are already synchronized with the github curated stacks
 ----
 
 Curated stacks and active stacks are now fully synchronized.
@@ -188,17 +187,17 @@ Curated stacks and active stacks are now fully synchronized.
 Inactive stacks are activated during the sync operation, as shown in the following example:
 
 ----
-Kabanero Instance Stacks	Version	Status
------------------------------	-------	------
-nodejs				0.2.6	inactive ==> active
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
+nodejs                    0.2.6   inactive ==> active
 ----
 
-This example result shows a stack added to Kabanero from stack entry in curated stack hub:
+This example result shows a stack added to Kabanero from a stack entry in curated stack hub:
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
-java-microprofile		0.2.21	added to Kabanero
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
+java-microprofile         0.2.21  added to Kabanero
 ----
 
 Running the `kabanero sync` command when one of the stacks is obsolete deletes the stack.
@@ -206,9 +205,9 @@ Running the `kabanero sync` command when one of the stacks is obsolete deletes t
 This example result shows a stack deleted from Kabanero because it is no longer in curated stack hub:
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
-java-microprofile		0.2.21	deleted
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
+java-microprofile         0.2.21  deleted
 ----
 
 
@@ -233,8 +232,8 @@ kabanero version
 Example result:
 
 ----
-kabanero cli version: 0.1.0
-kabanero command line service image: kabanero/kabanero-command-line-services:0.3.0
+kabanero cli version: 0.6.0
+kabanero command line service image: kabanero/kabanero-command-line-services:0.6.0
 ----
 
 === Deactivate Kabanero
@@ -264,32 +263,32 @@ Stack name: nodejs version: 0.3.1 deactivated
 Running the `kabanero list` command now shows the deactivated application stack as inactive.
 
 ----
-Kabanero Instance Stacks 	Version	Status
--------------------------	-------	------
-java-microprofile		0.2.19	active
-java-spring-boot2		0.3.18	active
-java-spring-boot2		0.3.21	active
-nodejs				0.2.6	inactive
-nodejs				0.3.1	inactive
-nodejs-express			0.2.8	active
-nodejs-loopback			0.1.6	active
-nodejs-loopback			0.1.8	active
+Kabanero Instance Stacks  Version Status
+------------------------  ------- ------
+java-microprofile         0.2.19  active
+java-spring-boot2         0.3.18  active
+java-spring-boot2         0.3.21  active
+nodejs                    0.2.6   inactive
+nodejs                    0.3.1   inactive
+nodejs-express            0.2.8   active
+nodejs-loopback           0.1.6   active
+nodejs-loopback           0.1.8   active
 
 GitHub Curated Stacks (repo name - url):
   central - <stack_hub_index_1_url>
   central2 - <stack_hub_index_2_url>
 
-GitHub Curated Stacks	Version	Repo
----------------------	-------	----
-java-microprofile	0.2.19	central
-java-spring-boot2	0.3.21	central
-java-spring-boot2	0.3.18	central2
-nodejs			0.3.1	central
-nodejs			0.2.6	central2
-nodejs-express		0.2.8	central
-nodejs-express		0.2.8	central2
-nodejs-loopback		0.1.8	central
-nodejs-loopback		0.1.6	central2
+GitHub Curated Stacks     Version Repo
+---------------------     ------- ----
+java-microprofile         0.2.19  central
+java-spring-boot2         0.3.21  central
+java-spring-boot2         0.3.18  central2
+nodejs                    0.3.1   central
+nodejs                    0.2.6   central2
+nodejs-express            0.2.8   central
+nodejs-express            0.2.8   central2
+nodejs-loopback           0.1.8   central
+nodejs-loopback           0.1.6   central2
 ----
 
 === Log out of Kabanero
