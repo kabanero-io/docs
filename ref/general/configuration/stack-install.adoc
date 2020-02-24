@@ -17,6 +17,8 @@ link:https://appsody.dev/docs/stacks/publish[Publishing Stacks], follow these st
 * Replace `<release>` with the name of the release that was created
 
 . Find the name of your Kabanero CR instance.  Use `oc get kabaneros -n kabanero` to obtain a list of all Kabanero CR instances in namespace `kabanero`.  The default name for the CR instance is `kabanero`.  Then, edit the specific CR instance using `oc edit kabanero <name> -n kabanero`, replacing `<name>` with the instance name.
++
+Note: Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console may change the `apiVersion` of the Kabanero CR instance from `v1alpha2` to `v1alpha1`.  There is a description of the issue link:https://github.com/openshift/console/issues/4444[here].
 
 . Modify your Kabanero CR instance to target the new stacks that were pushed to the remote GitHub repository and the teams in GitHub that will administer the stacks.  Specifically:
 * The `Spec.Stacks.Repositories.Https.url` attribute should be set to the URL of the alternative stack repository.

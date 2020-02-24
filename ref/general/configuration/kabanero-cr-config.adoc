@@ -292,3 +292,5 @@ spec:
   cli:
     sessionExpirationSeconds: 1h
 ```
+
+Note: Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console may change the `apiVersion` of the Kabanero CR instance from `v1alpha2` to `v1alpha1`.  There is a description of the issue link:https://github.com/openshift/console/issues/4444[here].
