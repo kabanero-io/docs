@@ -6,7 +6,7 @@
 
 Learn how to isolate and resolve problems with Kabanero.
 
-Make sure that your issues are not related to the operating system, such as disk, memory, and CPU capacities.
+Make sure that your issues are not related to the operating system, such as disk, memory, and CPU capacities.  An OCP cluster should contain a minimum of three master and three worker nodes.
 
 * See https://github.com/kabanero-io/kabanero-foundation#cluster-hardware-capacity[Kabanero resource requirements, window="_blank"]
 
