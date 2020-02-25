@@ -4,8 +4,7 @@
 :linkattrs:
 :page-doc-number: 3.0
 :sectanchors:
-Eclipse Codewind enables you to develop microservice applications from application stacks in an IDE. Follow one of these
-links for your chosen IDE:
+Eclipse Codewind enables you to develop microservice applications from application stacks in an IDE. Follow one of these links for your chosen IDE:
 
 - link:installing-dev-tools.html#installing-codewind-for-vs-code[Installing Codewind for VS Code]
 - link:installing-dev-tools.html#installing-codewind-for-eclipse[Installing Codewind for Eclipse]
