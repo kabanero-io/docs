@@ -11,6 +11,6 @@ It's now even easier to contribute by adding CLA (Contribution License Agreement
 
 For the Console, we've added more functionality to the manage stacks section (available when OAuth is configured). You also can sync your stacks with the Kabanero CRD, deactivate stacks, and view the CLI service version. On the instance page you will now see a tile for CodeReady Workspaces, if it's installed.
 
-Other updates include: security updates (including an application-supporting single sign-on server), updates to the pipeline trigger configuration, and (of course) many bug fixes.
+Other changes include: security updates (including an application-supporting single sign-on server), updates to the pipeline trigger configuration, and (of course) many bug fixes.
 
 Check out all the details on what’s new in our [What’s New in 0.6.0 blog post](/blog/2020/02/27/WhatsNew060.html).
