@@ -6,8 +6,8 @@
 
 Be aware of the following issues that can cause problems for your instance of Kabanero.
 
-== 
+== Build pipelines fail when collection is active
 
 There is a compatibility issue with the Appsody CLI versions 0.5.5 and 0.5.6 that can cause build pipelines to fail. These versions of the Appsody CLI add a prefix of the default image registry, docker.io, to the image tag in a new application configuration, regardless of whether the base collection specifies it. This action results in an application configuration that conflicts with the metadata that is used within the Kabanero instance that was created from the base collection configuration. This conflict causes the default build pipelines to fail for the application because it appears the relevant collection is not active within the Kabanero instance.
 
-After you initialize the application, you can manually edit the `.appsody-config.yaml` file in the application source folder to remove the docker registry portion of the value of the image tag. Alternatively, use a different version of the Appsody CLI.
+After you initialize the application, you can manually edit the `.appsody-config.yaml` file in the application source folder to remove the docker registry portion of the value of the image tag. Alternatively, upgrade your Appsody CLI to the latest version.
