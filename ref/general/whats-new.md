@@ -1,8 +1,16 @@
 ---
-version: v0.5.0
-title: What's New In Kabanero v0.5.0
+version: v0.6.0
+title: What's New In Kabanero 0.6.0
 ---
 
-Today you can get your hands on the next monthly release of Kabanero, v0.5.0. We’ve been working hard in the kitchen to cook up some new features and bug fixes in this month's release.
+Today we present the next monthly release of Kabanero, version 0.6.0. A lot has changed since the last release!
 
-Some new updates in this release include: Github OAuth integration with the Console, Tekton Trigger support, and much more. Check out all the details on what’s new in our [What’s New in 0.5.0 blog post](/blog/2020/02/05/WhatsNew050.html).
+Kabanero now uses stacks instead of collections. Accordingly, instead of collection hubs, you have normal Appsody stack hubs. This fundamental and pervasive change simplifies and improves configurability. We have also released support for multiple versions of the same application stack.
+
+It's now even easier to contribute by adding CLA (Contribution License Agreement) automation, which allows you to sign the Kabanero CLA online when creating a pull request in GitHub.
+
+For the Console, we've added more functionality to the manage stacks section (available when OAuth is configured). You also can sync your stacks with the Kabanero CRD, deactivate stacks, and view the CLI service version. On the instance page you will now see a tile for CodeReady Workspaces, if it's installed.
+
+Other changes include: security updates (including an application-supporting single sign-on server), updates to the pipeline trigger configuration, and (of course) many bug fixes.
+
+Check out all the details on what’s new in our [What’s New in 0.6.0 blog post](/blog/2020/02/27/WhatsNew060.html).
