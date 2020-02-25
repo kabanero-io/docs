@@ -40,6 +40,8 @@ spec:
 +
 
 For a full list of supported attributes in a `kabanero.yaml` configuration file, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].
++
+Note: Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console may change the `apiVersion` of the Kabanero CR instance from `v1alpha2` to `v1alpha1`.  There is a description of the issue link:https://github.com/openshift/console/issues/4444[here].
 
 . Apply your changes to the Kabanero CR instance. For example, to apply changes to the Kabanero CR instance in the `kabanero` namespace, run the following command:
 +

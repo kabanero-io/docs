@@ -47,5 +47,7 @@ spec:
 .. set enable to `true`
 .. set adminSecretName to `rhsso-secret`
 .. click **Save**
++
+Note: Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console may change the `apiVersion` of the Kabanero CR instance from `v1alpha2` to `v1alpha1`.  There is a description of the issue link:https://github.com/openshift/console/issues/4444[here].
 
 . The URL to the RHSSO console can be found in the OCP console, in the kabanero project namespace, under networking, in the **sso** route.  Use the values that were supplied in the secret for `username` and `password` to login in to the RHSSO console. 

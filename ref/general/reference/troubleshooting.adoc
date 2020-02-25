@@ -148,6 +148,10 @@ If the data does not show a `Ready` state and the problem is persistent, there m
    - Use the `oc get kservice -n tekton-pipelines` command.
    - If the `webhooks-extension-sink` KService is not in the `Ready` state, delete a revision object that is associated with the `webhooks-extension-sink`. For example, use the `oc delete rev -l serving.knative.dev/configuration=webhooks-extension-sink` command.
 
+== Changes to Kabanero CR instance are not persisted
+
+Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console may change the `apiVersion` of the Kabanero CR instance from `v1alpha2` to `v1alpha1`.  The fields of the Kabanero CR instance which were not defined in the `v1alpha` version may be deleted.  There is a description of the issue link:https://github.com/openshift/console/issues/4444[here].
+
 == Debugging subcomponents
 
 You can use the `oc get` or the `oc describe` command to obtain the status of the subcomponents for the product operator.
