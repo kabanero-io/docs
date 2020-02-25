@@ -121,7 +121,7 @@ You can build and deploy a simple java-microprofile application using the defaul
 * By default, the application container image is built and pushed to the Internal Registry, and then deployed serverless
 
 . (Optional) Access the pipeline logs
-* `oc logs $(oc get pods -l tekton.dev/pipelineRun=appsody-manual-pipeline-run --output=jsonpath={.items[0].metadata.name}) --all-containers`
+* `oc logs $(oc get pods -l tekton.dev/pipelineRun=java-microprofile-manual-pipeline-run -n kabanero --output="jsonpath={.items[0].metadata.name}") -n kabanero --all-containers`
 
 . (Optional) Make detailed pipeline changes by accessing the pipelines dashboard
 * `http://tekton-dashboard.<MY_OPENSHIFT_MASTER_DEFAULT_SUBDOMAIN>`
