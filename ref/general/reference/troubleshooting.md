@@ -16,7 +16,7 @@ title: Troubleshooting
 :sectanchors:
 -->
 
-# Troubleshooting the Kabanero open source project
+# Troubleshooting
 {: #troubleshoot}
 
 Learn how to isolate and resolve problems.
@@ -28,7 +28,7 @@ Learn how to isolate and resolve problems.
 ## Errors when using a webhook to trigger pipelines
 {: #errorwtp}
 
-When using a Tekton webhook to trigger pipelines installed with Kabanero, the last task is the `monitor-result-task`, which may fail in some cases. This might also cause the webhook pod to be in the "Error" state. The following failures of `monitor-result-task` in the TaskRun view can be disregarded at this time; they do not impact the application deployment:
+When using a webhook to trigger installed pipelines, the last task is the `monitor-result-task`, which may fail in some cases. This might also cause the webhook pod to be in the "Error" state. The following failures of `monitor-result-task` in the TaskRun view can be disregarded at this time; they do not impact the application deployment:
 
 * `error creating GitHub client: error parsing PR number: pulls`
 * `IOError: [Errno 2] No such file or directory: '/workspace/pull-request/pr.json'`
@@ -48,7 +48,7 @@ When the webhooks extension sink does not run for extended periods of time, the 
 
 ### To diagnose this problem:
 
-1. Check that your pods in the `knative-serving`, `knative-sources`, and `knative-eventingandistio-system` namespaces are healthy, and that you have a `ServiceMeshMemberRoll` resource that includes your install namespace for the Tekton Dashboard and Webhooks Extension.
+1. Check that your pods in the `knative-serving`, `knative-sources`, and `knative-eventingandistio-system` namespaces are healthy, and that you have a `ServiceMeshMemberRoll` resource that includes your install namespace for the pipelines dashboard and webhooks extension.
 
 1. Inspect the logs in the `github-controller-manager-0` pod in the `knative-eventing` namespace.  For example, run:
 ```
