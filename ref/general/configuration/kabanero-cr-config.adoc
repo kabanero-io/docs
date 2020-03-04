@@ -49,16 +49,30 @@ specify the following fields:
 **** `Sha256` - The digest of the pipelines contained at this
       URL.  Typically a command like `sha256sum` is used to obtain the
       digest.
-**** `https`
+**** `https` - Used for accessing pipelines via an unprotected URL.
+      This field is mutually exclusive with the `gitRelease` field.
 ***** `url` - The URL pointing to the pipelines.  Typically this file
        has a `.tar.gz` extension.  The URL will be accessed using
        HTTPS.
 ***** `skipCertVerification` - Controls whether the Kabanero controller will
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
+**** `gitRelease` - Used for accessing pipelines via a protected GitHub
+     release.  This field is mutually exclusive with the `https` field.
+     Login credentials must be supplied - see link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
+***** `hostname` - The host name where the GitHub release exists.
+***** `organization` - The user name, or organization name, where the
+      GitHub release exists.
+***** `project` - The project where the GitHub release exists.
+***** `release` - The name of the release within the GitHub project.
+***** `assetName` - The name of the file (asset) within the release.
+***** `skipCertVerification` - Controls whether the Kabanero controller will
+       validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
 *** `repositories` - A list of repositories containing application stacks.
 **** `name` - A descriptive name of the stack repository.
-**** `https`
+**** `https` - Used for accessing a stack index via an unprotected URL.
+     This field is mutually exclusive with the `gitRelease` field.
 ***** `url` - The URL pointing to the stack repository.  The URL will
       be accessed using HTTPS.  For example, the 
       default stack repository for Kabanero version 0.5.0 is
@@ -66,16 +80,41 @@ specify the following fields:
 ***** `skipCertVerification` - Controls whether the Kabanero controller will
       validate SSL/TLS certificates presented by the repository URL.
       Valid values are `true` and `false`.
+**** `gitRelease` - Used for accessing a stack index via a protected GitHub
+     release.  This field is mutually exclusive with the `https` field.
+     Login credentials must be supplied - see link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
+***** `hostname` - The host name where the GitHub release exists.
+***** `organization` - The user name, or organization name, where the
+      GitHub release exists.
+***** `project` - The project where the GitHub release exists.
+***** `release` - The name of the release within the GitHub project.
+***** `assetName` - The name of the file (asset) within the release.
+***** `skipCertVerification` - Controls whether the Kabanero controller will
+       validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
 **** `pipelines` - A list of pipelines that should be applied to the
       stacks in this repository.
 ***** `id` - A descriptive name of the pipelines contained at this URL.
 ***** `Sha256` - The digest of the pipelines contained at this
       URL.  Typically a command like `sha256sum` is used to obtain the
       digest.
-***** `https`
+***** `https` - Used for accessing pipelines via an unprotected GitHub
+      release.  This field is mutually exclusive with the `gitRelease` field.
 ****** `url` - The URL pointing to the pipelines.  Typically this file
        has a `.tar.gz` extension.  The URL will be accessed using
        HTTPS.
+****** `skipCertVerification` - Controls whether the Kabanero controller will
+       validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
+***** `gitRelease` - Used for accessing pipelines via a protected GitHub
+      release.  This field is mutually exclusive with the `https` field.
+      Login credentials must be supplied - see link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
+****** `hostname` - The host name where the GitHub release exists.
+****** `organization` - The user name, or organization name, where the
+       GitHub release exists.
+****** `project` - The project where the GitHub release exists.
+****** `release` - The name of the release within the GitHub project.
+****** `assetName` - The name of the file (asset) within the release.
 ****** `skipCertVerification` - Controls whether the Kabanero controller will
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
@@ -283,6 +322,37 @@ spec:
     - name: central
       https: 
         url: https://github.com/my-organization/stacks/releases/download/v0.1/kabanero-index.yaml
+  github:
+    organization: my-organization
+    teams:
+      - stack-admins
+      - admins
+    apiUrl: https://api.github.com
+  cli:
+    sessionExpirationSeconds: 1h
+```
+
+This example yaml defines a `Kabanero` instance at version 0.6.0, using
+the same custom stacks as the previous example, but using the `gitRelease`
+field instead of the `https` field:
+
+```yaml
+apiVersion: kabanero.io/v1alpha2
+kind: Kabanero
+metadata:
+  name: kabanero
+  namespace: kabanero
+spec:
+  version: "0.6.0"
+  stacks:
+    repositories:
+    - name: central
+      gitRelease:
+        hostname: "github.com"
+        organization: "my-organization"
+        project: "stacks"
+        release: "v0.1"
+        assetName: "kabanero-index.yaml"
   github:
     organization: my-organization
     teams:
