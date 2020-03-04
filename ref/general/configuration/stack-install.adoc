@@ -57,6 +57,8 @@ For more information about other fields that can be customized in the Kabanero C
 After editing, save your changes.  The updated Kabanero CR instance is applied to your cluster.
 
 . The Kabanero operator will now load the stacks in the repository.  To see a list of all stacks in the `kabanero` namespace, use `oc get stacks -n kabanero`.  If the kabanero-operator is unable to apply the stacks, the `Status` section of the Kabanero CR instance or the Stack CR instances will contain more information.
++
+Note that when replacing the stack index in the Kabanero CR instance, the Kabanero operator will not delete stacks that were present in the previous index, but not present in the current index.  To delete the removed stacks, run `kabanero sync` in the Kabanero CLI.  The `sync` may become the default behavior in a future release of Kabanero.
 
 == Need help?
 If you have questions, we would like to hear from you.
