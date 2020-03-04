@@ -2,7 +2,7 @@
 :page-doc-category: Installation
 :page-title: Installing Kabanero Foundation
 :linkattrs:
-:page-doc-number: 1.0
+:page-doc-number: 3.0
 :sectanchors:
 
 Kabanero version 0.6 has been tested on OpenShift Container Platform (OCP) 4.3. There is intent to expand testing to additional distributions, including upstream Kubernetes, in the future.

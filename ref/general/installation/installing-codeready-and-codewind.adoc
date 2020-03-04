@@ -2,7 +2,7 @@
 :page-doc-category: Installation
 :page-title: Installing Codewind in CodeReady Workspaces
 :linkattrs:
-:page-doc-number: 3.0
+:page-doc-number: 2.0
 :sectanchors:
 Eclipse Codewind enables you to develop microservice applications from application stacks in an IDE. Follow one of these
 links for your chosen IDE:
@@ -30,18 +30,18 @@ spec:
       customResourceInstance:
         tlsSupport: true
         selfSignedCert: true
-  stacks: 
-    repositories: 
+  stacks:
+    repositories:
     - name: central
       https:
         url: https://github.com/kabanero-io/collections/releases/download/0.6.0/kabanero-index.yaml
 ```
 
 === Configuring CodeReady Workspaces
-The Kabanero CR instance provides additional fields allowing you to configure your install of CodeReady Workspaces. 
+The Kabanero CR instance provides additional fields allowing you to configure your install of CodeReady Workspaces.
 
-* Set `Spec.codeReadyWorkspaces.operator.customResourceInstance.tlsSupport` to `true` if you wish to install CodeReady Workspaces with TLS Support. 
-  *Note:* If your OpenShift cluster's router is set up with self-signed certificates, `Spec.codeReadyWorkspaces.operator.instance.selfSignedCert` must also be set to `true`. 
+* Set `Spec.codeReadyWorkspaces.operator.customResourceInstance.tlsSupport` to `true` if you wish to install CodeReady Workspaces with TLS Support.
+  *Note:* If your OpenShift cluster's router is set up with self-signed certificates, `Spec.codeReadyWorkspaces.operator.instance.selfSignedCert` must also be set to `true`.
 * Set `Spec.codeReadyWorkspaces.operator.customResourceInstance.openShiftOAuth` to `true` if you wish to use your OpenShift accounts with CodeReady Workspaces.  Requires permanent users (accounts other than kube:admin) set up first.
 
 Consult link:kabanero-cr-config.html[Configuring a Kabanero CR Instance] for the full list of configurable fields
