@@ -27,7 +27,7 @@ specify the following fields:
     that this version of this stack should remain in.  An empty
     value results in this version being activated.  Other valid
     values are `active` and `inactive`.  If either of these values
-    is provided, the Kabanero operator will not attempt to change
+    is provided, the product operator will not attempt to change
     the state for this version, even if the stack is removed from
     the stack index which caused this Stack CR to be created.
     This behavior can be used to permanently activate or deactivate
