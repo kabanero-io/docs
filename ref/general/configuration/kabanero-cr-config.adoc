@@ -10,7 +10,7 @@ installation.  This description includes the locations of the application
 stacks, and how the Kabanero CLI should interact with GitHub.
 
 The `Spec` section of the `Kabanero` instance describes the desired
-configuration.  The `Status` section is populated by the Kabanero operator,
+configuration.  The `Status` section is populated by the product operator,
 and shows the versions of the components that make up Kabanero.  In some
 cases, the `Status` also contains URLs that can be used to interact with
 the components of Kabanero.
@@ -87,7 +87,7 @@ specify the following fields:
     three hours, thirty minutes and thirty seconds.
 ** `landing`
 *** `enable` - Controls whether the Kabanero landing page is deployed by
-    the Kabanero operator.  Valid values are `true` and `false`.  The default
+    the product operator.  Valid values are `true` and `false`.  The default
     value is `true`.
 ** `codeReadyWorkspaces`
 *** `enable` - Controls whether Kabanero will deploy an instance of 
@@ -120,7 +120,7 @@ specify the following fields:
     define the realm that the SSO server will use.  For more information
     about setting up the secret, see link:rhsso.html[the SSO configuration instructions].
 
-The following `Status` fields are maintained by the Kabanero operator to
+The following `Status` fields are maintained by the product operator to
 provide information about the installed components, and the health of the
 Kabanero instance:
 
@@ -182,7 +182,7 @@ Kabanero instance:
 *** `message` - Provides more details for a `ready` status of `False`.
 *** `version` - The version of the landing page that was deployed.
 ** `appsody` - Contains information about the application operator that was
-   deployed by the Kabanero operator.
+   deployed by the product operator.
 *** `ready` - The overall status of the application operator.  A value
     of `True` indicates the operator was deployed successfully.  A value of
     `False` indicates there was a problem, and more information can be found
@@ -203,7 +203,7 @@ Kabanero instance:
     kAppNav.  This information is copied from the `Route` for the kAppNav API
     service.
 ** `codereadyWorkspaces` - Contains information about the CodeReady
-   Workspaces instance that is deployed by the Kabanero operator.
+   Workspaces instance that is deployed by the product operator.
 *** `ready` - The overall status of CodeReady Workspaces.  A value of `True`
     indicates it was installed and configured successfully.  A value of
     `False` indicates that there was a problem, and more information can be
