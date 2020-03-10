@@ -39,7 +39,9 @@ specify the following fields:
       URL.  Typically a command like `sha256sum` is used to obtain the
       digest.
 **** `https` - Used for accessing pipelines via an unprotected URL.
-     This field is mutually exclusive with the `gitRelease` field.
+     This field is mutually exclusive with the `gitRelease` field.  If
+     both `https` and `gitRelease` are specified, the values in
+     `gitRelease` are used.
 ***** `url` - The URL pointing to the pipelines.  Typically this file
        has a `.tar.gz` extension.  The URL will be accessed using
        HTTPS.
@@ -47,8 +49,10 @@ specify the following fields:
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
 **** `gitRelease` - Used for accessing pipelines via a protected GitHub
-      release.  This field is mutually exclusive with the `https` field.
-      Login credentials must be supplied - see link:ghe-credentials.html[Specify
+      release.  This field is mutually exclusive with the `https` field.  If
+      both `https` and `gitRelease` are specified, the values in
+      `gitRelease` are used.  Login credentials must be supplied - see
+      link:ghe-credentials.html[Specify
 ***** `hostname` - The host name where the GitHub release exists.
 ***** `organization` - The user name, or organization name, where the
        GitHub release exists.

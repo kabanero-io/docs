@@ -50,7 +50,9 @@ specify the following fields:
       URL.  Typically a command like `sha256sum` is used to obtain the
       digest.
 **** `https` - Used for accessing pipelines via an unprotected URL.
-      This field is mutually exclusive with the `gitRelease` field.
+      This field is mutually exclusive with the `gitRelease` field.  If
+      both `https` and `gitRelease` are specified, the values in
+      `gitRelease` are used.
 ***** `url` - The URL pointing to the pipelines.  Typically this file
        has a `.tar.gz` extension.  The URL will be accessed using
        HTTPS.
@@ -59,7 +61,9 @@ specify the following fields:
        Valid values are `true` and `false`.
 **** `gitRelease` - Used for accessing pipelines via a protected GitHub
      release.  This field is mutually exclusive with the `https` field.
-     Login credentials must be supplied - see link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
+     If both `https` and `gitRelease` are specified, the values in
+     `gitRelease` are used. Login credentials must be supplied - see
+     link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
 ***** `hostname` - The host name where the GitHub release exists.
 ***** `organization` - The user name, or organization name, where the
       GitHub release exists.
@@ -72,7 +76,9 @@ specify the following fields:
 *** `repositories` - A list of repositories containing application stacks.
 **** `name` - A descriptive name of the stack repository.
 **** `https` - Used for accessing a stack index via an unprotected URL.
-     This field is mutually exclusive with the `gitRelease` field.
+     This field is mutually exclusive with the `gitRelease` field.  If
+     both `https` and `gitRelease` are specified, the values in
+     `gitRelease` are used.
 ***** `url` - The URL pointing to the stack repository.  The URL will
       be accessed using HTTPS.  For example, the 
       default stack repository for Kabanero version 0.5.0 is
@@ -81,8 +87,10 @@ specify the following fields:
       validate SSL/TLS certificates presented by the repository URL.
       Valid values are `true` and `false`.
 **** `gitRelease` - Used for accessing a stack index via a protected GitHub
-     release.  This field is mutually exclusive with the `https` field.
-     Login credentials must be supplied - see link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
+     release.  This field is mutually exclusive with the `https` field. If
+     both `https` and `gitRelease` are specified, the values in
+     `gitRelease` are used.  Login credentials must be supplied - see
+     link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
 ***** `hostname` - The host name where the GitHub release exists.
 ***** `organization` - The user name, or organization name, where the
       GitHub release exists.
@@ -100,6 +108,8 @@ specify the following fields:
       digest.
 ***** `https` - Used for accessing pipelines via an unprotected GitHub
       release.  This field is mutually exclusive with the `gitRelease` field.
+      If both `https` and `gitRelease` are specified, the values in
+      `gitRelease` are used.
 ****** `url` - The URL pointing to the pipelines.  Typically this file
        has a `.tar.gz` extension.  The URL will be accessed using
        HTTPS.
@@ -107,8 +117,10 @@ specify the following fields:
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
 ***** `gitRelease` - Used for accessing pipelines via a protected GitHub
-      release.  This field is mutually exclusive with the `https` field.
-      Login credentials must be supplied - see link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
+      release.  This field is mutually exclusive with the `https` field.  If
+      both `https` and `gitRelease` are specified, the values in
+      `gitRelease` are used.  Login credentials must be supplied - see
+      link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
 ****** `hostname` - The host name where the GitHub release exists.
 ****** `organization` - The user name, or organization name, where the
        GitHub release exists.
@@ -287,7 +299,7 @@ replace `-n kabanero` with the name of another namespace.
 
 == Examples
 
-This example yaml defines a `Kabanero` instance at version 0.6.0, using
+This example yaml defines a `Kabanero` instance at version 0.7.0, using
 the default stacks.
 
 ```yaml
@@ -297,15 +309,15 @@ metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  version: "0.6.0"
+  version: "0.7.0"
   stacks:
     repositories:
     - name: central
       https:
-        url: https://github.com/kabanero-io/collections/releases/download/v0.6.0/kabanero-index.yaml
+        url: https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.7.0/kabanero-stack-hub-index.yaml
 ```
 
-This example yaml defines a `Kabanero` instance at version 0.6.0, using
+This example yaml defines a `Kabanero` instance at version 0.7.0, using
 custom stacks and their associated GitHub configuration.  Sessions
 established using the Kabanero CLI remain valid for one hour.
 
@@ -316,7 +328,7 @@ metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  version: "0.6.0"
+  version: "0.7.0"
   stacks:
     repositories:
     - name: central
@@ -332,7 +344,7 @@ spec:
     sessionExpirationSeconds: 1h
 ```
 
-This example yaml defines a `Kabanero` instance at version 0.6.0, using
+This example yaml defines a `Kabanero` instance at version 0.7.0, using
 the same custom stacks as the previous example, but using the `gitRelease`
 field instead of the `https` field:
 
@@ -343,7 +355,7 @@ metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  version: "0.6.0"
+  version: "0.7.0"
   stacks:
     repositories:
     - name: central
