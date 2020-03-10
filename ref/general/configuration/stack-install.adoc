@@ -52,7 +52,7 @@ spec:
     apiUrl: https://api.github.com
 ```
 +
-For more information about other fields that can be customized in the Kabanero CR instance, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].
+If the GitHub repository is protected, see link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].  For more information about other fields that can be customized in the Kabanero CR instance, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].
 +
 After editing, save your changes.  The updated Kabanero CR instance is applied to your cluster.
 

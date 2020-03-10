@@ -38,11 +38,28 @@ specify the following fields:
 **** `Sha256` - The digest of the pipelines contained at this
       URL.  Typically a command like `sha256sum` is used to obtain the
       digest.
-**** `https`
+**** `https` - Used for accessing pipelines via an unprotected URL.
+     This field is mutually exclusive with the `gitRelease` field.  If
+     both `https` and `gitRelease` are specified, the values in
+     `gitRelease` are used.
 ***** `url` - The URL pointing to the pipelines.  Typically this file
        has a `.tar.gz` extension.  The URL will be accessed using
        HTTPS.
 ***** `skipCertVerification` - Controls whether the stack controller will
+       validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
+**** `gitRelease` - Used for accessing pipelines via a protected GitHub
+      release.  This field is mutually exclusive with the `https` field.  If
+      both `https` and `gitRelease` are specified, the values in
+      `gitRelease` are used.  Login credentials must be supplied - see
+      link:ghe-credentials.html[Specify
+***** `hostname` - The host name where the GitHub release exists.
+***** `organization` - The user name, or organization name, where the
+       GitHub release exists.
+***** `project` - The project where the GitHub release exists.
+***** `release` - The name of the release within the GitHub project.
+***** `assetName` - The name of the file (asset) within the release.
+***** `skipCertVerification` - Controls whether the Kabanero controller will
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
 *** `images` - A list of container images that are associated with
@@ -80,6 +97,29 @@ spec:
         - https:
             url: >-
               https://github.com/kabanero-io/collections/releases/download/0.5.0/incubator.common.pipeline.default.tar.gz
+          id: default
+          sha256: 14285a7f0bb152759b3e2141db19d72ea1f94f01bbf5ffbf866cab4e60e093dd
+      version: 0.2.21
+```
+
+This example is the same as the previous example, except uses the `gitRelease` field to specify the Pipelines zip:
+
+```yaml
+apiVersion: kabanero.io/v1alpha2
+kind: Stack
+metadata:
+  name: java-microprofile
+  namespace: kabanero
+spec:
+  name: java-microprofile
+  versions:
+    - pipelines:
+        - gitRelease:
+            hostname: "github.com"
+            organization: "kabanero-io"
+            project: "collections"
+            release: "0.5.0"
+            assetName: "incubator.common.pipeline.default.tar.gz"
           id: default
           sha256: 14285a7f0bb152759b3e2141db19d72ea1f94f01bbf5ffbf866cab4e60e093dd
       version: 0.2.21
