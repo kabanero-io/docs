@@ -89,7 +89,7 @@ specify the following fields:
 **** `gitRelease` - Used for accessing a stack index via a protected GitHub
      release.  This field is mutually exclusive with the `https` field. If
      both `https` and `gitRelease` are specified, the values in
-     `gitRelease` are used.  Login credentials must be supplied - see
+     `gitRelease` are used.  Authentication credentials ( via Kubernetes secret ) must be supplied - see
      link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
 ***** `hostname` - The host name where the GitHub release exists.
 ***** `organization` - The user name, or organization name, where the
