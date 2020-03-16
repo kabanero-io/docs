@@ -142,7 +142,7 @@ Example result showing stack with an obsolete status:
 Kabanero Instance Stacks  Version Status
 ------------------------  ------- ------
 java-microprofile         0.2.19  active
-java-microprofile         0.2.21  active obsolete
+java-microprofile         0.2.21  active (obsolete)
 java-spring-boot2         0.3.18  active
 java-spring-boot2         0.3.21  active
 nodejs                    0.2.6   inactive
