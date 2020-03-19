@@ -4,19 +4,20 @@
 :linkattrs:
 :page-doc-number: 3.0
 :sectanchors:
-Eclipse Codewind enables you to develop microservice applications from application stacks in an IDE. Follow one of these
-links for your chosen IDE:
+Eclipse Codewind enables you to develop microservice applications from application stacks in an IDE. 
+CodeReady Workspaces provides a containerized IDE for cloud native application development on an OpenShift cluster.
+
 
 == Prerequisites
 
 CodeReady Workspaces requires at least two 1Gi ReadWriteOnce (RWO) persistent volumes on the cluster to install and a 1Gi RWO volume for each created workspace.
 
-Each Codewind workspace also requires at least on 1Gi ReadWriteMany (RWX) persistent volume.
+Each Codewind workspace also requires at least one 1Gi ReadWriteMany (RWX) persistent volume.
 
 == Installing CodeReady Workspaces
 To install CodeReady Workspaces, set `Spec.codeReadyWorkspaces.enable: true` in the Kabanero custom resource (Kabanero CR) instance and apply it.
 
-A sample Kabanero CR instance might look like:
+The following sample shows a Kabanero CR instance configuration:
 ```yaml
 apiVersion: kabanero.io/v1alpha2
 kind: Kabanero
@@ -38,13 +39,12 @@ spec:
 ```
 
 === Configuring CodeReady Workspaces
-The Kabanero CR instance provides additional fields allowing you to configure your install of CodeReady Workspaces. 
+The Kabanero CR instance provides additional fields that allow you to configure your installation of CodeReady Workspaces. 
 
-* Set `Spec.codeReadyWorkspaces.operator.customResourceInstance.tlsSupport` to `true` if you wish to install CodeReady Workspaces with TLS Support. 
-  *Note:* If your OpenShift cluster's router is set up with self-signed certificates, `Spec.codeReadyWorkspaces.operator.instance.selfSignedCert` must also be set to `true`. 
-* Set `Spec.codeReadyWorkspaces.operator.customResourceInstance.openShiftOAuth` to `true` if you wish to use your OpenShift accounts with CodeReady Workspaces.  Requires permanent users (accounts other than kube:admin) set up first.
-
-Consult link:kabanero-cr-config.html[Configuring a Kabanero CR Instance] for the full list of configurable fields
+* f you want to install CodeReady Workspaces with TLS Support, set `Spec.codeReadyWorkspaces.operator.customResourceInstance.tlsSupport` to `true`.
+  **Note:** If your OpenShift cluster's router is set up with self-signed certificates, `Spec.codeReadyWorkspaces.operator.instance.selfSignedCert` must also be set to `true`. 
+* If you want to use your OpenShift accounts with CodeReady Workspaces, set up permanent users (accounts other than kube:admin) and then set `Spec.codeReadyWorkspaces.operator.customResourceInstance.openShiftOAuth` to `true`.
+Consult link:../configuration/kabanero-cr-config.html[Kabanero Custom Resource] for the full list of configurable fields.
 
 === Using CodeReady Workspaces with Self-Signed certificates
 If CodeReady Workspaces is set up to use the self-signed certificates provided by the OpenShift cluster's router, then you must do the following:
@@ -65,25 +65,25 @@ If CodeReady Workspaces is set up to use the self-signed certificates provided b
 . Import the `ingress-operator` certificate as an authority into Firefox.
 
 == Installing Codewind
-Ensure CodeReady Workspaces is installed on your OpenShift cluster.
+When CodeReady Workspaces is installed on your OpenShift cluster, complete the following steps:
 
-. Log in to CodeReady Workspaces with your desired account.
-. Click `Create Workspace`.
-. Under `Name`, give your workspace some meaningful name.
-. Under `Select Stack`, select `Codewind`.
-. Click `Create & Open` to create and start Codewind in CodeReady Workspaces.
+. Log in to CodeReady Workspaces.
+. Click **Create Workspace**.
+. For **Name**, give your workspace some meaningful name.
+. For **Select Stack**, select `Codewind`.
+. Click **Create & Open** to create and start Codewind in CodeReady Workspaces.
 
-CodeReady Workspaces then proceeds to bring up Codewind, and install the Codewind plugins. This process may take a couple of minutes for all of the necessary components to get pulled and started.
+CodeReady Workspaces starts Codewind and installs the Codewind plugins. This process might take a couple of minutes for all of the necessary components to be pulled and started.
 
 Consult the https://www.eclipse.org/codewind/mdt-che-overview.html[Codewind on Che documentation, window="_blank"] for additional information and next steps.
 
 === Stopping or Uninstalling Codewind
-If at any point, you need to stop the Codewind workspace, you can:
+If you need to stop the Codewind workspace, follow these steps:
 
 . Log in to your CodeReady workspaces account and access the dashboard.
-. Click on `Workspaces` in the sidebar.
-. To pause the Codewind workspace: Select the Codewind workspace and under `Actions` click the `Stop workspace` button.
-. To delete the Codewind workspace: Select the Codewind workspace and click the `Delete` button.
+. Click on **Workspaces** in the sidebar.
+. To pause the Codewind workspace: Select the Codewind workspace and under **Actions** click the **Stop workspace** button.
+. To delete the Codewind workspace: Select the Codewind workspace and click the **Delete** button.
 
 === Troubleshooting
 To troubleshoot Codewind, see the https://www.eclipse.org/codewind/troubleshooting.html[Codewind Troubleshooting page, window="_blank"].

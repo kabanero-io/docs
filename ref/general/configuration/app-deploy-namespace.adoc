@@ -27,7 +27,7 @@ Note that the default name for the CR instance is also `kabanero`.
 The following section of a `kabanero.yaml` file shows a Kabanero CR instance that supports application deployment to the `production` and `test` namespaces:
 +
 ----
-apiVersion: kabanero.io/v1alpha1
+apiVersion: kabanero.io/v1alpha2
 kind: Kabanero
 metadata:
   name: kabanero
@@ -39,7 +39,7 @@ spec:
 ----
 +
 
-For a full list of supported attributes in a `kabanero.yaml` configuration file, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].
+For a full list of supported attributes in a `kabanero.yaml` configuration file, see link:kabanero-cr-config.html[Kabanero Custom Resource].
 +
 Note: Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console may change the `apiVersion` of the Kabanero CR instance from `v1alpha2` to `v1alpha1`.  There is a description of the issue link:https://github.com/openshift/console/issues/4444[here].
 

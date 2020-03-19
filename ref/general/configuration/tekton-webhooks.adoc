@@ -1,9 +1,9 @@
 :page-layout: doc
 :page-doc-category: Configuration
-:page-title: Connecting to GitHub with webhooks
+:page-title: Connecting the product to GitHub with webhooks
 :sectanchors:
 :page-doc-number: 5.0
-= Connecting to GitHub with webhooks
+= Connecting the product to GitHub with webhooks
 
 A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[pipeline, window="_blank"]. After you configure the webhook, changes you make in your GitHub repository will trigger the pipeline and its associated tasks.
 
@@ -43,7 +43,7 @@ Name::
 Give your webhook a distinctive name.
 
 Repository URL::
-The URL of the GitHub repository that you want to connect to Kabanero.
+The URL of the GitHub repository that you want to connect to the product.
 
 Access token::
 Use this field to create a secret to store your GitHub personal access token. Even if you already created a token-based Git secret from your pipelines dashboard, you must also store your GitHub personal access token in this field. Click the green plus icon beside the field to open the `Create Access Token Secret` window.
@@ -64,7 +64,7 @@ Select a service account to be used by the PipelineRun. There are two default se
 * If you need to deploy pipelines across multiple namespaces, the product operator provides the `kabanero-pipeline` service account with this capability. If you are running a custom pipeline that requires more or less access than the kabanero-pipeline service account is configured to provide, do not edit this account. Instead, create a new service account, such as `custom-kabanero-pipeline-sa`, and configure it according to your needs using one of the provided service accounts as an example.
 
 Docker registry::
-Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use  `docker-registry.default.svc:5000/your-namespace`.
+Select the Docker registry where any built images are pushed. Use the same Docker registry that you created a secret for previously. For Docker Hub, use `index.docker.io/<docker_id>`. For an internal registry, use `docker-registry.default.svc:5000/kabanero`. If the namespace that is associated with your internal registry is not `kabanero`, use `docker-registry.default.svc:5000/your-namespace`.
 
 . After you complete the necessary information, click `Create`.
 
@@ -73,7 +73,7 @@ Select the Docker registry where any built images are pushed. Use the same Docke
 . Look for the webhook in your GitHub Repository.
 * From your GitHub repository, go to the `settings` tab and select `Webhooks` from the sidebar menu. Look for the webhook you created. Sometimes the webhook initially shows a 504 error icon but after the webhook is used it changes to a green check mark.
 
-. Update code and merge a PR.
+. Update code and merge a pull request (PR).
 * Make any update to your code, create a PR, and merge it. This change kicks off a PipelineRun.
 
 . Check the PipelineRun from your pipelines dashboard.

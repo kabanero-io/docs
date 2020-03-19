@@ -1,31 +1,31 @@
 :page-layout: doc
 :page-doc-category: Configuration
-:page-title: Configuring a Kabanero CR Instance
+:page-title: Kabanero Custom Resource
 :page-doc-number: 1.0
 :sectanchors:
-= Configuring a Kabanero CR instance
+= Kabanero Custom Resource
 
-A `Kabanero` custom resource (CR) instance describes a particular Kabanero
+A `Kabanero` custom resource (CR) instance describes a particular product
 installation.  This description includes the locations of the application
-stacks, and how the Kabanero CLI should interact with GitHub.
+stacks, and how the stack management CLI should interact with GitHub.
 
 The `Spec` section of the `Kabanero` instance describes the desired
 configuration.  The `Status` section is populated by the product operator,
-and shows the versions of the components that make up Kabanero.  In some
+and shows the versions of the components that make up the product.  In some
 cases, the `Status` also contains URLs that can be used to interact with
-the components of Kabanero.
+the components of the product.
 
 == Syntax (v1alpha2)
 
 A `Kabanero` CR can be comprised of only a few attributes.
-See the link:#examples[examples].  To define a `Kabanero` instance, you can
+See the link:#examples[examples]. To define a product instance, you can
 specify the following fields:
 
 * `Spec`
-** `version` - The release of Kabanero that you want to install.
+** `version` - The release of the product that you want to install.
    The levels of the individual components, such as the application operator
    and CLI services, are selected automatically based on this level.  The
-   release follows semver notation (for example, 0.6.0).
+   release follows semver notation (for example, 0.7.0).
 ** `targetNamespaces` - A list of namespaces which the application operator will
    watch for `AppsodyApplication` instances, in addition to the namespace
    where the Kabanero CR instance is deployed.  Typically an
@@ -36,8 +36,8 @@ specify the following fields:
     repositories are located.  The GitHub teams that administer the
     stacks are also contained in this organization.
 *** `teams` - A yaml list of GitHub teams that will be allowed to
-    use the Kabanero CLI to administer the stack repositories.  All users
-    who want to use the Kabanero CLI to administer the stacks must be a
+    use the stack management CLI to administer the stack repositories.  All users
+    who want to use the stack management CLI to administer the stacks must be a
     member of a team in this list. To learn how to create teams in GitHub, see link:https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/creating-a-team[Creating a team, window=_blank].
 *** `apiUrl` - The GitHub API URL for the GitHub containing the stack
     repositories.  For example, the API URL for github.com is https://api.github.com.
@@ -56,7 +56,7 @@ specify the following fields:
 ***** `url` - The URL pointing to the pipelines.  Typically this file
        has a `.tar.gz` extension.  The URL will be accessed using
        HTTPS.
-***** `skipCertVerification` - Controls whether the Kabanero controller will
+***** `skipCertVerification` - Controls whether the product controller will
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
 **** `gitRelease` - Used for accessing pipelines via a protected GitHub
@@ -70,7 +70,7 @@ specify the following fields:
 ***** `project` - The project where the GitHub release exists.
 ***** `release` - The name of the release within the GitHub project.
 ***** `assetName` - The name of the file (asset) within the release.
-***** `skipCertVerification` - Controls whether the Kabanero controller will
+***** `skipCertVerification` - Controls whether the product controller will
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
 *** `repositories` - A list of repositories containing application stacks.
@@ -81,8 +81,8 @@ specify the following fields:
      `gitRelease` are used.
 ***** `url` - The URL pointing to the stack repository.  The URL will
       be accessed using HTTPS.  For example, the 
-      default stack repository for Kabanero version 0.5.0 is
-      https://github.com/kabanero-io/collections/releases/download/v0.5.0/kabanero-index.yaml
+      default stack repository for Kabanero version 0.7.0 is
+      https://github.com/kabanero-io/collections/releases/download/v0.7.0/kabanero-index.yaml
 ***** `skipCertVerification` - Controls whether the Kabanero controller will
       validate SSL/TLS certificates presented by the repository URL.
       Valid values are `true` and `false`.
@@ -97,7 +97,7 @@ specify the following fields:
 ***** `project` - The project where the GitHub release exists.
 ***** `release` - The name of the release within the GitHub project.
 ***** `assetName` - The name of the file (asset) within the release.
-***** `skipCertVerification` - Controls whether the Kabanero controller will
+***** `skipCertVerification` - Controls whether the product controller will
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
 **** `pipelines` - A list of pipelines that should be applied to the
@@ -113,7 +113,7 @@ specify the following fields:
 ****** `url` - The URL pointing to the pipelines.  Typically this file
        has a `.tar.gz` extension.  The URL will be accessed using
        HTTPS.
-****** `skipCertVerification` - Controls whether the Kabanero controller will
+****** `skipCertVerification` - Controls whether the product controller will
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
 ***** `gitRelease` - Used for accessing pipelines via a protected GitHub
@@ -127,23 +127,22 @@ specify the following fields:
 ****** `project` - The project where the GitHub release exists.
 ****** `release` - The name of the release within the GitHub project.
 ****** `assetName` - The name of the file (asset) within the release.
-****** `skipCertVerification` - Controls whether the Kabanero controller will
+****** `skipCertVerification` - Controls whether the product controller will
        validate SSL/TLS certificates presented by the pipelines URL.
        Valid values are `true` and `false`.
 ** `cliServices`
 *** `sessionExpirationSeconds` - The length of time (duration) that
-    a session established by a Kabanero CLI login remains valid.  The duration
+    a session established by a stack management CLI login remains valid.  The duration
     can be specified in hours, minutes and/or seconds.  For example,
     specifying a value of `3h30m30s` would allow a login to remain valid for
     three hours, thirty minutes and thirty seconds.
 ** `landing`
-*** `enable` - Controls whether the Kabanero landing page is deployed by
+*** `enable` - Controls whether the product landing page is deployed by
     the product operator.  Valid values are `true` and `false`.  The default
     value is `true`.
 ** `codeReadyWorkspaces`
-*** `enable` - Controls whether Kabanero will deploy an instance of 
-    CodeReady Workspaces.  Valid values are `true` and `false`.
-    The default value is `false`.
+*** `enable` - Controls whether an instance of CodeReady Workspaces is deployed. 
+    Valid values are `true` and `false`. The default value is `false`.
 *** `operator` - Configuration for the CodeReady Workspaces operator.
 **** `instance`
 ***** `devFileRegistryImage` - The devfile image that should be used by
@@ -162,8 +161,8 @@ specify the following fields:
 ***** `tlsSupport` - Controls whether TLS is enabled for the CodeReady
       Workspaces instance.  Valid values are `true` and `false`.
 ** `sso` - Configuration for the Red Hat SSO Server
-*** `enable` - Controls whether Kabanero will deploy an instance of 
-    the Red Hat SSO Server for application use.  Valid values are `true` a
+*** `enable` - Controls whether an instance of the Red Hat SSO Server 
+    is deployed for application use.  Valid values are `true` a
     nd `false`.  The default value is `false`.
 *** `adminSecretName` - The name of a secret that contains keys for
     `username`, `password`, and `realm`.  These values will become the
@@ -173,17 +172,17 @@ specify the following fields:
 
 The following `Status` fields are maintained by the product operator to
 provide information about the installed components, and the health of the
-Kabanero instance:
+product instance:
 
 * `Status`
 ** `kabaneroInstance` - The overall status information of the
-   Kabanero instance.
-*** `ready` - The overall Status of Kabanero.  A value of `True`
-    indicates Kabanero has been installed successfully.  A value of `False`
+   product instance.
+*** `ready` - The overall Status of the product.  A value of `True`
+    indicates the product has been installed successfully.  A value of `False`
     indicates that there was a problem, and more information can be found
     by looking in the `message` attribute.
 *** `message` - Provides more details for a `ready` status of `False`.
-*** `version` - Shows the version of Kabanero that is currently installed.
+*** `version` - Shows the version of the product that is currently installed.
     This version can be different from `Spec.version` if there is a problem
     configuring and installing the `Spec.version`.
 ** `serverless` - Contains information about the OpenShift Serverless
@@ -215,18 +214,18 @@ Kabanero instance:
     CR instance.
 *** `version` - The version of pipelines as reported by the pipelines `Config`
     CR instance.
-** `cli` - Contains information about the Kabanero CLI backend service.
-*** `ready` - The overall status of the Kabanero CLI backend
+** `cli` - Contains information about the stack management CLI backend service.
+*** `ready` - The overall status of the stack management CLI backend
     service.  A value of `True` indicates the service was installed
     successfully.  A value of `False` indicates there was a problem, and
     more information can be found by looking in the `message`
     attribute.
 *** `message` - Provides more details for a `ready` status of `False`.
 *** `hostnames` - Provides the hostnames from the `Route` that was created
-    for the Kabanero CLI service.  The hostname can be used in the Kabanero
-    CLI to connect to this Kabanero instance.
-** `landing` - Contains information about the Kabanero landing page
-*** `ready` - The overall status of the Kabanero landing page.
+    for the stack management CLI service.  The hostname can be used in the product
+    CLI to connect to this product instance.
+** `landing` - Contains information about the product landing page
+*** `ready` - The overall status of the product landing page.
     A value of `True` indicates the landing page was deployed successfully.
     A value of `False` indicates there was a problem, and more information can
     be found by looking in the `message` attribute.
@@ -299,7 +298,7 @@ replace `-n kabanero` with the name of another namespace.
 
 == Examples
 
-This example yaml defines a `Kabanero` instance at version 0.7.0, using
+This example yaml defines a product instance at version 0.7.0, using
 the default stacks.
 
 ```yaml
@@ -317,9 +316,9 @@ spec:
         url: https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.7.0/kabanero-stack-hub-index.yaml
 ```
 
-This example yaml defines a `Kabanero` instance at version 0.7.0, using
+This example yaml defines a product instance at version 0.7.0, using
 custom stacks and their associated GitHub configuration.  Sessions
-established using the Kabanero CLI remain valid for one hour.
+established using the stack management CLI remain valid for one hour.
 
 ```yaml
 apiVersion: kabanero.io/v1alpha2

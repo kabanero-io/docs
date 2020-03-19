@@ -3,9 +3,9 @@
 :page-doc-category: Reference
 :linkattrs:
 :sectanchors:
-= Kabanero CLI
+= Managing stacks with the command-line interface (CLI)
 
-The Kabanero CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the Kabanero stacks. Developers use these stacks to create governed applications for their business.
+The stack management CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the Kabanero stacks. Developers use these stacks to create governed applications for their business.
 
 == Installing the Kabanero CLI
 
@@ -24,36 +24,36 @@ The Kabanero CLI is a command-line interface used by the enterprise, solution, o
 . Optional - Add the path to the `kabanero` command to your `PATH` environment variable so that you can use the `kabanero` command without specifying the path each time.
 
 
-== Kabanero commands
+== Commands
 
-Use the following commands to monitor and administer a Kabanero environment.
+Use the following commands to monitor and administer the product environment.
 
 === Login
 
-Use the Kabanero CLI URL to log in. There are two ways you can get this URL:
+Use the stack management CLI URL to log in. There are two ways you can get this URL:
 
-. View the CLI URL in the Kabanero landing page instance details.
+. View the CLI URL in the product landing page instance details.
 . Log in to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
 
-Run the `kabanero login` command to authenticate to Kabanero.
+Run the `kabanero login` command to authenticate.
 
 ----
-kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID>
+kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID>
 ----
 
-* `<KABANERO_CLI_URL>` is your Kabanero CLI URL from above.
+* `<SM_CLI_URL>` is your Kabanero CLI URL from above.
 * `<GITHUB_USER_ID>` is your GitHub user name.
 * `<GITHUB_PAT>` is your GitHub Personal Access Token.
 ** Your PAT must have the **read:org** - Read org and team membership, read org projects OAuth Scope allowed. You can select this when creating your PAT in GitHub
 * You can also use your GitHub password for the `<GITHUB_PAT>` argument.
 
-**Kabanero login options**
+** Login options**
 
 * Pass in GitHub user name
 ** `-u <string>`
 ** `--username <string>`
 
-Log in to a Kabanero instance by using GitHub credentials and store a temporary access token for subsequent command-line calls.
+Log in to a product instance by using GitHub credentials and store a temporary access token for subsequent command-line calls.
 The temporary access token is stored in a `your-home-directory/.kabanero/config.yaml` file.
 Use your GitHub user ID and either a password or Personal Access Token (PAT) to log in.
 
@@ -62,7 +62,7 @@ Examples:
 * Log in with A GitHub user ID and password
 +
 ----
-kabanero login <KABANERO_CLI_URL> -u <GITHUB_USER_ID>
+kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID>
 PASSWORD: <GITHUB_PASSWORD>
 ----
 
@@ -76,12 +76,12 @@ PASSWORD: <GITHUB_PAT>
 Example result:
 
 ----
-Logged in to Kabanero instance: <KABANERO_CLI_URL>
+Logged in to Kabanero instance: <SM_CLI_URL>
 ----
 
 === Onboard a developer
 
-Run the `kabanero onboard` command to onboard a developer to the Kabanero environment.
+Run the `kabanero onboard` command to onboard a developer to the product environment.
 
 ----
 kabanero onboard <GITHUB_USER_ID>
@@ -95,7 +95,7 @@ Example result:
 Go to the pipelines dashboard at <tekton-url> in your browser and manually configure the webhook for gituser: <GITHUB_USER_ID>
 ----
 
-=== List Kabanero Application Stacks
+=== List application stacks
 
 Run the `kabanero list` command to list all the application stacks in a kabanero instance, along with their status.
 
@@ -195,7 +195,7 @@ Kabanero Instance Stacks  Version Status
 nodejs                    0.2.6   inactive ==> active
 ----
 
-This example result shows a stack added to Kabanero from a stack entry in curated stack hub:
+This example result shows a stack added from a stack entry in curated stack hub:
 
 ----
 Kabanero Instance Stacks  Version Status
@@ -205,7 +205,7 @@ java-microprofile         0.2.21  added to Kabanero
 
 Running the `kabanero sync` command when one of the stacks is obsolete deletes the stack.
 
-This example result shows a stack deleted from Kabanero because it is no longer in curated stack hub:
+This example result shows a stack deleted because it is no longer in curated stack hub:
 
 ----
 Kabanero Instance Stacks  Version Status
@@ -214,9 +214,9 @@ java-microprofile         0.2.21  deleted
 ----
 
 
-=== Show the active repository application stack for a Kabanero instance
+=== Show the active repository application stack for a product instance
 
-Make sure the Kabanero instance is installed in the Kabanero namespace. There are two ways to view the active application stacks repository for a Kabanero instance.
+Make sure the product instance is installed in the Kabanero namespace. There are two ways to view the active application stacks repository for a product instance.
 
 . From the OpenShift console, view Administration > Custom Resource Definitions > Kabanero > Instances > Kabanero > YAML
 . Displaying the configured Kabanero CR with the OC CLI command
@@ -224,9 +224,9 @@ Make sure the Kabanero instance is installed in the Kabanero namespace. There ar
   oc get kabanero -n kabanero -o yaml
 
 
-=== Show the Kabanero version
+=== Show the product version
 
-Run the `kabanero version` command to display the version of kabanero that is running.
+Run the `kabanero version` command to display the version of the product that is running.
 
 ----
 kabanero version
@@ -239,7 +239,7 @@ kabanero cli version: 0.6.0
 kabanero command line service image: kabanero/kabanero-command-line-services:0.6.0
 ----
 
-=== Deactivate Kabanero
+=== Deactivate
 
 Run the `kabanero deactivate` command to prevent a specific version of an application stack from being used in pipeline builds.
 
@@ -247,7 +247,7 @@ Run the `kabanero deactivate` command to prevent a specific version of an applic
 kabanero deactivate stack-name version-number
 ----
 
-Running the deactivate command removes the specified application stack from the list of available application types, without deleting it from the Kabanero instance.
+Running the deactivate command removes the specified application stack from the list of available application types, without deleting it from the product instance.
 
 To restore a deactivated application stack, run the `kabanero sync` command. See <<Synchronize application stacks>>.
 
@@ -294,9 +294,9 @@ nodejs-loopback           0.1.6   central
 nodejs-loopback           0.1.8   central2
 ----
 
-=== Log out of Kabanero
+=== Log out
 
-Run the `kabanero logout` command to disconnect from the Kabanero instance.
+Run the `kabanero logout` command to disconnect from the product instance.
 
 ----
 kabanero logout
@@ -305,14 +305,14 @@ kabanero logout
 Example result:
 
 ----
-Logged out of kab instance: <KABANERO_CLI_URL>
+Logged out of kab instance: <SM_CLI_URL>
 ----
 
 == Global Options
 
-These options can be enabled on any Kabanero command.
+These options can be enabled on any command.
 
-* Help for a Kabanero command. For example, `kabanero refresh -h`
+* Help for a command. For example, `kabanero refresh -h`
 ** `-h`
 ** `--help`
 * Turn on debug output and logging to a file in `$HOME/.kabanero/logs`
@@ -322,4 +322,4 @@ These options can be enabled on any Kabanero command.
 == Related links
 
 - link:https://github.com/kabanero-io/kabanero-command-line#kabanero-cli[Kabanero CLI repository]
-- link:https://github.com/kabanero-io/kabanero-security#support-for-authentication-and-rbac-for-kabanero-collection-maintenance[Support for authentication and RBAC for Kabanero application stack maintenance]
+- link:https://github.com/kabanero-io/kabanero-security#support-for-authentication-and-rbac-for-kabanero-collection-maintenance[Support for authentication and RBAC for application stack maintenance]
