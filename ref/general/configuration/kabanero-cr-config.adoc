@@ -83,7 +83,7 @@ specify the following fields:
       be accessed using HTTPS.  For example, the 
       default stack repository for Kabanero version 0.7.0 is
       https://github.com/kabanero-io/collections/releases/download/v0.7.0/kabanero-index.yaml
-***** `skipCertVerification` - Controls whether the Kabanero controller will
+***** `skipCertVerification` - Controls whether the product controller will
       validate SSL/TLS certificates presented by the repository URL.
       Valid values are `true` and `false`.
 **** `gitRelease` - Used for accessing a stack index via a protected GitHub
