@@ -2,7 +2,7 @@
 :page-doc-category: Configuration
 :page-title: Configuring a Stack CR Instance
 :sectanchors:
-= Configuring a Stack CR instance
+= Stack Custom Resource
 
 A `Stack` custom resource (CR) instance describes a particular application
 stack.  Multiple versions of the same stack can be described in the

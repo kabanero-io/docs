@@ -156,13 +156,13 @@ Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console
 
 You can use the `oc get` or the `oc describe` command to obtain the status of the subcomponents for the product operator.
 
-For example, run the following command: 
+For example, run the following command:
 
 ----
 oc -n kabanero get kabanero kabanero -o=yaml
 ----
 
-If the command is successful, it returns information like the following example: 
+If the command is successful, it returns information like the following example:
 
 ----
 status:
@@ -181,7 +181,7 @@ status:
         cheWorkspaceClusterRole: role-name
         openShiftOAuth: false
         selfSignedCert: false
-        tlsSupport: false  
+        tlsSupport: false
   cli:
     hostnames:
     - kabanero-cli-kabanero.apps.mycluster.os.example.com
@@ -210,7 +210,7 @@ status:
     version: v0.8.0
 ----
 
-When a subcomponent is not ready or is failing, the product returns an error message, which could come directly 
+When a subcomponent is not ready or is failing, an error message is returned, which could come directly
 from the subcomponent. You can gather more information on why a subcomponent is not ready or is failing by referring to the description of each
 subcomponent that follows. Each description includes a command to determine the state for the component and a command to gather logs for the component.
 
@@ -218,7 +218,7 @@ subcomponent that follows. Each description includes a command to determine the 
 
 The admissionControllerWebhook component is part of the product operator and includes a deployment, a replicaset, and a pod.
 
-To obtain the state, enter the following command: 
+To obtain the state, enter the following command:
 
 ----
 oc -n kabanero describe pods -l name=kabanero-operator-admission-webhook
@@ -264,7 +264,7 @@ oc -n kabanero logs $(oc -n kabanero get pods -l app=codeready-operator -o=jsonp
 
 === cli
 
-The cli component provides a service for interacting with the product instance.
+The cli component provides a service for interacting with the instance.
 
 To obtain the state, enter the following command:
 
@@ -310,7 +310,7 @@ To obtain the logs, enter the following command:
 oc -n kabanero logs $(oc -n kabanero get pods -l name=kabanero-operator -o=jsonpath={.items[0].metadata.name})
 ----
 
-=== landing 
+=== landing
 
 The landing component provides the landing page for the console.
 
@@ -328,7 +328,7 @@ oc -n kabanero logs $(oc -n kabanero get pods -l app=kabanero-landing -o=jsonpat
 
 === serverless
 
-The serverless component manages the KnativeServing instances. 
+The serverless component manages the KnativeServing instances.
 
 To obtain the state, enter the following command:
 
@@ -336,7 +336,7 @@ To obtain the state, enter the following command:
 oc -n openshift-operators describe pods -l name=knative-serving-operator
 ----
 
-To obtain the instance of the state, enter the following command: 
+To obtain the instance of the state, enter the following command:
 
 ----
 oc -n knative-serving describe knativeserving knative-serving

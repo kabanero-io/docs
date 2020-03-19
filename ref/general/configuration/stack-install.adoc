@@ -4,12 +4,12 @@
 :page-doc-number: 2.0
 :linkattrs:
 :sectanchors:
-= Configuring Kabanero to use an alternative stack repository
+= Configuring to use an alternative stack repository
 
 A Kabanero custom resource (CR) instance can be configured to use an alternative stack repository.  When you have published a new stack repository, as described in
 link:https://appsody.dev/docs/stacks/publish[Publishing Stacks], follow these steps to use that stack index with Kabanero:
 
-. Create organizational-level teams in GitHub to administer the cloned stacks, and add members to those teams.  These members will be able to use the link:../reference/kabanero-cli.html[Kabanero CLI] to administer the stacks in the namespace where the Kabanero CR instance is configured.
+. Create organizational-level teams in GitHub to administer the cloned stacks, and add members to those teams.  These members will be able to use the link:../reference/kabanero-cli.html[stack management CLI] to administer the stacks in the namespace where the Kabanero CR instance is configured.
 
 . Obtain the URL to the stack repository.  If a Git release was created for the stacks, the URL format might be: `https://<github.com>/<organization>/stacks/releases/download/<release>/incubator-index.html`
 * Replace `<github.com>` with your GitHub or GHE hostname
@@ -22,7 +22,7 @@ Note: Avoid using the OpenShift Console to edit the Kabanero CR instance.  The c
 
 . Modify your Kabanero CR instance to target the new stacks that were pushed to the remote GitHub repository and the teams in GitHub that will administer the stacks.  Specifically:
 * The `Spec.Stacks.Repositories.Https.url` attribute should be set to the URL of the alternative stack repository.
-* Refer to link:github-authorization.html[authorizing the Kabanero CLI service] for instructions on defining authorization to the GitHub teams.
+* Refer to link:github-authorization.html[authorizing the stack management CLI service] for instructions on defining authorization to the GitHub teams.
 
 +
 A modified Kabanero CR instance for a stack repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.1.2` of stacks might look like this:
@@ -52,7 +52,7 @@ spec:
     apiUrl: https://api.github.com
 ```
 +
-If the GitHub repository is protected, see link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].  For more information about other fields that can be customized in the Kabanero CR instance, see link:kabanero-cr-config.html[Configuring a Kabanero CR instance].
+If the GitHub repository is protected, see link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].  For more information about other fields that can be customized in the Kabanero CR instance, see link:kabanero-cr-config.html[Kabanero Custom Resource].
 +
 After editing, save your changes.  The updated Kabanero CR instance is applied to your cluster.
 
