@@ -6,7 +6,7 @@
 = Deploying applications to an alternative namespace
 
 By default, applications are deployed to the same namespace as the Kabanero custom resource (CR) instance, which is the `kabanero` namespace.
-However, you can configure the product to deploy applications to a different namespace by following these steps:
+However, you can change the configuration so that applications are deployed to a different namespace by following these steps:
 
 . Obtain a copy of your current Kabanero CR instance configuration.
 * To obtain a list of all Kabanero CR instances in the `kabanero` namespace, run the following command:

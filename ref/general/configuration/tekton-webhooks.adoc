@@ -1,9 +1,9 @@
 :page-layout: doc
 :page-doc-category: Configuration
-:page-title: Connecting the product to GitHub with webhooks
+:page-title: Connecting to GitHub with webhooks
 :sectanchors:
 :page-doc-number: 5.0
-= Connecting the product to GitHub with webhooks
+= Connecting to GitHub with webhooks
 
 A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[pipeline, window="_blank"]. After you configure the webhook, changes you make in your GitHub repository will trigger the pipeline and its associated tasks.
 
@@ -43,7 +43,7 @@ Name::
 Give your webhook a distinctive name.
 
 Repository URL::
-The URL of the GitHub repository that you want to connect to the product.
+The URL of the GitHub repository that you want to connect to.
 
 Access token::
 Use this field to create a secret to store your GitHub personal access token. Even if you already created a token-based Git secret from your pipelines dashboard, you must also store your GitHub personal access token in this field. Click the green plus icon beside the field to open the `Create Access Token Secret` window.

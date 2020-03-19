@@ -4,7 +4,7 @@
 :page-doc-number: 2.0
 :linkattrs:
 :sectanchors:
-= Configuring the product to use an alternative stack repository
+= Configuring to use an alternative stack repository
 
 A Kabanero custom resource (CR) instance can be configured to use an alternative stack repository.  When you have published a new stack repository, as described in
 link:https://appsody.dev/docs/stacks/publish[Publishing Stacks], follow these steps to use that stack index with Kabanero:

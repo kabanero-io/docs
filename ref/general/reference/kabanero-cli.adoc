@@ -24,15 +24,13 @@ The stack management CLI is a command-line interface used by the enterprise, sol
 . Optional - Add the path to the `kabanero` command to your `PATH` environment variable so that you can use the `kabanero` command without specifying the path each time.
 
 
-== Commands
-
-Use the following commands to monitor and administer the product environment.
+== Monitoring and administration commands
 
 === Login
 
 Use the stack management CLI URL to log in. There are two ways you can get this URL:
 
-. View the CLI URL in the product landing page instance details.
+. View the CLI URL in the landing page instance details.
 . Log in to your cluster and run: `oc get routes -n kabanero`. The URL is for the `kabanero-cli` route.
 
 Run the `kabanero login` command to authenticate.
@@ -53,7 +51,7 @@ kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID>
 ** `-u <string>`
 ** `--username <string>`
 
-Log in to a product instance by using GitHub credentials and store a temporary access token for subsequent command-line calls.
+Log in to an instance by using GitHub credentials and store a temporary access token for subsequent command-line calls.
 The temporary access token is stored in a `your-home-directory/.kabanero/config.yaml` file.
 Use your GitHub user ID and either a password or Personal Access Token (PAT) to log in.
 
@@ -81,7 +79,7 @@ Logged in to Kabanero instance: <SM_CLI_URL>
 
 === Onboard a developer
 
-Run the `kabanero onboard` command to onboard a developer to the product environment.
+Run the `kabanero onboard` command to onboard a developer.
 
 ----
 kabanero onboard <GITHUB_USER_ID>
@@ -214,9 +212,9 @@ java-microprofile         0.2.21  deleted
 ----
 
 
-=== Show the active repository application stack for a product instance
+=== Show the active repository application stack for an instance
 
-Make sure the product instance is installed in the Kabanero namespace. There are two ways to view the active application stacks repository for a product instance.
+Make sure the instance is installed in the Kabanero namespace. There are two ways to view the active application stacks repository for an instance.
 
 . From the OpenShift console, view Administration > Custom Resource Definitions > Kabanero > Instances > Kabanero > YAML
 . Displaying the configured Kabanero CR with the OC CLI command
@@ -224,9 +222,9 @@ Make sure the product instance is installed in the Kabanero namespace. There are
   oc get kabanero -n kabanero -o yaml
 
 
-=== Show the product version
+=== Show the version number
 
-Run the `kabanero version` command to display the version of the product that is running.
+Run the `kabanero version` command to display the version of Kabanero that is running.
 
 ----
 kabanero version
@@ -247,7 +245,7 @@ Run the `kabanero deactivate` command to prevent a specific version of an applic
 kabanero deactivate stack-name version-number
 ----
 
-Running the deactivate command removes the specified application stack from the list of available application types, without deleting it from the product instance.
+Running the deactivate command removes the specified application stack from the list of available application types, without deleting it from the instance.
 
 To restore a deactivated application stack, run the `kabanero sync` command. See <<Synchronize application stacks>>.
 
@@ -296,7 +294,7 @@ nodejs-loopback           0.1.8   central2
 
 === Log out
 
-Run the `kabanero logout` command to disconnect from the product instance.
+Run the `kabanero logout` command to disconnect from the instance.
 
 ----
 kabanero logout
