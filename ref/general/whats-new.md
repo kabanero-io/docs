@@ -9,4 +9,4 @@ The console has new admin features that allow you to manage your GitHub admin te
 
 The Open Liberty operator is now included, and there's a guide about developing for the Open Liberty stack.
 
-Kabanero 0.7 executes on OpenShift Container Platform 4.3. The foundation components have been updated as well. For a full list, and for even more updates than are mentioned here, check out our [What’s New in 0.7.0 blog post](/blog/2020/03/20/WhatsNew070.html).
+The foundation components are updated; for a full list, and for even more updates than are mentioned here, check out our [What’s New in 0.7.0 blog post](/blog/2020/03/20/WhatsNew070.html).
