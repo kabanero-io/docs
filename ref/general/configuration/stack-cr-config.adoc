@@ -5,11 +5,11 @@
 = Stack Custom Resource
 
 A `Stack` custom resource (CR) instance describes a particular application
-stack.  Multiple versions of the same stack can be described in the
+stack. Multiple versions of the same stack can be described in the
 same `Stack` CR instance.  
 
 The `Spec` section of the `Stack` instance describes the desired
-configuration.  The `Status` section is populated by the Stack controller,
+configuration. The `Status` section is populated by the Stack controller,
 and shows which versions of the Stack have been activated, and which
 pipelines and tasks have been activated for that version.
 
@@ -22,11 +22,11 @@ specify the following fields:
 ** `name` - The name of the stack that is represented by this CR.
 ** `versions` - A list of versions of this stack that should be
    activated.  Each CR instance must define at least one version.
-*** `version` - The version of this stack
+*** `version` - The version of this stack.
 *** `desiredState` - An optional field which describes the state
     that this version of this stack should remain in.  An empty
     value results in this version being activated.  Other valid
-    values are `active` and `inactive`.  If either of these values
+    values are `active` and `inactive`. If either of these values
     is provided, the product operator will not attempt to change
     the state for this version, even if the stack is removed from
     the stack index which caused this Stack CR to be created.
@@ -76,7 +76,7 @@ command:
 
 `oc get stacks -n kabanero -o yaml`
 
-The example uses the kabanero namespace.  To use a different namespace,
+The example uses the kabanero namespace. To use a different namespace,
 replace `-n kabanero` with the name of another namespace.
 
 == Examples

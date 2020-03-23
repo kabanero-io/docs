@@ -46,7 +46,7 @@ The Kabanero CR instance provides additional fields that allow you to configure 
 * If you want to use your OpenShift accounts with CodeReady Workspaces, set up permanent users (accounts other than kube:admin) and then set `Spec.codeReadyWorkspaces.operator.customResourceInstance.openShiftOAuth` to `true`.
 Consult link:../configuration/kabanero-cr-config.html[Kabanero Custom Resource] for the full list of configurable fields.
 
-=== Using CodeReady Workspaces with Self-Signed certificates
+=== Using CodeReady Workspaces with self-signed certificates
 If CodeReady Workspaces is set up to use the self-signed certificates provided by the OpenShift cluster's router, then you must do the following:
 
 *Google Chrome:*

@@ -5,9 +5,9 @@
 :sectanchors:
 = Managing stacks with the command-line interface (CLI)
 
-The stack management CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the Kabanero stacks. Developers use these stacks to create governed applications for their business.
+The stack management CLI is a command-line interface used by the enterprise, solution, or application architect who defines and manages the application stacks. Developers use these stacks to create governed applications for their business.
 
-== Installing the Kabanero CLI
+== Installing the stack management CLI
 
 . Download the archive corresponding to the platform you are running on.
 * https://github.com/kabanero-io/kabanero-command-line/releases/latest[Latest CLI release, window="_blank"]
@@ -39,7 +39,7 @@ Run the `kabanero login` command to authenticate.
 kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID>
 ----
 
-* `<SM_CLI_URL>` is your Kabanero CLI URL from above.
+* `<SM_CLI_URL>` is your stack management CLI URL from above.
 * `<GITHUB_USER_ID>` is your GitHub user name.
 * `<GITHUB_PAT>` is your GitHub Personal Access Token.
 ** Your PAT must have the **read:org** - Read org and team membership, read org projects OAuth Scope allowed. You can select this when creating your PAT in GitHub
@@ -57,14 +57,14 @@ Use your GitHub user ID and either a password or Personal Access Token (PAT) to 
 
 Examples:
 
-* Log in with A GitHub user ID and password
+* Log in with a GitHub user ID and password
 +
 ----
 kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID>
 PASSWORD: <GITHUB_PASSWORD>
 ----
 
-* Log in with previously used url GitHub user ID and PAT
+* Log in with previously used URL GitHub user ID and PAT
 +
 ----
 kabanero login -u <GITHUB_USER_ID>
@@ -233,7 +233,7 @@ kabanero version
 Example result:
 
 ----
-kabanero cli version: 0.6.0
+kabanero cli version: 0.7.0
 kabanero command line service image: kabanero/kabanero-command-line-services:0.6.0
 ----
 
@@ -303,7 +303,7 @@ kabanero logout
 Example result:
 
 ----
-Logged out of kab instance: <SM_CLI_URL>
+Logged out of Kabanero instance: <SM_CLI_URL>
 ----
 
 == Global Options
