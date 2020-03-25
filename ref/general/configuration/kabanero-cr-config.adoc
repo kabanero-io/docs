@@ -169,6 +169,11 @@ specify the following fields:
     admin username and password for the Red Hat SSO server, as well as
     define the realm that the SSO server will use. For more information
     about setting up the secret, see link:rhsso.html[the SSO configuration instructions].
+** `governancePolicy` - High level structure for setting governance policy for
+   the Kabanero instance.
+*** `stackPolicy` - The policy to use when enforcing stack digests. Valid values
+    are `strictDigest`, `activeDigest`, `ignoreDigest` and `none`.  For more
+    information, see link:stack-governance.html[Configuring Governance Policy for Stacks].
 
 The following `Status` fields are maintained by the product operator to
 provide information about the installed components, and the health of the
