@@ -57,6 +57,8 @@ If the GitHub repository is protected, see link:ghe-credentials.html[Specifying 
 After editing, save your changes. The updated Kabanero CR instance is applied to your cluster.
 
 . The product operator will now load the stacks in the repository. To see a list of all stacks in the `kabanero` namespace, use `oc get stacks -n kabanero`.  If the kabanero-operator is unable to apply the stacks, the `Status` section of the Kabanero CR instance or the Stack CR instances will contain more information.
++
+Note that when replacing the stack index in the Kabanero CR instance, the product operator will not alter any `version` in a Stack CR instance that has a `desiredState` set. For more information on `desiredState`, see link:stack-cr-config.html[Stack CR Configuration].
 
 == Need help?
 If you have questions, we would like to hear from you.
