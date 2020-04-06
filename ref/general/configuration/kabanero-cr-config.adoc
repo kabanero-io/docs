@@ -98,7 +98,7 @@ specify the following fields:
 ***** `release` - The name of the release within the GitHub project.
 ***** `assetName` - The name of the file (asset) within the release.
 ***** `skipCertVerification` - Controls whether the controller will
-       validate SSL/TLS certificates presented by the pipelines URL.
+       validate SSL/TLS certificates presented by the repository URL.
        Valid values are `true` and `false`.
 **** `pipelines` - A list of pipelines that should be applied to the
       stacks in this repository.
@@ -129,6 +129,10 @@ specify the following fields:
 ****** `assetName` - The name of the file (asset) within the release.
 ****** `skipCertVerification` - Controls whether the controller will
        validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
+*** `skipRegistryCertVerification` - Controls whether the controller will
+       validate SSL/TLS certificates presented by the registry hosting the
+       stack container image from which the controller tries to read information.
        Valid values are `true` and `false`.
 ** `cliServices`
 *** `sessionExpirationSeconds` - The length of time (duration) that
