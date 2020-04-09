@@ -32,6 +32,10 @@ specify the following fields:
     the stack index which caused this Stack CR to be created.
     This behavior can be used to permanently activate or deactivate
     a stack, until the configuration is manually changed.
+*** `skipRegistryCertVerification` - Controls whether the controller will
+       validate SSL/TLS certificates presented by the registry hosting the
+       stack's container image.
+       Valid values are `true` and `false`.
 *** `pipelines` - A list of pipelines which should be applied to
     this stack version.
 **** `id` - A descriptive name of the pipelines contained at this URL.

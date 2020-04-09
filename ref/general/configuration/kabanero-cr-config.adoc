@@ -132,7 +132,7 @@ specify the following fields:
        Valid values are `true` and `false`.
 *** `skipRegistryCertVerification` - Controls whether the controller will
        validate SSL/TLS certificates presented by the registry hosting the
-       stack container image from which the controller tries to read information.
+       stack's container image.
        Valid values are `true` and `false`.
 ** `cliServices`
 *** `sessionExpirationSeconds` - The length of time (duration) that
