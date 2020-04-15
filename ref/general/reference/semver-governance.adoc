@@ -121,13 +121,13 @@ activated.
 - **post-build**: Even though a container digest was confirmed to be active prior to build, it is possible that in the interim the container tag was
 reassigned to a container with a different digest.
 
-<!--
+////
 - **pre-deploy**: Before deploying an application, the labels of the underlying base application stack are examined for matches with active application stacks.
 
 - **ad-hoc**: Using the CLI and REST APIs (via Kabanero Unique Experience), the active application stacks version container digests are queried to see if
 they are the same as when the stack was activated. The operator will store the digest of a given application stack version when it is first activated and
 update the status field of the Stack CR with that digest value.
--->
+////
 
 == Governance actions
 
@@ -152,16 +152,19 @@ The actions taken at the decision points depend on the governance policy chosen.
 
     During a "post-build" stackPolicy enforcement point, the version must be specified as active in the `.appsody-config.yaml` file, because the
     application has already been built at that specific level. If the version is no longer active, as determined by the digest, the post-build
-    stackPolicy enforcement fails. The behavior at a "pre-deploy" point is also the same: the application image has already been built and the stack
+    stackPolicy enforcement fails.
+////
+    The behavior at a "pre-deploy" point is also the same: the application image has already been built and the stack
     version, by digest, must be active.
+////
 
-    - **ignoreDigest**: Application stacks are still governed but using tags only. There is still a check that a valid matching PATCH level is active
+  - **ignoreDigest**: Application stacks are still governed but using tags only. There is still a check that a valid matching PATCH level is active
     at the governance detection points. Digests are not considered when making governance decisions.
 
     This policy is useful for teams that do not have strict tagging policy for their containers, or have adopted a tagging policy that makes governance
     based on digests unnecessary.
 
-    - **none**: Disables any stack active state, tag or digest validation. Pipelines will be allowed to progress without any stack governance.
+  - **none**: Disables any stack active state, tag or digest validation. Pipelines will be allowed to progress without any stack governance.
 
 === Governance policy action Examples
 
@@ -436,6 +439,7 @@ Example governance scenarios for build lifecycle detection points:
 |
 |===
 
+////
 For life-cycle detection points after post-build, the application is built on a specific 3-digit container. Application stacks are
 labeled with a dev.appsody.stack.version label which indicates the stack build level. (Note: issue
 https://github.com/appsody/appsody/issues/957 was opened to improve the ability to manage governance policy for container digests during
@@ -547,3 +551,5 @@ If the optional label is present, the deployment is governed according to these 
 |none
 |deploy
 |===
+
+////
