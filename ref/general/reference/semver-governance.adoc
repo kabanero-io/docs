@@ -1,0 +1,549 @@
+:page-layout: doc
+:page-type: doc
+:page-doc-category: Reference
+:linkattrs:
+:sectanchors:
+= Governing stacks with semantic versioning tags
+
+When customizing stacks, architects and operations personnel can implement link:https://semver.org[semantic versioning] tags as part of a
+governance policy that ensures that only the precise, desired application stacks are used for application builds and deployments. This strategy
+is made possible by the fact that container registries can be labeled with one or more tag values, which can change over time, while the
+container identifier (also known as the "digest") is immutable.
+
+== Semantic versioning
+
+In semantic versioning, versions are limited to 3 digits: MAJOR.MINOR.PATCH. Changes to:
+- PATCH indicates the container contains only fixes that are backwards compatible.
+- MINOR indicates the container contains new features that are backwards compatible.
+- MAJOR indicates the container contains versions of features and software that could introduce deprecations or withdrawal of features, and
+that might not be backwards compatible.
+
+**Note:** There are special rules if the MAJOR level of the version is 0 or if the PATCH level is suffixed with non-numeric characters. For
+more detail, see link:https://semver.org[semver.org].
+
+By adhering to semantic versioning, you can take advantage of the governance policy described here. There is, however, no requirement to follow
+a particular tagging policy.
+
+== Examples of semantic versioning in application stack tagging
+
+In the following examples of using tags to facilitate a semantic versioning governance policy, these tags are used:
+
+- `latest`: Mutable. Assign this tag to the same container as latest PATCH level of the latest MINOR release of the latest MAJOR release.
+- `MAJOR`: Mutable. Assign this tag to the latest PATCH level of the latest MINOR release of this major release.
+- `MAJOR.MINOR`: Mutable. Assign this tag to the latest PATCH level of this minor release.
+- `MAJOR.MINOR.PATCH`: Immutable. Assign this tag to the specific container that is built providing the specific patch level.
+
+=== Initial level and patch level
+
+In this example, the first release of a container, which has digest number 767h34, is assigned the MAJOR.MINOR.PATCH level of `1.0.0`,
+a MAJOR.MINOR tag of `1.0`, a MAJOR tag of `1`, and the `latest` tag. A patch of the container is then released, which has digest number
+9485jd, and is given the MAJOR.MINOR.PATCH tag `1.0.1`. The MAJOR.MINOR.PATCH tags are immutable and are not used to tag another
+container digest. The other tags (`latest`, `1`, and `1.0`) are moved to the new release. A query of the container registry
+for tags `latest`, `1`, `1.0`, and `1.0.1` now return digest 9485jd.
+
+image::/docs/img/digest-1.0.1.gif[link="/docs/img/digest-1.0.1.gif" alt="Initial level and patch level"]
+
+=== New minor release
+
+In this example, a new MINOR version has been published. The latest and MAJOR tags are reassigned to the `1.1.0`
+container, and a new MAJOR.MINOR (`1.1`) tag is added to the new container. Notice that the existing `1.0` tag remains
+assigned to 1.0.1 container.
+
+image::/docs/img/digest-1.1.0.gif[link="/docs/img/digest-1.1.0.gif" alt="New minor release"]
+
+=== New major release
+
+For this example, a new MAJOR version is published. The `latest` tag is reassigned to the `2.0.0` container, and new MAJOR (`2`)
+and MAJOR.MINOR (`2.0`) tags are also assigned to the container.
+
+image::/docs/img/digest-2.0.0.gif[link="/docs/img/digest-2.0.0.gif" alt="New major release"]
+
+=== New patch released
+
+In this example, a new patch level is released for version 2.0.0. The `latest`, MAJOR, and MAJOR.MINOR tags are
+assigned to the 2.0.1 container.
+
+image::/docs/img/digest-2.0.1.gif[link="/docs/img/digest-2.0.1.gif" alt="New patch release"]
+
+=== Another major released
+
+Another new MAJOR version is published in this example. The `latest` tag is reassigned to the 3.0.0 container, and new
+MAJOR (`3`) and MAJOR.MINOR (`3.0`) tags are also assigned to the container.
+
+image::/docs/img/digest-3.0.0.gif[link="/docs/img/digest-3.0.0.gif" alt="Another major release"]
+
+=== New patch for prior release
+
+In this example, the new container advances the PATCH level of 1.1, and that PATCH is the latest semver release of MAJOR
+version 1. Therefore, both the MAJOR (`1`) and MAJOR.MINOR (`1.1`) tags are reassigned to the 1.1.1 container.
+Even though this container was published last chronologically, the `latest` tag remains with the latest PATCH level of
+the latest MAJOR.MINOR release.
+
+image::/docs/img/digest-1.1.1.gif[link="/docs/img/digest-1.1.1.gif" alt="New patch for prior release"]
+
+== Application stack tagging for governance
+
+There are advantages to using only the MAJOR.MINOR tag to identify the application stack version in the stack hub. This value,
+stored in the `.appsody-config.yaml` file, declares that this application is only dependent on the feature set that is introduced
+and provided by the application stack at the MAJOR.MINOR level, and not on any specific PATCH level. When using the MAJOR.MINOR tag
+you can therefore be assured that the latest released PATCH level is used.
+
+When an application stack patch level is ready to be introduced to developers, be sure that it is activated before any events are
+triggered to build or to deploy applications built on the new patch level.
+
+When publishing a new patch level of an application stack container:
+
+1. Build the new application stack container and tag the container with its desired 3-digit semver tag (e.g., `0.2.23`).
+2. Update the desired deployments with the new single stack index to activate the new stack.
+3. Move the existing tags `latest`, MAJOR and MAJOR.MINOR to the new patch container (i.e., 0.2.23).
+4. Rebuild the stack-hub index shared with developers to include the latest patch level.
+5. Build pipelines label application containers, which identify the three-digit semantic version application stack that is used to
+build the application. Query your container registry for containers that are built with the older patch level.
+6. For each container, rebuild, test, and redeploy the applications on the older patch level.
+
+When retiring an older patch level of an application stack container:
+
+1. Rebuild, test and redeploy all relevant applications built on the older patch level.
+2. Remove application containers built on older patch level from the container registry.
+3. Remove the old index from the stack hub index shared with developers.
+4. Deactivate the older patch level of application (be sure to refresh and synchronize also).
+5. Remove the old patch level of the application stack container from the container registry.
+
+
+== Compliance detection
+
+During the lifecycle of applications and during normal operation, container digests are examined to validate compliance with the semantic versioning
+best practices. Based on the configuration policy in place, different actions will occur at those decision points.
+
+- **pre-build**: Before build pipeline tasks run, there is a check to ensure that the base application stack that the application is being built with is
+activated.
+
+- **post-build**: Even though a container digest was confirmed to be active prior to build, it is possible that in the interim the container tag was
+reassigned to a container with a different digest.
+
+<!--
+- **pre-deploy**: Before deploying an application, the labels of the underlying base application stack are examined for matches with active application stacks.
+
+- **ad-hoc**: Using the CLI and REST APIs (via Kabanero Unique Experience), the active application stacks version container digests are queried to see if
+they are the same as when the stack was activated. The operator will store the digest of a given application stack version when it is first activated and
+update the status field of the Stack CR with that digest value.
+-->
+
+== Governance actions
+
+The actions taken at the decision points depend on the governance policy chosen. Policy is set within the Kabanero CR using the new field
+`governancePolicy`, which has a subfield `stackPolicy`. The stackPolicy subfield can have the following settings:
+
+  - `strictDigest`: Indicates that usage of container tags for application stacks follow strict guidelines, and noncompliance will result in a
+  failure to proceed at the lifecycle point of detection. PATCH tags are not expected to be assigned to different containers. This policy is for
+  use by teams that have rigid container tagging policy and activation procedures.
+
+  - `activeDigest`: (DEFAULT) Indicates that usage of container tags for application stacks follow the tagging best practices. During a "pre-build"
+  stackPolicy enforcement point, a digest mismatch results in the substitution of a tag from a compatible active PATCH level within the same MAJOR.MINOR.
+  This policy ensures that only application stacks that are activated are used to build applications. It also allows for a more flexible process for
+  updating the container registry tags.
+
+    During a "pre-build" stackPolicy enforcement point, when the `.appsody-config.yaml` file specifies:
+      - :MAJOR. The Kabanero operator will use the latest active PATCH level of the latest MINOR release with the same MAJOR. If there are no PATCH levels
+      active for any MINOR releases of the specified MAJOR level, the build fails.
+      - :MAJOR.MINOR. The Kabanero operator will use the latest active PATCH level of the specified MAJOR.MINOR. If there are no PATCH levels active for
+      the specified MAJOR.MINOR release, the build fails.
+      - :MAJOR.MINOR.PATCH. The Kabanero operator will use the specified stack, if active. If the specified PATCH level is not active, the build fails.
+
+    During a "post-build" stackPolicy enforcement point, the version must be specified as active in the `.appsody-config.yaml` file, because the
+    application has already been built at that specific level. If the version is no longer active, as determined by the digest, the post-build
+    stackPolicy enforcement fails. The behavior at a "pre-deploy" point is also the same: the application image has already been built and the stack
+    version, by digest, must be active.
+
+    - **ignoreDigest**: Application stacks are still governed but using tags only. There is still a check that a valid matching PATCH level is active
+    at the governance detection points. Digests are not considered when making governance decisions.
+
+    This policy is useful for teams that do not have strict tagging policy for their containers, or have adopted a tagging policy that makes governance
+    based on digests unnecessary.
+
+    - **none**: Disables any stack active state, tag or digest validation. Pipelines will be allowed to progress without any stack governance.
+
+=== Governance policy action Examples
+
+The following examples of policy enforcement are based on a prepopulated container registry for a given application and activated stack state,
+as shown in these images:
+
+Container registry example:
+image::/docs/img/container-registry.png[link="/docs/img/container-registry.png" alt="Container registry example"]
+
+Stack state example:
+image::/docs/img/stack-state.png[link="/docs/img/stack-state.png" alt="Stack state example"]
+
+Example governance scenarios for build lifecycle detection points:
+
+|===
+|tag |detection point |policy |action |digest
+
+|:latest
+|pre-build
+|strictDigest
+|build
+|78bb45
+
+|
+|
+|activeDigest
+|build
+|78bb45
+
+|
+|
+|ignoreDigest
+|build
+|78bb45
+
+|
+|
+|none
+|build
+|78bb45
+
+|
+|post-build
+|strictDigest
+|keep
+|
+
+|
+|
+|activeDigest
+|keep
+|
+
+|
+|
+|ignoreDigest
+|keep
+|
+
+|
+|
+|none
+|keep
+|
+|===
+
+|===
+|tag |detection point |policy |action |digest
+
+|:1
+|pre-build
+|strictDigest
+|fail
+|
+
+|
+|
+|activeDigest
+|build
+|aaf783
+
+|
+|
+|ignoreDigest
+|build
+|08cdef
+
+|
+|
+|none
+|build
+|08cdef
+
+|
+|post-build
+|strictDigest
+|discard
+|
+
+|
+|
+|activeDigest
+|keep
+|
+
+|
+|
+|ignoreDigest
+|keep
+|
+
+|
+|
+|none
+|keep
+|
+|===
+
+|===
+|tag |detection point |policy |action |digest
+
+|:1.0
+|pre-build
+|strictDigest
+|build
+|9485jd
+
+|
+|
+|activeDigest
+|build
+|9485jd
+
+|
+|
+|ignoreDigest
+|build
+|9485jd
+
+|
+|
+|none
+|build
+|9485jd
+
+|
+|post-build
+|strictDigest
+|discard
+|
+
+|
+|
+|activeDigest
+|keep
+|
+
+|
+|
+|ignoreDigest
+|keep
+|
+
+|
+|
+|none
+|keep
+|
+|===
+
+|===
+|tag |detection point |policy |action |digest
+
+|:1.1
+|pre-build
+|strictDigest
+|fail
+|
+
+|
+|
+|activeDigest
+|build
+|aaf783
+
+|
+|
+|ignoreDigest
+|build
+|08cdef
+
+|
+|
+|none
+|build
+|08cdef
+
+|
+|post-build
+|strictDigest
+|discard
+|
+
+|
+|
+|activeDigest
+|keep
+|
+
+|
+|
+|ignoreDigest
+|keep
+|
+
+|
+|
+|none
+|keep
+|
+|===
+
+|===
+|tag |detection point |policy |action |digest
+
+|:1.1.1
+|pre-build
+|strictDigest
+|fail
+|n/a
+
+|
+|
+|activeDigest
+|fail
+|n/a
+
+|
+|
+|ignoreDigest
+|fail
+|n/a
+
+|
+|
+|none
+|build
+|08cdef
+
+|
+|post-build
+|strictDigest
+|discard
+|
+
+|
+|
+|activeDigest
+|discard
+|
+
+|
+|
+|ignoreDigest
+|discard
+|
+
+|
+|
+|none
+|keep
+|
+|===
+
+For life-cycle detection points after post-build, the application is built on a specific 3-digit container. Application stacks are
+labeled with a dev.appsody.stack.version label which indicates the stack build level. (Note: issue
+https://github.com/appsody/appsody/issues/957 was opened to improve the ability to manage governance policy for container digests during
+deployment; the current suggestion is to add a new label: dev.appsody.stack.digest to application containers.)
+
+|===
+|tag |detection point |policy |action
+
+|:1.1.0
+|deploy
+|strictDigest
+|deploy
+
+|
+|
+|activeDigest
+|deploy
+
+|
+|
+|ignoreDigest
+|deploy
+
+|
+|
+|none
+|deploy
+|===
+
+|===
+|tag |detection point |policy |action
+
+|:1.1.1
+|deploy
+|strictDigest
+|fail
+
+|
+|
+|activeDigest
+|fail
+
+|
+|
+|ignoreDigest
+|fail
+
+|
+|
+|none
+|deploy
+|===
+
+If the optional label is present, the deployment is governed according to these examples:
+
+|===
+|tag |digest |detection point |policy |action
+
+|:1.1.0
+|aaf783
+|deploy
+|strictDigest
+|deploy
+
+|
+|
+|
+|activeDigest
+|deploy
+
+|
+|ignored
+|
+|ignoreDigest
+|deploy
+
+|
+|ignored
+|
+|none
+|deploy
+|===
+
+|===
+|tag |digest |detection point |policy |action
+
+|:1.1.1
+|08cdef
+|deploy
+|strictDigest
+|fail
+
+|
+|
+|
+|activeDigest
+|fail
+
+|
+|ignored
+|
+|ignoreDigest
+|fail
+|
+
+|
+|ignored
+|
+|none
+|deploy
+|===
