@@ -152,6 +152,12 @@ If the data does not show a `Ready` state and the problem is persistent, there m
 
 Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console may change the `apiVersion` of the Kabanero CR instance from `v1alpha2` to `v1alpha1`.  The fields of the Kabanero CR instance which were not defined in the `v1alpha` version may be deleted.  There is a description of the issue link:https://github.com/openshift/console/issues/4444[here].
 
+== Appsody Operator gets stuck in a crash loop backoff during `install.sh`
+
+A previous configuration of Knative Serving or OpenShift Serverless might cause the Appsody operator pod to enter a crash loop. If this occurs, look for CRDs in the serving.knative.dev group, and remove them. To find these CRDs, issue `oc get crds | grep serving.knative.dev` and then issue `oc delete crd <name>` for each CRD. For more information, see link:https://github.com/appsody/appsody-operator/issues/251[this known issue].
+
+The Appsody operator logs will contain an error message that you can use to verify you have encountered this specific issue. To view the logs, issue `oc logs deployment/appsody-operator -n openshift-operators` and look for the following message: `no matches for kind "Service" in version "serving.knative.dev/v1alpha1"`.
+
 == Debugging subcomponents
 
 You can use the `oc get` or the `oc describe` command to obtain the status of the subcomponents for the product operator.
