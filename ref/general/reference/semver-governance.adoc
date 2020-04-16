@@ -135,37 +135,37 @@ update the status field of the Stack CR with that digest value.
 The actions taken at the decision points depend on the governance policy chosen. Policy is set within the Kabanero CR using the new field
 `governancePolicy`, which has a subfield `stackPolicy`. The stackPolicy subfield can have the following settings:
 
-  - `strictDigest`: Indicates that usage of container tags for application stacks follow strict guidelines, and noncompliance will result in a
+  * `strictDigest`: Indicates that usage of container tags for application stacks follow strict guidelines, and noncompliance will result in a
   failure to proceed at the lifecycle point of detection. PATCH tags are not expected to be assigned to different containers. This policy is for
   use by teams that have rigid container tagging policy and activation procedures.
 
-  - `activeDigest`: (DEFAULT) Indicates that usage of container tags for application stacks follow the tagging best practices. During a "pre-build"
+  * `activeDigest`: (DEFAULT) Indicates that usage of container tags for application stacks follow the tagging best practices. During a "pre-build"
   stackPolicy enforcement point, a digest mismatch results in the substitution of a tag from a compatible active PATCH level within the same MAJOR.MINOR.
   This policy ensures that only application stacks that are activated are used to build applications. It also allows for a more flexible process for
   updating the container registry tags.
 
     During a "pre-build" stackPolicy enforcement point, when the `.appsody-config.yaml` file specifies:
-      - :MAJOR. The Kabanero operator will use the latest active PATCH level of the latest MINOR release with the same MAJOR. If there are no PATCH levels
+      ** :MAJOR. The Kabanero operator will use the latest active PATCH level of the latest MINOR release with the same MAJOR. If there are no PATCH levels
       active for any MINOR releases of the specified MAJOR level, the build fails.
-      - :MAJOR.MINOR. The Kabanero operator will use the latest active PATCH level of the specified MAJOR.MINOR. If there are no PATCH levels active for
+      ** :MAJOR.MINOR. The Kabanero operator will use the latest active PATCH level of the specified MAJOR.MINOR. If there are no PATCH levels active for
       the specified MAJOR.MINOR release, the build fails.
-      - :MAJOR.MINOR.PATCH. The Kabanero operator will use the specified stack, if active. If the specified PATCH level is not active, the build fails.
+      ** :MAJOR.MINOR.PATCH. The Kabanero operator will use the specified stack, if active. If the specified PATCH level is not active, the build fails.
 
-    During a "post-build" stackPolicy enforcement point, the version must be specified as active in the `.appsody-config.yaml` file, because the
-    application has already been built at that specific level. If the version is no longer active, as determined by the digest, the post-build
-    stackPolicy enforcement fails.
+During a "post-build" stackPolicy enforcement point, the version must be specified as active in the `.appsody-config.yaml` file, because the
+application has already been built at that specific level. If the version is no longer active, as determined by the digest, the post-build
+stackPolicy enforcement fails.
+
 ////
     The behavior at a "pre-deploy" point is also the same: the application image has already been built and the stack
     version, by digest, must be active.
 ////
 
-  - `ignoreDigest`: Application stacks are still governed but using tags only. There is still a check that a valid matching PATCH level is active
+  * `ignoreDigest`: Application stacks are still governed but using tags only. There is still a check that a valid matching PATCH level is active
     at the governance detection points. Digests are not considered when making governance decisions.
 
-This policy is useful for teams that do not have strict tagging policy for their containers, or have adopted a tagging policy that makes governance
-based on digests unnecessary.
+This policy is useful for teams that do not have strict tagging policy for their containers, or have adopted a tagging policy that makes governance based on digests unnecessary.
 
-  - `none`: Disables any stack active state, tag or digest validation. Pipelines will be allowed to progress without any stack governance.
+  * `none`: Disables any stack active state, tag or digest validation. Pipelines will be allowed to progress without any stack governance.
 
 === Governance policy action examples
 
