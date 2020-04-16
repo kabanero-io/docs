@@ -13,6 +13,7 @@ container identifier (also known as the "digest") is immutable.
 == Semantic versioning
 
 In semantic versioning, versions are limited to 3 digits: MAJOR.MINOR.PATCH. Changes to:
+
 - PATCH indicates the container contains only fixes that are backwards compatible.
 - MINOR indicates the container contains new features that are backwards compatible.
 - MAJOR indicates the container contains versions of features and software that could introduce deprecations or withdrawal of features, and
@@ -158,23 +159,25 @@ The actions taken at the decision points depend on the governance policy chosen.
     version, by digest, must be active.
 ////
 
-  - **ignoreDigest**: Application stacks are still governed but using tags only. There is still a check that a valid matching PATCH level is active
+  - `ignoreDigest`: Application stacks are still governed but using tags only. There is still a check that a valid matching PATCH level is active
     at the governance detection points. Digests are not considered when making governance decisions.
 
-    This policy is useful for teams that do not have strict tagging policy for their containers, or have adopted a tagging policy that makes governance
-    based on digests unnecessary.
+This policy is useful for teams that do not have strict tagging policy for their containers, or have adopted a tagging policy that makes governance
+based on digests unnecessary.
 
-  - **none**: Disables any stack active state, tag or digest validation. Pipelines will be allowed to progress without any stack governance.
+  - `none`: Disables any stack active state, tag or digest validation. Pipelines will be allowed to progress without any stack governance.
 
-=== Governance policy action Examples
+=== Governance policy action examples
 
 The following examples of policy enforcement are based on a prepopulated container registry for a given application and activated stack state,
 as shown in these images:
 
 Container registry example:
+
 image::/docs/img/container-registry.png[link="/docs/img/container-registry.png" alt="Container registry example"]
 
 Stack state example:
+
 image::/docs/img/stack-state.png[link="/docs/img/stack-state.png" alt="Stack state example"]
 
 Example governance scenarios for build lifecycle detection points:
