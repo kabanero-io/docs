@@ -94,20 +94,24 @@ triggered to build or to deploy applications built on the new patch level.
 
 When publishing a new patch level of an application stack container:
 
-1. Build the new application stack container and tag the container with its desired 3-digit semver tag (e.g., `0.2.23`).
-2. Update the desired deployments with the new single stack index to activate the new stack.
-3. Move the existing tags `latest`, MAJOR and MAJOR.MINOR to the new patch container (i.e., 0.2.23).
-4. Rebuild the stack-hub index shared with developers to include the latest patch level.
-5. Build pipelines label application containers, which identify the three-digit semantic version application stack that is used to
-build the application. Query your container registry for containers that are built with the older patch level.
-6. For each container, rebuild, test, and redeploy the applications on the older patch level.
+1. Build the new application stack container. The build process tags the container with its desired 3-digit semantic version tag
+(e.g., `0.2.23`).
+2. Add the stack index.yaml to the Kabanero custom resource (CR) of the desired deployments to activate the new stack.
+3. Release the stack and push the images. As part of this process, the existing tags `latest`, MAJOR and MAJOR.MINOR are updated
+to the new patch container (i.e., `0.2.23`), although you can also make these changes manually.
+4. Update the Kabanero CR that is shared with developers with the new index that includes the latest patch level. Do not do this
+step before the stack is activated, otherwise developers could create and push an application using the newer stack before it is
+available.
+5. Build pipelines label the containers created for the microservice with the identity of the three-digit application stack
+that is used to build the application. Query your container registry for containers that are built with the older patch level.
+6. For each updated container, rebuild, test, and redeploy the applications on the new patch level.
 
 When retiring an older patch level of an application stack container:
 
-1. Rebuild, test and redeploy all relevant applications built on the older patch level.
-2. Remove application containers built on older patch level from the container registry.
+1. For each container with an older patch level, rebuild, test, and redeploy the applications on the new patch level.
+2. Remove application containers built on the older patch level from the container registry.
 3. Remove the old index from the stack hub index shared with developers.
-4. Deactivate the older patch level of application (be sure to refresh and synchronize also).
+4. Deactivate the older patch level of the application (be sure to refresh and synchronize also).
 5. Remove the old patch level of the application stack container from the container registry.
 
 
@@ -176,7 +180,7 @@ Container registry example:
 
 image::/docs/img/container-registry.png[link="/docs/img/container-registry.png" alt="Container registry example"]
 
-Stack state example:
+Stack state example (note that in this example, version 1.0.0 has been republished and has a new digest number):
 
 image::/docs/img/stack-state.png[link="/docs/img/stack-state.png" alt="Stack state example"]
 
@@ -312,6 +316,58 @@ Example governance scenarios for build lifecycle detection points:
 |none
 |build
 |9485jd
+
+|
+|post-build
+|strictDigest
+|discard
+|
+
+|
+|
+|activeDigest
+|keep
+|
+
+|
+|
+|ignoreDigest
+|keep
+|
+
+|
+|
+|none
+|keep
+|
+|===
+
+|===
+|tag |detection point |policy |action |digest
+
+|:1.0.0
+|pre-build
+|strictDigest
+|fail
+|
+
+|
+|
+|activeDigest
+|build
+|a3fb77
+
+|
+|
+|ignoreDigest
+|build
+|767h34
+
+|
+|
+|none
+|build
+|767h34
 
 |
 |post-build
