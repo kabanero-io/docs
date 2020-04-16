@@ -154,9 +154,9 @@ Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console
 
 == Appsody Operator gets stuck in a crash loop backoff during `install.sh`
 
-Please see link:https://github.com/appsody/appsody-operator/issues/251[this known issue].  A previous configuration of Knative Serving or OpenShift Serverless may cause the Appsody operator pod to enter a crash loop.  If this occurs, look for CRDs in the serving.knative.dev group, and remove them.  To find these CRDs, issue `oc get crds | grep serving.knative.dev` and then issue `oc delete crd <name>` for each CRD.
+A previous configuration of Knative Serving or OpenShift Serverless might cause the Appsody operator pod to enter a crash loop. If this occurs, look for CRDs in the serving.knative.dev group, and remove them. To find these CRDs, issue `oc get crds | grep serving.knative.dev` and then issue `oc delete crd <name>` for each CRD. For more information, see link:https://github.com/appsody/appsody-operator/issues/251[this known issue].
 
-The Appsody operator logs will contain an error message.  To view the logs, issue `oc logs deployment/appsody-operator -n openshift-operators` and look for the following message: `no matches for kind "Service" in version "serving.knative.dev/v1alpha1"`.
+The Appsody operator logs will contain an error message that you can use to verify you have encountered this specific issue. To view the logs, issue `oc logs deployment/appsody-operator -n openshift-operators` and look for the following message: `no matches for kind "Service" in version "serving.knative.dev/v1alpha1"`.
 
 == Debugging subcomponents
 
