@@ -243,8 +243,8 @@ kabanero version
 Example result:
 
 ----
-kabanero cli version: 0.7.0
-kabanero command line service image: kabanero/kabanero-command-line-services:0.6.0
+kabanero cli version: 0.8.0
+kabanero command line service image: kabanero/kabanero-command-line-services:0.8.0
 ----
 
 === Deactivate
