@@ -105,7 +105,7 @@ Example result:
 
 ----
 Kabanero Instance Stacks  Version Status    Valid Digest
-------------------------  ------- ------    ------------ 
+------------------------  ------- ------    ------------
 java-microprofile         0.2.19  active    matched
 java-microprofile         0.2.21  active    matched
 java-spring-boot2         0.3.18  active    matched
@@ -132,16 +132,6 @@ nodejs-express            0.2.9   central2
 nodejs-loopback           0.1.6   central
 nodejs-loopback           0.1.8   central2
 ----
-
-The Valid Digest section can have four differest outputs:
-
-matched: when the stack's digest from the Kabanero CR matches the container registry digest 
-
-mismatched: when the stack's digest from the Kabanero CR does not match the container registry digest
-
-NA: when a stack is deactivated it does not have a digest to compare
-
-unknown: cannot read from the container registry, possible network timeout to the container registry server
 
 If a stack is removed from the curated stack hub on GitHub, its status shows as obsolete.  If a stack is obsolete, a SYNC command deletes it.
 
@@ -178,6 +168,16 @@ nodejs-loopback           0.1.6   central
 nodejs-loopback           0.1.8   central2
 
 ----
+
+==== Valid digest
+
+As part of digest governance, for each application stack, the value of the digest in the Kabanero custom resource (CR) is checked against the value of the digest in the container registry. For more information, see link:semver-governance.html[Governing stacks with semantic versioning tags]. The Valid Digest column can have four different values:
+
+. `matched`: the values for the application stack's digest in the Kabanero custom resource (CR) and the container registry are the same
+. `mismatched`: the values for the application stack's digest in the Kabanero CR and the container registry do not match
+. `NA`: indicates that the stack is deactivated, therefore no digest exists to compare
+. `unknown`: a value was not received from the container registry; possible reasons include a network timeout to the container registry server
+
 
 === Synchronize stacks
 
