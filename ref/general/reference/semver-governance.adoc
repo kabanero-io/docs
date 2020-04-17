@@ -99,20 +99,19 @@ When publishing a new patch level of an application stack container:
 2. Add the stack index.yaml to the Kabanero custom resource (CR) of the desired deployments to activate the new stack.
 3. Release the stack and push the images. As part of this process, the existing tags `latest`, MAJOR and MAJOR.MINOR are updated
 to the new patch container (i.e., `0.2.23`), although you can also make these changes manually.
-4. Update the Kabanero CR that is shared with developers with the new index that includes the latest patch level. Do not do this
-step before the stack is activated, otherwise developers could create and push an application using the newer stack before it is
-available.
-5. Build pipelines label the containers created for the microservice with the identity of the three-digit application stack
-that is used to build the application. Query your container registry for containers that are built with the older patch level.
-6. For each updated container, rebuild, test, and redeploy the applications on the new patch level.
+4. Update the Kabanero CR with the new index that is shared with indexes (if necessary) which includes this new patched level. Depending
+on the governance policy selected, if this step is done before the stack is activated, the developers could create and push an application
+using the newer stack before it is available.
 
 When retiring an older patch level of an application stack container:
 
-1. For each container with an older patch level, rebuild, test, and redeploy the applications on the new patch level.
-2. Remove application containers built on the older patch level from the container registry.
-3. Remove the old index from the stack hub index shared with developers.
-4. Deactivate the older patch level of the application (be sure to refresh and synchronize also).
-5. Remove the old patch level of the application stack container from the container registry.
+1. Build pipelines label the containers created for the microservice with the identity of the three-digit application stack
+that is used to build the application. Query your container registry for containers that are built with the older patch level.
+2. For each container with an older patch level, rebuild, test, and redeploy the applications on the new patch level.
+3. Remove application containers built on the older patch level from the container registry.
+4. Remove the old index from the stack hub index shared with developers.
+5. Deactivate the older patch level of the application (be sure to refresh and synchronize also).
+6. Remove the old patch level of the application stack container from the container registry.
 
 
 == Compliance detection
