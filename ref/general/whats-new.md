@@ -1,12 +1,12 @@
 ---
-version: v0.7.0
-title: What's New In Kabanero 0.7.0
+version: v0.8.0
+title: What's New In Kabanero 0.8.0
 ---
 
-The next monthly release of Kabanero, version 0.7.0, is here now! This terrific project keeps getting better.
+Kabanero version 0.8.0 is now available! We have implemented some exciting new changes.
 
-The console has new admin features that allow you to manage your GitHub admin teams via the Console UI (requires OAuth). The console also supports the new way to lay out the stack hub spec in the Kabanero Custom Resource, this allows you to still see your stack hub URLs via the Console UI. We've also generalized tool creation on the UI to reduce repetitive code, and added a UI testing framework with some initial tests to ensure quality code. 
+In this release we've enabled a governance policy that will ensure that only the active application stacks are being used to build microservices, and that the microservices being deployed are built from those same active application stacks. [Reference documentation](/docs/ref/general/reference/semver-governance.html) on how to take advantage of this is provided.
 
-The Open Liberty operator is now included, and there's a guide about developing for the Open Liberty stack.
+In pipelines, you can now make TLS enabled calls to SKOPEO.
 
-The foundation components are updated; for a full list, and for even more updates than are mentioned here, check out our [What’s New in 0.7.0 blog post](/blog/2020/03/20/WhatsNew070.html).
+For more information about these and other updates, see the [What’s New in 0.8.0 blog post](/blog/2020/04/17/WhatsNew080.html).
