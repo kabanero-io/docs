@@ -133,6 +133,16 @@ nodejs-loopback           0.1.6   central
 nodejs-loopback           0.1.8   central2
 ----
 
+The Valid Digest section can have four differest outputs:
+
+matched: when the stack's digest from the Kabanero CR matches the container registry digest 
+
+mismatched: when the stack's digest from the Kabanero CR does not match the container registry digest
+
+NA: when a stack is deactivated it does not have a digest to compare
+
+unknown: cannot read from the container registry, possible network timeout to the container registry server
+
 If a stack is removed from the curated stack hub on GitHub, its status shows as obsolete.  If a stack is obsolete, a SYNC command deletes it.
 
 Example result showing stack with an obsolete status:
