@@ -104,17 +104,17 @@ kabanero list
 Example result:
 
 ----
-Kabanero Instance Stacks  Version Status
-------------------------  ------- ------
-java-microprofile         0.2.19  active
-java-microprofile         0.2.21  active
-java-spring-boot2         0.3.18  active
-java-spring-boot2         0.3.21  active
-nodejs                    0.2.6   inactive
-nodejs                    0.3.1   active
-nodejs-express            0.2.8   active
-nodejs-loopback           0.1.6   active
-nodejs-loopback           0.1.8   active
+Kabanero Instance Stacks  Version Status    Valid Digest
+------------------------  ------- ------    ------------ 
+java-microprofile         0.2.19  active    matched
+java-microprofile         0.2.21  active    matched
+java-spring-boot2         0.3.18  active    matched
+java-spring-boot2         0.3.21  active    matched
+nodejs                    0.2.6   inactive  NA
+nodejs                    0.3.1   active    matched
+nodejs-express            0.2.8   active    matched
+nodejs-loopback           0.1.6   active    matched
+nodejs-loopback           0.1.8   active    matched
 
 GitHub Curated Stacks (repo name - url):
   central - <stack_hub_index_1_url>
@@ -133,22 +133,32 @@ nodejs-loopback           0.1.6   central
 nodejs-loopback           0.1.8   central2
 ----
 
+The Valid Digest section can have four differest outputs:
+
+matched: when the stack's digest from the Kabanero CR matches the container registry digest 
+
+mismatched: when the stack's digest from the Kabanero CR does not match the container registry digest
+
+NA: when a stack is deactivated it does not have a digest to compare
+
+unknown: cannot read from the container registry, possible network timeout to the container registry server
+
 If a stack is removed from the curated stack hub on GitHub, its status shows as obsolete.  If a stack is obsolete, a SYNC command deletes it.
 
 Example result showing stack with an obsolete status:
 
 ----
-Kabanero Instance Stacks  Version Status
-------------------------  ------- ------
-java-microprofile         0.2.19  active
-java-microprofile         0.2.21  active (obsolete)
-java-spring-boot2         0.3.18  active
-java-spring-boot2         0.3.21  active
-nodejs                    0.2.6   inactive
-nodejs                    0.3.1   active
-nodejs-express            0.2.8   active
-nodejs-loopback           0.1.6   active
-nodejs-loopback           0.1.8   active
+Kabanero Instance Stacks  Version Status            Valid Digest
+------------------------  ------- ------            ------------
+java-microprofile         0.2.19  active            matched
+java-microprofile         0.2.21  active (obsolete) matched
+java-spring-boot2         0.3.18  active            matched
+java-spring-boot2         0.3.21  active            matched
+nodejs                    0.2.6   inactive          NA
+nodejs                    0.3.1   active            matched
+nodejs-express            0.2.8   active            matched
+nodejs-loopback           0.1.6   active            matched
+nodejs-loopback           0.1.8   active            matched
 
 
 GitHub Curated Stacks (repo name - url):
@@ -264,16 +274,16 @@ Stack name: nodejs version: 0.3.1 deactivated
 Running the `kabanero list` command now shows the deactivated application stack as inactive.
 
 ----
-Kabanero Instance Stacks  Version Status
-------------------------  ------- ------
-java-microprofile         0.2.19  active
-java-spring-boot2         0.3.18  active
-java-spring-boot2         0.3.21  active
-nodejs                    0.2.6   inactive
-nodejs                    0.3.1   inactive
-nodejs-express            0.2.8   active
-nodejs-loopback           0.1.6   active
-nodejs-loopback           0.1.8   active
+Kabanero Instance Stacks  Version Status    Valid Digest
+------------------------  ------- ------    ------------
+java-microprofile         0.2.19  active    matched
+java-spring-boot2         0.3.18  active    matched
+java-spring-boot2         0.3.21  active    matched
+nodejs                    0.2.6   inactive  NA
+nodejs                    0.3.1   inactive  NA
+nodejs-express            0.2.8   active    matched
+nodejs-loopback           0.1.6   active    matched
+nodejs-loopback           0.1.8   active    matched
 
 GitHub Curated Stacks (repo name - url):
   central - <stack_hub_index_1_url>
