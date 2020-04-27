@@ -86,7 +86,7 @@ replace `-n kabanero` with the name of another namespace.
 == Examples
 
 This example yaml defines a `Stack` instance with a single version of
-the `java-microprofile` stack:
+the `java-openliberty` stack:
 
 ```yaml
 apiVersion: kabanero.io/v1alpha2
