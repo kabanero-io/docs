@@ -31,7 +31,8 @@ spec:
   governancePolicy:
     stackPolicy: activeDigest
 ```
-== . If the container registry containing the stack images is protected, a secret must be created which contains the credentials necessary to authenticate with the container registry.  The secret should contain both `username` and `password` keys in the `data` section. The value of `password` can be either a password or a PAT.  The secret must also contain an annotation which associates it with the hostname where the container registry exists.  The format of the annotation is `kabanero.io/docker-0: https://hostname` where `hostname` is replaced with the container registry hostname.  For example, the following yaml defines a secret that is used to access a Docker Hub registry:
+===
+. If the container registry containing the stack images is protected, a secret must be created which contains the credentials necessary to authenticate with the container registry.  The secret should contain both `username` and `password` keys in the `data` section. The value of `password` can be either a password or a PAT.  The secret must also contain an annotation which associates it with the hostname where the container registry exists.  The format of the annotation is `kabanero.io/docker-0: https://hostname` where `hostname` is replaced with the container registry hostname.  For example, the following yaml defines a secret that is used to access a Docker Hub registry:
 +
 ```yaml
 apiVersion: v1
