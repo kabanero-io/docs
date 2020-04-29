@@ -35,7 +35,7 @@ When the attribute createListener is true, an HTTPS listener is created to recei
 
 The URL to send a JSON message to the mediation within the mediator is `https://<mediator_name>/<mediation_name>` (for example, `https://webhook/webhook`). The `<mediation_name>` portion of the URL specifies a mediation within the mediator.
 
-When both attributes `createListener` and `createRoute` are set to `true`, a new Kubernetes Route with the same name as the mediator is created to allow external access to the mediator. The external host name for the Route is installation- specific. The default URL to send a message to the mediation is `https:<external_name>/<mediation_name>` (for example, `https://webhook-default.apps.example.com/webhook`).
+When both attributes `createListener` and `createRoute` are set to `true`, a new Kubernetes Route with the same name as the mediator is created to allow external access to the mediator. The external host name for the Route is installation- specific. The default URL to send a message to the mediation is `https://<external_name>/<mediation_name>` (for example, `https://webhook-default.apps.example.com/webhook`).
 
 
 == Event Mediations
@@ -138,7 +138,7 @@ For example:
                     =: "sendEvent(dest2, body, header)"
                   - default:
                     =: "sendEvent(dest3, body, header)"
-----
+
 
 
 == Built-in functions
