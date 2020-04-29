@@ -12,7 +12,7 @@ If you do not already have a team defined, see link:https://help.github.com/en/g
 Authorization setup If the container registry containing the stack images is protected
 If you do not already have a team defined, see link:https://github.com/kabanero-io/docs/blob/davco01a-patch-1/ref/general/configuration/stack-governance.adoc#the-governance-policy-is-specified-on-the-kabanero-cr-instance[See Step 2, window=_blank].
 
-Authorization setup if accessing repositories on Git Hub Enterprise, see link:https://kabanero.io/docs/ref/general/configuration/ghe-credentials.html[See Steps 1 and 2, window=_blank]. 
+Authorization setup if accessing repositories on Git Hub Enterprise, see link:https://kabanero.io/docs/ref/general/configuration/ghe-credentials.html[See Steps 1 and 2, window=_blank].  Step 4 explains how to set up the Kabanero Custom Resource document to point to your GHE repositories.
 
 
 .To provide authorization:
