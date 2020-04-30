@@ -33,13 +33,13 @@ spec:
       https:
         url: https://github.example.com/my_org/stacks/releases/download/0.6.0/incubator-index.yaml
   github:
-    ## github: https://api.github.com (public)
-    ## ghe: https://github.ibm.com/api/v3
-    ## refer to GitHub or GHE documentation for more info on authentication endpoints
     organization: my_org
     teams:
       - stack-admins
       - admins
+    ## github: https://api.github.com (public)
+    ## ghe: https://github.ibm.com/api/v3
+    ## refer to GitHub or GHE documentation for more info on authentication endpoints
     apiUrl: https://api.github.com
 ```
 
