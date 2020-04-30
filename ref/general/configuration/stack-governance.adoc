@@ -3,7 +3,7 @@
 :page-title: Configuring Governance Policy for Stacks
 :linkattrs:
 :sectanchors:
-= Configuring Governance Policy for Stacks
+= Configuring governance policy for stacks
 
 Kabanero can help detect when there is a discrepency between the stack that an application wants to build with, and the set of stacks that have been configured in the Kabanero instance.  Kabanero uses the digest of the container images to enforce the policy.
 
