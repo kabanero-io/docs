@@ -17,7 +17,7 @@ There are four permitted stack governance policies:
 
 . `none` - Disables any digest or tag based image validation.
 
-== The governance policy is specified on the Kabanero CR instance:
+== Specifying the governance policy on the Kabanero CR instance
 
 . Modify your Kabanero CR instance to specify the stack governance policy.  The policy information is specified in the `spec.governancePolicy.stackPolicy` field of the Kabanero CR instance.  One of the four policies mentioned previously should be specified here.  For example, the `activeDigest` policy is specified as follows:
 +
