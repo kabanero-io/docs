@@ -34,14 +34,14 @@ spec:
       https:
         url: https://github.example.com/my_org/stacks/releases/download/0.6.0/incubator-index.yaml
   github:
+    ## github: https://api.github.com (public)
+    ## ghe: https://github.ibm.com/api/v3 
     organization: my_org
     teams:
       - stack-admins
       - admins
     apiUrl: https://api.github.com
 ```
-
-e.g. for `organization:` the value may be: https://api.github.com (for public) or https://github.ibm.com/api/v3 (for GHE)
 
 ( It is best to consult your security provider to determine the proper authentication endpoint value for `organization:` )
 
