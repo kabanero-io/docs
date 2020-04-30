@@ -14,7 +14,7 @@ optional: Authorization setup If the container registry containing the stack ima
 optional: Authorization setup if accessing repositories on Git Hub Enterprise, see link:https://kabanero.io/docs/ref/general/configuration/ghe-credentials.html[See Steps 1 and 2, window=_blank].  Step 4 explains how to set up the Kabanero Custom Resource document to point to your GHE repositories.
 
 
-.To provide Login authorization to the CLI service:
+required: To provide Login authorization to the CLI service:
 * The `Spec.Github.organization` attribute should be set to the organization hosting the stacks in the remote GitHub repository.  In the previous example, the organization name is `my_org`.
 * The `Spec.Github.teams` attribute should be set to a yaml list of GitHub teams in the remote GitHub repository, whose members can administer the stack using the stack management CLI.
 * The `Spec.Github.apiUrl` attribute should be set to the API URL for the remote GitHub repository being used.  For example, the API URL for `github.com` is `https://api.github.com`.
