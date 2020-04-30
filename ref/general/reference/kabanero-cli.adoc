@@ -255,7 +255,7 @@ Run the `kabanero describe` command to list the details of an application stack.
 kabanero describe stack-name version-number
 ----
 
-Running the describe command produces a list of details that allows for identifying mismatches in the specified application stack. This information is useful when a mismatch is indicated for the digest values.
+Running the `describe` command produces a list of details that allows for identifying mismatches in the specified application stack. This information is useful when a mismatch is indicated for the digest values.
 
 Example:
 
@@ -277,7 +277,7 @@ kabanero digest:  5343a17b5a2d1923755d5853f4f0507f4ef1cc429238768d9b17c34dee3b82
 image digest:  5343a17b5a2d1923755d5853f4f0507f4ef1cc429238768d9b17c34dee3b829a
 ----
 
-Notice that the `kabanero describe` command allows you to see that the kabanero digest matches the image digest.
+Notice that the `describe` command allows you to see that the kabanero digest matches the image digest.
 
 === Deactivate
 
