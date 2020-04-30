@@ -43,6 +43,6 @@ spec:
     apiUrl: https://api.github.com
 ```
 
-( It is best to consult your security provider to determine the proper authentication endpoint value for `organization:` )
+( It is best to consult your git hub security provider to determine the proper authentication endpoint value for `organization:` )
 
 Note: Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console may change the `apiVersion` of the Kabanero CR instance from `v1alpha2` to `v1alpha1`.  There is a description of the issue link:https://github.com/openshift/console/issues/4444[here].
