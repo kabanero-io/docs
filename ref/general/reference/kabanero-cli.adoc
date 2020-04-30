@@ -247,6 +247,38 @@ kabanero cli version: 0.8.0
 kabanero command line service image: kabanero/kabanero-command-line-services:0.8.0
 ----
 
+=== Describe
+
+Run the `kabanero describe` command to list the details of an application stack.
+
+----
+kabanero describe stack-name version-number
+----
+
+Running the `kabanero describe` command produces a list of details that allows for identifying mismatches in the specified application stack. This information is useful when a mismatch is indicated for the digest values.
+
+Example:
+
+----
+kabanero describe java-spring-boot2 0.3.28
+----
+
+Example result:
+----
+kabanero describe java-spring-boot2 0.3.28
+stack name:  java-spring-boot2
+version:  0.3.28
+project:  kabanero
+source:  https://raw.githubusercontent.com/kabanero-io/kabanero-command-line-services/master/index.yaml
+image:  docker.io/kabanerobeta/java-spring-boot2
+status:  active
+digest check:  matched
+kabanero digest:  5343a17b5a2d1923755d5853f4f0507f4ef1cc429238768d9b17c34dee3b829a
+image digest:  5343a17b5a2d1923755d5853f4f0507f4ef1cc429238768d9b17c34dee3b829a
+----
+
+Notice that the `kabanero describe` command allows you to see that the kabanero digest matches the image digest.
+
 === Deactivate
 
 Run the `kabanero deactivate` command to prevent a specific version of an application stack from being used in pipeline builds.
