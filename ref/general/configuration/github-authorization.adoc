@@ -6,12 +6,11 @@
 :page-doc-number: 4.0
 = Configuring Kabanero CLI service authorization
 
-You can modify your Kabanero CR instance to provide authorization to the teams in GitHub that will administer the application stacks.
-If you do not already have a team defined, see link:https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/creating-a-team[Creating a team, window=_blank].
+You can modify your Kabanero custom resource (CR) instance to provide authorization to the teams in GitHub that will administer the application stacks. If you do not already have a team defined, see link:https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/creating-a-team[Creating a team, window=_blank].
 
-Authorization setup (optional): If the container registry containing the stack images is protected, see link:https://github.com/kabanero-io/docs/blob/davco01a-patch-1/ref/general/configuration/stack-governance.adoc#the-governance-policy-is-specified-on-the-kabanero-cr-instance[See Step 2, window=_blank].
+Authorization setup (optional): If the container registry containing the stack images is protected, see link:stack-governance.html#specifying-the-governance-policy-on-the-kabanero-cr-instance[Step 2 of the Configuring governance policy for stacks page, window=_blank].
 
-Authorization setup (optional): If accessing repositories on Git Hub Enterprise, see link:https://kabanero.io/docs/ref/general/configuration/ghe-credentials.html[See Steps 1 and 2, window=_blank].  Step 4 explains how to set up the Kabanero Custom Resource document to point to your GHE repositories.
+Authorization setup (optional): If accessing repositories on GitHub Enterprise, see link:ghe-credentials.html[Steps 1 and 2 of the Specifying credentials to access GitHub Enterprise resources page, window=_blank]. Step 4 explains how to set up the Kabanero Custom Resource document to point to your GHE repositories.
 
 
 Providing login authorization to the CLI service (required):
@@ -34,13 +33,13 @@ spec:
       https:
         url: https://github.example.com/my_org/stacks/releases/download/0.6.0/incubator-index.yaml
   github:
-    ## github: https://api.github.com (public)
-    ## ghe: https://github.ibm.com/api/v3 
-    ## refer to GitHub or GHE documentation for more info on authentication endpoints
     organization: my_org
     teams:
       - stack-admins
       - admins
+    ## github: https://api.github.com (public)
+    ## ghe: https://github.ibm.com/api/v3
+    ## refer to GitHub or GHE documentation for more info on authentication endpoints
     apiUrl: https://api.github.com
 ```
 
