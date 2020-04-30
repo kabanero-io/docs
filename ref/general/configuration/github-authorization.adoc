@@ -36,6 +36,7 @@ spec:
   github:
     ## github: https://api.github.com (public)
     ## ghe: https://github.ibm.com/api/v3 
+    ## refer to GitHub or GHE documentation for more info on authentication endpoints
     organization: my_org
     teams:
       - stack-admins
@@ -43,6 +44,6 @@ spec:
     apiUrl: https://api.github.com
 ```
 
-( It is best to consult your git hub security provider to determine the proper authentication endpoint value for `organization:` )
+( It is best to consult your GitHub or equivalent provider to determine the proper authentication endpoint value for `organization:` )
 
 Note: Avoid using the OpenShift Console to edit the Kabanero CR instance.  The console may change the `apiVersion` of the Kabanero CR instance from `v1alpha2` to `v1alpha1`.  There is a description of the issue link:https://github.com/openshift/console/issues/4444[here].
