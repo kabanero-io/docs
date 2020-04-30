@@ -261,8 +261,8 @@ spec:
 
 The `repositories` attribute defines repository related configuration. For a GitHub repository:
 
-. `secret` points to a Kubernetes Secret. It has the same format as the Tekton user name/password secret, where username is the user name to GitHub, and password is the API key to access GitHub.
-. `webhookSecret` is used to authenticate the originator of the webhook message. It is the same secret you specified when configuring the webhook on GitHub.
+. `secret`: the name of the Kubernetes secret that contains the GitHub API token.
+. `webhookSecret`: the name of the Kubernetes secret that contains your webhook secret. The value of the secretToken must match the secret you specified when configuring the webhook on GitHub.
 
 The selector defines which mediation to call based on the specified criteria:
 
