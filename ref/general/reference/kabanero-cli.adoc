@@ -178,7 +178,7 @@ As part of digest governance, for each application stack, the value of the diges
 . `NA`: indicates that the stack is deactivated, therefore no digest exists to compare
 . `unknown`: a value was not received from the container registry; possible reasons include a network timeout to the container registry server
 
-Note: An `unknown` digest value when using a private container registry might indicate that a kubernetes secret is needed to authenticate to the the registry. For more information, see link:stack-governance.html#specifying-the-governance-policy-on-the-kabanero-cr-instance[Step 2 of Configuring governance policy for stacks, window=_blank].
+Note: An `unknown` digest value when using a private container registry might indicate that a kubernetes secret is needed to authenticate to the the registry. For more information, see link:../configuration/stack-governance.html#specifying-the-governance-policy-on-the-kabanero-cr-instance[Step 2 of Configuring governance policy for stacks, window=_blank].
 
 
 === Synchronize stacks
