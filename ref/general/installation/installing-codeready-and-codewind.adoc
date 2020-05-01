@@ -24,7 +24,7 @@ kind: Kabanero
 metadata:
   name: kabanero
 spec:
-  version: "0.6.0"
+  version: "0.9.0"
   codeReadyWorkspaces:
     enable: true
     operator:
@@ -35,7 +35,7 @@ spec:
     repositories:
     - name: central
       https:
-        url: https://github.com/kabanero-io/collections/releases/download/0.6.0/kabanero-index.yaml
+        url: https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.9.0/kabanero-stack-hub-index.yaml
 ```
 
 === Configuring CodeReady Workspaces
