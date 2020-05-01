@@ -25,7 +25,7 @@ specify the following fields:
 ** `version` - The release of Kabanero that you want to install.
    The levels of the individual components, such as the application operator
    and CLI services, are selected automatically based on this level. The
-   release follows semver notation (for example, 0.8.0).
+   release follows semver notation (for example, 0.9.0).
 ** `targetNamespaces` - A list of namespaces which the application operator will
    watch for `AppsodyApplication` instances, in addition to the namespace
    where the Kabanero CR instance is deployed. Typically an
@@ -81,8 +81,8 @@ specify the following fields:
      `gitRelease` are used.
 ***** `url` - The URL pointing to the stack repository. The URL will
       be accessed using HTTPS. For example, the
-      default stack repository for Kabanero version 0.8.0 is
-      https://github.com/kabanero-io/collections/releases/download/v0.8.0/kabanero-index.yaml
+      default stack repository for Kabanero version 0.9.0 is
+      https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.9.0/kabanero-stack-hub-index.yaml
 ***** `skipCertVerification` - Controls whether the controller will
       validate SSL/TLS certificates presented by the repository URL.
       Valid values are `true` and `false`.
@@ -305,7 +305,7 @@ replace `-n kabanero` with the name of another namespace.
 
 == Examples
 
-This example yaml defines an instance at version 0.8.0, using
+This example yaml defines an instance at version 0.9.0, using
 the default stacks.
 
 ```yaml
@@ -315,15 +315,15 @@ metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  version: "0.8.0"
+  version: "0.9.0"
   stacks:
     repositories:
     - name: central
       https:
-        url: https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.8.0/kabanero-stack-hub-index.yaml
+        url: https://github.com/kabanero-io/kabanero-stack-hub/releases/download/0.9.0/kabanero-stack-hub-index.yaml
 ```
 
-This example yaml defines an instance at version 0.8.0, using
+This example yaml defines an instance at version 0.9.0, using
 custom stacks and their associated GitHub configuration.  Sessions
 established using the stack management CLI remain valid for one hour.
 
@@ -334,12 +334,12 @@ metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  version: "0.8.0"
+  version: "0.9.0"
   stacks:
     repositories:
     - name: central
       https:
-        url: https://github.com/my-organization/stacks/releases/download/v0.1/kabanero-index.yaml
+        url: https://github.com/my-organization/stacks/releases/download/v0.1/kabanero-stack-hub-index.yaml
   github:
     organization: my-organization
     teams:
@@ -350,7 +350,7 @@ spec:
     sessionExpirationSeconds: 1h
 ```
 
-This example yaml defines an instance at version 0.8.0, using
+This example yaml defines an instance at version 0.9.0, using
 the same custom stacks as the previous example, but using the `gitRelease`
 field instead of the `https` field:
 
@@ -361,7 +361,7 @@ metadata:
   name: kabanero
   namespace: kabanero
 spec:
-  version: "0.8.0"
+  version: "0.9.0"
   stacks:
     repositories:
     - name: central
