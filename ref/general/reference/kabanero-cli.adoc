@@ -106,8 +106,8 @@ Example result:
 ----
 Kabanero Instance Stacks  Version Status    Valid Digest
 ------------------------  ------- ------    ------------
-java-microprofile         0.2.19  active    matched
-java-microprofile         0.2.21  active    matched
+java-openliberty          0.2.19  active    matched
+java-openliberty          0.2.21  active    matched
 java-spring-boot2         0.3.18  active    matched
 java-spring-boot2         0.3.21  active    matched
 nodejs                    0.2.6   inactive  NA
@@ -122,7 +122,7 @@ GitHub Curated Stacks (repo name - url):
 
 GitHub Curated Stacks     Version Repo
 ---------------------     ------- ----
-java-microprofile         0.2.19  central
+java-openliberty          0.2.19  central
 java-spring-boot2         0.3.18  central
 java-spring-boot2         0.3.21  central2
 nodejs                    0.3.1   central
@@ -140,8 +140,8 @@ Example result showing stack with an obsolete status:
 ----
 Kabanero Instance Stacks  Version Status            Valid Digest
 ------------------------  ------- ------            ------------
-java-microprofile         0.2.19  active            matched
-java-microprofile         0.2.21  active (obsolete) matched
+java-openliberty          0.2.19  active            matched
+java-openliberty          0.2.21  active (obsolete) matched
 java-spring-boot2         0.3.18  active            matched
 java-spring-boot2         0.3.21  active            matched
 nodejs                    0.2.6   inactive          NA
@@ -157,7 +157,7 @@ GitHub Curated Stacks (repo name - url):
 
 GitHub Curated Stacks     Version Repo
 ---------------------     ------- ----
-java-microprofile         0.2.19  central
+java-openliberty          0.2.19  central
 java-spring-boot2         0.3.18  central
 java-spring-boot2         0.3.21  central2
 nodejs                    0.2.6   central
@@ -210,7 +210,7 @@ This example result shows a stack added from a stack entry in curated stack hub:
 ----
 Kabanero Instance Stacks  Version Status
 ------------------------  ------- ------
-java-microprofile         0.2.21  added to Kabanero
+java-openliberty          0.2.21  added to Kabanero
 ----
 
 Running the `kabanero sync` command when one of the stacks is obsolete deletes the stack.
@@ -220,7 +220,7 @@ This example result shows a stack deleted because it is no longer in curated sta
 ----
 Kabanero Instance Stacks  Version Status
 ------------------------  ------- ------
-java-microprofile         0.2.21  deleted
+java-openliberty          0.2.21  deleted
 ----
 
 
@@ -310,7 +310,7 @@ Running the `kabanero list` command now shows the deactivated application stack 
 ----
 Kabanero Instance Stacks  Version Status    Valid Digest
 ------------------------  ------- ------    ------------
-java-microprofile         0.2.19  active    matched
+java-openliberty          0.2.19  active    matched
 java-spring-boot2         0.3.18  active    matched
 java-spring-boot2         0.3.21  active    matched
 nodejs                    0.2.6   inactive  NA
@@ -325,7 +325,7 @@ GitHub Curated Stacks (repo name - url):
 
 GitHub Curated Stacks     Version Repo
 ---------------------     ------- ----
-java-microprofile         0.2.19  central
+java-openliberty          0.2.19  central
 java-spring-boot2         0.3.18  central
 java-spring-boot2         0.3.21  central2
 nodejs                    0.3.1   central
