@@ -106,8 +106,8 @@ Example result:
 ----
 Kabanero Instance Stacks  Version Status    Valid Digest
 ------------------------  ------- ------    ------------
-java-microprofile         0.2.19  active    matched
-java-microprofile         0.2.21  active    matched
+java-openliberty          0.2.19  active    matched
+java-openliberty          0.2.21  active    matched
 java-spring-boot2         0.3.18  active    matched
 java-spring-boot2         0.3.21  active    matched
 nodejs                    0.2.6   inactive  NA
@@ -122,7 +122,7 @@ GitHub Curated Stacks (repo name - url):
 
 GitHub Curated Stacks     Version Repo
 ---------------------     ------- ----
-java-microprofile         0.2.19  central
+java-openliberty          0.2.19  central
 java-spring-boot2         0.3.18  central
 java-spring-boot2         0.3.21  central2
 nodejs                    0.3.1   central
@@ -140,8 +140,8 @@ Example result showing stack with an obsolete status:
 ----
 Kabanero Instance Stacks  Version Status            Valid Digest
 ------------------------  ------- ------            ------------
-java-microprofile         0.2.19  active            matched
-java-microprofile         0.2.21  active (obsolete) matched
+java-openliberty          0.2.19  active            matched
+java-openliberty          0.2.21  active (obsolete) matched
 java-spring-boot2         0.3.18  active            matched
 java-spring-boot2         0.3.21  active            matched
 nodejs                    0.2.6   inactive          NA
@@ -157,7 +157,7 @@ GitHub Curated Stacks (repo name - url):
 
 GitHub Curated Stacks     Version Repo
 ---------------------     ------- ----
-java-microprofile         0.2.19  central
+java-openliberty          0.2.19  central
 java-spring-boot2         0.3.18  central
 java-spring-boot2         0.3.21  central2
 nodejs                    0.2.6   central
@@ -177,6 +177,8 @@ As part of digest governance, for each application stack, the value of the diges
 . `mismatched`: the values for the application stack's digest in the Kabanero CR and the container registry do not match
 . `NA`: indicates that the stack is deactivated, therefore no digest exists to compare
 . `unknown`: a value was not received from the container registry; possible reasons include a network timeout to the container registry server
+
+Note: An `unknown` digest value when using a private container registry might indicate that a kubernetes secret is needed to authenticate to the the registry. For more information, see link:../configuration/stack-governance.html#specifying-the-governance-policy-on-the-kabanero-cr-instance[Step 2 of Configuring governance policy for stacks, window=_blank].
 
 
 === Synchronize stacks
@@ -208,7 +210,7 @@ This example result shows a stack added from a stack entry in curated stack hub:
 ----
 Kabanero Instance Stacks  Version Status
 ------------------------  ------- ------
-java-microprofile         0.2.21  added to Kabanero
+java-openliberty          0.2.21  added to Kabanero
 ----
 
 Running the `kabanero sync` command when one of the stacks is obsolete deletes the stack.
@@ -218,7 +220,7 @@ This example result shows a stack deleted because it is no longer in curated sta
 ----
 Kabanero Instance Stacks  Version Status
 ------------------------  ------- ------
-java-microprofile         0.2.21  deleted
+java-openliberty          0.2.21  deleted
 ----
 
 
@@ -243,9 +245,41 @@ kabanero version
 Example result:
 
 ----
-kabanero cli version: 0.8.0
-kabanero command line service image: kabanero/kabanero-command-line-services:0.8.0
+kabanero cli version: 0.9.0
+kabanero command line service image: kabanero/kabanero-command-line-services:0.9.0
 ----
+
+=== Describe
+
+Run the `kabanero describe` command to list the details of an application stack.
+
+----
+kabanero describe stack-name version-number
+----
+
+Running the `kabanero describe` command produces a list of details that allows for identifying mismatches in the specified application stack. This information is useful when a mismatch is indicated for the digest values.
+
+Example:
+
+----
+kabanero describe java-spring-boot2 0.3.28
+----
+
+Example result:
+----
+kabanero describe java-spring-boot2 0.3.28
+stack name:  java-spring-boot2
+version:  0.3.28
+project:  kabanero
+source:  https://raw.githubusercontent.com/kabanero-io/kabanero-command-line-services/master/index.yaml
+image:  docker.io/kabanerobeta/java-spring-boot2
+status:  active
+digest check:  matched
+kabanero digest:  5343a17b5a2d1923755d5853f4f0507f4ef1cc429238768d9b17c34dee3b829a
+image digest:  5343a17b5a2d1923755d5853f4f0507f4ef1cc429238768d9b17c34dee3b829a
+----
+
+Notice that the `kabanero describe` command allows you to see that the kabanero digest matches the image digest.
 
 === Deactivate
 
@@ -276,7 +310,7 @@ Running the `kabanero list` command now shows the deactivated application stack 
 ----
 Kabanero Instance Stacks  Version Status    Valid Digest
 ------------------------  ------- ------    ------------
-java-microprofile         0.2.19  active    matched
+java-openliberty          0.2.19  active    matched
 java-spring-boot2         0.3.18  active    matched
 java-spring-boot2         0.3.21  active    matched
 nodejs                    0.2.6   inactive  NA
@@ -291,7 +325,7 @@ GitHub Curated Stacks (repo name - url):
 
 GitHub Curated Stacks     Version Repo
 ---------------------     ------- ----
-java-microprofile         0.2.19  central
+java-openliberty          0.2.19  central
 java-spring-boot2         0.3.18  central
 java-spring-boot2         0.3.21  central2
 nodejs                    0.3.1   central
