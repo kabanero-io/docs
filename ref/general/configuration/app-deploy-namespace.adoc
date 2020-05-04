@@ -60,7 +60,7 @@ metadata:
   namespace: test
 spec:
   applicationImage: docker-registry.default.svc:5000/kabanero/appsody-hello-world
-  stack: java-microprofile
+  stack: java-openliberty
   createKnativeService: true
 ----
 +
