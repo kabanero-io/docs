@@ -6,7 +6,7 @@
 
 A `Stack` custom resource (CR) instance describes a particular application
 stack. Multiple versions of the same stack can be described in the
-same `Stack` CR instance.  
+same `Stack` CR instance.
 
 The `Spec` section of the `Stack` instance describes the desired
 configuration. The `Status` section is populated by the Stack controller,
@@ -86,16 +86,16 @@ replace `-n kabanero` with the name of another namespace.
 == Examples
 
 This example yaml defines a `Stack` instance with a single version of
-the `java-microprofile` stack:
+the `java- openliberty` stack:
 
 ```yaml
 apiVersion: kabanero.io/v1alpha2
 kind: Stack
 metadata:
-  name: java-microprofile
+  name: java-openliberty
   namespace: kabanero
 spec:
-  name: java-microprofile
+  name: java-openliberty
   versions:
     - pipelines:
         - https:
@@ -112,10 +112,10 @@ This example is the same as the previous example, except uses the `gitRelease` f
 apiVersion: kabanero.io/v1alpha2
 kind: Stack
 metadata:
-  name: java-microprofile
+  name: java-openliberty
   namespace: kabanero
 spec:
-  name: java-microprofile
+  name: java-openliberty
   versions:
     - pipelines:
         - gitRelease:
