@@ -92,10 +92,10 @@ the `java- openliberty` stack:
 apiVersion: kabanero.io/v1alpha2
 kind: Stack
 metadata:
-  name: java-microprofile
+  name: java-openliberty
   namespace: kabanero
 spec:
-  name: java-microprofile
+  name: java-openliberty
   versions:
     - pipelines:
         - https:
@@ -112,10 +112,10 @@ This example is the same as the previous example, except uses the `gitRelease` f
 apiVersion: kabanero.io/v1alpha2
 kind: Stack
 metadata:
-  name: java-microprofile
+  name: java-openliberty
   namespace: kabanero
 spec:
-  name: java-microprofile
+  name: java-openliberty
   versions:
     - pipelines:
         - gitRelease:
