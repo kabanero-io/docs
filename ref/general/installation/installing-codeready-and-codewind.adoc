@@ -75,7 +75,7 @@ When CodeReady Workspaces is installed on your OpenShift cluster, complete the f
 
 CodeReady Workspaces starts Codewind and installs the Codewind plugins. This process might take a couple of minutes for all of the necessary components to be pulled and started.
 
-Consult the https://www.eclipse.org/codewind/mdt-che-installinfo.html[Codewind on Che documentation, window="_blank"] for additional information and next steps.
+Consult the https://www.eclipse.org/codewind/che-installinfo.html[Codewind on Che documentation, window="_blank"] for additional information and next steps.
 
 === Stopping or Uninstalling Codewind
 If you need to stop the Codewind workspace, follow these steps:
