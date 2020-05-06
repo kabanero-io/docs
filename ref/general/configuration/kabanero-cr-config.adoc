@@ -178,6 +178,36 @@ specify the following fields:
 *** `stackPolicy` - The policy to use when enforcing stack digests. Valid values
     are `strictDigest`, `activeDigest`, `ignoreDigest` and `none`.  For more
     information, see link:stack-governance.html[Configuring Governance Policy for Stacks].
+** `gitops` - High level structure for the Gitops repository associated with this Kabanero CR instance
+*** `pipelines` - A list of pipelines that are associated with the Gitops repository
+**** `id` - A descriptive name of the pipelines contained at this URL.
+**** `Sha256` - The digest of the pipelines contained at this
+      URL. Typically a command like `sha256sum` is used to obtain the
+      digest.
+**** `https` - Used for accessing pipelines via an unprotected GitHub
+      release. This field is mutually exclusive with the `gitRelease` field.
+      If both `https` and `gitRelease` are specified, the values in
+      `gitRelease` are used.
+***** `url` - The URL pointing to the pipelines. Typically this file
+       has a `.tar.gz` extension. The URL will be accessed using
+       HTTPS.
+***** `skipCertVerification` - Controls whether the controller will
+       validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
+**** `gitRelease` - Used for accessing pipelines via a protected GitHub
+      release.  This field is mutually exclusive with the `https` field. If
+      both `https` and `gitRelease` are specified, the values in
+      `gitRelease` are used.  Login credentials must be supplied - see
+      link:ghe-credentials.html[Specifying Credentials to Access Protected GitHub Resources].
+***** `hostname` - The host name where the GitHub release exists.
+***** `organization` - The user name, or organization name, where the
+       GitHub release exists.
+***** `project` - The project where the GitHub release exists.
+***** `release` - The name of the release within the GitHub project.
+***** `assetName` - The name of the file (asset) within the release.
+***** `skipCertVerification` - Controls whether the controller will
+       validate SSL/TLS certificates presented by the pipelines URL.
+       Valid values are `true` and `false`.
 
 The following `Status` fields are maintained by the product operator to
 provide information about the installed components, and the health of the
@@ -292,6 +322,36 @@ instance:
     A value of `False` indicates that there was a problem, and more
     information can be found by looking in the `message` attribute.
 *** `message` - Provides more details for a `ready` status of `False`.
+** `gitops` - High level structure for the status of the Gitops repository associated with this Kabanero CR instance
+*** `ready` - The overall status of the Gitops feature.  A value of `True`
+    indicates the Gitops repository configuration was processed and activated
+    successfully. A value of `False` indicates that there was a problem,
+    and more information can be found by looking in the `message` attribute.
+*** `message` - Provides more details for a `ready` status of `False`.
+*** `pipelines` - The overall status of the pipelines associated with
+    the Gitops repository.
+**** `name` - The name associated with the pipelines
+**** `url` - The URL where the pipelines were retrieved.
+**** `gitRelease` - The information used to retrieve the pipelines information
+     from a GitHub release.
+***** `hostname` - The host name where the GitHub release exists.
+***** `organization` - The user name, or organization name, where the
+       GitHub release exists.
+***** `project` - The project where the GitHub release exists.
+***** `release` - The name of the release within the GitHub project.
+***** `assetName` - The name of the file (asset) within the release.
+**** `digest` - The sha256 digest of the archive (`.tar.gz`) containing
+     the pipeline definitions
+**** `activeAssets` - A list of objects that were read from the pipeline
+     and applied
+***** `assetName` - The name of the object.
+***** `namespace` - The namespace where the object was applied.
+***** `group` - The apiGroup for the object kind.
+***** `version` - The version of the object.
+***** `kind` - The kind of the object.
+***** `assetDigest` - The sha256 digest of the individual object's yaml.
+***** `status` - The activation status of the object.  Valid values are "active", "failed" and "unknown".
+***** `statusMessage` - Additional information that would explain a `status` condition of "failed" or "unknown".
 
 == Inspecting your Kabanero CR Instance
 
