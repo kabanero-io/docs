@@ -15,7 +15,7 @@ CodeReady Workspaces requires at least two 1Gi ReadWriteOnce (RWO) persistent vo
 Each Codewind workspace also requires at least one 1Gi ReadWriteMany (RWX) persistent volume.
 
 == Installing CodeReady Workspaces
-To install CodeReady Workspaces, set `Spec.codeReadyWorkspaces.enable: true` in the Kabanero custom resource (Kabanero CR) instance and apply it.
+To install CodeReady Workspaces, set `Spec.codeReadyWorkspaces.enable: true` in the Kabanero custom resource (Kabanero CR) instance and apply it. To edit the Kabanero CR, you can run `oc edit kabanero -n kabanero` from the command line.
 
 The following sample shows a Kabanero CR instance configuration:
 ```yaml
