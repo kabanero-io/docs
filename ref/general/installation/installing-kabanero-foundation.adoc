@@ -67,9 +67,7 @@ spec:
 
 === (Optional sample) Application deployment project with manual pipeline run
 
-Now that you have an instance, you can build and deploy a simple java-openliberty application using the default java-openliberty pipelines by following these steps:
-
-=======
+Now that you have an instance, you can build and deploy a simple `java-openliberty` application using the default java-openliberty pipelines by following these steps:
 
 . Retrieve the installation scripts from the kabanero-foundation repository
 * Clone the repository to get the scripts: `git clone https://github.com/kabanero-io/kabanero-foundation.git`
@@ -121,7 +119,11 @@ kabanero-landing-6dc5c798d4-ncg52     1/1       Running   0          11m
 
 === Configure webhooks
 
-To establish continuous integration/continuous delivery, you must implement one of two eventing models: the link:/docs/ref/general/reference/event-operator.html[events mediator] (which requires only a single, organization-level webhook), or individual webhooks. For more information and instructions on how to set either of these models up, see link:/docs/ref/general//configuration/tekton-webhooks.html[Connecting to GitHub with webhooks].
+To establish continuous integration/continuous delivery, you must implement one of two eventing models:
+
+* The events mediator, which requires a single, organizational-level webhook. See link:/guides/integrating-events-operator/integrating-events-operator.html[the Integrating the events operator guide].
+
+* The pipelines dashboard, which requires a webhook for each GitHub repository. See link:/docs/ref/general/configuration/tekton-webhooks.html[Connecting to GitHub with webhooks].
 
 **Important:** Due to the addition of Triggers in Kabanero version 0.5, and an update to Triggers in Kabanero version 0.6, if you are upgrading to Kabanero version 0.5 or later from any previous version, you must delete any existing webhooks and create them again. See link:/docs/ref/general/configuration/tekton-webhooks.html[Connecting to GitHub with webhooks] for instructions on deleting and creating webhooks.
 
