@@ -35,46 +35,39 @@ Use the stack management CLI URL to log in. There are two ways you can get this 
 
 Run the `kabanero login` command to authenticate.
 
+Example login commands:
 ----
 kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID>
+kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID> --insecure-skip-tls-verify=true
+kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID> --certificate-authority "mycert.cert"
+kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID> --p <GITHUB_PAT> --certificate-authority "<LOCAL_CERT_LOCATION>"
 ----
 
-* `<SM_CLI_URL>` is your stack management CLI URL from above.
-* `<GITHUB_USER_ID>` is your GitHub user name.
-* `<GITHUB_PAT>` is your GitHub Personal Access Token.
+* `<SM_CLI_URL>` is your stack management CLI URL from above
+* `<GITHUB_USER_ID>` is your GitHub user name
+* `<GITHUB_PAT>` is your GitHub Personal Access Token or your GitHub password
 ** Your PAT must have the **read:org** - Read org and team membership, read org projects OAuth Scope allowed. You can select this when creating your PAT in GitHub
-* You can also use your GitHub password for the `<GITHUB_PAT>` argument.
+** When you log in to an instance by using GitHub credentials, a temporary access token is stored in a `your-home-directory/.kabanero/config.yaml` file for subsequent command-line calls.
+* `mycert.cert` is a file containing a TLS certificate
+* `<LOCAL_CERT_LOCATION>` is the path to a file containing a TLS certificate
+** To get the certification, run:
+`openssl s_client -connect <SM_CLI_URL>:443 -servername <SM_CLI_URL>`
+** Copy the content from `-----BEGIN CERTIFICATE-----` to `-----END CERTIFICATE -----` (including these two lines) and paste it into a new file with a filename of your choice. Pass this filename and location to the login command using the `--certificate-authority` option.
 
-** Login options**
-
-* Pass in GitHub user name
-** `-u <string>`
-** `--username <string>`
-
-Log in to an instance by using GitHub credentials and store a temporary access token for subsequent command-line calls.
-The temporary access token is stored in a `your-home-directory/.kabanero/config.yaml` file.
-Use your GitHub user ID and either a password or Personal Access Token (PAT) to log in.
-
-Examples:
-
-* Log in with a GitHub user ID and password
-+
+Note: if you do use either the `--certificate-authority` or `--insecure-skip-tls-verify=true` options, you will be prompted to confirm that want to proceed with an insecure connection:
 ----
-kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID>
-PASSWORD: <GITHUB_PASSWORD>
+kabanero login <SM_CLI_URL> -u <username>
+Password:
+Are you sure you want to continue with an insecure connection to <SM_CLI_URL> (y/n):
 ----
 
-* Log in with previously used URL GitHub user ID and PAT
-+
+Complete list of flags:
 ----
-kabanero login -u <GITHUB_USER_ID>
-PASSWORD: <GITHUB_PAT>
-----
-
-Example result:
-
-----
-Logged in to Kabanero instance: <SM_CLI_URL>
+--certificate-authority string    Path to a certificate file for the certificate authority
+-h, --help                        Help for login
+--insecure-skip-tls-verify        If set to true, the server's certificate will not be checked for validity; the HTTPS connection is insecure
+-p, --password string             GitHub password or PAT; if not provided, a prompt appears
+-u, --username string             GitHub username
 ----
 
 === Onboard a developer
