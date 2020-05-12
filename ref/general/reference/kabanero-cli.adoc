@@ -39,7 +39,6 @@ Example login commands:
 ----
 kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID>
 kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID> --insecure-skip-tls-verify=true
-kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID> --certificate-authority "mycert.cert"
 kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID> --p <GITHUB_PAT> --certificate-authority "<LOCAL_CERT_LOCATION>"
 ----
 
@@ -48,13 +47,12 @@ kabanero login <SM_CLI_URL> -u <GITHUB_USER_ID> --p <GITHUB_PAT> --certificate-a
 * `<GITHUB_PAT>` is your GitHub Personal Access Token or your GitHub password
 ** Your PAT must have the **read:org** - Read org and team membership, read org projects OAuth Scope allowed. You can select this when creating your PAT in GitHub
 ** When you log in to an instance by using GitHub credentials, a temporary access token is stored in a `your-home-directory/.kabanero/config.yaml` file for subsequent command-line calls.
-* `mycert.cert` is a file containing a TLS certificate
 * `<LOCAL_CERT_LOCATION>` is the path to a file containing a TLS certificate
 ** To get the certification, run:
 `openssl s_client -connect <SM_CLI_URL>:443 -servername <SM_CLI_URL>`
 ** Copy the content from `-----BEGIN CERTIFICATE-----` to `-----END CERTIFICATE -----` (including these two lines) and paste it into a new file with a filename of your choice. Pass this filename and location to the login command using the `--certificate-authority` option.
 
-Note: if you do use either the `--certificate-authority` or `--insecure-skip-tls-verify=true` options, you will be prompted to confirm that want to proceed with an insecure connection:
+Note: if you do not use either the `--certificate-authority` or `--insecure-skip-tls-verify=true` options, you are prompted to confirm that want to proceed with an insecure connection:
 ----
 kabanero login <SM_CLI_URL> -u <username>
 Password:
