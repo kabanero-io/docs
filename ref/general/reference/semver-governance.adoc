@@ -128,10 +128,11 @@ reassigned to a container with a different digest.
 
 - **pre-deploy**: Before deploying an application, the labels of the underlying base application stack are examined for matches with active application stacks.
 
+////
 - **ad-hoc**: Using the CLI and REST APIs (via Kabanero Unique Experience), the active application stacks version container digests are queried to see if
 they are the same as when the stack was activated. The operator will store the digest of a given application stack version when it is first activated and
 update the status field of the Stack CR with that digest value.
-
+////
 
 == Governance actions
 
