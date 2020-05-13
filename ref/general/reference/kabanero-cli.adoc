@@ -68,21 +68,10 @@ Complete list of flags:
 -u, --username string             GitHub username
 ----
 
-=== Onboard a developer
+=== Onboard a developer (Removed)
 
-Run the `kabanero onboard` command to onboard a developer.
+The `kabanero onboard` command was removed and is not available in this release.
 
-----
-kabanero onboard <GITHUB_USER_ID>
-----
-
-This command is under development.
-
-Example result:
-
-----
-Go to the pipelines dashboard at <tekton-url> in your browser and manually configure the webhook for gituser: <GITHUB_USER_ID>
-----
 
 === List application stacks
 
