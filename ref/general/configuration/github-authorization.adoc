@@ -14,12 +14,13 @@ Authorization setup (optional): If accessing repositories on GitHub Enterprise, 
 
 
 Providing login authorization to the CLI service (required):
+
 * The `Spec.Github.organization` attribute should be set to the organization hosting the stacks in the remote GitHub repository.  In the previous example, the organization name is `my_org`.
 * The `Spec.Github.teams` attribute should be set to a yaml list of GitHub teams in the remote GitHub repository, whose members can administer the stack using the stack management CLI.
 * The `Spec.Github.apiUrl` attribute should be set to the API URL for the remote GitHub repository being used.  For example, the API URL for `github.com` is `https://api.github.com`.
-+
+
 A modified Kabanero CR instance for an application stack repository located in the `my_org` organization of the `github.example.com` GitHub repository using release `0.6.0` of stacks might look like this:
-+
+
 ```yaml
 apiVersion: kabanero.io/v1alpha2
 kind: Kabanero
