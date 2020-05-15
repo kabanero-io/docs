@@ -1,12 +1,12 @@
 ---
-version: v0.8.0
-title: What's New In Kabanero 0.8.0
+version: v0.9.0
+title: What's New In Kabanero 0.9.0
 ---
 
-Kabanero version 0.8.0 is now available! We have implemented some exciting new changes.
+We proudly present the latest version of the Kabanero project, version 0.9.0! Let's get right to it.
 
-In this release we've enabled a governance policy that will ensure that only the active application stacks are being used to build microservices, and that the microservices being deployed are built from those same active application stacks. [Reference documentation](/docs/ref/general/reference/semver-governance.html) on how to take advantage of this is provided.
+We've created an exciting new events operator and mediator, which needs only one webhook per organization. We've included a new guide and reference documentation to get you started with this feature.
 
-In pipelines, you can now make TLS enabled calls to SKOPEO.
+Also, we've added GitOps to pipelines, added a pre-deploy decision point to governance, made several improvements and bug fixes in the landing page and the Kabanero CLI, and deprecated the `java-microprofile` stack in favor of the `java-openliberty` stack.
 
-For more information about these and other updates, see the [What’s New in 0.8.0 blog post](/blog/2020/04/17/WhatsNew080.html).
+For more information about these and other updates, see the [What’s New in 0.9.0 blog post](/blog/2020/05/15/WhatsNew090.html).
