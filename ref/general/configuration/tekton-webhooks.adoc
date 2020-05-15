@@ -2,15 +2,17 @@
 :page-doc-category: Configuration
 :page-title: Connecting to GitHub with webhooks
 :sectanchors:
-:page-doc-number: 5.0
+:page-doc-number: 0.1
 = Connecting to GitHub with webhooks
 
 A webhook is an outbound HTTP request that helps you create a relationship between your GitHub repository and a particular URL, in this case a https://github.com/kabanero-io/kabanero-pipelines/blob/master/README.md[pipeline, window="_blank"]. After you configure the webhook, changes you make in your GitHub repository will trigger the pipeline and its associated tasks.
 
+**Note:** There is now an events operator with an events mediator that requires only one webhook per organization. For more information, see the link:https://kabanero.io/guides/integrating-events-operator[Integrating the events operator] guide and the link:https://kabanero.io/doc/ref/general/reference/event-operator.html[Events operator specification] reference.
+
 == Prerequisites
 
 * A GitHub repository
-* https://kabanero.io/docs/ref/general/installation/installing-kabanero-foundation.md[Kabanero Foundation, window="_blank"].
+* https://kabanero.io/docs/ref/general/installation/installing-kabanero-foundation.html[Kabanero Foundation, window="_blank"].
 ** The product operator installation will include an instance of the pipelines dashboard with the webhooks extension and triggers.
 
 == Create a persistent volume
