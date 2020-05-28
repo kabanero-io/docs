@@ -16,7 +16,7 @@ A webhook is an outbound HTTP request that helps you create a relationship betwe
 ** The product operator installation will include an instance of the pipelines dashboard with the webhooks extension and triggers.
 
 == Create a persistent volume
-Pipelines need a persistent volume. For more information, see *Setting up a persistent volume to run pipelines* in the https://kabanero.io/guides/working-with-pipelines/[Build and deploy applications with pipelines, window="_blank"] guide.
+Pipelines need a persistent volume. For more information, see *Setting up a persistent volume to run pipelines* in the https://kabanero.io/guides/working-with-pipelines/[Working with pipelines, window="_blank"] guide.
 
 [#gat]
 == Generate a GitHub access token
